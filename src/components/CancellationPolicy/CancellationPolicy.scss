@@ -1,0 +1,144 @@
+.cancellation {
+  padding: 70px 100px 0 100px;
+
+  @media screen and (max-width: 1440px) {
+    padding: 80px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 80px 60px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 30px 16px;
+  }
+
+  &__point {
+    margin-bottom: 60px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    margin-bottom: 90px;
+
+    @media screen and (max-width: 1440px) {
+      margin-bottom: 50px;
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__text {
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.44px;
+    margin-top: 20px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      letter-spacing: 0.36px;
+    }
+  }
+
+  &__subtitle {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+
+    &_scenario {
+      text-transform: none;
+    }
+  }
+
+  &__conditions {
+    width: 100%;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 100%;
+    letter-spacing: 0.44px;
+    margin: 40px 0;
+    border-collapse: collapse;
+  }
+
+  &__header {
+    text-align: left;
+    font-weight: 300;
+    padding: 5px 0;
+
+    &:first-of-type {
+      padding-right: 5px;
+
+      @media screen and (max-width: 1024px) {
+        padding-right: 10px;
+      }
+    }
+
+    &:last-of-type {
+      padding-left: 5px;
+
+      @media screen and (max-width: 1024px) {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  &__line {
+    border-bottom: 1px solid #e8e7e7;
+  }
+
+  &__column {
+    width: 50%;
+    padding: 15px 0 5px 0;
+
+    &:first-of-type {
+      padding-right: 5px;
+
+      @media screen and (max-width: 1024px) {
+        padding-right: 10px;
+      }
+    }
+
+    &:last-of-type {
+      padding-left: 5px;
+
+      @media screen and (max-width: 1024px) {
+        padding-left: 10px;
+      }
+    }
+  }
+
+  &-wrap .contact-us {
+    padding-top: 160px;
+    padding-bottom: 170px;
+
+    @media screen and (max-width: 1440px) {
+      padding-top: 120px;
+      padding-bottom: 480px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding-top: 80px;
+      padding-bottom: 400px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding-top: 80px;
+      padding-bottom: 210px;
+    }
+  }
+}

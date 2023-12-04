@@ -1,0 +1,78 @@
+.card {
+  height: 500px;
+  width: 410px;
+  padding: 40px;
+  border: 1px solid #e8e7e7;
+  border-radius: 4px;
+  margin: 0 5px 5px 0;
+
+  @media screen and (max-width: 1440px) {
+    width: 429px;
+    margin: 0 6px 6px 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    margin: 0 0 10px 0;
+  }
+
+  @media screen and (max-width: 744px) {
+    height: 390px;
+    padding: 26px;
+  }
+
+  &:nth-of-type(3) {
+    margin-right: 0;
+
+    @media screen and (max-width: 1440px) {
+      margin-right: 6px;
+    }
+  }
+
+  &:nth-of-type(2n) {
+    @media screen and (max-width: 1440px) {
+      margin-right: 0;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.6px;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 24px;
+      letter-spacing: 0.48px;
+    }
+  }
+
+  &__text {
+    font-size: 22px;
+    line-height: 130%;
+    letter-spacing: 0.44px;
+    height: 310px;
+    margin-bottom: 40px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      letter-spacing: 0.36px;
+      height: 207px;
+      margin-bottom: 73px;
+    }
+  }
+
+  &__time {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 100%;
+    letter-spacing: 0.36px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 14px;
+      letter-spacing: 0.28px;
+    }
+  }
+}

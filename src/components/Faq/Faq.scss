@@ -1,0 +1,71 @@
+.faq {
+  padding: 70px 100px 0 100px;
+
+  @media screen and (max-width: 1440px) {
+    padding: 80px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 80px 60px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 30px 16px;
+  }
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 1440px) {
+      margin-bottom: 50px;
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__cards {
+    display: flex;
+
+    @media screen and (max-width: 1440px) {
+      flex-direction: column;
+    }
+  }
+
+  &__column:first-of-type {
+    margin-right: 10px;
+
+    @media screen and (max-width: 1440px) {
+      margin-right: 0;
+    }
+  }
+
+  &-wrap .contact-us {
+    padding-top: 110px;
+    padding-bottom: 170px;
+
+    @media screen and (max-width: 1440px) {
+      padding-top: 120px;
+      padding-bottom: 480px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding-top: 80px;
+      padding-bottom: 400px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding-top: 70px;
+      padding-bottom: 280px;
+    }
+  }
+}

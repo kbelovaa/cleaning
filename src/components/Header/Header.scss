@@ -1,0 +1,62 @@
+.header {
+  color: #717171;
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 100px;
+  height: 130px;
+
+  &-section {
+    background: #f4f9f7;
+  }
+
+  &__label {
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+  }
+
+  &__auth {
+    font-size: 16px;
+    display: flex;
+
+    .isauth & {
+      display: none;
+    }
+  }
+
+  &__link {
+    cursor: pointer;
+
+    &:first-of-type {
+      margin-right: 26px;
+    }
+
+    &:last-of-type {
+      margin-right: 46px;
+    }
+  }
+}
+
+.burger {
+  cursor: pointer;
+
+  &__bar {
+    width: 30px;
+    height: 4px;
+    border-radius: 47px;
+    background: #000;
+    margin-top: 5px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
