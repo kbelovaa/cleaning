@@ -6,11 +6,12 @@
   top: 0;
   left: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s ease-out;
+  overflow-y: scroll;
+  z-index: 2;
 
   &.active {
     opacity: 1;
@@ -18,11 +19,21 @@
   }
 }
 
-.registration {
+.login {
+  height: 787px;
+}
+
+.reg {
+  height: 900px;
+}
+
+.auth {
   padding: 100px 200px;
   border-radius: 4px;
   background: #fff;
   width: 1240px;
+  margin-top: 104px;
+  margin-bottom: 104px;
 
   &__title {
     font-size: 34px;
@@ -31,10 +42,46 @@
     letter-spacing: 0.68px;
     text-align: center;
   }
+
+  &__details {
+    text-align: center;
+  }
+
+  &__note {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: normal;
+    margin-top: 5px;
+  
+    &_socials {
+      letter-spacing: 0.8px;
+      margin-top: 50px;
+      margin-bottom: 10px;
+    }
+
+    &_account {
+      letter-spacing: 0.8px;
+      margin-top: 50px;
+
+      & a {
+        color: #92A1A9;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__social {
+    width: 30px;
+    cursor: pointer;
+
+    &:first-of-type {
+      margin-right: 20px;
+    }
+  }
 }
 
 .form {
-  &.reg-form {
+  &.auth-form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,7 +91,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 670px;
-    margin: 50px 0 40px;
+    margin: 50px 0;
   }
 
   &__field-wrap {
@@ -56,6 +103,10 @@
 
     &:nth-of-type(2n) {
       margin-left: 10px;
+    }
+
+    .login & {
+      width: 100%;
     }
   }
 

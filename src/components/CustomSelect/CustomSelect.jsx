@@ -38,7 +38,7 @@ const CustomSelect = ({ options, selectedOption, setSelectedOption, isStateFunct
       <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
         <span className="selected-option__name">{selectedOption}</span>
         <svg
-          className={isOpen ? 'arrow rotated' : 'arrow'}
+          className={`arrow ${isOpen ? 'rotated' : ''}`}
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"

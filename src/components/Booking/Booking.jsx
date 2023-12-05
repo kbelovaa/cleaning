@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMonths, subMonths } from 'date-fns';
 import {
@@ -41,7 +41,6 @@ import {
 import { calculateCleaningTypePrice, calculateTimeCoeff, roundPrice } from '../../utils/calculatePrice';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import Calendar from '../Calendar/Calendar';
-import Authorization from '../Authorization/Authorization';
 import './Booking.scss';
 
 const Booking = () => {
@@ -54,7 +53,8 @@ const Booking = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
-  const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
+
+  const setIsAuthorizationOpen = useOutletContext();
 
   useEffect(() => {
     const cleaningSum =
@@ -105,7 +105,7 @@ const Booking = () => {
     const serviceNumber = cleaning.selectedServices.find((selectedService) => selectedService.name === service.name).number;
     const oldServices = cleaning.selectedServices.filter((elem) => elem.name !== service.name);
 
-    if (isMore && serviceNumber < 10) {
+    if (isMore && serviceNumber < 20) {
       dispatch(setSelectedServicesAction([...oldServices, { ...service, number: serviceNumber + 1 }]));
     } else if (!isMore && serviceNumber > 1) {
       dispatch(setSelectedServicesAction([...oldServices, { ...service, number: serviceNumber - 1 }]));
@@ -528,19 +528,22 @@ const Booking = () => {
                 <span className="summary__price">{`€${roundPrice(cleaning.extrasSum)}`}</span>
               </div>
               <div className="summary__extras">
-                {cleaning.selectedServices.map((service, index) => (
-                  <div key={index} className="summary__line summary__line_list">
-                    <span className="summary__item">{service.name}</span>
-                    <span className="summary__price">{`€${roundPrice(service.price * cleaning.selectedServices.find((selectedService) => selectedService.name === service.name).number)}`}</span>
-                  </div>
-                ))}
+                {cleaning.selectedServices.map((service, index) => {
+                  const serviceNumber = cleaning.selectedServices.find((selectedService) => selectedService.name === service.name).number;
+                  return (
+                    <div key={index} className="summary__line summary__line_list">
+                      <span className="summary__item">{`${service.name}${serviceNumber > 1 ? ` (x${serviceNumber})` : ''}`}</span>
+                      <span className="summary__price">{`€${roundPrice(service.price * serviceNumber)}`}</span>
+                    </div>
+                  );
+                })}
               </div>
               <div className={cleaning.selectedSpeed !== 'x1' ? 'summary__line' : 'hidden'}>
                 <span className="summary__item">How fast</span>
                 <span className="summary__price">{`€${roundPrice(cleaning.speedSum)}`}</span>
               </div>
               <div className={cleaning.timeSum !== 0 ? 'summary__line' : 'hidden'}>
-                <span className="summary__item">Time of the day</span>
+                <span className="summary__item">Off-peak hours</span>
                 <span className="summary__price">{`€${roundPrice(cleaning.timeSum)}`}</span>
               </div>
               <div className="summary__subtotal">
@@ -564,7 +567,6 @@ const Booking = () => {
           </div>
         </section>
       </div>
-      <Authorization isOpen={isAuthorizationOpen} setIsOpen={setIsAuthorizationOpen} />
     </div>
   );
 };

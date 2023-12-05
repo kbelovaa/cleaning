@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.scss';
 
 const Footer = () => (
-  <div className="footer-wrap">
+  <footer className="footer-section">
     <div className="container">
       <div className="footer">
         <p className="footer__text">Copyright © 2023 Maid for perfection. All rights reserved</p>
@@ -30,7 +30,7 @@ const Footer = () => (
         </ul>
       </div>
     </div>
-  </div>
+  </footer>
 );
 
 export default Footer;

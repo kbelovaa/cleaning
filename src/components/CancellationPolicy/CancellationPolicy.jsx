@@ -23,7 +23,7 @@ const CancellationPolicy = () => (
               <th className="cancellation__header">Refund</th>
             </tr>
             <tr className="cancellation__line">
-              <td className="cancellation__column">Within 1 hour of booking the trip</td>
+              <td className="cancellation__column">Within 1 hour of booking</td>
               <td className="cancellation__column">Full refund</td>
             </tr>
             <tr className="cancellation__line">

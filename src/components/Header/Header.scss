@@ -11,6 +11,15 @@
 
   &-section {
     background: #f4f9f7;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+
+    &_transparent {
+      background: #fff;
+    }
   }
 
   &__label {

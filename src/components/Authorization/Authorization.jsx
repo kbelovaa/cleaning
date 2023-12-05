@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import googleImg from '../../images/google.png';
+import appleImg from '../../images/apple.png';
 import './Authorization.scss';
 
-const Authorization = ({ isOpen, setIsOpen }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
+  const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
@@ -32,40 +34,38 @@ const Authorization = ({ isOpen, setIsOpen }) => {
     };
   }, [isOpen]);
 
-  const handleRegistration = () => {};
+  const handleAuthorization = () => {};
 
   return (
-    <div className={isOpen ? 'modal active' : 'modal'}>
-      <div className="registration" ref={modalRef}>
-        <h2 className="registration__title">Registration</h2>
-        <form className="form reg-form" onSubmit={handleRegistration}>
+    <div className={`modal ${isOpen ? 'active' : ''}`}>
+      <div className={`auth ${isLogin ? 'login' : 'reg'}`} ref={modalRef}>
+        <h2 className="auth__title">{isLogin ? 'Log in' : 'Sign up'}</h2>
+        <form className="form auth-form" onSubmit={handleAuthorization}>
           <div className="form__fields">
-            <div className="form__field-wrap">
-              <label htmlFor="firstname" className="form__label">
-                First name
+            <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
+              <label htmlFor="name" className="form__label">
+                Name
               </label>
               <input
-                id="firstname"
+                id="name"
                 type="text"
-                className="input form__reg-field"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
+                className="input form__auth-field"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 autoComplete="off"
-                required
               />
             </div>
-            <div className="form__field-wrap">
-              <label htmlFor="lastname" className="form__label">
-                Last name
+            <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
+              <label htmlFor="surname" className="form__label">
+                Surname
               </label>
               <input
-                id="lastname"
+                id="surname"
                 type="text"
-                className="input form__reg-field"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
+                className="input form__auth-field"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
                 autoComplete="off"
-                required
               />
             </div>
             <div className="form__field-wrap">
@@ -75,25 +75,23 @@ const Authorization = ({ isOpen, setIsOpen }) => {
               <input
                 id="email"
                 type="email"
-                className="input form__reg-field"
+                className="input form__auth-field"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 autoComplete="off"
-                required
               />
             </div>
-            <div className="form__field-wrap">
+            <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
               <label htmlFor="mobile" className="form__label">
                 Mobile nr
               </label>
               <input
                 id="mobile"
                 type="tel"
-                className="input form__reg-field"
+                className="input form__auth-field"
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 autoComplete="off"
-                required
               />
             </div>
             <div className="form__field-wrap">
@@ -103,12 +101,14 @@ const Authorization = ({ isOpen, setIsOpen }) => {
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
-                className="input form__reg-field"
+                className="input form__auth-field"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="off"
-                required
               />
+              <p className={isLogin ? 'hidden' : 'auth__note'}>
+                The password must contain at least 6 characters. Use only Latin alphabet and numbers
+              </p>
               <span className={showPassword ? 'hidden' : 'form__eye'} onClick={() => setShowPassword(true)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -133,18 +133,17 @@ const Authorization = ({ isOpen, setIsOpen }) => {
                 </svg>
               </span>
             </div>
-            <div className="form__field-wrap">
+            <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
               <label htmlFor="passwordconf" className="form__label">
                 Confirm password
               </label>
               <input
                 id="passwordconf"
                 type={showPasswordConf ? 'text' : 'password'}
-                className="input form__reg-field"
+                className="input form__auth-field"
                 value={passwordConf}
                 onChange={(e) => setPasswordConf(e.target.value)}
                 autoComplete="off"
-                required
               />
               <span className={showPasswordConf ? 'hidden' : 'form__eye'} onClick={() => setShowPasswordConf(true)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -175,6 +174,24 @@ const Authorization = ({ isOpen, setIsOpen }) => {
             Create an account
           </button>
         </form>
+        <div className="auth__details">
+          <p className="auth__note auth__note_socials">
+            {isLogin ? 'Or log in via' : 'Or sign up via'}
+          </p>
+          <div className="auth__socials">
+            <img src={googleImg} alt="Google" className="auth__social" />
+            <img src={appleImg} alt="Apple" className="auth__social" />
+          </div>
+          {isLogin ? (
+            <p className="auth__note auth__note_account">
+              I do not have an account. Go to <a onClick={() => setIsLogin(false)}>Sign up</a>
+            </p>
+          ) : (
+            <p className="auth__note auth__note_account">
+              I have an account. Go to <a onClick={() => setIsLogin(true)}>Log in</a>
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

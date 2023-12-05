@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
+import Authorization from '../Authorization/Authorization';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './Header.scss';
 
 const Header = () => {
   const isAuth = useSelector((state) => state.user.isAuth);
 
+  const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
+  const [isLoginOpen, setIsLoginOpen] = useState(true);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const handleAuthModalOpen = (isLoginOpen) => {
+    setIsLoginOpen(isLoginOpen);
+    setIsAuthorizationOpen(true);
+  };
 
   return (
     <div className="content">
-      <header className="header-section">
+      <header className={`header-section ${pathname !== '/' ? 'header-section_transparent' : ''}`}>
         <div className="container">
           <div className={`header ${isAuth ? 'isauth' : ''}`}>
             <span className="header__label" onClick={() => navigate('/')}>
@@ -21,10 +31,10 @@ const Header = () => {
             </span>
             <nav className='header__menu'>
               <ul className="header__auth">
-                <li className="header__link" onClick={() => navigate('/sign-up')}>
+                <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   Sign up
                 </li>
-                <li className="header__link" onClick={() => navigate('/log-in')}>
+                <li className="header__link" onClick={() => handleAuthModalOpen(true)}>
                   Log in
                 </li>
               </ul>
@@ -37,9 +47,10 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <Outlet />
+      <Outlet context={setIsAuthorizationOpen} />
       <Footer />
-      {/* <BurgerMenu isOpen={isBurgerMenuOpen} setIsOpen={setIsBurgerMenuOpen} /> */}
+      <Authorization isOpen={isAuthorizationOpen} setIsOpen={setIsAuthorizationOpen} isLogin={isLoginOpen} setIsLogin={setIsLoginOpen} />
+      <BurgerMenu isOpen={isBurgerMenuOpen} setIsOpen={setIsBurgerMenuOpen} />
     </div>
   );
 };
