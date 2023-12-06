@@ -10,15 +10,20 @@
   height: 130px;
 
   &-section {
-    background: #f4f9f7;
+    background: transparent;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1;
     width: 100%;
+    transition: all 0.4s ease;
 
-    &_transparent {
+    &.white {
       background: #fff;
+    }
+
+    &.green {
+      background: #F4F9F7;
     }
   }
 

@@ -2,14 +2,22 @@ import React, { useEffect, useRef, useState } from 'react';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
 import './Authorization.scss';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isEmailUnique, setIsEmailUnique] = useState('');
   const [mobile, setMobile] = useState('');
   const [password, setPassword] = useState('');
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [passwordConf, setPasswordConf] = useState('');
+  const [isPasswordConfValid, setIsPasswordConfValid] = useState(true);
+  const [areCredentialsValid, setAreCredentialsValid] = useState('');
+  const [isFormValid, setIsFormValid] = useState(true);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConf, setShowPasswordConf] = useState(false);
@@ -34,13 +42,72 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     };
   }, [isOpen]);
 
-  const handleAuthorization = () => {};
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isLogin) {
+      if (email && password) {
+        // const result = await login(email, password);
+        // if (result.error) {
+        //   setAreCredentialsValid(result.error.message);
+        //   setIsFormValid(false);
+        // } else {
+        //   setIsModalOpen(true);
+        //   handleAuth();
+        // }
+        setIsOpen(false);
+        setIsConfirmationOpen(true);
+      } else {
+        setIsFormValid(false);
+      }
+    } else if (name && surname && email && isEmailValid && mobile && password && isPasswordValid && passwordConf && isPasswordConfValid) {
+      // const result = await registration(name, surname, email, mobile, password);
+      // if (result.error) {
+      //   setIsEmailUnique(result.error.message);
+      //   setIsFormValid(false);
+      // } else {
+      //   setIsModalOpen(true);
+      //   handleAuth();
+      // }
+      setIsOpen(false);
+      setIsConfirmationOpen(true);
+    } else {
+      setIsFormValid(false);
+    }
+  };
+
+  const handleEmailChange = (email) => {
+    setEmail(email);
+    setIsEmailUnique('');
+    setAreCredentialsValid('');
+
+    const isEmailValid = email === '' || /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(email);
+    setIsEmailValid(isEmailValid);
+  };
+
+  const handlePasswordChange = (password) => {
+    setPassword(password);
+    setAreCredentialsValid('');
+
+    const isPasswordValid = /^[A-Za-z0-9]{6,}$/.test(password);
+    setIsPasswordValid(isPasswordValid);
+
+    const isPasswordConfValid = passwordConf === '' || passwordConf === password;
+    setIsPasswordConfValid(isPasswordConfValid);
+  };
+
+  const handlePasswordConfChange = (passwordConf) => {
+    setPasswordConf(passwordConf);
+
+    const isPasswordConfValid = passwordConf === '' || passwordConf === password;
+    setIsPasswordConfValid(isPasswordConfValid);
+  };
 
   return (
     <div className={`modal ${isOpen ? 'active' : ''}`}>
       <div className={`auth ${isLogin ? 'login' : 'reg'}`} ref={modalRef}>
         <h2 className="auth__title">{isLogin ? 'Log in' : 'Sign up'}</h2>
-        <form className="form auth-form" onSubmit={handleAuthorization}>
+        <form className={`form auth-form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
           <div className="form__fields">
             <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
               <label htmlFor="name" className="form__label">
@@ -49,7 +116,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <input
                 id="name"
                 type="text"
-                className="input form__auth-field"
+                className={`input ${!name ? 'invalid-field' : ''}`}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 autoComplete="off"
@@ -62,7 +129,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <input
                 id="surname"
                 type="text"
-                className="input form__auth-field"
+                className={`input ${!surname ? 'invalid-field' : ''}`}
                 value={surname}
                 onChange={(e) => setSurname(e.target.value)}
                 autoComplete="off"
@@ -74,12 +141,18 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </label>
               <input
                 id="email"
-                type="email"
-                className="input form__auth-field"
+                type="text"
+                className={`input ${!email || !isEmailValid || isEmailUnique ? 'invalid-field' : ''}`}
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => handleEmailChange(e.target.value)}
                 autoComplete="off"
               />
+              <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>
+                Please enter a valid email address.
+              </p>
+              <p className={isEmailUnique ? 'auth__note' : 'hidden'}>
+                {isEmailUnique}
+              </p>
             </div>
             <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
               <label htmlFor="mobile" className="form__label">
@@ -88,7 +161,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <input
                 id="mobile"
                 type="tel"
-                className="input form__auth-field"
+                className={`input ${!mobile ? 'invalid-field' : ''}`}
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
                 autoComplete="off"
@@ -101,13 +174,19 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
-                className="input form__auth-field"
+                className={`input ${!password || !isPasswordValid ? 'invalid-field' : ''}`}
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => handlePasswordChange(e.target.value)}
                 autoComplete="off"
               />
-              <p className={isLogin ? 'hidden' : 'auth__note'}>
+              <p className={isLogin ? 'hidden' : isPasswordValid ? 'hidden' : 'auth__note'}>
                 The password must contain at least 6 characters. Use only Latin alphabet and numbers
+              </p>
+              <p className={!isLogin ? 'hidden' : areCredentialsValid ? 'auth__note' : 'hidden'}>
+                {areCredentialsValid}
+              </p>
+              <p className={!isFormValid && (!name || !surname || !email || !mobile || !password || !passwordConf) ? 'auth__note' : 'hidden'}>
+                Please fill in all fields
               </p>
               <span className={showPassword ? 'hidden' : 'form__eye'} onClick={() => setShowPassword(true)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -140,11 +219,14 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <input
                 id="passwordconf"
                 type={showPasswordConf ? 'text' : 'password'}
-                className="input form__auth-field"
+                className={`input ${!passwordConf || !isPasswordConfValid ? 'invalid-field' : ''}`}
                 value={passwordConf}
-                onChange={(e) => setPasswordConf(e.target.value)}
+                onChange={(e) => handlePasswordConfChange(e.target.value)}
                 autoComplete="off"
               />
+              <p className={isPasswordConfValid ? 'hidden' : 'auth__note'}>
+                Password and Confirm Password must match.
+              </p>
               <span className={showPasswordConf ? 'hidden' : 'form__eye'} onClick={() => setShowPasswordConf(true)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                   <path
@@ -171,7 +253,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             </div>
           </div>
           <button className="btn" type="submit">
-            Create an account
+            {isLogin ? 'Log in' : 'Create an account'}
           </button>
         </form>
         <div className="auth__details">
@@ -193,6 +275,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           )}
         </div>
       </div>
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={isLogin} />
     </div>
   );
 };

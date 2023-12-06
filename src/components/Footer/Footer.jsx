@@ -5,7 +5,7 @@ const Footer = () => (
   <footer className="footer-section">
     <div className="container">
       <div className="footer">
-        <p className="footer__text">Copyright © 2023 Maid for perfection. All rights reserved</p>
+        <p className="footer__text">Copyright © 2024 Maid for perfection. All rights reserved</p>
         <ul className="footer__links">
           <li>
             <a href="#" className="footer__link">

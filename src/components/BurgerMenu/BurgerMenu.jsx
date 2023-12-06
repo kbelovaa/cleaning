@@ -42,7 +42,7 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
             <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>
               <NavLink className='burger-menu__link' to='/profile' onClick={closeBurgerMenu}>Profile</NavLink>
               <svg className={`arrow ${isProfileExpanded ? 'rotated' : ''}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M6 10L12 16L18 10" stroke="black" stroke-linecap="round"/>
+                <path d="M6 10L12 16L18 10" stroke="black" strokeLinecap="round"/>
               </svg>
             </div>
             <ul className={`burger-menu__sublist ${isProfileExpanded ? 'expanded' : ''}`}>
@@ -77,18 +77,13 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
             <div className="burger-menu__item" onClick={() => setIsInfoExpanded((state) => !state)}>
               <span className='burger-menu__link'>Info</span>
               <svg className={`arrow ${isInfoExpanded ? 'rotated' : ''}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M6 10L12 16L18 10" stroke="black" stroke-linecap="round"/>
+                <path d="M6 10L12 16L18 10" stroke="black" strokeLinecap="round"/>
               </svg>
             </div>
             <ul className={`burger-menu__sublist ${isInfoExpanded ? 'expanded' : ''}`}>
               <li>
                 <NavLink className='burger-menu__sublink' to='/info-price' onClick={closeBurgerMenu}>
                   Services
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className='burger-menu__sublink' to='/payment' onClick={closeBurgerMenu}>
-                  Payment
                 </NavLink>
               </li>
               <li>

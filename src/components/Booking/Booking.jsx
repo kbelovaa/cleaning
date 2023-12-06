@@ -520,7 +520,7 @@ const Booking = () => {
             <div className="summary">
               <h2 className="summary__title">Summary</h2>
               <div className="summary__line summary__line_bold">
-                <h3 className="summary__subtitle">{`${cleaning.selectedCleaning.type} (${cleaning.selectedFrequency}, ${cleaning.selectedCleaning.duration} hours)`}</h3>
+                <h3 className="summary__subtitle">{cleaning.selectedCleaning.type}</h3>
                 <span className="summary__price">{`€${roundPrice(cleaning.cleaningSum)}`}</span>
               </div>
               <div className={cleaning.selectedServices.length !== 0 ? 'summary__line summary__line_list' : 'hidden'}>

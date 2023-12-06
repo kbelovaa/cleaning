@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import Header from '../Header/Header';
 import Booking from '../Booking/Booking';
 import Summary from '../Summary/Summary';
@@ -11,6 +12,7 @@ import './App.scss';
 
 const App = () => (
   <BrowserRouter>
+    <ScrollToTop />
     <Routes>
       <Route path="/" element={<Header />}>
         <Route index element={<Booking />} />

@@ -68,7 +68,7 @@ const extraServices = [
   { name: 'Inside dishwasher', price: 10 },
   { name: 'Inside washer', price: 15 },
   { name: 'Inside dryer', price: 10 },
-  { name: 'Inside wicrowave', price: 10 },
+  { name: 'Inside microwave', price: 10 },
   { name: 'Inside kitchen cabinets', price: 5 },
   { name: 'Inside windows', price: 15 },
   { name: 'Tile walls', price: 20 },

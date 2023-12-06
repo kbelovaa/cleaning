@@ -60,6 +60,16 @@
   transition: all 0.3s ease;
   color: #3a3a3a;
   height: 56px;
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.invalid .invalid-field {
+  border: 1px solid #A51F1F;
 }
 
 input[type='radio'], input[type='checkbox'] {

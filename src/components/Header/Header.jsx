@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../Footer/Footer';
@@ -12,9 +12,35 @@ const Header = () => {
   const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(true);
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [headerColor, setHeaderColor] = useState('');
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const isBook = pathname === '/';
+
+    const handleScroll = () => {
+      const { scrollY } = window;
+      let color = '';
+      if (isBook) {
+        if (scrollY > 382) {
+          color = 'white';
+        } else if (scrollY > 0) {
+          color = 'green';
+        }
+      } else if (scrollY > 0) {
+        color = 'white';
+      }
+      setHeaderColor(color);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [pathname]);
 
   const handleAuthModalOpen = (isLoginOpen) => {
     setIsLoginOpen(isLoginOpen);
@@ -23,7 +49,7 @@ const Header = () => {
 
   return (
     <div className="content">
-      <header className={`header-section ${pathname !== '/' ? 'header-section_transparent' : ''}`}>
+      <header className={`header-section ${headerColor}`}>
         <div className="container">
           <div className={`header ${isAuth ? 'isauth' : ''}`}>
             <span className="header__label" onClick={() => navigate('/')}>
