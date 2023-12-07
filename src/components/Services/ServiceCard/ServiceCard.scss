@@ -63,16 +63,4 @@
       margin-bottom: 73px;
     }
   }
-
-  &__time {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 100%;
-    letter-spacing: 0.36px;
-
-    @media screen and (max-width: 744px) {
-      font-size: 14px;
-      letter-spacing: 0.28px;
-    }
-  }
 }

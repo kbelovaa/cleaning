@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './ContactUs.scss';
 
 const ContactUs = () => {
@@ -10,6 +12,9 @@ const ContactUs = () => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [text, setText] = useState('');
   const [isFormValid, setIsFormValid] = useState(true);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
+  const { pathname } = useLocation();
 
   const handleEmailChange = (email) => {
     setEmail(email);
@@ -24,10 +29,12 @@ const ContactUs = () => {
     if (isAuth) {
       if (text) {
         //отправить запрос
+        setIsConfirmationOpen(true);
       } else {
         setIsFormValid(false);
       }
     } else if (name && email && isEmailValid && text) {
+      setIsConfirmationOpen(true);
       // отправить запрос
     } else {
       setIsFormValid(false);
@@ -37,7 +44,7 @@ const ContactUs = () => {
   return (
     <div className="container">
       <div className="contact-us">
-        <h2 className="contact-us__title">Contact us</h2>
+        <h2 className="contact-us__title">{pathname === '/faq' ? 'Did not find what you are looking for? Contact us here' : 'Contact us'}</h2>
         <form className={`contact-us__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
           <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="name" className="form__label">
@@ -47,7 +54,7 @@ const ContactUs = () => {
           </div>
           <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="email" className="form__label">
-              E-mail
+              Email
             </label>
             <input id="email" type="text" className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`} value={email} onChange={(e) => handleEmailChange(e.target.value)} />
             <p className={isEmailValid ? 'hidden' : 'auth__note'}>
@@ -76,6 +83,7 @@ const ContactUs = () => {
           <button className="btn contact-us__btn">Submit</button>
         </form>
       </div>
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={false} email={email} />
     </div>
   );
 };

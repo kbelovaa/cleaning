@@ -40,7 +40,7 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
           </li>
           <li>
             <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>
-              <NavLink className='burger-menu__link' to='/profile' onClick={closeBurgerMenu}>Profile</NavLink>
+              <span className='burger-menu__link'>Profile</span>
               <svg className={`arrow ${isProfileExpanded ? 'rotated' : ''}`} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M6 10L12 16L18 10" stroke="black" strokeLinecap="round"/>
               </svg>

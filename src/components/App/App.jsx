@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import Booking from '../Booking/Booking';
 import Summary from '../Summary/Summary';
 import ContactUs from '../ContactUs/ContactUs';
-import InfoPrice from '../InfoPrice/InfoPrice';
+import Services from '../Services/Services';
 import Faq from '../Faq/Faq';
 import CancellationPolicy from '../CancellationPolicy/CancellationPolicy';
 import './App.scss';
@@ -18,7 +18,7 @@ const App = () => (
         <Route index element={<Booking />} />
         <Route path="summary" element={<Summary />} />
         <Route path="contact-us" element={<ContactUs />} />
-        <Route path="info-price" element={<InfoPrice />} />
+        <Route path="info-price" element={<Services />} />
         <Route path="faq" element={<Faq />} />
         <Route path="cancellation-policy" element={<CancellationPolicy />} />
       </Route>

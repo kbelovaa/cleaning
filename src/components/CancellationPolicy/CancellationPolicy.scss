@@ -1,5 +1,5 @@
 .cancellation {
-  padding: 170px 100px 0 100px;
+  padding: 170px 100px 440px 100px;
 
   @media screen and (max-width: 1440px) {
     padding: 80px;
@@ -119,26 +119,6 @@
       @media screen and (max-width: 1024px) {
         padding-left: 10px;
       }
-    }
-  }
-
-  &-wrap .contact-us {
-    padding-top: 160px;
-    padding-bottom: 110px;
-
-    @media screen and (max-width: 1440px) {
-      padding-top: 120px;
-      padding-bottom: 480px;
-    }
-
-    @media screen and (max-width: 1024px) {
-      padding-top: 80px;
-      padding-bottom: 400px;
-    }
-
-    @media screen and (max-width: 744px) {
-      padding-top: 80px;
-      padding-bottom: 210px;
     }
   }
 }

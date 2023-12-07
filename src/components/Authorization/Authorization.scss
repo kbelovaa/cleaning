@@ -19,14 +19,6 @@
   }
 }
 
-.login {
-  height: 787px;
-}
-
-.reg {
-  height: 900px;
-}
-
 .auth {
   padding: 100px 200px;
   border-radius: 4px;
@@ -34,6 +26,14 @@
   width: 1240px;
   margin-top: 104px;
   margin-bottom: 104px;
+
+  &.login {
+    height: 787px;
+  }
+  
+  &.reg {
+    height: 900px;
+  }
 
   &__title {
     font-size: 34px;

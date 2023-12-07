@@ -1,5 +1,4 @@
 import React from 'react';
-import ContactUs from '../ContactUs/ContactUs';
 import './CancellationPolicy.scss';
 
 const CancellationPolicy = () => (
@@ -125,7 +124,6 @@ const CancellationPolicy = () => (
         </div>
       </div>
     </div>
-    <ContactUs />
   </div>
 );
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
-import './Authorization.scss';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
+import './Authorization.scss';
 
 const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const [name, setName] = useState('');
@@ -28,6 +28,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
         setIsOpen(false);
+        setIsFormValid(true);
       }
     };
 
@@ -42,6 +43,19 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     };
   }, [isOpen]);
 
+  // const finishFormSending = () => {
+  //   setName('');
+  //   setSurname('');
+  //   setEmail('');
+  //   setMobile('');
+  //   setPassword('');
+  //   setIsPasswordValid(false);
+  //   setPasswordConf('');
+  //   setIsFormValid(true);
+  //   setIsOpen(false);
+  //   setIsConfirmationOpen(true);
+  // };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,6 +69,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         //   setIsModalOpen(true);
         //   handleAuth();
         // }
+        setIsFormValid(true);
         setIsOpen(false);
         setIsConfirmationOpen(true);
       } else {
@@ -69,6 +84,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       //   setIsModalOpen(true);
       //   handleAuth();
       // }
+      setIsFormValid(true);
       setIsOpen(false);
       setIsConfirmationOpen(true);
     } else {
@@ -275,7 +291,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           )}
         </div>
       </div>
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={isLogin} />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={isLogin} email={email} />
     </div>
   );
 };
