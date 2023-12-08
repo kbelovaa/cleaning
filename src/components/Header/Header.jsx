@@ -24,7 +24,7 @@ const Header = () => {
       const { scrollY } = window;
       let color = '';
       if (isBook) {
-        if (scrollY > 382) {
+        if (scrollY > 410) {
           color = 'white';
         } else if (scrollY > 0) {
           color = 'green';
@@ -55,7 +55,7 @@ const Header = () => {
             <span className="header__label" onClick={() => navigate('/')}>
               Cleaning
             </span>
-            <nav className='header__menu'>
+            <nav className="header__menu">
               <ul className="header__auth">
                 <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   Sign up
@@ -75,7 +75,12 @@ const Header = () => {
       </header>
       <Outlet context={setIsAuthorizationOpen} />
       <Footer />
-      <Authorization isOpen={isAuthorizationOpen} setIsOpen={setIsAuthorizationOpen} isLogin={isLoginOpen} setIsLogin={setIsLoginOpen} />
+      <Authorization
+        isOpen={isAuthorizationOpen}
+        setIsOpen={setIsAuthorizationOpen}
+        isLogin={isLoginOpen}
+        setIsLogin={setIsLoginOpen}
+      />
       <BurgerMenu isOpen={isBurgerMenuOpen} setIsOpen={setIsBurgerMenuOpen} />
     </div>
   );

@@ -24,11 +24,6 @@
   align-items: center;
   height: 100%;
 
-  .opened & {
-    border-bottom: 1px solid #268664;
-    border-radius: 4px 4px 0 0;
-  }
-
   &__name {
     line-height: 100%;
     letter-spacing: 0.36px;
@@ -36,6 +31,10 @@
     .form__date & {
       line-height: normal;
       letter-spacing: 0.32px;
+    }
+
+    &.default {
+      color: #92a1a9;
     }
   }
 }
@@ -77,22 +76,22 @@
     margin: 0;
     border-radius: 4px;
     box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    height: 208px;
   }
 
   &-list {
     list-style: none;
-    padding: 8px 0;
-    height: 208px;
 
     & li {
-      padding: 10px 12px;
+      padding: 12px;
       cursor: pointer;
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.5px;
 
       &:hover {
-        background-color: #00000014;
+        background-color: #f4f9f7;
       }
     }
   }

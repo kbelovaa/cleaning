@@ -4,7 +4,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './CustomSelect.scss';
 
-const CustomSelect = ({ options, selectedOption, setSelectedOption, isStateFunction }) => {
+const CustomSelect = ({ options, selectedOption, setSelectedOption, isStateFunction, defaultOption }) => {
   const dispatch = useDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -34,9 +34,11 @@ const CustomSelect = ({ options, selectedOption, setSelectedOption, isStateFunct
   }, []);
 
   return (
-    <div className={isOpen ? 'custom-select opened' : 'custom-select'} ref={selectRef}>
+    <div className="custom-select" ref={selectRef}>
       <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
-        <span className="selected-option__name">{selectedOption}</span>
+        <span className={`selected-option__name ${defaultOption && !selectedOption ? 'default' : ''}`}>
+          {defaultOption && !selectedOption ? defaultOption : selectedOption}
+        </span>
         <svg
           className={`arrow ${isOpen ? 'rotated' : ''}`}
           xmlns="http://www.w3.org/2000/svg"

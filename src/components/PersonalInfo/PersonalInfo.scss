@@ -1,0 +1,30 @@
+.profile {
+  padding: 126px 100px 500px;
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    margin-bottom: 30px;
+  }
+}
+
+.personal-info {
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__field-wrap {
+    width: calc((100% - 30px) / 2);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    position: relative;
+
+    &:nth-of-type(2n) {
+      margin-left: 30px;
+    }
+  }
+}

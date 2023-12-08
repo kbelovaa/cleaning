@@ -44,12 +44,14 @@ const Calendar = ({ currentDate, setCurrentDate, selectedDay, setSelectedDay }) 
           <div
             key={index}
             className={`calendar__day ${
-              day.getMonth() - currentDate.getMonth() === 1 || day.getMonth() - currentDate.getMonth() === -11 || day.getMonth() - currentDate.getMonth() === -1
+              day.getMonth() - currentDate.getMonth() === 1 ||
+              day.getMonth() - currentDate.getMonth() === -11 ||
+              day.getMonth() - currentDate.getMonth() === -1
                 ? 'calendar__day_next'
                 : ''
-            } ${
-              day >= new Date().setHours(0, 0, 0, 0) ? 'calendar__day_after' : 'calendar__day_before'
-            } ${day.getMonth() < currentDate.getMonth() ? 'calendar__day_previous' : ''}`}
+            } ${day >= new Date().setHours(0, 0, 0, 0) ? 'calendar__day_after' : 'calendar__day_before'} ${
+              day.getMonth() < currentDate.getMonth() ? 'calendar__day_previous' : ''
+            }`}
             onClick={() => handleDayClick(day)}
           >
             <span

@@ -69,10 +69,11 @@
 }
 
 .invalid .invalid-field {
-  border: 1px solid #A51F1F;
+  border: 1px solid #a51f1f;
 }
 
-input[type='radio'], input[type='checkbox'] {
+input[type='radio'],
+input[type='checkbox'] {
   display: none;
 }
 
@@ -85,10 +86,15 @@ input[type='radio'], input[type='checkbox'] {
   }
 }
 
-ul, li {
+ul,
+li {
   list-style-type: none;
 }
 
 a {
   text-decoration: none;
+}
+
+*:focus-visible {
+  outline: none;
 }

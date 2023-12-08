@@ -8,6 +8,10 @@ import ContactUs from '../ContactUs/ContactUs';
 import Services from '../Services/Services';
 import Faq from '../Faq/Faq';
 import CancellationPolicy from '../CancellationPolicy/CancellationPolicy';
+import PersonalInfo from '../PersonalInfo/PersonalInfo';
+import Addresses from '../Addresses/Addresses';
+import Orders from '../Orders/Orders';
+import Settings from '../Settings/Settings';
 import './App.scss';
 
 const App = () => (
@@ -21,6 +25,10 @@ const App = () => (
         <Route path="info-price" element={<Services />} />
         <Route path="faq" element={<Faq />} />
         <Route path="cancellation-policy" element={<CancellationPolicy />} />
+        <Route path="personal-info" element={<PersonalInfo />} />
+        <Route path="addresses" element={<Addresses />} />
+        <Route path="orders" element={<Orders />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>

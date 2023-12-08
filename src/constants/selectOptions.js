@@ -89,6 +89,8 @@ for (let hours = 0; hours <= 23; hours++) {
 
 const frequency = ['One-time', 'Weekly', 'Bi-weekly', 'Monthly'];
 
+const knowingWays = ['Google', 'Facebook', 'Instagram', 'Friend', 'Neighbour'];
+
 const faq = [
   {
     question: 'How long is a typical cleaning service?',
@@ -118,7 +120,7 @@ const faq = [
   {
     question: 'What is the cancellation policy?',
     answer:
-      "We do not have contracts for cleaning services. We simply ask for 48 hours' notice for cancellations or rescheduling. If you cancel within 48 hours, a $70 fee applies. If you cancel within 3 hours of the appointment, it is 50% of the cleaning cost. If you cancel with the cleaner present or if we are locked out, the full price will be charged.",
+      "We do not have contracts for cleaning services. We simply ask for 48 hours' notice for cancellations or rescheduling. If you cancel within 48 hours, a €70 fee applies. If you cancel within 3 hours of the appointment, it is 50% of the cleaning cost. If you cancel with the cleaner present or if we are locked out, the full price will be charged.",
   },
   {
     question: 'How do I pay for my cleaning services?',
@@ -166,5 +168,6 @@ export {
   speedCoeff,
   times,
   frequency,
+  knowingWays,
   faq,
 };

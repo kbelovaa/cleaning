@@ -53,8 +53,26 @@ const Booking = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
+  const [isSummaryUnderlined, setIsSummaryUnderlined] = useState(false);
 
   const setIsAuthorizationOpen = useOutletContext();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const { scrollY } = window;
+      if (scrollY > 490) {
+        setIsSummaryUnderlined(true);
+      } else if (scrollY > 0) {
+        setIsSummaryUnderlined(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const cleaningSum =
@@ -102,7 +120,9 @@ const Booking = () => {
 
   const handleServicesNumberChange = (e, service, isMore) => {
     e.stopPropagation();
-    const serviceNumber = cleaning.selectedServices.find((selectedService) => selectedService.name === service.name).number;
+    const serviceNumber = cleaning.selectedServices.find(
+      (selectedService) => selectedService.name === service.name,
+    ).number;
     const oldServices = cleaning.selectedServices.filter((elem) => elem.name !== service.name);
 
     if (isMore && serviceNumber < 20) {
@@ -247,9 +267,22 @@ const Booking = () => {
                           onClick={(e) => e.stopPropagation()}
                           className="form__radio-checker"
                         />
-                        <svg className='form__radio-checked' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z" fill="#E8E7E7"/>
-                          <path d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z" fill="transparent"/>
+                        <svg
+                          className="form__radio-checked"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path
+                            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20Z"
+                            fill="#E8E7E7"
+                          />
+                          <path
+                            d="M12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17Z"
+                            fill="transparent"
+                          />
                         </svg>
                         <label htmlFor={elem.type.split(' ').join('')} className="form__radio-label">
                           {elem.type}
@@ -257,7 +290,7 @@ const Booking = () => {
                       </div>
                       <span className="form__radio-price">
                         {cleaning.apartmentSize === ''
-                          ? '-'
+                          ? '€-'
                           : `€${roundPrice(
                               calculateCleaningTypePrice(elem.price, cleaning.apartmentSize, [
                                 cleaning.bedroomsNum,
@@ -299,18 +332,53 @@ const Booking = () => {
                         </svg>
                         <span className="form__service-label">{elem.name}</span>
                       </div>
-                      <div className={cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name) ? 'form__service-number' : 'hidden'}>
-                        <svg className='form__service-sign' onClick={(e) => handleServicesNumberChange(e, elem, false)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M17 12H7" stroke="#E8E7E7" strokeLinecap="round"/>
-                          <path fillRule="evenodd" clipRule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#E8E7E7"/>
+                      <div
+                        className={
+                          cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name)
+                            ? 'form__service-number'
+                            : 'hidden'
+                        }
+                      >
+                        <svg
+                          className="form__service-sign"
+                          onClick={(e) => handleServicesNumberChange(e, elem, false)}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path d="M17 12H7" stroke="#E8E7E7" strokeLinecap="round" />
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                            stroke="#E8E7E7"
+                          />
                         </svg>
                         <span className="form__service-quantity">
-                          {cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name)?.number}
+                          {
+                            cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name)
+                              ?.number
+                          }
                         </span>
-                        <svg className='form__service-sign' onClick={(e) => handleServicesNumberChange(e, elem, true)} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M17 12H7" stroke="#E8E7E7" strokeLinecap="round"/>
-                          <path d="M12 17V7" stroke="#E8E7E7" strokeLinecap="round"/>
-                          <path fillRule="evenodd" clipRule="evenodd" d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#E8E7E7"/>
+                        <svg
+                          className="form__service-sign"
+                          onClick={(e) => handleServicesNumberChange(e, elem, true)}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path d="M17 12H7" stroke="#E8E7E7" strokeLinecap="round" />
+                          <path d="M12 17V7" stroke="#E8E7E7" strokeLinecap="round" />
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                            stroke="#E8E7E7"
+                          />
                         </svg>
                       </div>
                     </div>
@@ -496,7 +564,7 @@ const Booking = () => {
               </div>
               <div className="form__saving">
                 <input
-                  id='save'
+                  id="save"
                   type="checkbox"
                   checked={cleaning.saving}
                   onChange={() => dispatch(setSavingAction(!cleaning.saving))}
@@ -504,10 +572,16 @@ const Booking = () => {
                 />
                 <div className="form__saving-tick" onClick={() => dispatch(setSavingAction(!cleaning.saving))}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                    <path d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path
+                      d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
+                      stroke="white"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </div>
-                <label htmlFor='save' className="form__saving-label">
+                <label htmlFor="save" className="form__saving-label">
                   Save information for future
                 </label>
               </div>
@@ -517,7 +591,7 @@ const Booking = () => {
             </form>
           </div>
           <div className="book__summary">
-            <div className="summary">
+            <div className={`summary ${isSummaryUnderlined ? 'underlined' : ''}`}>
               <h2 className="summary__title">Summary</h2>
               <div className="summary__line summary__line_bold">
                 <h3 className="summary__subtitle">{cleaning.selectedCleaning.type}</h3>
@@ -529,10 +603,14 @@ const Booking = () => {
               </div>
               <div className="summary__extras">
                 {cleaning.selectedServices.map((service, index) => {
-                  const serviceNumber = cleaning.selectedServices.find((selectedService) => selectedService.name === service.name).number;
+                  const serviceNumber = cleaning.selectedServices.find(
+                    (selectedService) => selectedService.name === service.name,
+                  ).number;
                   return (
                     <div key={index} className="summary__line summary__line_list">
-                      <span className="summary__item">{`${service.name}${serviceNumber > 1 ? ` (x${serviceNumber})` : ''}`}</span>
+                      <span className="summary__item">{`${service.name}${
+                        serviceNumber > 1 ? ` (x${serviceNumber})` : ''
+                      }`}</span>
                       <span className="summary__price">{`€${roundPrice(service.price * serviceNumber)}`}</span>
                     </div>
                   );

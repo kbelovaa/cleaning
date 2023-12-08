@@ -11,7 +11,7 @@
   pointer-events: none;
   transition: all 0.5s ease-out;
   overflow-y: scroll;
-  z-index: 2;
+  z-index: 3;
 
   &.active {
     opacity: 1;
@@ -30,7 +30,7 @@
   &.login {
     height: 787px;
   }
-  
+
   &.reg {
     height: 900px;
   }
@@ -52,7 +52,7 @@
     font-weight: 300;
     line-height: normal;
     margin-top: 5px;
-  
+
     &_socials {
       letter-spacing: 0.8px;
       margin-top: 50px;
@@ -64,7 +64,7 @@
       margin-top: 50px;
 
       & a {
-        color: #92A1A9;
+        color: #92a1a9;
         cursor: pointer;
       }
     }

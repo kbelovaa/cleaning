@@ -44,22 +44,34 @@ const ContactUs = () => {
   return (
     <div className="container">
       <div className="contact-us">
-        <h2 className="contact-us__title">{pathname === '/faq' ? 'Did not find what you are looking for? Contact us here' : 'Contact us'}</h2>
+        <h2 className="contact-us__title">
+          {pathname === '/faq' ? 'Did not find what you are looking for? Contact us here' : 'Contact us'}
+        </h2>
         <form className={`contact-us__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
           <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="name" className="form__label">
               Name
             </label>
-            <input id="name" type="text" className={`input ${!name ? 'invalid-field' : ''}`} value={name} onChange={(e) => setName(e.target.value)} />
+            <input
+              id="name"
+              type="text"
+              className={`input ${!name ? 'invalid-field' : ''}`}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
           <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="email" className="form__label">
               Email
             </label>
-            <input id="email" type="text" className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`} value={email} onChange={(e) => handleEmailChange(e.target.value)} />
-            <p className={isEmailValid ? 'hidden' : 'auth__note'}>
-              Please enter a valid email address.
-            </p>
+            <input
+              id="email"
+              type="text"
+              className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`}
+              value={email}
+              onChange={(e) => handleEmailChange(e.target.value)}
+            />
+            <p className={isEmailValid ? 'hidden' : 'auth__note'}>Please enter a valid email address.</p>
           </div>
           <div className="form__input-wrap">
             <label htmlFor="text" className="form__label">
@@ -76,7 +88,13 @@ const ContactUs = () => {
                 e.target.style.height = `${e.target.scrollHeight + 2}px`;
               }}
             ></textarea>
-            <p className={(!isFormValid && !isAuth && (!name || !email || !text)) || (!isFormValid && isAuth && !text) ? 'auth__note' : 'hidden'}>
+            <p
+              className={
+                (!isFormValid && !isAuth && (!name || !email || !text)) || (!isFormValid && isAuth && !text)
+                  ? 'auth__note'
+                  : 'hidden'
+              }
+            >
               Please fill in all fields
             </p>
           </div>
