@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { parsePhoneNumber } from 'react-phone-number-input';
 import './PersonalInfo.scss';
 
 const PersonalInfo = () => {
@@ -36,6 +39,10 @@ const PersonalInfo = () => {
     setIsEmailValid(isEmailValid);
   };
 
+  const handleMobileChange = (value) => {
+    setMobile(value);
+  };
+
   return (
     <div className="container">
       <div className="profile">
@@ -70,6 +77,10 @@ const PersonalInfo = () => {
             <label htmlFor="mobile" className="form__label">
               Mobile nr
             </label>
+            <PhoneInput
+              value={mobile}
+              onChange={handleMobileChange}
+            />
             <input
               id="mobile"
               type="tel"

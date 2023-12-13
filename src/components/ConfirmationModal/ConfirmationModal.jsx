@@ -18,6 +18,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
         setIsOpen(false);
+        setEmail('');
       }
     };
 

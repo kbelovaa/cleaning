@@ -1,5 +1,5 @@
 .faq {
-  padding: 170px 100px 0 100px;
+  padding: 170px 100px 400px 100px;
 
   @media screen and (max-width: 1440px) {
     padding: 80px;
@@ -49,23 +49,34 @@
     }
   }
 
-  &-wrap .contact-us {
-    padding-top: 110px;
-    padding-bottom: 110px;
+  &__contact-us {
+    border-radius: 4px;
+    background: rgba(38, 134, 100, 0.08);
+    padding: 100px 0px;
+    margin-top: 10px;
+    text-align: center;
+  }
 
-    @media screen and (max-width: 1440px) {
-      padding-top: 120px;
-      padding-bottom: 480px;
-    }
+  &__text {
+    font-size: 34px;
+    line-height: 130%;
+    letter-spacing: 0.68px;
+    margin-bottom: 10px;
+  }
 
-    @media screen and (max-width: 1024px) {
-      padding-top: 80px;
-      padding-bottom: 400px;
-    }
-
-    @media screen and (max-width: 744px) {
-      padding-top: 70px;
-      padding-bottom: 280px;
+  &__link {
+    color: #268664;
+    position: relative;
+    cursor: pointer;
+    
+    &::after {
+      display: block;
+      content: '';
+      width: 100%;
+      position: absolute;
+      background: #268664;
+      height: 2px;
+      left: 0;
     }
   }
 }

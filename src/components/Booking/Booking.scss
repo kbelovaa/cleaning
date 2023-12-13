@@ -418,6 +418,10 @@
   &__arrow {
     cursor: pointer;
 
+    &.unactive {
+      cursor: default;
+    }
+
     &:first-of-type {
       margin: 0 26.17px 0 4.36px;
     }
@@ -507,37 +511,6 @@
 
   &__instructions {
     resize: none;
-  }
-
-  &__saving {
-    display: flex;
-    align-items: center;
-    margin-bottom: 60px;
-    width: 180px;
-
-    &-tick {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      border: 1px solid #268664;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      cursor: pointer;
-
-      input[type='checkbox']:checked + & {
-        background-color: #268664;
-      }
-    }
-
-    &-label {
-      font-size: 12px;
-      line-height: normal;
-      letter-spacing: 0.6px;
-      margin-left: 8px;
-      cursor: pointer;
-    }
   }
 
   &__btn {

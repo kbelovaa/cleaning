@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMonths, subMonths } from 'date-fns';
 import {
@@ -25,6 +25,8 @@ import {
   setTotalAction,
   setSpeedSumAction,
   setTimeSumAction,
+  setAddress1Action,
+  setAddress2Action,
 } from '../../store/actions/cleaningActions';
 import {
   months,
@@ -44,16 +46,49 @@ import Calendar from '../Calendar/Calendar';
 import './Booking.scss';
 
 const Booking = () => {
-  const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const cleaning = useSelector((state) => state.cleaning);
 
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
+  const [date, setDate] = useState(cleaning.date);
+  const [time, setTime] = useState(cleaning.time);
+  const [selectedCleaning, setSelectedCleaning] = useState(cleaning.selectedCleaning);
+  const [selectedServices, setSelectedServices] = useState(cleaning.selectedServices);
+  const [apartmentSize, setApartmentSize] = useState(cleaning.apartmentSize);
+  const [selectedSpeed, setSelectedSpeed] = useState(cleaning.selectedSpeed);
+  const [selectedFrequency, setSelectedFrequency] = useState(cleaning.selectedFrequency);
+  const [bedroomsNum, setBedroomsNum] = useState(cleaning.bedroomsNum);
+  const [bathroomsNum, setBathroomsNum] = useState(cleaning.bathroomsNum);
+  const [kitchensNum, setKitchensNum] = useState(cleaning.kitchensNum);
+  const [address1, setAddress1] = useState(cleaning.address1);
+  const [address2, setAddress2] = useState(cleaning.address2);
+  const [postalCode, setPostalCode] = useState(cleaning.postalCode);
+  const [city, setCity] = useState(cleaning.city);
+  const [province, setProvince] = useState(cleaning.province);
+  const [instructions, setInstructions] = useState(cleaning.instructions);
+  const [saving, setSaving] = useState(cleaning.saving);
+  const [cleaningSum, setCleaningSum] = useState(cleaning.cleaningSum);
+  const [extrasSum, setExtrasSum] = useState(cleaning.extrasSum);
+  const [speedSum, setSpeedSum] = useState(cleaning.speedSum);
+  const [timeSum, setTimeSum] = useState(cleaning.timeSum);
+  const [subtotal, setSubtotal] = useState(cleaning.subtotal);
+  const [iva, setIva] = useState(cleaning.iva);
+  const [total, setTotal] = useState(cleaning.total);
   const [isSummaryUnderlined, setIsSummaryUnderlined] = useState(false);
+
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const routes = pathname.split('/');
+
+  const dateRef = useRef(null);
+  const timeRef = useRef(null);
+  const addressRef = useRef(null);
+  const speedRef = useRef(null);
+  const sizeRef = useRef(null);
+  const propertyRef = useRef(null);
+  const cleaningRef = useRef(null);
+  const extrasRef = useRef(null);
 
   const setIsAuthorizationOpen = useOutletContext();
 
@@ -75,84 +110,115 @@ const Booking = () => {
   }, []);
 
   useEffect(() => {
-    const cleaningSum =
-      cleaning.apartmentSize === ''
-        ? 0
-        : calculateCleaningTypePrice(cleaning.selectedCleaning.price, cleaning.apartmentSize, [
-            cleaning.bedroomsNum,
-            cleaning.bathroomsNum,
-            cleaning.kitchensNum,
-          ]);
-    dispatch(setCleaningSumAction(cleaningSum));
-  }, [
-    cleaning.apartmentSize,
-    cleaning.bedroomsNum,
-    cleaning.bathroomsNum,
-    cleaning.kitchensNum,
-    cleaning.selectedCleaning,
+    let currentRef;
+    switch (routes[2]) {
+      case 'date':
+        currentRef = dateRef;
+        break;
+      case 'time':
+        currentRef = timeRef;
+        break;
+      case 'address':
+        currentRef = addressRef;
+        break;
+      case 'speed':
+        currentRef = speedRef;
+        break;
+      case 'size':
+        currentRef = sizeRef;
+        break;
+      case 'property':
+        currentRef = propertyRef;
+        break;
+      case 'cleaning':
+        currentRef = cleaningRef;
+        break;
+      case 'extras':
+        currentRef = extrasRef;
+        break;
+      default:
+        currentRef = null;
+    }
+    if (currentRef) {
+      const element = currentRef.current;
+      const header = document.getElementById('header');
+      const y = element.getBoundingClientRect().top - header.clientHeight * 1.5;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  }, []);
+
+  useEffect(() => {
+    const cleaningSum = apartmentSize === ''
+      ? 0
+      : calculateCleaningTypePrice(selectedCleaning.price, apartmentSize, [
+        bedroomsNum,
+        bathroomsNum,
+        kitchensNum,
+      ]);
+    setCleaningSum(cleaningSum);
+  }, [apartmentSize, bedroomsNum, bathroomsNum, kitchensNum, selectedCleaning,
   ]);
 
   useEffect(() => {
-    const extrasSum = cleaning.selectedServices.reduce((sum, service) => sum + service.price * service.number, 0);
-    dispatch(setExtrasSumAction(extrasSum));
-  }, [cleaning.selectedServices]);
+    const extrasSum = selectedServices.reduce((sum, service) => sum + service.price * service.number, 0);
+    setExtrasSum(extrasSum);
+  }, [selectedServices]);
 
   useEffect(() => {
-    const totalCleaningSum = cleaning.cleaningSum + cleaning.extrasSum;
-    const speedSum = totalCleaningSum * (speedCoeff[speedOptions.indexOf(cleaning.selectedSpeed)] - 1);
-    dispatch(setSpeedSumAction(speedSum));
-    const timeSum = totalCleaningSum * (calculateTimeCoeff(cleaning.time) - 1);
-    dispatch(setTimeSumAction(timeSum));
+    const totalCleaningSum = cleaningSum + extrasSum;
+    const speedSum = totalCleaningSum * (speedCoeff[speedOptions.indexOf(selectedSpeed)] - 1);
+    setSpeedSum(speedSum);
+    const timeSum = totalCleaningSum * (calculateTimeCoeff(time) - 1);
+    setTimeSum(timeSum);
     const subtotal = totalCleaningSum + speedSum + timeSum;
-    dispatch(setSubtotalAction(subtotal));
+    setSubtotal(subtotal);
     const iva = subtotal * 0.21;
-    dispatch(setIvaAction(iva));
-    dispatch(setTotalAction(Number(subtotal) + Number(iva)));
-  }, [cleaning.cleaningSum, cleaning.extrasSum, cleaning.selectedSpeed, cleaning.time]);
+    setIva(iva);
+    setTotal(Number(subtotal) + Number(iva));
+  }, [cleaningSum, extrasSum, selectedSpeed, time]);
 
   const handleServicesChange = (service) => {
-    if (cleaning.selectedServices.find((selectedService) => selectedService.name === service.name)) {
-      dispatch(setSelectedServicesAction(cleaning.selectedServices.filter((elem) => elem.name !== service.name)));
+    if (selectedServices.find((selectedService) => selectedService.name === service.name)) {
+      setSelectedServices(selectedServices.filter((elem) => elem.name !== service.name));
     } else {
-      dispatch(setSelectedServicesAction([...cleaning.selectedServices, { ...service, number: 1 }]));
+      setSelectedServices([...selectedServices, { ...service, number: 1 }]);
     }
   };
 
   const handleServicesNumberChange = (e, service, isMore) => {
     e.stopPropagation();
-    const serviceNumber = cleaning.selectedServices.find(
+    const serviceNumber = selectedServices.find(
       (selectedService) => selectedService.name === service.name,
     ).number;
-    const oldServices = cleaning.selectedServices.filter((elem) => elem.name !== service.name);
+    const oldServices = selectedServices.filter((elem) => elem.name !== service.name);
 
     if (isMore && serviceNumber < 20) {
-      dispatch(setSelectedServicesAction([...oldServices, { ...service, number: serviceNumber + 1 }]));
+      setSelectedServices([...oldServices, { ...service, number: serviceNumber + 1 }]);
     } else if (!isMore && serviceNumber > 1) {
-      dispatch(setSelectedServicesAction([...oldServices, { ...service, number: serviceNumber - 1 }]));
+      setSelectedServices([...oldServices, { ...service, number: serviceNumber - 1 }]);
     }
   };
 
-  const generateOptionsBlock = (options, selectedOption, setSelectedOption) =>
-    options.map((elem, index) => (
-      <div
-        key={index}
-        onClick={() => dispatch(setSelectedOption(elem))}
-        className={`form__option-variant ${selectedOption === elem ? 'checked' : ''}`}
-      >
-        <input
-          id={elem}
-          type="radio"
-          value={elem}
-          checked={selectedOption === elem}
-          onChange={(e) => dispatch(setSelectedOption(e.target.value))}
-          onClick={(e) => e.stopPropagation()}
-          className="form__option-checker"
-        />
-        <label htmlFor={elem} className="form__option-label">
-          {elem}
-        </label>
-      </div>
-    ));
+  const generateOptionsBlock = (options, selectedOption, setSelectedOption) => options.map((elem, index) => (
+    <div
+      key={index}
+      onClick={() => setSelectedOption(elem)}
+      className={`form__option-variant ${selectedOption === elem ? 'checked' : ''}`}
+    >
+      <input
+        id={elem}
+        type="radio"
+        value={elem}
+        checked={selectedOption === elem}
+        onChange={(e) => setSelectedOption(e.target.value)}
+        onClick={(e) => e.stopPropagation()}
+        className="form__option-checker"
+      />
+      <label htmlFor={elem} className="form__option-label">
+        {elem}
+      </label>
+    </div>
+  ));
 
   const handleMonthChange = (month) => {
     const selectedMonth = months.indexOf(month);
@@ -166,8 +232,7 @@ const Booking = () => {
 
   const prevMonth = () => {
     if (
-      `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
-      `${new Date().getMonth()}.${new Date().getFullYear()}`
+      `${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}`
     ) {
       setCurrentDate(subMonths(currentDate, 1));
     }
@@ -181,6 +246,30 @@ const Booking = () => {
     e.preventDefault();
     //form validation
     if (user.isAuth) {
+      dispatch(setDateAction(date));
+      dispatch(setTimeAction(time));
+      dispatch(setSelectedCleaningAction(selectedCleaning));
+      dispatch(setSelectedServicesAction(selectedServices));
+      dispatch(setApartmentSizeAction(apartmentSize));
+      dispatch(setSelectedSpeedAction(selectedSpeed));
+      dispatch(setSelectedFrequencyAction(selectedFrequency));
+      dispatch(setBedroomsNumAction(bedroomsNum));
+      dispatch(setBathroomsNumAction(bathroomsNum));
+      dispatch(setKitchensNumAction(kitchensNum));
+      dispatch(setAddress1Action(address1));
+      dispatch(setAddress2Action(address2));
+      dispatch(setPostalCodeAction(postalCode));
+      dispatch(setCityAction(city));
+      dispatch(setProvinceAction(province));
+      dispatch(setInstructionsAction(instructions));
+      dispatch(setSavingAction(saving));
+      dispatch(setCleaningSumAction(cleaningSum));
+      dispatch(setExtrasSumAction(extrasSum));
+      dispatch(setSpeedSumAction(speedSum));
+      dispatch(setTimeSumAction(timeSum));
+      dispatch(setSubtotalAction(subtotal));
+      dispatch(setIvaAction(iva));
+      dispatch(setTotalAction(total));
       navigate('/summary');
     } else {
       setIsAuthorizationOpen(true);
@@ -205,7 +294,7 @@ const Booking = () => {
             <form className="form" onSubmit={handleFormSubmit}>
               <div className="form__section">
                 <h3 className="form__title">Property information</h3>
-                <div className="form__input-wrap">
+                <div className="form__input-wrap" ref={sizeRef}>
                   <label htmlFor="size" className="form__label">
                     Apartment size, m<sup className="top-index">2</sup>
                   </label>
@@ -213,38 +302,38 @@ const Booking = () => {
                     id="size"
                     type="number"
                     className="input"
-                    value={cleaning.apartmentSize}
-                    onChange={(e) => dispatch(setApartmentSizeAction(e.target.value))}
+                    value={apartmentSize}
+                    onChange={(e) => setApartmentSize(e.target.value)}
                   />
                 </div>
-                <div className="form__properties">
+                <div className="form__properties" ref={propertyRef}>
                   <div className="form__property">
                     <span className="form__label">How many bedrooms?</span>
                     <CustomSelect
                       options={bedrooms}
-                      selectedOption={cleaning.bedroomsNum}
-                      setSelectedOption={setBedroomsNumAction}
+                      selectedOption={bedroomsNum}
+                      setSelectedOption={setBedroomsNum}
                     />
                   </div>
                   <div className="form__property">
                     <span className="form__label">How many bathrooms?</span>
                     <CustomSelect
                       options={bathrooms}
-                      selectedOption={cleaning.bathroomsNum}
-                      setSelectedOption={setBathroomsNumAction}
+                      selectedOption={bathroomsNum}
+                      setSelectedOption={setBathroomsNum}
                     />
                   </div>
                   <div className="form__property">
                     <span className="form__label">How many kitchens?</span>
                     <CustomSelect
                       options={kitchens}
-                      selectedOption={cleaning.kitchensNum}
-                      setSelectedOption={setKitchensNumAction}
+                      selectedOption={kitchensNum}
+                      setSelectedOption={setKitchensNum}
                     />
                   </div>
                 </div>
               </div>
-              <div className="form__section">
+              <div className="form__section" ref={cleaningRef}>
                 <h3 className="form__title">Service type</h3>
                 <p className="form__text">
                   Prices have a fixed and a variable rate based on m<sup className="top-index top-index_little">2</sup>.
@@ -254,16 +343,16 @@ const Booking = () => {
                   {cleaningTypes.map((elem, index) => (
                     <div
                       key={index}
-                      onClick={() => dispatch(setSelectedCleaningAction(elem))}
-                      className={`form__radio ${cleaning.selectedCleaning.type === elem.type ? 'checked' : ''}`}
+                      onClick={() => setSelectedCleaning(elem)}
+                      className={`form__radio ${selectedCleaning.type === elem.type ? 'checked' : ''}`}
                     >
                       <div className="form__radio-value">
                         <input
                           id={elem.type.split(' ').join('')}
                           type="radio"
                           value={elem.type}
-                          checked={cleaning.selectedCleaning.type === elem.type}
-                          onChange={(e) => dispatch(setSelectedCleaningAction(e.target.value))}
+                          checked={selectedCleaning.type === elem.type}
+                          onChange={(e) => setSelectedCleaning(e.target.value)}
                           onClick={(e) => e.stopPropagation()}
                           className="form__radio-checker"
                         />
@@ -289,21 +378,21 @@ const Booking = () => {
                         </label>
                       </div>
                       <span className="form__radio-price">
-                        {cleaning.apartmentSize === ''
+                        {apartmentSize === ''
                           ? '€-'
                           : `€${roundPrice(
-                              calculateCleaningTypePrice(elem.price, cleaning.apartmentSize, [
-                                cleaning.bedroomsNum,
-                                cleaning.bathroomsNum,
-                                cleaning.kitchensNum,
-                              ]),
-                            )}`}
+                            calculateCleaningTypePrice(elem.price, apartmentSize, [
+                              bedroomsNum,
+                              bathroomsNum,
+                              kitchensNum,
+                            ]),
+                          )}`}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="form__section">
+              <div className="form__section" ref={extrasRef}>
                 <h3 className="form__title">Extra services</h3>
                 <div className="form__services">
                   {extraServices.map((elem, index) => (
@@ -311,7 +400,7 @@ const Booking = () => {
                       key={index}
                       onClick={() => handleServicesChange(elem)}
                       className={`form__service ${
-                        cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name)
+                        selectedServices.find((selectedService) => selectedService.name === elem.name)
                           ? 'checked'
                           : ''
                       }`}
@@ -334,7 +423,7 @@ const Booking = () => {
                       </div>
                       <div
                         className={
-                          cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name)
+                          selectedServices.find((selectedService) => selectedService.name === elem.name)
                             ? 'form__service-number'
                             : 'hidden'
                         }
@@ -357,10 +446,7 @@ const Booking = () => {
                           />
                         </svg>
                         <span className="form__service-quantity">
-                          {
-                            cleaning.selectedServices.find((selectedService) => selectedService.name === elem.name)
-                              ?.number
-                          }
+                          {selectedServices.find((selectedService) => selectedService.name === elem.name)?.number}
                         </span>
                         <svg
                           className="form__service-sign"
@@ -385,23 +471,23 @@ const Booking = () => {
                   ))}
                 </div>
               </div>
-              <div className="form__section">
+              <div className="form__section" ref={speedRef}>
                 <h3 className="form__title">How fast?</h3>
                 <p className="form__text">
                   For a faster clean, select '2x' to reduce a 6-hour clean to 3 hours with two cleaners, or '3x' to
                   reduce it to 2 hours with three cleaners. Subject to availability.
                 </p>
                 <div className="form__option">
-                  {generateOptionsBlock(speedOptions, cleaning.selectedSpeed, setSelectedSpeedAction)}
+                  {generateOptionsBlock(speedOptions, selectedSpeed, setSelectedSpeed)}
                 </div>
               </div>
               <div className="form__section">
                 <h3 className="form__title">When?</h3>
-                <div className="form__input-wrap form__time">
+                <div className="form__input-wrap form__time" ref={timeRef}>
                   <span className="form__label">Time</span>
-                  <CustomSelect options={times} selectedOption={cleaning.time} setSelectedOption={setTimeAction} />
+                  <CustomSelect options={times} selectedOption={time} setSelectedOption={setTime} />
                 </div>
-                <span className="form__label">Date</span>
+                <span className="form__label" ref={dateRef}>Date</span>
                 <div className="form__date">
                   <div className="form__date-group">
                     <div className="form__date-input">
@@ -409,13 +495,12 @@ const Booking = () => {
                         options={months}
                         selectedOption={months[currentDate.getMonth()]}
                         setSelectedOption={handleMonthChange}
-                        isStateFunction={true}
                       />
                       <span className="form__year">{currentDate.getFullYear()}</span>
                     </div>
                     <div className="form__arrows">
                       <svg
-                        className="form__arrow"
+                        className={`form__arrow ${`${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}` ? '' : 'unactive'}`}
                         onClick={prevMonth}
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -427,8 +512,7 @@ const Booking = () => {
                           className="form__arrow-line"
                           d="M19.7812 6.17188L1.56961 6.17188"
                           stroke={
-                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
-                            `${new Date().getMonth()}.${new Date().getFullYear()}`
+                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}`
                               ? '#000'
                               : '#6D6D6D'
                           }
@@ -439,8 +523,7 @@ const Booking = () => {
                           className="form__arrow-line"
                           d="M7.02197 11.623L1.56939 6.17046L7.02197 0.717875"
                           stroke={
-                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
-                            `${new Date().getMonth()}.${new Date().getFullYear()}`
+                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}`
                               ? '#000'
                               : '#6D6D6D'
                           }
@@ -475,18 +558,18 @@ const Booking = () => {
                   <Calendar
                     currentDate={currentDate}
                     setCurrentDate={setCurrentDate}
-                    selectedDay={cleaning.date}
-                    setSelectedDay={setDateAction}
+                    selectedDay={date}
+                    setSelectedDay={setDate}
                   />
                 </div>
               </div>
               <div className="form__section">
                 <h3 className="form__title">How often?</h3>
                 <div className="form__option">
-                  {generateOptionsBlock(frequency, cleaning.selectedFrequency, setSelectedFrequencyAction)}
+                  {generateOptionsBlock(frequency, selectedFrequency, setSelectedFrequency)}
                 </div>
               </div>
-              <div className="form__section">
+              <div className="form__section" ref={addressRef}>
                 <h3 className="form__title">Property address</h3>
                 <div className="form__input-wrap">
                   <label htmlFor="address1" className="form__label">
@@ -516,8 +599,8 @@ const Booking = () => {
                       id="code"
                       type="number"
                       className="input form__address"
-                      value={cleaning.postalCode}
-                      onChange={(e) => dispatch(setPostalCodeAction(e.target.value))}
+                      value={postalCode}
+                      onChange={(e) => setPostalCode(e.target.value)}
                     />
                   </div>
                   <div className="form__input-wrap form__city-name">
@@ -528,8 +611,8 @@ const Booking = () => {
                       id="city"
                       type="text"
                       className="input form__address"
-                      value={cleaning.city}
-                      onChange={(e) => dispatch(setCityAction(e.target.value))}
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
                     />
                   </div>
                 </div>
@@ -541,8 +624,8 @@ const Booking = () => {
                     id="province"
                     type="text"
                     className="input form__address"
-                    value={cleaning.province}
-                    onChange={(e) => dispatch(setProvinceAction(e.target.value))}
+                    value={province}
+                    onChange={(e) => setProvince(e.target.value)}
                   />
                 </div>
                 <div className="form__input-wrap">
@@ -553,8 +636,8 @@ const Booking = () => {
                     id="instructions"
                     rows="1"
                     className="input form__instructions"
-                    value={cleaning.instructions}
-                    onChange={(e) => dispatch(setInstructionsAction(e.target.value))}
+                    value={instructions}
+                    onChange={(e) => setInstructions(e.target.value)}
                     onInput={(e) => {
                       e.target.style.height = 'auto';
                       e.target.style.height = `${e.target.scrollHeight + 2}px`;
@@ -562,15 +645,14 @@ const Booking = () => {
                   ></textarea>
                 </div>
               </div>
-              <div className="form__saving">
+              <div className="checkbox">
                 <input
                   id="save"
                   type="checkbox"
-                  checked={cleaning.saving}
-                  onChange={() => dispatch(setSavingAction(!cleaning.saving))}
-                  className="form__saving-checker"
+                  checked={saving}
+                  onChange={() => (setSaving(!saving))}
                 />
-                <div className="form__saving-tick" onClick={() => dispatch(setSavingAction(!cleaning.saving))}>
+                <div className="checkbox__tick" onClick={() => setSaving(!saving)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                     <path
                       d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
@@ -581,12 +663,12 @@ const Booking = () => {
                     />
                   </svg>
                 </div>
-                <label htmlFor="save" className="form__saving-label">
+                <label htmlFor="save" className="checkbox__label">
                   Save information for future
                 </label>
               </div>
               <button className="btn form__btn form__btn" type="submit">
-                Next
+                {routes[1] ? 'Save' : 'Next'}
               </button>
             </form>
           </div>
@@ -594,16 +676,16 @@ const Booking = () => {
             <div className={`summary ${isSummaryUnderlined ? 'underlined' : ''}`}>
               <h2 className="summary__title">Summary</h2>
               <div className="summary__line summary__line_bold">
-                <h3 className="summary__subtitle">{cleaning.selectedCleaning.type}</h3>
-                <span className="summary__price">{`€${roundPrice(cleaning.cleaningSum)}`}</span>
+                <h3 className="summary__subtitle">{selectedCleaning.type}</h3>
+                <span className="summary__price">{`€${roundPrice(cleaningSum)}`}</span>
               </div>
-              <div className={cleaning.selectedServices.length !== 0 ? 'summary__line summary__line_list' : 'hidden'}>
+              <div className={selectedServices.length !== 0 ? 'summary__line summary__line_list' : 'hidden'}>
                 <span className="summary__item">Extra services</span>
-                <span className="summary__price">{`€${roundPrice(cleaning.extrasSum)}`}</span>
+                <span className="summary__price">{`€${roundPrice(extrasSum)}`}</span>
               </div>
               <div className="summary__extras">
-                {cleaning.selectedServices.map((service, index) => {
-                  const serviceNumber = cleaning.selectedServices.find(
+                {selectedServices.map((service, index) => {
+                  const serviceNumber = selectedServices.find(
                     (selectedService) => selectedService.name === service.name,
                   ).number;
                   return (
@@ -616,30 +698,30 @@ const Booking = () => {
                   );
                 })}
               </div>
-              <div className={cleaning.selectedSpeed !== 'x1' ? 'summary__line' : 'hidden'}>
+              <div className={selectedSpeed !== 'x1' ? 'summary__line' : 'hidden'}>
                 <span className="summary__item">How fast</span>
-                <span className="summary__price">{`€${roundPrice(cleaning.speedSum)}`}</span>
+                <span className="summary__price">{`€${roundPrice(speedSum)}`}</span>
               </div>
-              <div className={cleaning.timeSum !== 0 ? 'summary__line' : 'hidden'}>
+              <div className={timeSum !== 0 ? 'summary__line' : 'hidden'}>
                 <span className="summary__item">Off-peak hours</span>
-                <span className="summary__price">{`€${roundPrice(cleaning.timeSum)}`}</span>
+                <span className="summary__price">{`€${roundPrice(timeSum)}`}</span>
               </div>
               <div className="summary__subtotal">
                 <div className="summary__line">
                   <span className="summary__item">Subtotal</span>
-                  <span className="summary__price">{`€${roundPrice(cleaning.subtotal)}`}</span>
+                  <span className="summary__price">{`€${roundPrice(subtotal)}`}</span>
                 </div>
                 <div className="summary__line">
                   <span className="summary__item">IVA 21%</span>
-                  <span className="summary__price">{`€${roundPrice(cleaning.iva)}`}</span>
+                  <span className="summary__price">{`€${roundPrice(iva)}`}</span>
                 </div>
               </div>
               <div className="summary__line summary__line_bold">
                 <span className="summary__subtitle">Total</span>
-                <span className="summary__price">{`€${roundPrice(cleaning.total)}`}</span>
+                <span className="summary__price">{`€${roundPrice(total)}`}</span>
               </div>
               <button className="btn form__btn summary__btn" type="submit">
-                Next
+                {routes[1] ? 'Save' : 'Next'}
               </button>
             </div>
           </div>

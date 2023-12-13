@@ -18,7 +18,8 @@ import {
   SET_BEDROOMS_NUM,
   SET_BATHROOMS_NUM,
   SET_KITCHENS_NUM,
-  SET_ADDRESS,
+  SET_ADDRESS1,
+  SET_ADDRESS2,
   SET_POSTAL_CODE,
   SET_CITY,
   SET_PROVINCE,
@@ -44,7 +45,8 @@ const defaultState = {
   bedroomsNum: bedrooms[0],
   bathroomsNum: bathrooms[0],
   kitchensNum: kitchens[0],
-  address: '',
+  address1: '',
+  address2: '',
   postalCode: '',
   city: '',
   province: '',
@@ -81,8 +83,10 @@ const cleaningReducer = (state = defaultState, action) => {
       return { ...state, bathroomsNum: action.payload };
     case SET_KITCHENS_NUM:
       return { ...state, kitchensNum: action.payload };
-    case SET_ADDRESS:
-      return { ...state, address: action.payload };
+    case SET_ADDRESS1:
+      return { ...state, address1: action.payload };
+    case SET_ADDRESS2:
+      return { ...state, address2: action.payload };
     case SET_POSTAL_CODE:
       return { ...state, postalCode: action.payload };
     case SET_CITY:

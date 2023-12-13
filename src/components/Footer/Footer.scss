@@ -4,11 +4,6 @@
   justify-content: center;
   align-items: center;
   height: 200px;
-  font-size: 16px;
-  font-weight: 300;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  color: #92a1a9;
 
   @media screen and (max-width: 744px) {
     height: 234px;
@@ -19,6 +14,12 @@
   }
 
   &__text {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: 0.8px;
+    color: #92a1a9;
+
     @media screen and (max-width: 744px) {
       max-width: 297px;
       text-align: center;
@@ -41,9 +42,6 @@
   }
 
   &__link {
-    text-decoration: none;
-    color: #92a1a9;
-
     @media screen and (max-width: 744px) {
       margin-top: 10px;
       display: block;

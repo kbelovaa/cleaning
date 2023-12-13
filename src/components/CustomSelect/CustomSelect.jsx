@@ -1,21 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './CustomSelect.scss';
 
-const CustomSelect = ({ options, selectedOption, setSelectedOption, isStateFunction, defaultOption }) => {
-  const dispatch = useDispatch();
-
+const CustomSelect = ({ options, selectedOption, setSelectedOption, defaultOption }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
 
   const handleOptionSelect = (option) => {
-    if (isStateFunction) {
-      setSelectedOption(option);
-    } else {
-      dispatch(setSelectedOption(option));
-    }
+    setSelectedOption(option);
     setIsOpen(false);
   };
 

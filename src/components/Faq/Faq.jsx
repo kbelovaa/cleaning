@@ -1,7 +1,7 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { faq } from '../../constants/selectOptions';
 import FaqCard from './FaqCard/FaqCard';
-import ContactUs from '../ContactUs/ContactUs';
 import './Faq.scss';
 
 const Faq = () => (
@@ -21,9 +21,16 @@ const Faq = () => (
             ))}
           </div>
         </div>
+        <div className="faq__contact-us">
+          <p className="faq__text">
+            Did not find what you are looking for?
+          </p>
+          <NavLink className="faq__text faq__link" to='/contact-us'>
+            Contact us here
+          </NavLink>
+        </div>
       </div>
     </div>
-    <ContactUs />
   </div>
 );
 

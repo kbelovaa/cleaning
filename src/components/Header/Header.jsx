@@ -49,7 +49,7 @@ const Header = () => {
 
   return (
     <div className="content">
-      <header className={`header-section ${headerColor}`}>
+      <header id="header" className={`header-section ${headerColor}`}>
         <div className="container">
           <div className={`header ${isAuth ? 'isauth' : ''}`}>
             <span className="header__label" onClick={() => navigate('/')}>

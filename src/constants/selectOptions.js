@@ -17,35 +17,30 @@ const cleaningTypes = [
   {
     type: 'Basic',
     price: 50,
-    duration: 3,
     description:
       'Basic cleaning starts with an assessment, followed by systematic dusting, vacuuming, and mopping. The kitchen and bathroom receive special attention, including surface sanitization. After the final touch-ups, we perform a walk-through to ensure our high standards are met, leaving your home in pristine condition.',
   },
   {
     type: 'Detailed',
     price: 100,
-    duration: 5,
     description:
       'Detailed cleaning takes the BASIC cleaning to the next level, leaving no corner untouched. We meticulously clean and sanitize every surface and crevice in your home. From deep cleaning kitchen appliances to thorough dusting, we ensure that your living space is truly immaculate.',
   },
   {
     type: 'Move in/out',
     price: 200,
-    duration: 5,
     description:
       'Designed for transitioning in or out of a home, this service includes a thorough cleaning of all areas, with extra attention to spaces that may have been neglected. We take care of cabinets, appliances, and ensure the entire space is ready for the next chapter.',
   },
   {
     type: 'After building',
     price: 250,
-    duration: 5,
     description:
       'Perfect for post-construction or renovation clean-ups, we tackle the mess and dust left behind by builders, leaving you with a clean and comfortable environment. From cleaning surfaces to removing construction debris, we make your newly built or renovated area shine.',
   },
   {
     type: 'After party',
     price: 250,
-    duration: 5,
     description:
       'After a great event, the last thing you want to do is clean up. We handle the cleanup, from removing spills and stains to general tidying up, ensuring every surface is sparkling. Allowing you to wake up to a refreshed and clean home.',
   },

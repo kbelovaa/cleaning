@@ -9,7 +9,8 @@ import {
   SET_BEDROOMS_NUM,
   SET_BATHROOMS_NUM,
   SET_KITCHENS_NUM,
-  SET_ADDRESS,
+  SET_ADDRESS1,
+  SET_ADDRESS2,
   SET_POSTAL_CODE,
   SET_CITY,
   SET_PROVINCE,
@@ -74,8 +75,13 @@ export const setKitchensNumAction = (payload) => ({
   payload,
 });
 
-export const setAddressAction = (payload) => ({
-  type: SET_ADDRESS,
+export const setAddress1Action = (payload) => ({
+  type: SET_ADDRESS1,
+  payload,
+});
+
+export const setAddress2Action = (payload) => ({
+  type: SET_ADDRESS2,
   payload,
 });
 

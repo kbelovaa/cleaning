@@ -40,6 +40,19 @@
   box-sizing: border-box;
 }
 
+*:active, *:focus, *:focus-visible {
+  outline: none;
+}
+
+ul,
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 body {
   background: #fff;
   color: #3a3a3a;
@@ -56,4 +69,9 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='number'] {
   -moz-appearance: textfield;
+}
+
+input[type='radio'],
+input[type='checkbox'] {
+  display: none;
 }

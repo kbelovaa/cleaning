@@ -1,11 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isToday, addDays } from 'date-fns';
 import './Calendar.scss';
 
 const Calendar = ({ currentDate, setCurrentDate, selectedDay, setSelectedDay }) => {
-  const dispatch = useDispatch();
-
   const daysInCalendar = () => {
     const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
     const end = endOfWeek(endOfMonth(currentDate), { weekStartsOn: 1 });
@@ -23,7 +20,7 @@ const Calendar = ({ currentDate, setCurrentDate, selectedDay, setSelectedDay }) 
 
   const handleDayClick = (day) => {
     if (day >= new Date().setHours(0, 0, 0, 0)) {
-      dispatch(setSelectedDay(day.toLocaleDateString()));
+      setSelectedDay(day.toLocaleDateString());
       setCurrentDate(day);
     }
   };

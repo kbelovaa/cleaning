@@ -1,7 +1,7 @@
 import { SET_IS_AUTH } from '../../constants/actionsRedux';
 
 const defaultState = {
-  isAuth: false,
+  isAuth: true,
 };
 
 const userReducer = (state = defaultState, action) => {
