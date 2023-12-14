@@ -1,31 +1,23 @@
 import React, { useState } from 'react';
-import PhoneInput from 'react-phone-number-input';
-import 'react-phone-number-input/style.css';
-import { parsePhoneNumber } from 'react-phone-number-input';
 import './PersonalInfo.scss';
+import PhoneField from '../PhoneField/PhoneField';
 
 const PersonalInfo = () => {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [mobile, setMobile] = useState('');
+  const [isMobileValid, setIsMobileValid] = useState(true);
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isEmailUnique, setIsEmailUnique] = useState('');
   const [isFormValid, setIsFormValid] = useState(true);
 
-  const finishFormSending = () => {
-    setName('');
-    setSurname('');
-    setMobile('');
-    setIsFormValid(true);
-  };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    if (name && surname && mobile && email && isEmailValid) {
+    if (name && surname && mobile && isMobileValid && email && isEmailValid) {
       // отправка запроса
-      finishFormSending();
+      setIsFormValid(true);
     } else {
       setIsFormValid(false);
     }
@@ -37,10 +29,6 @@ const PersonalInfo = () => {
 
     const isEmailValid = email === '' || /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(email);
     setIsEmailValid(isEmailValid);
-  };
-
-  const handleMobileChange = (value) => {
-    setMobile(value);
   };
 
   return (
@@ -74,21 +62,16 @@ const PersonalInfo = () => {
             />
           </div>
           <div className="personal-info__field-wrap">
-            <label htmlFor="mobile" className="form__label">
-              Mobile nr
-            </label>
-            <PhoneInput
-              value={mobile}
-              onChange={handleMobileChange}
-            />
-            <input
-              id="mobile"
-              type="tel"
-              className={`input ${!mobile ? 'invalid-field' : ''}`}
-              value={mobile}
-              onChange={(e) => setMobile(e.target.value)}
-              autoComplete="off"
-            />
+            <PhoneField mobile={mobile} setMobile={setMobile} isMobileValid={isMobileValid} setIsMobileValid={setIsMobileValid} />
+            <p
+              className={
+                !isFormValid && (!name || !surname || !email || !mobile)
+                  ? 'auth__note'
+                  : 'hidden'
+              }
+            >
+              Please fill in all fields
+            </p>
           </div>
           <div className="personal-info__field-wrap">
             <label htmlFor="email" className="form__label">

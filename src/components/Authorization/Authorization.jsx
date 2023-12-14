@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setIsAuthAction } from '../../store/actions/userActions';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
+import PhoneField from '../PhoneField/PhoneField';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './Authorization.scss';
 
@@ -13,6 +14,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isEmailUnique, setIsEmailUnique] = useState('');
   const [mobile, setMobile] = useState('');
+  const [isMobileValid, setIsMobileValid] = useState(true);
   const [password, setPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [passwordConf, setPasswordConf] = useState('');
@@ -138,11 +140,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           <form className={`form auth-form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
             <div className="form__fields">
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
-                <label htmlFor="name" className="form__label">
+                <label htmlFor="auth-name" className="form__label">
                   Name
                 </label>
                 <input
-                  id="name"
+                  id="auth-name"
                   type="text"
                   className={`input ${!name ? 'invalid-field' : ''}`}
                   value={name}
@@ -151,11 +153,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 />
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
-                <label htmlFor="surname" className="form__label">
+                <label htmlFor="auth-surname" className="form__label">
                   Surname
                 </label>
                 <input
-                  id="surname"
+                  id="auth-surname"
                   type="text"
                   className={`input ${!surname ? 'invalid-field' : ''}`}
                   value={surname}
@@ -164,11 +166,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 />
               </div>
               <div className="form__field-wrap">
-                <label htmlFor="email" className="form__label">
+                <label htmlFor="auth-email" className="form__label">
                   Email address
                 </label>
                 <input
-                  id="email"
+                  id="auth-email"
                   type="text"
                   className={`input ${!email || !isEmailValid || isEmailUnique ? 'invalid-field' : ''}`}
                   value={email}
@@ -181,24 +183,14 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <p className={isEmailUnique ? 'auth__note' : 'hidden'}>{isEmailUnique}</p>
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
-                <label htmlFor="mobile" className="form__label">
-                  Mobile nr
-                </label>
-                <input
-                  id="mobile"
-                  type="tel"
-                  className={`input ${!mobile ? 'invalid-field' : ''}`}
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value)}
-                  autoComplete="off"
-                />
+                <PhoneField mobile={mobile} setMobile={setMobile} isMobileValid={isMobileValid} setIsMobileValid={setIsMobileValid} />
               </div>
               <div className="form__field-wrap">
-                <label htmlFor="password" className="form__label">
+                <label htmlFor="auth-password" className="form__label">
                   Password
                 </label>
                 <input
-                  id="password"
+                  id="auth-password"
                   type={showPassword ? 'text' : 'password'}
                   className={`input ${!password || !isPasswordValid ? 'invalid-field' : ''}`}
                   value={password}
@@ -245,11 +237,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </span>
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
-                <label htmlFor="passwordconf" className="form__label">
+                <label htmlFor="auth-passwordconf" className="form__label">
                   Confirm password
                 </label>
                 <input
-                  id="passwordconf"
+                  id="auth-passwordconf"
                   type={showPasswordConf ? 'text' : 'password'}
                   className={`input ${!passwordConf || !isPasswordConfValid ? 'invalid-field' : ''}`}
                   value={passwordConf}

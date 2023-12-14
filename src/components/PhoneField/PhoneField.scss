@@ -1,0 +1,35 @@
+.react-tel-input {
+  .form-control {
+    border-radius: 4px;
+    border: 1px solid #e8e7e7;
+    background: transparent;
+    font-family: 'SF Pro Display', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: normal;
+    transition: all 0.3s ease;
+    color: #3a3a3a;
+    height: 56px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding-left: 55px;
+  }
+
+  .flag-dropdown {
+    background-color: #fff;
+    border: 1px solid #e8e7e7;
+    border-right: none;
+    padding: 5px;
+
+    .invalid &.invalid-field {
+      border: 1px solid #a51f1f;
+      border-right: none;
+    }
+  }
+
+  .country-list {
+    margin: 15px 0 10px -6px;
+  }
+}
