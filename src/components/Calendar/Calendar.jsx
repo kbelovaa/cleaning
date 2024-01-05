@@ -1,8 +1,38 @@
 import React from 'react';
-import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isToday, addDays } from 'date-fns';
+import {
+  format,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  isToday,
+  addDays,
+  getDay,
+  parse,
+  getYear,
+  getMonth,
+} from 'date-fns';
+import { weekdays } from '../../constants/selectOptions';
 import './Calendar.scss';
 
-const Calendar = ({ currentDate, setCurrentDate, selectedDay, setSelectedDay }) => {
+const Calendar = ({
+  currentDate,
+  setCurrentDate,
+  selectedDays,
+  repeat,
+  date,
+  setDate,
+  isStartDateActive,
+  setIsStartDateActive,
+  setStartDate,
+  isLastDateActive,
+  setIsLastDateActive,
+  setLastDate,
+  calendarRef,
+  setIsAutoUpdate,
+  customSchedule,
+  handleCustomScheduleUpdate,
+}) => {
   const daysInCalendar = () => {
     const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
     const end = endOfWeek(endOfMonth(currentDate), { weekStartsOn: 1 });
@@ -20,40 +50,106 @@ const Calendar = ({ currentDate, setCurrentDate, selectedDay, setSelectedDay }) 
 
   const handleDayClick = (day) => {
     if (day >= new Date().setHours(0, 0, 0, 0)) {
-      setSelectedDay(day.toLocaleDateString());
-      setCurrentDate(day);
+      if (repeat === 'One-time') {
+        setDate(day.toLocaleDateString());
+        setCurrentDate(day);
+      } else if (repeat === 'Custom schedule') {
+        const activeFieldIndex = customSchedule.findIndex((elem) => elem.isDateActive);
+        if (activeFieldIndex !== -1) {
+          handleCustomScheduleUpdate(day.toLocaleDateString(), 'date', activeFieldIndex);
+          handleCustomScheduleUpdate(false, 'isDateActive', activeFieldIndex);
+          setCurrentDate(day);
+        }
+      } else {
+        if (isStartDateActive) {
+          setStartDate(day.toLocaleDateString());
+          setIsAutoUpdate(false);
+          setIsStartDateActive(false);
+          setCurrentDate(day);
+        }
+        if (isLastDateActive) {
+          setLastDate(day.toLocaleDateString());
+          setIsAutoUpdate(false);
+          setIsLastDateActive(false);
+          setCurrentDate(day);
+        }
+      }
     }
   };
 
+  const getWeekDayClassName = (weekday) => {
+    let isAvailable = false;
+
+    if (repeat === 'Monthly') {
+      const day = parse(selectedDays[0], 'dd.MM.yyyy', new Date()).getDate();
+      const availableDate = new Date(currentDate);
+      availableDate.setDate(day);
+      isAvailable = availableDate.getDay() === weekday.index;
+    } else if (repeat === 'Weekly' || repeat === 'Every 2 weeks') {
+      const weekdayNr = parse(selectedDays[0], 'dd.MM.yyyy', new Date()).getDay();
+      isAvailable = weekdayNr === weekday.index;
+    }
+
+    return isAvailable ? 'calendar__weekday_available' : '';
+  };
+
+  const getDayClassName = (day) => {
+    let className = '';
+
+    if (
+      day.getMonth() - currentDate.getMonth() === 1 ||
+      day.getMonth() - currentDate.getMonth() === -11 ||
+      day.getMonth() - currentDate.getMonth() === -1
+    ) {
+      className += ' calendar__day_next';
+    }
+
+    if (day >= new Date().setHours(0, 0, 0, 0)) {
+      className += ' calendar__day_after';
+    } else {
+      className += ' calendar__day_before';
+    }
+
+    if (day.getMonth() < currentDate.getMonth()) {
+      className += ' calendar__day_previous';
+    }
+
+    if (selectedDays.length !== 0) {
+      if (repeat === 'Monthly' && !(parse(selectedDays[0], 'dd.MM.yyyy', new Date()).getDate() === day.getDate())) {
+        className += ' calendar__day_unactive';
+      } else if (
+        (repeat === 'Weekly' || repeat === 'Every 2 weeks') &&
+        !(parse(selectedDays[0], 'dd.MM.yyyy', new Date()).getDay() === day.getDay())
+      ) {
+        className += ' calendar__day_unactive';
+      }
+    }
+
+    return className;
+  };
+
   return (
-    <div className="calendar">
+    <div className="calendar" ref={calendarRef}>
       <div className="calendar__weekdays">
-        <span className="calendar__weekday">M</span>
-        <span className="calendar__weekday">T</span>
-        <span className="calendar__weekday">W</span>
-        <span className="calendar__weekday">T</span>
-        <span className="calendar__weekday">F</span>
-        <span className="calendar__weekday">S</span>
-        <span className="calendar__weekday">S</span>
+        {weekdays.map((weekday, index) => (
+          <span key={index} className={`calendar__weekday ${getWeekDayClassName(weekday)}`}>
+            {weekday.name}
+          </span>
+        ))}
       </div>
       <div className="calendar__days">
         {daysInCalendar().map((day, index) => (
-          <div
-            key={index}
-            className={`calendar__day ${
-              day.getMonth() - currentDate.getMonth() === 1 ||
-              day.getMonth() - currentDate.getMonth() === -11 ||
-              day.getMonth() - currentDate.getMonth() === -1
-                ? 'calendar__day_next'
-                : ''
-            } ${day >= new Date().setHours(0, 0, 0, 0) ? 'calendar__day_after' : 'calendar__day_before'} ${
-              day.getMonth() < currentDate.getMonth() ? 'calendar__day_previous' : ''
-            }`}
-            onClick={() => handleDayClick(day)}
-          >
+          <div key={index} className={`calendar__day ${getDayClassName(day)}`} onClick={() => handleDayClick(day)}>
             <span
               className={`${isToday(day) ? 'calendar__day_today' : ''} ${
-                selectedDay === day.toLocaleDateString() ? 'calendar__day_selected' : ''
+                (repeat !== 'Custom schedule' &&
+                  repeat !== 'One-time' &&
+                  selectedDays.includes(day.toLocaleDateString())) ||
+                (repeat === 'Custom schedule' &&
+                  customSchedule.find((elem) => elem.date === day.toLocaleDateString())) ||
+                (repeat === 'One-time' && date === day.toLocaleDateString())
+                  ? 'calendar__day_selected'
+                  : ''
               }`}
             >
               {format(day, 'd')}

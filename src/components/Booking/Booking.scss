@@ -383,14 +383,67 @@
     }
   }
 
-  &__time {
-    margin-bottom: 28.72px;
+  &__one-time {
+    margin-bottom: 20px;
     width: 340px;
 
     @media screen and (max-width: 1024px) {
-      margin-bottom: 28px;
       width: 100%;
     }
+  }
+
+  &__date-period {
+    display: flex;
+    justify-content: space-between;
+
+    &:nth-of-type(3) .form__input-wrap,
+    &:nth-of-type(1) .form__input-wrap:last-of-type {
+      width: calc((100% - 20px) / 2);
+      margin-bottom: 20px;
+
+      & .input {
+        height: 60px;
+      }
+    }
+
+    &:nth-of-type(2) {
+      flex-direction: column;
+    }
+  }
+
+  &__date-custom {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+
+    & .form__input-wrap {
+      width: calc((100% - 20px) / 2);
+
+      & .input {
+        height: 60px;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+
+  &__date-add {
+    color: #268664;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: 0.32px;
+    cursor: pointer;
+    border-bottom: 1px solid #268664;
+    align-self: flex-start;
+    margin-bottom: 60px;
   }
 
   &__date {
@@ -502,11 +555,10 @@
   &__city {
     display: flex;
     justify-content: space-between;
-  }
 
-  &__code,
-  &__city-name {
-    width: calc((100% - 10px) / 2);
+    & .form__input-wrap {
+      width: calc((100% - 10px) / 2);
+    }
   }
 
   &__instructions {

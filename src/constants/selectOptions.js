@@ -72,6 +72,8 @@ const extraServices = [
 const speedOptions = ['x1', 'x2', 'x3'];
 const speedCoeff = [1, 1.2, 1.5];
 
+const repeats = ['One-time', 'Weekly', 'Every 2 weeks', 'Monthly', 'Custom schedule'];
+
 const times = [];
 
 for (let hours = 0; hours <= 23; hours++) {
@@ -81,8 +83,6 @@ for (let hours = 0; hours <= 23; hours++) {
     times.push(`${hourStr}:${minuteStr}`);
   }
 }
-
-const frequency = ['One-time', 'Weekly', 'Bi-weekly', 'Monthly'];
 
 const knowingWays = ['Google', 'Facebook', 'Instagram', 'Friend', 'Neighbour'];
 
@@ -151,6 +151,16 @@ const faq = [
   },
 ];
 
+const weekdays = [
+  { name: 'M', index: 1 },
+  { name: 'T', index: 2 },
+  { name: 'W', index: 3 },
+  { name: 'T', index: 4 },
+  { name: 'F', index: 5 },
+  { name: 'S', index: 6 },
+  { name: 'S', index: 0 },
+];
+
 export {
   months,
   cleaningTypes,
@@ -161,8 +171,9 @@ export {
   extraServices,
   speedOptions,
   speedCoeff,
+  repeats,
   times,
-  frequency,
   knowingWays,
   faq,
+  weekdays,
 };

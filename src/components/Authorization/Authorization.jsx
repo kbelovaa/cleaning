@@ -183,7 +183,12 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <p className={isEmailUnique ? 'auth__note' : 'hidden'}>{isEmailUnique}</p>
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
-                <PhoneField mobile={mobile} setMobile={setMobile} isMobileValid={isMobileValid} setIsMobileValid={setIsMobileValid} />
+                <PhoneField
+                  mobile={mobile}
+                  setMobile={setMobile}
+                  isMobileValid={isMobileValid}
+                  setIsMobileValid={setIsMobileValid}
+                />
               </div>
               <div className="form__field-wrap">
                 <label htmlFor="auth-password" className="form__label">

@@ -1,20 +1,11 @@
+import { bathrooms, bedrooms, cleaningTypes, kitchens, speedOptions, times } from '../../constants/selectOptions';
 import {
-  bathrooms,
-  bedrooms,
-  cleaningTypes,
-  frequency,
-  kitchens,
-  speedOptions,
-  times,
-} from '../../constants/selectOptions';
-import {
-  SET_DATE,
+  SET_DATES,
   SET_TIME,
   SET_SELECTED_CLEANING,
   SET_SELECTED_SERVICES,
   SET_APARTMENT_SIZE,
   SET_SELECTED_SPEED,
-  SET_SELECTED_FREQUENCY,
   SET_BEDROOMS_NUM,
   SET_BATHROOMS_NUM,
   SET_KITCHENS_NUM,
@@ -35,13 +26,14 @@ import {
 } from '../../constants/actionsRedux';
 
 const defaultState = {
-  date: new Date().toLocaleDateString(),
+  dates: [],
+  date: '',
   time: times[50],
+  customSchedule: [{ time: times[50], date: '', isDateValid: true, isDateActive: false, isDateUnique: true }],
   selectedCleaning: cleaningTypes[0],
   selectedServices: [],
   apartmentSize: '',
   selectedSpeed: speedOptions[0],
-  selectedFrequency: frequency[0],
   bedroomsNum: bedrooms[0],
   bathroomsNum: bathrooms[0],
   kitchensNum: kitchens[0],
@@ -63,8 +55,8 @@ const defaultState = {
 
 const cleaningReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case SET_DATE:
-      return { ...state, date: action.payload };
+    case SET_DATES:
+      return { ...state, dates: action.payload };
     case SET_TIME:
       return { ...state, time: action.payload };
     case SET_SELECTED_CLEANING:
@@ -75,8 +67,6 @@ const cleaningReducer = (state = defaultState, action) => {
       return { ...state, apartmentSize: action.payload };
     case SET_SELECTED_SPEED:
       return { ...state, selectedSpeed: action.payload };
-    case SET_SELECTED_FREQUENCY:
-      return { ...state, selectedFrequency: action.payload };
     case SET_BEDROOMS_NUM:
       return { ...state, bedroomsNum: action.payload };
     case SET_BATHROOMS_NUM:

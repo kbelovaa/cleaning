@@ -4,6 +4,11 @@
   height: 60px;
   font-size: 16px;
 
+  .form__date-period & {
+    font-size: 20px;
+    font-weight: 300;
+  }
+
   .form__date & {
     font-size: 14px;
     height: 44px;
@@ -43,6 +48,7 @@
   width: 4px;
   margin: 8px 2px 8px 4px;
   opacity: 0.9;
+  display: block;
 
   &:hover > .ps__thumb-y,
   &:focus > .ps__thumb-y,
@@ -62,7 +68,6 @@
   border-radius: 10px;
   background-color: #79747e;
   width: 4px;
-  height: 86px;
 }
 
 .options {
@@ -89,6 +94,16 @@
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.5px;
+
+      .form__time & {
+        font-size: 20px;
+        font-weight: 300;
+      }
+
+      .form__date & {
+        font-size: 14px;
+        padding: 7px 12px;
+      }
 
       &:hover {
         background-color: #f4f9f7;

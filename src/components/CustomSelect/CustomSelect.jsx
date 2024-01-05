@@ -3,28 +3,37 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './CustomSelect.scss';
 
-const CustomSelect = ({ options, selectedOption, setSelectedOption, defaultOption }) => {
+const CustomSelect = ({ options, selectedOption, setSelectedOption, defaultOption, setIsAutoUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
-  };
 
-  const handleDocumentClick = (e) => {
-    if (selectRef.current && !selectRef.current.contains(e.target)) {
-      setIsOpen(false);
+    if (setIsAutoUpdate) {
+      setIsAutoUpdate(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleDocumentClick);
+    const handleClickOutside = (e) => {
+      if (selectRef.current && !selectRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    if (isOpen) {
+      const scrollbar = document.getElementsByClassName('scrollbar-container')[0];
+      scrollbar.scrollTop = 1;
+    }
 
     return () => {
-      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className="custom-select" ref={selectRef}>

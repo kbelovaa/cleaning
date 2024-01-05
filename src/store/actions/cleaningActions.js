@@ -1,11 +1,10 @@
 import {
-  SET_DATE,
+  SET_DATES,
   SET_TIME,
   SET_SELECTED_CLEANING,
   SET_SELECTED_SERVICES,
   SET_APARTMENT_SIZE,
   SET_SELECTED_SPEED,
-  SET_SELECTED_FREQUENCY,
   SET_BEDROOMS_NUM,
   SET_BATHROOMS_NUM,
   SET_KITCHENS_NUM,
@@ -25,8 +24,8 @@ import {
   SET_TOTAL,
 } from '../../constants/actionsRedux';
 
-export const setDateAction = (payload) => ({
-  type: SET_DATE,
+export const setDatesAction = (payload) => ({
+  type: SET_DATES,
   payload,
 });
 
@@ -52,11 +51,6 @@ export const setApartmentSizeAction = (payload) => ({
 
 export const setSelectedSpeedAction = (payload) => ({
   type: SET_SELECTED_SPEED,
-  payload,
-});
-
-export const setSelectedFrequencyAction = (payload) => ({
-  type: SET_SELECTED_FREQUENCY,
   payload,
 });
 

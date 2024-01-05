@@ -40,7 +40,9 @@
   box-sizing: border-box;
 }
 
-*:active, *:focus, *:focus-visible {
+*:active,
+*:focus,
+*:focus-visible {
   outline: none;
 }
 
@@ -74,4 +76,8 @@ input[type='number'] {
 input[type='radio'],
 input[type='checkbox'] {
   display: none;
+}
+
+input::placeholder {
+  color: #d8d8d8;
 }

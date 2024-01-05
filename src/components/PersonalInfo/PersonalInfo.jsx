@@ -62,14 +62,13 @@ const PersonalInfo = () => {
             />
           </div>
           <div className="personal-info__field-wrap">
-            <PhoneField mobile={mobile} setMobile={setMobile} isMobileValid={isMobileValid} setIsMobileValid={setIsMobileValid} />
-            <p
-              className={
-                !isFormValid && (!name || !surname || !email || !mobile)
-                  ? 'auth__note'
-                  : 'hidden'
-              }
-            >
+            <PhoneField
+              mobile={mobile}
+              setMobile={setMobile}
+              isMobileValid={isMobileValid}
+              setIsMobileValid={setIsMobileValid}
+            />
+            <p className={!isFormValid && (!name || !surname || !email || !mobile) ? 'auth__note' : 'hidden'}>
               Please fill in all fields
             </p>
           </div>

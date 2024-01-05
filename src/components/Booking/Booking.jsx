@@ -1,14 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMonths, subMonths } from 'date-fns';
+import InputMask from 'react-input-mask';
+import {
+  parse,
+  differenceInMonths,
+  differenceInWeeks,
+  addMonths,
+  subMonths,
+  addWeeks,
+  startOfDay,
+  isBefore,
+  differenceInDays,
+} from 'date-fns';
 import {
   setApartmentSizeAction,
   setBathroomsNumAction,
   setBedroomsNumAction,
   setCityAction,
   setCleaningSumAction,
-  setDateAction,
+  setDatesAction,
   setExtrasSumAction,
   setInstructionsAction,
   setSavingAction,
@@ -17,7 +28,6 @@ import {
   setPostalCodeAction,
   setProvinceAction,
   setSelectedCleaningAction,
-  setSelectedFrequencyAction,
   setSelectedServicesAction,
   setSelectedSpeedAction,
   setSubtotalAction,
@@ -37,8 +47,8 @@ import {
   extraServices,
   speedOptions,
   speedCoeff,
+  repeats,
   times,
-  frequency,
 } from '../../constants/selectOptions';
 import { calculateCleaningTypePrice, calculateTimeCoeff, roundPrice } from '../../utils/calculatePrice';
 import CustomSelect from '../CustomSelect/CustomSelect';
@@ -50,14 +60,27 @@ const Booking = () => {
   const user = useSelector((state) => state.user);
   const cleaning = useSelector((state) => state.cleaning);
 
+  const [repeat, setRepeat] = useState(repeats[1]);
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [dates, setDates] = useState(cleaning.dates);
   const [date, setDate] = useState(cleaning.date);
+  const [isDateValid, setIsDateValid] = useState(true);
   const [time, setTime] = useState(cleaning.time);
+  const [customSchedule, setCustomSchedule] = useState(cleaning.customSchedule);
+  const [duration, setDuration] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [isStartDateValid, setIsStartDateValid] = useState(true);
+  const [isStartDateActive, setIsStartDateActive] = useState(false);
+  const [lastDate, setLastDate] = useState('');
+  const [isLastDateValid, setIsLastDateValid] = useState(true);
+  const [isLastDateActive, setIsLastDateActive] = useState(false);
+  const [isAutoUpdate, setIsAutoUpdate] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [addExcludedDates, setAddExcludedDates] = useState(false);
   const [selectedCleaning, setSelectedCleaning] = useState(cleaning.selectedCleaning);
   const [selectedServices, setSelectedServices] = useState(cleaning.selectedServices);
   const [apartmentSize, setApartmentSize] = useState(cleaning.apartmentSize);
   const [selectedSpeed, setSelectedSpeed] = useState(cleaning.selectedSpeed);
-  const [selectedFrequency, setSelectedFrequency] = useState(cleaning.selectedFrequency);
   const [bedroomsNum, setBedroomsNum] = useState(cleaning.bedroomsNum);
   const [bathroomsNum, setBathroomsNum] = useState(cleaning.bathroomsNum);
   const [kitchensNum, setKitchensNum] = useState(cleaning.kitchensNum);
@@ -81,14 +104,17 @@ const Booking = () => {
   const { pathname } = useLocation();
   const routes = pathname.split('/');
 
-  const dateRef = useRef(null);
-  const timeRef = useRef(null);
+  const customScheduleRefs = useRef([]);
+  const dateTimeRef = useRef(null);
   const addressRef = useRef(null);
   const speedRef = useRef(null);
   const sizeRef = useRef(null);
   const propertyRef = useRef(null);
   const cleaningRef = useRef(null);
   const extrasRef = useRef(null);
+  const calendarRef = useRef(null);
+  const startDateRef = useRef(null);
+  const lastDateRef = useRef(null);
 
   const setIsAuthorizationOpen = useOutletContext();
 
@@ -112,11 +138,8 @@ const Booking = () => {
   useEffect(() => {
     let currentRef;
     switch (routes[2]) {
-      case 'date':
-        currentRef = dateRef;
-        break;
-      case 'time':
-        currentRef = timeRef;
+      case 'date-time':
+        currentRef = dateTimeRef;
         break;
       case 'address':
         currentRef = addressRef;
@@ -147,17 +170,224 @@ const Booking = () => {
     }
   }, []);
 
+  const checkClickOutside = (ref, isActive, setIsActive) => {
+    const handleClickOutside = (e) => {
+      if (
+        ref.current &&
+        calendarRef.current &&
+        !ref.current.contains(e.target) &&
+        !calendarRef.current.contains(e.target)
+      ) {
+        setIsActive(false);
+      }
+    };
+
+    if (isActive) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  };
+
+  useEffect(() => checkClickOutside(startDateRef, isStartDateActive, setIsStartDateActive), [isStartDateActive]);
+  useEffect(() => checkClickOutside(lastDateRef, isLastDateActive, setIsLastDateActive), [isLastDateActive]);
+
+  const handleCustomScheduleUpdate = (value, key, index) =>
+    setCustomSchedule((prevSchedule) => {
+      const newData = [...prevSchedule];
+      if (newData[index]) {
+        newData[index] = { ...newData[index], [key]: value };
+      }
+      return newData;
+    });
+
+  const customScheduleIsDateActives = useMemo(() => customSchedule.map((elem) => elem.isDateActive), [customSchedule]);
+
   useEffect(() => {
-    const cleaningSum = apartmentSize === ''
-      ? 0
-      : calculateCleaningTypePrice(selectedCleaning.price, apartmentSize, [
-        bedroomsNum,
-        bathroomsNum,
-        kitchensNum,
-      ]);
+    customSchedule.forEach((elem, index) =>
+      checkClickOutside(customScheduleRefs.current[index], elem.isDateActive, (value) =>
+        handleCustomScheduleUpdate(value, 'isDateActive', index),
+      ),
+    );
+  }, [customScheduleIsDateActives]);
+
+  useEffect(() => {
+    customScheduleRefs.current = Array(customSchedule.length)
+      .fill()
+      .map((_, i) => customScheduleRefs.current[i] || React.createRef());
+  }, [customSchedule.length]);
+
+  const customScheduleDates = useMemo(() => customSchedule.map((elem) => elem.date), [customSchedule]);
+
+  useEffect(() => {
+    if (repeat === 'Custom schedule') {
+      customSchedule
+        .slice()
+        .reverse()
+        .forEach((elem, index, arr) => {
+          const hasDuplicate = arr.slice(index + 1).some((otherElem) => elem.date === otherElem.date);
+          const reversedIndex = customSchedule.length - 1 - index;
+
+          if (elem.date !== '' && hasDuplicate && customSchedule[reversedIndex].isDateUnique) {
+            handleCustomScheduleUpdate(false, 'isDateUnique', reversedIndex);
+          } else if (elem.date !== '' && !hasDuplicate && !customSchedule[reversedIndex].isDateUnique) {
+            handleCustomScheduleUpdate(true, 'isDateUnique', reversedIndex);
+          }
+        });
+    }
+  }, [customScheduleDates]);
+
+  const calculateLastDate = (duration) => {
+    const parsedStartDate = parse(startDate, 'dd.MM.yyyy', new Date());
+
+    let newLastDate;
+
+    if (Number(duration) !== 0) {
+      switch (repeat) {
+        case 'Weekly':
+          newLastDate = addWeeks(parsedStartDate, Number(duration) - 1);
+          break;
+        case 'Every 2 weeks':
+          newLastDate = addWeeks(parsedStartDate, 2 * (Number(duration) - 1));
+          break;
+        case 'Monthly':
+          newLastDate = addMonths(parsedStartDate, Number(duration) - 1);
+          break;
+        default:
+          newLastDate = new Date();
+      }
+    } else {
+      newLastDate = parsedStartDate;
+    }
+
+    setLastDate(newLastDate.toLocaleDateString());
+
+    return newLastDate.toLocaleDateString();
+  };
+
+  useEffect(() => {
+    if (!isAutoUpdate && startDate.replace(/\D/g, '').length === 8 && isStartDateValid && duration) {
+      calculateLastDate(duration);
+      setCurrentDate(parse(startDate, 'dd.MM.yyyy', new Date()));
+    }
+
+    if (startDate.replace(/\D/g, '').length === 0 || duration === '') {
+      setLastDate('');
+    }
+
+    setIsAutoUpdate(true);
+  }, [startDate, duration, repeat]);
+
+  const calculateDuration = () => {
+    const parsedStartDate = parse(startDate, 'dd.MM.yyyy', new Date());
+    const parsedEndDate = parse(lastDate, 'dd.MM.yyyy', new Date());
+
+    let diff;
+    switch (repeat) {
+      case 'Weekly':
+        diff = differenceInWeeks(parsedEndDate, parsedStartDate);
+        break;
+      case 'Every 2 weeks':
+        diff = Math.floor(differenceInWeeks(parsedEndDate, parsedStartDate) / 2);
+        break;
+      case 'Monthly':
+        diff = differenceInMonths(parsedEndDate, parsedStartDate);
+        break;
+      default:
+        diff = '';
+    }
+
+    setDuration(diff + 1);
+
+    return diff + 1;
+  };
+
+  const findNearestDuration = () => {
+    setIsAutoUpdate(true);
+
+    const parsedStartDate = parse(startDate, 'dd.MM.yyyy', new Date());
+    const parsedLastDate = parse(lastDate, 'dd.MM.yyyy', new Date());
+
+    const daysDifference = differenceInDays(parsedLastDate, parsedStartDate);
+
+    let duration;
+
+    switch (repeat) {
+      case 'Weekly':
+        duration = daysDifference / 7;
+        break;
+      case 'Every 2 weeks':
+        duration = daysDifference / 14;
+        break;
+      case 'Monthly':
+        duration = daysDifference / 30.5;
+        break;
+      default:
+        duration = 0;
+    }
+
+    setDuration(Math.round(duration) + 1);
+    calculateLastDate(Math.round(duration) + 1);
+  };
+
+  useEffect(() => {
+    if (!isAutoUpdate && lastDate.replace(/\D/g, '').length === 8 && isLastDateValid && startDate && isStartDateValid) {
+      const duration = calculateDuration();
+
+      if (duration !== '' && calculateLastDate(duration) !== lastDate) {
+        setShowNotification(true);
+        setTimeout(() => setShowNotification(false), 5000);
+        findNearestDuration();
+      }
+    }
+
+    if (lastDate.replace(/\D/g, '').length === 0) {
+      setDuration('');
+    }
+
+    setIsAutoUpdate(true);
+  }, [lastDate]);
+
+  useEffect(() => {
+    if (startDate && isStartDateValid && lastDate && isLastDateValid && duration) {
+      const selectedDays = [startDate];
+
+      for (let i = 1; i < Number(duration); i++) {
+        const parsedPrevDate = parse(selectedDays[i - 1], 'dd.MM.yyyy', new Date());
+        let selectedDay;
+
+        switch (repeat) {
+          case 'Weekly':
+            selectedDay = addWeeks(parsedPrevDate, 1);
+            break;
+          case 'Every 2 weeks':
+            selectedDay = addWeeks(parsedPrevDate, 2);
+            break;
+          case 'Monthly':
+            selectedDay = addMonths(parsedPrevDate, 1);
+            break;
+          default:
+            selectedDay = new Date();
+        }
+
+        selectedDays.push(selectedDay.toLocaleDateString());
+      }
+
+      setDates(selectedDays);
+    }
+  }, [startDate, lastDate, duration]);
+
+  useEffect(() => {
+    const cleaningSum =
+      apartmentSize === ''
+        ? 0
+        : calculateCleaningTypePrice(selectedCleaning.price, apartmentSize, [bedroomsNum, bathroomsNum, kitchensNum]);
     setCleaningSum(cleaningSum);
-  }, [apartmentSize, bedroomsNum, bathroomsNum, kitchensNum, selectedCleaning,
-  ]);
+  }, [apartmentSize, bedroomsNum, bathroomsNum, kitchensNum, selectedCleaning]);
 
   useEffect(() => {
     const extrasSum = selectedServices.reduce((sum, service) => sum + service.price * service.number, 0);
@@ -177,48 +407,99 @@ const Booking = () => {
     setTotal(Number(subtotal) + Number(iva));
   }, [cleaningSum, extrasSum, selectedSpeed, time]);
 
+  const handleApartmentSizeChange = (size) => {
+    if (/^\d+$/.test(size) || size === '') {
+      setApartmentSize(size);
+    }
+  };
+
   const handleServicesChange = (service) => {
     if (selectedServices.find((selectedService) => selectedService.name === service.name)) {
-      setSelectedServices(selectedServices.filter((elem) => elem.name !== service.name));
+      setSelectedServices((state) => state.filter((elem) => elem.name !== service.name));
     } else {
-      setSelectedServices([...selectedServices, { ...service, number: 1 }]);
+      setSelectedServices((state) => [...state, { ...service, number: 1 }]);
     }
   };
 
   const handleServicesNumberChange = (e, service, isMore) => {
     e.stopPropagation();
-    const serviceNumber = selectedServices.find(
-      (selectedService) => selectedService.name === service.name,
-    ).number;
+    const serviceNumber = selectedServices.find((selectedService) => selectedService.name === service.name).number;
     const oldServices = selectedServices.filter((elem) => elem.name !== service.name);
 
     if (isMore && serviceNumber < 20) {
       setSelectedServices([...oldServices, { ...service, number: serviceNumber + 1 }]);
     } else if (!isMore && serviceNumber > 1) {
       setSelectedServices([...oldServices, { ...service, number: serviceNumber - 1 }]);
+    } else if (!isMore && serviceNumber === 1) {
+      setSelectedServices(oldServices);
     }
   };
 
-  const generateOptionsBlock = (options, selectedOption, setSelectedOption) => options.map((elem, index) => (
-    <div
-      key={index}
-      onClick={() => setSelectedOption(elem)}
-      className={`form__option-variant ${selectedOption === elem ? 'checked' : ''}`}
-    >
-      <input
-        id={elem}
-        type="radio"
-        value={elem}
-        checked={selectedOption === elem}
-        onChange={(e) => setSelectedOption(e.target.value)}
-        onClick={(e) => e.stopPropagation()}
-        className="form__option-checker"
-      />
-      <label htmlFor={elem} className="form__option-label">
-        {elem}
-      </label>
-    </div>
-  ));
+  const generateOptionsBlock = (options, selectedOption, setSelectedOption) =>
+    options.map((elem, index) => (
+      <div
+        key={index}
+        onClick={() => setSelectedOption(elem)}
+        className={`form__option-variant ${selectedOption === elem ? 'checked' : ''}`}
+      >
+        <input
+          id={elem}
+          type="radio"
+          value={elem}
+          checked={selectedOption === elem}
+          onChange={(e) => setSelectedOption(e.target.value)}
+          onClick={(e) => e.stopPropagation()}
+          className="form__option-checker"
+        />
+        <label htmlFor={elem} className="form__option-label">
+          {elem}
+        </label>
+      </div>
+    ));
+
+  const handleDurationChange = (duration) => {
+    if (/^\d+$/.test(duration) || duration === '') {
+      setIsAutoUpdate(false);
+      setDuration(duration);
+    }
+  };
+
+  const handleDateInput = (value, setSelectedDate, setIsDateValid) => {
+    setIsDateValid(true);
+    const date = value.split('.');
+    const day = date[0];
+    const month = date[1];
+    const year = date[2];
+
+    if (
+      (!Number.isNaN(parseInt(day, 10)) && (parseInt(day, 10) < 1 || parseInt(date, 10) > 31)) ||
+      (!Number.isNaN(parseInt(month, 10)) && (parseInt(month, 10) > 12 || parseInt(month, 10) < 1)) ||
+      (!Number.isNaN(parseInt(year, 10)) &&
+        year.replace(/\D/g, '').length === 4 &&
+        isBefore(parse(value, 'dd.MM.yyyy', new Date()), startOfDay(new Date())))
+    ) {
+      setIsDateValid(false);
+    }
+
+    setIsAutoUpdate(false);
+    setSelectedDate(value);
+  };
+
+  const deleteCustomDate = (index) => {
+    const newCustomSchedule = [...customSchedule];
+    newCustomSchedule.splice(index, 1);
+    setCustomSchedule(newCustomSchedule);
+
+    customScheduleRefs.current = customScheduleRefs.current.filter((_, i) => i !== index);
+  };
+
+  const addCustomDate = () => {
+    setCustomSchedule((state) => [
+      ...state,
+      { time: times[50], date: '', isDateValid: true, isDateActive: false, isDateUnique: true },
+    ]);
+    customScheduleRefs.current = [...customScheduleRefs.current, React.createRef()];
+  };
 
   const handleMonthChange = (month) => {
     const selectedMonth = months.indexOf(month);
@@ -232,7 +513,8 @@ const Booking = () => {
 
   const prevMonth = () => {
     if (
-      `${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}`
+      `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
+      `${new Date().getMonth()}.${new Date().getFullYear()}`
     ) {
       setCurrentDate(subMonths(currentDate, 1));
     }
@@ -246,13 +528,12 @@ const Booking = () => {
     e.preventDefault();
     //form validation
     if (user.isAuth) {
-      dispatch(setDateAction(date));
+      dispatch(setDatesAction(dates));
       dispatch(setTimeAction(time));
       dispatch(setSelectedCleaningAction(selectedCleaning));
       dispatch(setSelectedServicesAction(selectedServices));
       dispatch(setApartmentSizeAction(apartmentSize));
       dispatch(setSelectedSpeedAction(selectedSpeed));
-      dispatch(setSelectedFrequencyAction(selectedFrequency));
       dispatch(setBedroomsNumAction(bedroomsNum));
       dispatch(setBathroomsNumAction(bathroomsNum));
       dispatch(setKitchensNumAction(kitchensNum));
@@ -300,20 +581,16 @@ const Booking = () => {
                   </label>
                   <input
                     id="size"
-                    type="number"
+                    type="text"
                     className="input"
                     value={apartmentSize}
-                    onChange={(e) => setApartmentSize(e.target.value)}
+                    onChange={(e) => handleApartmentSizeChange(e.target.value)}
                   />
                 </div>
                 <div className="form__properties" ref={propertyRef}>
                   <div className="form__property">
                     <span className="form__label">How many bedrooms?</span>
-                    <CustomSelect
-                      options={bedrooms}
-                      selectedOption={bedroomsNum}
-                      setSelectedOption={setBedroomsNum}
-                    />
+                    <CustomSelect options={bedrooms} selectedOption={bedroomsNum} setSelectedOption={setBedroomsNum} />
                   </div>
                   <div className="form__property">
                     <span className="form__label">How many bathrooms?</span>
@@ -325,11 +602,7 @@ const Booking = () => {
                   </div>
                   <div className="form__property">
                     <span className="form__label">How many kitchens?</span>
-                    <CustomSelect
-                      options={kitchens}
-                      selectedOption={kitchensNum}
-                      setSelectedOption={setKitchensNum}
-                    />
+                    <CustomSelect options={kitchens} selectedOption={kitchensNum} setSelectedOption={setKitchensNum} />
                   </div>
                 </div>
               </div>
@@ -381,12 +654,12 @@ const Booking = () => {
                         {apartmentSize === ''
                           ? '€-'
                           : `€${roundPrice(
-                            calculateCleaningTypePrice(elem.price, apartmentSize, [
-                              bedroomsNum,
-                              bathroomsNum,
-                              kitchensNum,
-                            ]),
-                          )}`}
+                              calculateCleaningTypePrice(elem.price, apartmentSize, [
+                                bedroomsNum,
+                                bathroomsNum,
+                                kitchensNum,
+                              ]),
+                            )}`}
                       </span>
                     </div>
                   ))}
@@ -400,9 +673,7 @@ const Booking = () => {
                       key={index}
                       onClick={() => handleServicesChange(elem)}
                       className={`form__service ${
-                        selectedServices.find((selectedService) => selectedService.name === elem.name)
-                          ? 'checked'
-                          : ''
+                        selectedServices.find((selectedService) => selectedService.name === elem.name) ? 'checked' : ''
                       }`}
                     >
                       <div className="form__service-value">
@@ -482,12 +753,172 @@ const Booking = () => {
                 </div>
               </div>
               <div className="form__section">
-                <h3 className="form__title">When?</h3>
-                <div className="form__input-wrap form__time" ref={timeRef}>
-                  <span className="form__label">Time</span>
-                  <CustomSelect options={times} selectedOption={time} setSelectedOption={setTime} />
+                <h3 className="form__title">Recurring</h3>
+                <p className="form__text">Here you can schedule regular cleaning</p>
+                <span className="form__label">How often?</span>
+                <CustomSelect
+                  options={repeats}
+                  selectedOption={repeat}
+                  setSelectedOption={setRepeat}
+                  setIsAutoUpdate={setIsAutoUpdate}
+                />
+              </div>
+              <div className="form__section">
+                <h3 className="form__title" ref={dateTimeRef}>
+                  When?
+                </h3>
+                <div className="form__date-period">
+                  <div className={`form__input-wrap form__one-time ${repeat === 'Custom schedule' ? 'hidden' : ''}`}>
+                    <span className="form__label">Time</span>
+                    <CustomSelect options={times} selectedOption={time} setSelectedOption={setTime} />
+                  </div>
+                  <div
+                    className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'form__input-wrap'}
+                  >
+                    <label htmlFor="duration" className="form__label">
+                      Duration
+                    </label>
+                    <input
+                      id="duration"
+                      type="number"
+                      className="input"
+                      value={duration}
+                      onChange={(e) => handleDurationChange(e.target.value)}
+                    />
+                  </div>
                 </div>
-                <span className="form__label" ref={dateRef}>Date</span>
+                <div className={repeat === 'Custom schedule' ? 'form__date-period' : 'hidden'}>
+                  {customSchedule.map((elem, index) => (
+                    <div key={index} className="form__date-custom">
+                      <svg
+                        className="form__close"
+                        onClick={() => deleteCustomDate(index)}
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path d="M17.6574 17.6566L6.34367 6.34285" stroke="black" strokeLinecap="round" />
+                        <path d="M17.6563 6.34285L6.34262 17.6566" stroke="black" strokeLinecap="round" />
+                      </svg>
+                      <div className="form__input-wrap">
+                        <span className="form__label">Time</span>
+                        <CustomSelect
+                          options={times}
+                          selectedOption={elem.time}
+                          setSelectedOption={(value) => handleCustomScheduleUpdate(value, 'time', index)}
+                        />
+                      </div>
+                      <div className="form__input-wrap">
+                        <span className="form__label">Date</span>
+                        <InputMask
+                          value={elem.date}
+                          mask="99.99.9999"
+                          placeholder={new Date().toLocaleDateString()}
+                          onChange={(e) =>
+                            handleDateInput(
+                              e.target.value,
+                              (value) => handleCustomScheduleUpdate(value, 'date', index),
+                              (value) => handleCustomScheduleUpdate(value, 'isDateValid', index),
+                            )
+                          }
+                          onFocus={() => handleCustomScheduleUpdate(true, 'isDateActive', index)}
+                        >
+                          {(inputProps) => (
+                            <input
+                              {...inputProps}
+                              id={`custom-date${index}`}
+                              className="input"
+                              ref={customScheduleRefs.current[index]}
+                            />
+                          )}
+                        </InputMask>
+                        <p className={elem.isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                        <p className={elem.isDateUnique ? 'hidden' : 'auth__note'}>
+                          This date has already been selected.
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                  <span className="form__date-add" onClick={addCustomDate}>
+                    Add
+                  </span>
+                </div>
+                <div className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'form__date-period'}>
+                  <div className="form__input-wrap">
+                    <label htmlFor="start-date" className="form__label">
+                      Start date
+                    </label>
+                    <InputMask
+                      value={startDate}
+                      mask="99.99.9999"
+                      placeholder={new Date().toLocaleDateString()}
+                      onChange={(e) => handleDateInput(e.target.value, setStartDate, setIsStartDateValid)}
+                      onFocus={() => setIsStartDateActive(true)}
+                    >
+                      {(inputProps) => <input {...inputProps} id="start-date" className="input" ref={startDateRef} />}
+                    </InputMask>
+                    <p className={isStartDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                    <p className={Number(duration) !== 0 || duration === '' ? 'hidden' : 'auth__note'}>
+                      Change the date range or duration, as it doesn't cover any selected period
+                    </p>
+                  </div>
+                  <div className="form__input-wrap">
+                    <label htmlFor="last-date" className="form__label">
+                      Last date
+                    </label>
+                    <InputMask
+                      value={lastDate}
+                      mask="99.99.9999"
+                      placeholder={new Date().toLocaleDateString()}
+                      onChange={(e) => handleDateInput(e.target.value, setLastDate, setIsLastDateValid)}
+                      onFocus={() => setIsLastDateActive(true)}
+                    >
+                      {(inputProps) => <input {...inputProps} id="last-date" className="input" ref={lastDateRef} />}
+                    </InputMask>
+                    <p className={isLastDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                    <p className={showNotification ? 'auth__note' : 'hidden'}>
+                      We have changed the last date according to the selected frequency
+                    </p>
+                  </div>
+                </div>
+                <div className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'checkbox'}>
+                  <input
+                    id="excluded-dates"
+                    type="checkbox"
+                    checked={addExcludedDates}
+                    onChange={() => setAddExcludedDates(!addExcludedDates)}
+                  />
+                  <div className="checkbox__tick" onClick={() => setAddExcludedDates(!addExcludedDates)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+                      <path
+                        d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
+                        stroke="white"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <label htmlFor="excluded-dates" className="checkbox__label">
+                    Excluded dates
+                  </label>
+                </div>
+                <div className={repeat === 'One-time' ? 'form__input-wrap form__one-time' : 'hidden'}>
+                  <label htmlFor="date" className="form__label">
+                    Date
+                  </label>
+                  <InputMask
+                    id="date"
+                    className="input"
+                    value={date}
+                    mask="99.99.9999"
+                    placeholder={new Date().toLocaleDateString()}
+                    onChange={(e) => handleDateInput(e.target.value, setDate, setIsDateValid)}
+                  />
+                  <p className={isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                </div>
                 <div className="form__date">
                   <div className="form__date-group">
                     <div className="form__date-input">
@@ -500,7 +931,12 @@ const Booking = () => {
                     </div>
                     <div className="form__arrows">
                       <svg
-                        className={`form__arrow ${`${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}` ? '' : 'unactive'}`}
+                        className={`form__arrow ${
+                          `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
+                          `${new Date().getMonth()}.${new Date().getFullYear()}`
+                            ? ''
+                            : 'unactive'
+                        }`}
                         onClick={prevMonth}
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -512,7 +948,8 @@ const Booking = () => {
                           className="form__arrow-line"
                           d="M19.7812 6.17188L1.56961 6.17188"
                           stroke={
-                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}`
+                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
+                            `${new Date().getMonth()}.${new Date().getFullYear()}`
                               ? '#000'
                               : '#6D6D6D'
                           }
@@ -523,7 +960,8 @@ const Booking = () => {
                           className="form__arrow-line"
                           d="M7.02197 11.623L1.56939 6.17046L7.02197 0.717875"
                           stroke={
-                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !== `${new Date().getMonth()}.${new Date().getFullYear()}`
+                            `${currentDate.getMonth()}.${currentDate.getFullYear()}` !==
+                            `${new Date().getMonth()}.${new Date().getFullYear()}`
                               ? '#000'
                               : '#6D6D6D'
                           }
@@ -558,15 +996,22 @@ const Booking = () => {
                   <Calendar
                     currentDate={currentDate}
                     setCurrentDate={setCurrentDate}
-                    selectedDay={date}
-                    setSelectedDay={setDate}
+                    selectedDays={dates}
+                    setSelectedDays={setDates}
+                    repeat={repeat}
+                    date={date}
+                    setDate={setDate}
+                    isStartDateActive={isStartDateActive}
+                    setIsStartDateActive={setIsStartDateActive}
+                    setStartDate={setStartDate}
+                    isLastDateActive={isLastDateActive}
+                    setIsLastDateActive={setIsLastDateActive}
+                    setLastDate={setLastDate}
+                    calendarRef={calendarRef}
+                    setIsAutoUpdate={setIsAutoUpdate}
+                    customSchedule={customSchedule}
+                    handleCustomScheduleUpdate={handleCustomScheduleUpdate}
                   />
-                </div>
-              </div>
-              <div className="form__section">
-                <h3 className="form__title">How often?</h3>
-                <div className="form__option">
-                  {generateOptionsBlock(frequency, selectedFrequency, setSelectedFrequency)}
                 </div>
               </div>
               <div className="form__section" ref={addressRef}>
@@ -646,12 +1091,7 @@ const Booking = () => {
                 </div>
               </div>
               <div className="checkbox">
-                <input
-                  id="save"
-                  type="checkbox"
-                  checked={saving}
-                  onChange={() => (setSaving(!saving))}
-                />
+                <input id="save" type="checkbox" checked={saving} onChange={() => setSaving(!saving)} />
                 <div className="checkbox__tick" onClick={() => setSaving(!saving)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                     <path

@@ -7,7 +7,7 @@ import {
   setBedroomsNumAction,
   setCityAction,
   setCleaningSumAction,
-  setDateAction,
+  setDatesAction,
   setExtrasSumAction,
   setInstructionsAction,
   setSavingAction,
@@ -16,7 +16,6 @@ import {
   setPostalCodeAction,
   setProvinceAction,
   setSelectedCleaningAction,
-  setSelectedFrequencyAction,
   setSelectedServicesAction,
   setSelectedSpeedAction,
   setSubtotalAction,
@@ -27,7 +26,7 @@ import {
   setAddress1Action,
   setAddress2Action,
 } from '../../store/actions/cleaningActions';
-import { bathrooms, bedrooms, cleaningTypes, frequency, kitchens, speedOptions, times } from '../../constants/selectOptions';
+import { bathrooms, bedrooms, cleaningTypes, kitchens, speedOptions, times } from '../../constants/selectOptions';
 import formatDate from '../../utils/formatDate';
 import { roundPrice } from '../../utils/calculatePrice';
 import edit from '../../images/edit.png';
@@ -44,13 +43,12 @@ const Summary = () => {
   const handlePayment = () => {
     if (policyAccepting) {
       //оплата
-      dispatch(setDateAction(new Date().toLocaleDateString()));
+      dispatch(setDatesAction([new Date().toLocaleDateString()]));
       dispatch(setTimeAction(times[50]));
       dispatch(setSelectedCleaningAction(cleaningTypes[0]));
       dispatch(setSelectedServicesAction([]));
       dispatch(setApartmentSizeAction(''));
       dispatch(setSelectedSpeedAction(speedOptions[0]));
-      dispatch(setSelectedFrequencyAction(frequency[0]));
       dispatch(setBedroomsNumAction(bedrooms[0]));
       dispatch(setBathroomsNumAction(bathrooms[0]));
       dispatch(setKitchensNumAction(kitchens[0]));
@@ -79,39 +77,41 @@ const Summary = () => {
         <div className="total-summary__data">
           <div className="total-summary__line total-summary__line_important">
             <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/date')} src={edit} alt="Edit" />
+              <img className="total-summary__edit" onClick={() => navigate('/edit/date-time')} src={edit} alt="Edit" />
               Date
             </span>
             <span className="total-summary__value">{formatDate(cleaning.date)}</span>
           </div>
           <div className="total-summary__line total-summary__line_important">
             <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className='total-summary__edit' onClick={() => navigate('/edit/time')} src={edit} alt="Edit" />
+              <img className="total-summary__edit" onClick={() => navigate('/edit/date-time')} src={edit} alt="Edit" />
               Time
             </span>
             <span className="total-summary__value">{cleaning.time}</span>
           </div>
           <p className={`total-summary__address total-summary__line_important ${editMode ? 'edit' : ''}`}>
-            <img className='total-summary__edit' onClick={() => navigate('/edit/address')} src={edit} alt="Edit" />
-            {`${cleaning.address1}${cleaning.address2 ? `, ${cleaning.address2}` : ''}, ${cleaning.city}, ${cleaning.province}, ${cleaning.postalCode}`}
+            <img className="total-summary__edit" onClick={() => navigate('/edit/address')} src={edit} alt="Edit" />
+            {`${cleaning.address1}${cleaning.address2 ? `, ${cleaning.address2}` : ''}, ${cleaning.city}, ${
+              cleaning.province
+            }, ${cleaning.postalCode}`}
           </p>
           <div className="total-summary__line">
             <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className='total-summary__edit' onClick={() => navigate('/edit/speed')} src={edit} alt="Edit" />
+              <img className="total-summary__edit" onClick={() => navigate('/edit/speed')} src={edit} alt="Edit" />
               How fast
             </span>
             <span className="total-summary__value">{cleaning.selectedSpeed}</span>
           </div>
           <div className="total-summary__line">
             <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className='total-summary__edit' onClick={() => navigate('/edit/size')} src={edit} alt="Edit" />
+              <img className="total-summary__edit" onClick={() => navigate('/edit/size')} src={edit} alt="Edit" />
               Apartment size, m<sup className="top-index">2</sup>
             </span>
             <span className="total-summary__value">{cleaning.apartmentSize}</span>
           </div>
           <div className="total-summary__line">
             <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className='total-summary__edit' onClick={() => navigate('/edit/property')} src={edit} alt="Edit" />
+              <img className="total-summary__edit" onClick={() => navigate('/edit/property')} src={edit} alt="Edit" />
               Property information
             </span>
             <div className="total-summary__list">
@@ -122,7 +122,7 @@ const Summary = () => {
           </div>
           <div className="total-summary__line">
             <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className='total-summary__edit' onClick={() => navigate('/edit/cleaning')} src={edit} alt="Edit" />
+              <img className="total-summary__edit" onClick={() => navigate('/edit/cleaning')} src={edit} alt="Edit" />
               {cleaning.selectedCleaning.type}
             </span>
             <span className="total-summary__value">{`€${roundPrice(cleaning.cleaningSum)}`}</span>
@@ -130,7 +130,7 @@ const Summary = () => {
           {cleaning.selectedServices.length !== 0 && (
             <div className="total-summary__extras">
               <span className={`total-summary__line ${editMode ? 'edit' : ''}`}>
-                <img className='total-summary__edit' onClick={() => navigate('/edit/extras')} src={edit} alt="Edit" />
+                <img className="total-summary__edit" onClick={() => navigate('/edit/extras')} src={edit} alt="Edit" />
                 Extra services:
               </span>
               <div className="total-summary__extras-list">
@@ -139,9 +139,7 @@ const Summary = () => {
                     <span className="total-summary__name">
                       {`${service.name}${service.number > 1 ? ` (x${service.number})` : ''}`}
                     </span>
-                    <span className="total-summary__value">
-                      {`€${roundPrice(service.price * service.number)}`}
-                    </span>
+                    <span className="total-summary__value">{`€${roundPrice(service.price * service.number)}`}</span>
                   </div>
                 ))}
               </div>
@@ -150,7 +148,7 @@ const Summary = () => {
           {cleaning.selectedSpeed !== 'x1' && (
             <div className="total-summary__line">
               <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-                <img className='total-summary__edit' onClick={() => navigate('/edit/speed')} src={edit} alt="Edit" />
+                <img className="total-summary__edit" onClick={() => navigate('/edit/speed')} src={edit} alt="Edit" />
                 How fast
               </span>
               <span className="total-summary__value">{`€${roundPrice(cleaning.speedSum)}`}</span>
@@ -159,7 +157,7 @@ const Summary = () => {
           {cleaning.timeSum !== 0 && (
             <div className="total-summary__line">
               <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-                <img className='total-summary__edit' onClick={() => navigate('/edit/time')} src={edit} alt="Edit" />
+                <img className="total-summary__edit" onClick={() => navigate('/edit/time')} src={edit} alt="Edit" />
                 Off-peak hours
               </span>
               <span className="total-summary__value">{`€${roundPrice(cleaning.timeSum)}`}</span>
@@ -197,15 +195,25 @@ const Summary = () => {
             </svg>
           </div>
           <label htmlFor="save" className="checkbox__label">
-            I understand and accept <NavLink to='/cancellation-policy' className="checkbox__link">The Cancellation Policy</NavLink>*
+            I understand and accept{' '}
+            <NavLink to="/cancellation-policy" className="checkbox__link">
+              The Cancellation Policy
+            </NavLink>
+            *
           </label>
         </div>
         <div className="total-summary__buttons">
-          <button className={`btn total-summary__btn ${editMode ? 'edit' : 'btn_light'}`} onClick={() => setEditMode((state) => !state)}>
+          <button
+            className={`btn total-summary__btn ${editMode ? 'edit' : 'btn_light'}`}
+            onClick={() => setEditMode((state) => !state)}
+          >
             <img className={editMode ? 'hidden' : 'total-summary__edit'} src={edit} alt="Edit" />
             {editMode ? 'Save' : 'Edit'}
           </button>
-          <button className={`btn total-summary__btn ${policyAccepting ? '' : 'inactive'} ${editMode ? 'hidden' : ''}`} onClick={handlePayment}>
+          <button
+            className={`btn total-summary__btn ${policyAccepting ? '' : 'inactive'} ${editMode ? 'hidden' : ''}`}
+            onClick={handlePayment}
+          >
             Pay
           </button>
         </div>

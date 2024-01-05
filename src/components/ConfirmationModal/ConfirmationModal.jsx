@@ -68,7 +68,6 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
             options={knowingWays}
             selectedOption={knowingWay}
             setSelectedOption={setKnowingWay}
-            isStateFunction={true}
             defaultOption={'Select'}
           />
         </div>
