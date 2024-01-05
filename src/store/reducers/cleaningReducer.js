@@ -1,4 +1,4 @@
-import { bathrooms, bedrooms, cleaningTypes, kitchens, speedOptions, times } from '../../constants/selectOptions';
+import { bathrooms, bedrooms, cleaningTypes, kitchens, speedOptions, repeats, times } from '../../constants/selectOptions';
 import {
   SET_DATES,
   SET_TIME,
@@ -26,6 +26,7 @@ import {
 } from '../../constants/actionsRedux';
 
 const defaultState = {
+  repeat: repeats[0],
   dates: [],
   date: '',
   time: times[50],

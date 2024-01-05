@@ -60,7 +60,7 @@ const Booking = () => {
   const user = useSelector((state) => state.user);
   const cleaning = useSelector((state) => state.cleaning);
 
-  const [repeat, setRepeat] = useState(repeats[1]);
+  const [repeat, setRepeat] = useState(cleaning.repeat);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [dates, setDates] = useState(cleaning.dates);
   const [date, setDate] = useState(cleaning.date);
