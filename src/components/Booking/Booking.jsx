@@ -83,6 +83,7 @@ const Booking = () => {
   const [selectedCleaning, setSelectedCleaning] = useState(cleaning.selectedCleaning);
   const [selectedServices, setSelectedServices] = useState(cleaning.selectedServices);
   const [apartmentSize, setApartmentSize] = useState(cleaning.apartmentSize);
+  const [isApartmentSizeValid, setIsApartmentSizeValid] = useState(true);
   const [selectedSpeed, setSelectedSpeed] = useState(cleaning.selectedSpeed);
   const [bedroomsNum, setBedroomsNum] = useState(cleaning.bedroomsNum);
   const [bathroomsNum, setBathroomsNum] = useState(cleaning.bathroomsNum);
@@ -449,7 +450,13 @@ const Booking = () => {
 
   const handleApartmentSizeChange = (size) => {
     if (/^\d+$/.test(size) || size === '') {
-      setApartmentSize(size);
+      setIsApartmentSizeValid(true);
+      if (size <= 10000) {
+        setApartmentSize(size);
+      } else {
+        setIsApartmentSizeValid(false);
+        setTimeout(() => setIsApartmentSizeValid(true), 3000);
+      }
     }
   };
 
@@ -631,6 +638,9 @@ const Booking = () => {
                     value={apartmentSize}
                     onChange={(e) => handleApartmentSizeChange(e.target.value)}
                   />
+                  <p className={isApartmentSizeValid ? 'hidden' : 'auth__note'}>
+                    Apartment size cannot be more than 10000 m<sup className="top-index">2</sup>.
+                  </p>
                 </div>
                 <div className="form__properties" ref={propertyRef}>
                   <div className="form__property">

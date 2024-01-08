@@ -107,7 +107,17 @@ const Calendar = ({
       className += ' calendar__day_next';
     }
 
-    if (day >= new Date().setHours(0, 0, 0, 0)) {
+    if (
+      day >= new Date().setHours(0, 0, 0, 0) &&
+      (repeat === 'One-time' ||
+        (repeat === 'Custom schedule' && customSchedule.find((date) => date.isDateActive)) ||
+        (repeat !== 'One-time' &&
+          repeat !== 'Custom schedule' &&
+          ((excludedDates.find((date) => date.isDateActive) &&
+            selectedDays.find((date) => date === day.toLocaleDateString())) ||
+            isStartDateActive ||
+            isLastDateActive)))
+    ) {
       className += ' calendar__day_after';
     } else {
       className += ' calendar__day_before';
