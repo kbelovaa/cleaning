@@ -427,6 +427,24 @@
     }
   }
 
+  &__date-excluded {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__date-fields {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: -40px;
+
+    & .form__input-wrap {
+      position: relative;
+      width: calc((100% - 20px) / 2);
+      margin-bottom: 20px;
+    }
+  }
+
   &__close {
     position: absolute;
     top: 0;

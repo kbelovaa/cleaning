@@ -63,6 +63,9 @@ const Booking = () => {
   const [repeat, setRepeat] = useState(cleaning.repeat);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [dates, setDates] = useState(cleaning.dates);
+  const [excludedDates, setExcludedDates] = useState([
+    { date: '', isDateValid: true, isDateActive: false, isDateUnique: true },
+  ]);
   const [date, setDate] = useState(cleaning.date);
   const [isDateValid, setIsDateValid] = useState(true);
   const [time, setTime] = useState(cleaning.time);
@@ -105,6 +108,7 @@ const Booking = () => {
   const routes = pathname.split('/');
 
   const customScheduleRefs = useRef([]);
+  const excludedDateRefs = useRef([]);
   const dateTimeRef = useRef(null);
   const addressRef = useRef(null);
   const speedRef = useRef(null);
@@ -196,9 +200,9 @@ const Booking = () => {
   useEffect(() => checkClickOutside(startDateRef, isStartDateActive, setIsStartDateActive), [isStartDateActive]);
   useEffect(() => checkClickOutside(lastDateRef, isLastDateActive, setIsLastDateActive), [isLastDateActive]);
 
-  const handleCustomScheduleUpdate = (value, key, index) =>
-    setCustomSchedule((prevSchedule) => {
-      const newData = [...prevSchedule];
+  const handleDatesArrUpdate = (setValue, value, key, index) =>
+    setValue((prevArr) => {
+      const newData = [...prevArr];
       if (newData[index]) {
         newData[index] = { ...newData[index], [key]: value };
       }
@@ -210,16 +214,32 @@ const Booking = () => {
   useEffect(() => {
     customSchedule.forEach((elem, index) =>
       checkClickOutside(customScheduleRefs.current[index], elem.isDateActive, (value) =>
-        handleCustomScheduleUpdate(value, 'isDateActive', index),
+        handleDatesArrUpdate(setCustomSchedule, value, 'isDateActive', index),
       ),
     );
   }, [customScheduleIsDateActives]);
+
+  const isExcludedDateActives = useMemo(() => excludedDates.map((elem) => elem.isDateActive), [excludedDates]);
+
+  useEffect(() => {
+    excludedDates.forEach((elem, index) =>
+      checkClickOutside(excludedDateRefs.current[index], elem.isDateActive, (value) =>
+        handleDatesArrUpdate(setExcludedDates, value, 'isDateActive', index),
+      ),
+    );
+  }, [isExcludedDateActives]);
 
   useEffect(() => {
     customScheduleRefs.current = Array(customSchedule.length)
       .fill()
       .map((_, i) => customScheduleRefs.current[i] || React.createRef());
   }, [customSchedule.length]);
+
+  useEffect(() => {
+    excludedDateRefs.current = Array(excludedDates.length)
+      .fill()
+      .map((_, i) => excludedDateRefs.current[i] || React.createRef());
+  }, [excludedDates.length]);
 
   const customScheduleDates = useMemo(() => customSchedule.map((elem) => elem.date), [customSchedule]);
 
@@ -233,13 +253,33 @@ const Booking = () => {
           const reversedIndex = customSchedule.length - 1 - index;
 
           if (elem.date !== '' && hasDuplicate && customSchedule[reversedIndex].isDateUnique) {
-            handleCustomScheduleUpdate(false, 'isDateUnique', reversedIndex);
+            handleDatesArrUpdate(setCustomSchedule, false, 'isDateUnique', reversedIndex);
           } else if (elem.date !== '' && !hasDuplicate && !customSchedule[reversedIndex].isDateUnique) {
-            handleCustomScheduleUpdate(true, 'isDateUnique', reversedIndex);
+            handleDatesArrUpdate(setCustomSchedule, true, 'isDateUnique', reversedIndex);
           }
         });
     }
   }, [customScheduleDates]);
+
+  const excludedDateDays = useMemo(() => excludedDates.map((elem) => elem.date), [excludedDates]);
+
+  useEffect(() => {
+    if (repeat !== 'Custom schedule' && repeat !== 'One-time') {
+      excludedDates
+        .slice()
+        .reverse()
+        .forEach((elem, index, arr) => {
+          const hasDuplicate = arr.slice(index + 1).some((otherElem) => elem.date === otherElem.date);
+          const reversedIndex = excludedDates.length - 1 - index;
+
+          if (elem.date !== '' && hasDuplicate && excludedDates[reversedIndex].isDateUnique) {
+            handleDatesArrUpdate(setExcludedDates, false, 'isDateUnique', reversedIndex);
+          } else if (elem.date !== '' && !hasDuplicate && !excludedDates[reversedIndex].isDateUnique) {
+            handleDatesArrUpdate(setExcludedDates, true, 'isDateUnique', reversedIndex);
+          }
+        });
+    }
+  }, [excludedDateDays]);
 
   const calculateLastDate = (duration) => {
     const parsedStartDate = parse(startDate, 'dd.MM.yyyy', new Date());
@@ -485,12 +525,12 @@ const Booking = () => {
     setSelectedDate(value);
   };
 
-  const deleteCustomDate = (index) => {
-    const newCustomSchedule = [...customSchedule];
-    newCustomSchedule.splice(index, 1);
-    setCustomSchedule(newCustomSchedule);
+  const deleteDate = (index, state, setState, refs) => {
+    const newDates = [...state];
+    newDates.splice(index, 1);
+    setState(newDates);
 
-    customScheduleRefs.current = customScheduleRefs.current.filter((_, i) => i !== index);
+    refs.current = refs.current.filter((_, i) => i !== index);
   };
 
   const addCustomDate = () => {
@@ -499,6 +539,11 @@ const Booking = () => {
       { time: times[50], date: '', isDateValid: true, isDateActive: false, isDateUnique: true },
     ]);
     customScheduleRefs.current = [...customScheduleRefs.current, React.createRef()];
+  };
+
+  const addExcludedDate = () => {
+    setExcludedDates((state) => [...state, { date: '', isDateValid: true, isDateActive: false, isDateUnique: true }]);
+    excludedDateRefs.current = [...excludedDateRefs.current, React.createRef()];
   };
 
   const handleMonthChange = (month) => {
@@ -792,7 +837,7 @@ const Booking = () => {
                     <div key={index} className="form__date-custom">
                       <svg
                         className="form__close"
-                        onClick={() => deleteCustomDate(index)}
+                        onClick={() => deleteDate(index, customSchedule, setCustomSchedule, customScheduleRefs)}
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
                         height="24"
@@ -807,7 +852,7 @@ const Booking = () => {
                         <CustomSelect
                           options={times}
                           selectedOption={elem.time}
-                          setSelectedOption={(value) => handleCustomScheduleUpdate(value, 'time', index)}
+                          setSelectedOption={(value) => handleDatesArrUpdate(setCustomSchedule, value, 'time', index)}
                         />
                       </div>
                       <div className="form__input-wrap">
@@ -819,11 +864,11 @@ const Booking = () => {
                           onChange={(e) =>
                             handleDateInput(
                               e.target.value,
-                              (value) => handleCustomScheduleUpdate(value, 'date', index),
-                              (value) => handleCustomScheduleUpdate(value, 'isDateValid', index),
+                              (value) => handleDatesArrUpdate(setCustomSchedule, value, 'date', index),
+                              (value) => handleDatesArrUpdate(setCustomSchedule, value, 'isDateValid', index),
                             )
                           }
-                          onFocus={() => handleCustomScheduleUpdate(true, 'isDateActive', index)}
+                          onFocus={() => handleDatesArrUpdate(setCustomSchedule, true, 'isDateActive', index)}
                         >
                           {(inputProps) => (
                             <input
@@ -904,6 +949,67 @@ const Booking = () => {
                   <label htmlFor="excluded-dates" className="checkbox__label">
                     Excluded dates
                   </label>
+                </div>
+                <div className={addExcludedDates ? 'form__date-excluded' : 'hidden'}>
+                  <div className="form__date-fields">
+                    {excludedDates.map((elem, index) => (
+                      <div key={index} className="form__input-wrap">
+                        <svg
+                          className="form__close"
+                          onClick={() => deleteDate(index, excludedDates, setExcludedDates, excludedDateRefs)}
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path d="M17.6574 17.6566L6.34367 6.34285" stroke="black" strokeLinecap="round" />
+                          <path d="M17.6563 6.34285L6.34262 17.6566" stroke="black" strokeLinecap="round" />
+                        </svg>
+                        <span className="form__label">Excluded date</span>
+                        <InputMask
+                          value={elem.date}
+                          mask="99.99.9999"
+                          placeholder={new Date().toLocaleDateString()}
+                          onChange={(e) =>
+                            handleDateInput(
+                              e.target.value,
+                              (value) => handleDatesArrUpdate(setExcludedDates, value, 'date', index),
+                              (value) => handleDatesArrUpdate(setExcludedDates, value, 'isDateValid', index),
+                            )
+                          }
+                          onFocus={() => handleDatesArrUpdate(setExcludedDates, true, 'isDateActive', index)}
+                        >
+                          {(inputProps) => (
+                            <input
+                              {...inputProps}
+                              id={`excluded-date${index}`}
+                              className="input"
+                              ref={excludedDateRefs.current[index]}
+                            />
+                          )}
+                        </InputMask>
+                        <p className={elem.isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                        <p className={elem.isDateUnique ? 'hidden' : 'auth__note'}>
+                          This date has already been excluded.
+                        </p>
+                        <p
+                          className={
+                            elem.date.replace(/\D/g, '').length === 8 &&
+                            elem.isDateValid &&
+                            !dates.find((day) => day === elem.date)
+                              ? 'auth__note'
+                              : 'hidden'
+                          }
+                        >
+                          This date isn't included in the selected cleaning dates.
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <span className="form__date-add" onClick={addExcludedDate}>
+                    Add
+                  </span>
                 </div>
                 <div className={repeat === 'One-time' ? 'form__input-wrap form__one-time' : 'hidden'}>
                   <label htmlFor="date" className="form__label">
@@ -1000,17 +1106,26 @@ const Booking = () => {
                     setSelectedDays={setDates}
                     repeat={repeat}
                     date={date}
+                    setIsDateValid={setIsDateValid}
                     setDate={setDate}
                     isStartDateActive={isStartDateActive}
                     setIsStartDateActive={setIsStartDateActive}
+                    setIsStartDateValid={setIsStartDateValid}
                     setStartDate={setStartDate}
                     isLastDateActive={isLastDateActive}
                     setIsLastDateActive={setIsLastDateActive}
+                    setIsLastDateValid={setIsLastDateValid}
                     setLastDate={setLastDate}
                     calendarRef={calendarRef}
                     setIsAutoUpdate={setIsAutoUpdate}
                     customSchedule={customSchedule}
-                    handleCustomScheduleUpdate={handleCustomScheduleUpdate}
+                    handleCustomScheduleUpdate={(value, key, index) =>
+                      handleDatesArrUpdate(setCustomSchedule, value, key, index)
+                    }
+                    handleExcludedDatesUpdate={(value, key, index) =>
+                      handleDatesArrUpdate(setExcludedDates, value, key, index)
+                    }
+                    excludedDates={excludedDates}
                   />
                 </div>
               </div>

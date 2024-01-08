@@ -1,17 +1,5 @@
 import React from 'react';
-import {
-  format,
-  startOfWeek,
-  endOfWeek,
-  startOfMonth,
-  endOfMonth,
-  isToday,
-  addDays,
-  getDay,
-  parse,
-  getYear,
-  getMonth,
-} from 'date-fns';
+import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isToday, addDays, parse } from 'date-fns';
 import { weekdays } from '../../constants/selectOptions';
 import './Calendar.scss';
 
@@ -21,17 +9,22 @@ const Calendar = ({
   selectedDays,
   repeat,
   date,
+  setIsDateValid,
   setDate,
   isStartDateActive,
   setIsStartDateActive,
+  setIsStartDateValid,
   setStartDate,
   isLastDateActive,
   setIsLastDateActive,
+  setIsLastDateValid,
   setLastDate,
   calendarRef,
   setIsAutoUpdate,
   customSchedule,
   handleCustomScheduleUpdate,
+  handleExcludedDatesUpdate,
+  excludedDates,
 }) => {
   const daysInCalendar = () => {
     const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
@@ -52,25 +45,35 @@ const Calendar = ({
     if (day >= new Date().setHours(0, 0, 0, 0)) {
       if (repeat === 'One-time') {
         setDate(day.toLocaleDateString());
+        setIsDateValid(true);
         setCurrentDate(day);
       } else if (repeat === 'Custom schedule') {
         const activeFieldIndex = customSchedule.findIndex((elem) => elem.isDateActive);
         if (activeFieldIndex !== -1) {
           handleCustomScheduleUpdate(day.toLocaleDateString(), 'date', activeFieldIndex);
           handleCustomScheduleUpdate(false, 'isDateActive', activeFieldIndex);
+          handleCustomScheduleUpdate(true, 'isDateValid', activeFieldIndex);
           setCurrentDate(day);
         }
       } else {
+        const activeFieldIndex = excludedDates.findIndex((elem) => elem.isDateActive);
+        if (activeFieldIndex !== -1 && selectedDays.find((elem) => elem === day.toLocaleDateString())) {
+          handleExcludedDatesUpdate(day.toLocaleDateString(), 'date', activeFieldIndex);
+          handleExcludedDatesUpdate(false, 'isDateActive', activeFieldIndex);
+          setCurrentDate(day);
+        }
         if (isStartDateActive) {
           setStartDate(day.toLocaleDateString());
           setIsAutoUpdate(false);
           setIsStartDateActive(false);
+          setIsStartDateValid(true);
           setCurrentDate(day);
         }
         if (isLastDateActive) {
           setLastDate(day.toLocaleDateString());
           setIsAutoUpdate(false);
           setIsLastDateActive(false);
+          setIsLastDateValid(true);
           setCurrentDate(day);
         }
       }
@@ -144,7 +147,8 @@ const Calendar = ({
               className={`${isToday(day) ? 'calendar__day_today' : ''} ${
                 (repeat !== 'Custom schedule' &&
                   repeat !== 'One-time' &&
-                  selectedDays.includes(day.toLocaleDateString())) ||
+                  selectedDays.includes(day.toLocaleDateString()) &&
+                  !excludedDates.find((elem) => elem.date === day.toLocaleDateString())) ||
                 (repeat === 'Custom schedule' &&
                   customSchedule.find((elem) => elem.date === day.toLocaleDateString())) ||
                 (repeat === 'One-time' && date === day.toLocaleDateString())
