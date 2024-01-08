@@ -1,6 +1,14 @@
 import {
-  SET_DATES,
+  SET_REPEAT,
+  SET_DATE,
   SET_TIME,
+  SET_DATES,
+  SET_ADD_EXCLUDED_DATES,
+  SET_EXCLUDED_DATES,
+  SET_CUSTOM_SCHEDULE,
+  SET_DURATION,
+  SET_START_DATE,
+  SET_LAST_DATE,
   SET_SELECTED_CLEANING,
   SET_SELECTED_SERVICES,
   SET_APARTMENT_SIZE,
@@ -24,13 +32,53 @@ import {
   SET_TOTAL,
 } from '../../constants/actionsRedux';
 
-export const setDatesAction = (payload) => ({
-  type: SET_DATES,
+export const setRepeatAction = (payload) => ({
+  type: SET_REPEAT,
+  payload,
+});
+
+export const setDateAction = (payload) => ({
+  type: SET_DATE,
   payload,
 });
 
 export const setTimeAction = (payload) => ({
   type: SET_TIME,
+  payload,
+});
+
+export const setDatesAction = (payload) => ({
+  type: SET_DATES,
+  payload,
+});
+
+export const setAddExcludedDatesAction = (payload) => ({
+  type: SET_ADD_EXCLUDED_DATES,
+  payload,
+});
+
+export const setExcludedDatesAction = (payload) => ({
+  type: SET_EXCLUDED_DATES,
+  payload,
+});
+
+export const setCustomScheduleAction = (payload) => ({
+  type: SET_CUSTOM_SCHEDULE,
+  payload,
+});
+
+export const setDurationAction = (payload) => ({
+  type: SET_DURATION,
+  payload,
+});
+
+export const setStartDateAction = (payload) => ({
+  type: SET_START_DATE,
+  payload,
+});
+
+export const setLastDateAction = (payload) => ({
+  type: SET_LAST_DATE,
   payload,
 });
 

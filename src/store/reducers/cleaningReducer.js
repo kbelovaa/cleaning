@@ -8,8 +8,16 @@ import {
   times,
 } from '../../constants/selectOptions';
 import {
-  SET_DATES,
+  SET_REPEAT,
+  SET_DATE,
   SET_TIME,
+  SET_DATES,
+  SET_ADD_EXCLUDED_DATES,
+  SET_EXCLUDED_DATES,
+  SET_CUSTOM_SCHEDULE,
+  SET_DURATION,
+  SET_START_DATE,
+  SET_LAST_DATE,
   SET_SELECTED_CLEANING,
   SET_SELECTED_SERVICES,
   SET_APARTMENT_SIZE,
@@ -35,10 +43,15 @@ import {
 
 const defaultState = {
   repeat: repeats[0],
-  dates: [],
   date: '',
   time: times[50],
+  dates: [],
+  addExcludedDates: false,
+  excludedDates: [{ date: '', isDateValid: true, isDateActive: false, isDateUnique: true }],
   customSchedule: [{ time: times[50], date: '', isDateValid: true, isDateActive: false, isDateUnique: true }],
+  duration: '',
+  startDate: '',
+  lastDate: '',
   selectedCleaning: cleaningTypes[0],
   selectedServices: [],
   apartmentSize: '',
@@ -64,10 +77,26 @@ const defaultState = {
 
 const cleaningReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case SET_DATES:
-      return { ...state, dates: action.payload };
+    case SET_REPEAT:
+      return { ...state, repeat: action.payload };
+    case SET_DATE:
+      return { ...state, date: action.payload };
     case SET_TIME:
       return { ...state, time: action.payload };
+    case SET_DATES:
+      return { ...state, dates: action.payload };
+    case SET_ADD_EXCLUDED_DATES:
+      return { ...state, addExcludedDates: action.payload };
+    case SET_EXCLUDED_DATES:
+      return { ...state, excludedDates: action.payload };
+    case SET_CUSTOM_SCHEDULE:
+      return { ...state, customSchedule: action.payload };
+    case SET_DURATION:
+      return { ...state, duration: action.payload };
+    case SET_START_DATE:
+      return { ...state, startDate: action.payload };
+    case SET_LAST_DATE:
+      return { ...state, lastDatez: action.payload };
     case SET_SELECTED_CLEANING:
       return { ...state, selectedCleaning: action.payload };
     case SET_SELECTED_SERVICES:

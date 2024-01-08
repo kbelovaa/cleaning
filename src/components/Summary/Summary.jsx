@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 import {
   setApartmentSizeAction,
   setBathroomsNumAction,
@@ -43,7 +44,7 @@ const Summary = () => {
   const handlePayment = () => {
     if (policyAccepting) {
       //оплата
-      dispatch(setDatesAction([new Date().toLocaleDateString()]));
+      dispatch(setDatesAction([format(new Date(), 'dd.MM.yyyy')]));
       dispatch(setTimeAction(times[50]));
       dispatch(setSelectedCleaningAction(cleaningTypes[0]));
       dispatch(setSelectedServicesAction([]));

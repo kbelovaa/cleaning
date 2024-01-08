@@ -44,33 +44,33 @@ const Calendar = ({
   const handleDayClick = (day) => {
     if (day >= new Date().setHours(0, 0, 0, 0)) {
       if (repeat === 'One-time') {
-        setDate(day.toLocaleDateString());
+        setDate(format(day, 'dd.MM.yyyy'));
         setIsDateValid(true);
         setCurrentDate(day);
       } else if (repeat === 'Custom schedule') {
         const activeFieldIndex = customSchedule.findIndex((elem) => elem.isDateActive);
         if (activeFieldIndex !== -1) {
-          handleCustomScheduleUpdate(day.toLocaleDateString(), 'date', activeFieldIndex);
+          handleCustomScheduleUpdate(format(day, 'dd.MM.yyyy'), 'date', activeFieldIndex);
           handleCustomScheduleUpdate(false, 'isDateActive', activeFieldIndex);
           handleCustomScheduleUpdate(true, 'isDateValid', activeFieldIndex);
           setCurrentDate(day);
         }
       } else {
         const activeFieldIndex = excludedDates.findIndex((elem) => elem.isDateActive);
-        if (activeFieldIndex !== -1 && selectedDays.find((elem) => elem === day.toLocaleDateString())) {
-          handleExcludedDatesUpdate(day.toLocaleDateString(), 'date', activeFieldIndex);
+        if (activeFieldIndex !== -1 && selectedDays.find((elem) => elem === format(day, 'dd.MM.yyyy'))) {
+          handleExcludedDatesUpdate(format(day, 'dd.MM.yyyy'), 'date', activeFieldIndex);
           handleExcludedDatesUpdate(false, 'isDateActive', activeFieldIndex);
           setCurrentDate(day);
         }
         if (isStartDateActive) {
-          setStartDate(day.toLocaleDateString());
+          setStartDate(format(day, 'dd.MM.yyyy'));
           setIsAutoUpdate(false);
           setIsStartDateActive(false);
           setIsStartDateValid(true);
           setCurrentDate(day);
         }
         if (isLastDateActive) {
-          setLastDate(day.toLocaleDateString());
+          setLastDate(format(day, 'dd.MM.yyyy'));
           setIsAutoUpdate(false);
           setIsLastDateActive(false);
           setIsLastDateValid(true);
@@ -114,7 +114,7 @@ const Calendar = ({
         (repeat !== 'One-time' &&
           repeat !== 'Custom schedule' &&
           ((excludedDates.find((date) => date.isDateActive) &&
-            selectedDays.find((date) => date === day.toLocaleDateString())) ||
+            selectedDays.find((date) => date === format(day, 'dd.MM.yyyy'))) ||
             isStartDateActive ||
             isLastDateActive)))
     ) {
@@ -157,11 +157,11 @@ const Calendar = ({
               className={`${isToday(day) ? 'calendar__day_today' : ''} ${
                 (repeat !== 'Custom schedule' &&
                   repeat !== 'One-time' &&
-                  selectedDays.includes(day.toLocaleDateString()) &&
-                  !excludedDates.find((elem) => elem.date === day.toLocaleDateString())) ||
+                  selectedDays.includes(format(day, 'dd.MM.yyyy')) &&
+                  !excludedDates.find((elem) => elem.date === format(day, 'dd.MM.yyyy'))) ||
                 (repeat === 'Custom schedule' &&
-                  customSchedule.find((elem) => elem.date === day.toLocaleDateString())) ||
-                (repeat === 'One-time' && date === day.toLocaleDateString())
+                  customSchedule.find((elem) => elem.date === format(day, 'dd.MM.yyyy'))) ||
+                (repeat === 'One-time' && date === format(day, 'dd.MM.yyyy'))
                   ? 'calendar__day_selected'
                   : ''
               }`}

@@ -12,6 +12,7 @@ import {
   startOfDay,
   isBefore,
   differenceInDays,
+  format,
 } from 'date-fns';
 import {
   setApartmentSizeAction,
@@ -60,26 +61,24 @@ const Booking = () => {
   const user = useSelector((state) => state.user);
   const cleaning = useSelector((state) => state.cleaning);
 
-  const [repeat, setRepeat] = useState(cleaning.repeat);
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [dates, setDates] = useState(cleaning.dates);
-  const [excludedDates, setExcludedDates] = useState([
-    { date: '', isDateValid: true, isDateActive: false, isDateUnique: true },
-  ]);
+  const [repeat, setRepeat] = useState(cleaning.repeat);
   const [date, setDate] = useState(cleaning.date);
   const [isDateValid, setIsDateValid] = useState(true);
   const [time, setTime] = useState(cleaning.time);
+  const [dates, setDates] = useState(cleaning.dates);
+  const [addExcludedDates, setAddExcludedDates] = useState(cleaning.addExcludedDates);
+  const [excludedDates, setExcludedDates] = useState(cleaning.excludedDates);
   const [customSchedule, setCustomSchedule] = useState(cleaning.customSchedule);
-  const [duration, setDuration] = useState('');
-  const [startDate, setStartDate] = useState('');
+  const [duration, setDuration] = useState(cleaning.duration);
+  const [startDate, setStartDate] = useState(cleaning.startDate);
   const [isStartDateValid, setIsStartDateValid] = useState(true);
   const [isStartDateActive, setIsStartDateActive] = useState(false);
-  const [lastDate, setLastDate] = useState('');
+  const [lastDate, setLastDate] = useState(cleaning.lastDate);
   const [isLastDateValid, setIsLastDateValid] = useState(true);
   const [isLastDateActive, setIsLastDateActive] = useState(false);
   const [isAutoUpdate, setIsAutoUpdate] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
-  const [addExcludedDates, setAddExcludedDates] = useState(false);
   const [selectedCleaning, setSelectedCleaning] = useState(cleaning.selectedCleaning);
   const [selectedServices, setSelectedServices] = useState(cleaning.selectedServices);
   const [apartmentSize, setApartmentSize] = useState(cleaning.apartmentSize);
@@ -230,35 +229,45 @@ const Booking = () => {
     );
   }, [isExcludedDateActives]);
 
-  useEffect(() => {
-    customScheduleRefs.current = Array(customSchedule.length)
+  const createRefs = (array, refsArray) => {
+    refsArray.current = Array(array.length)
       .fill()
-      .map((_, i) => customScheduleRefs.current[i] || React.createRef());
+      .map((_, i) => refsArray.current[i] || React.createRef());
+  };
+
+  useEffect(() => {
+    createRefs(customSchedule, customScheduleRefs);
   }, [customSchedule.length]);
 
   useEffect(() => {
-    excludedDateRefs.current = Array(excludedDates.length)
-      .fill()
-      .map((_, i) => excludedDateRefs.current[i] || React.createRef());
+    createRefs(excludedDates, excludedDateRefs);
+
+    if (excludedDates.length === 0) {
+      setAddExcludedDates(false);
+    }
   }, [excludedDates.length]);
+
+  const checkForDuplicates = (array, setArray) => {
+    array
+      .slice()
+      .reverse()
+      .forEach((elem, index, arr) => {
+        const hasDuplicate = arr.slice(index + 1).some((otherElem) => elem.date === otherElem.date);
+        const reversedIndex = array.length - 1 - index;
+
+        if (elem.date !== '' && hasDuplicate && array[reversedIndex].isDateUnique) {
+          handleDatesArrUpdate(setArray, false, 'isDateUnique', reversedIndex);
+        } else if (elem.date !== '' && !hasDuplicate && !array[reversedIndex].isDateUnique) {
+          handleDatesArrUpdate(setArray, true, 'isDateUnique', reversedIndex);
+        }
+      });
+  };
 
   const customScheduleDates = useMemo(() => customSchedule.map((elem) => elem.date), [customSchedule]);
 
   useEffect(() => {
     if (repeat === 'Custom schedule') {
-      customSchedule
-        .slice()
-        .reverse()
-        .forEach((elem, index, arr) => {
-          const hasDuplicate = arr.slice(index + 1).some((otherElem) => elem.date === otherElem.date);
-          const reversedIndex = customSchedule.length - 1 - index;
-
-          if (elem.date !== '' && hasDuplicate && customSchedule[reversedIndex].isDateUnique) {
-            handleDatesArrUpdate(setCustomSchedule, false, 'isDateUnique', reversedIndex);
-          } else if (elem.date !== '' && !hasDuplicate && !customSchedule[reversedIndex].isDateUnique) {
-            handleDatesArrUpdate(setCustomSchedule, true, 'isDateUnique', reversedIndex);
-          }
-        });
+      checkForDuplicates(customSchedule, setCustomSchedule);
     }
   }, [customScheduleDates]);
 
@@ -266,19 +275,7 @@ const Booking = () => {
 
   useEffect(() => {
     if (repeat !== 'Custom schedule' && repeat !== 'One-time') {
-      excludedDates
-        .slice()
-        .reverse()
-        .forEach((elem, index, arr) => {
-          const hasDuplicate = arr.slice(index + 1).some((otherElem) => elem.date === otherElem.date);
-          const reversedIndex = excludedDates.length - 1 - index;
-
-          if (elem.date !== '' && hasDuplicate && excludedDates[reversedIndex].isDateUnique) {
-            handleDatesArrUpdate(setExcludedDates, false, 'isDateUnique', reversedIndex);
-          } else if (elem.date !== '' && !hasDuplicate && !excludedDates[reversedIndex].isDateUnique) {
-            handleDatesArrUpdate(setExcludedDates, true, 'isDateUnique', reversedIndex);
-          }
-        });
+      checkForDuplicates(excludedDates, setExcludedDates);
     }
   }, [excludedDateDays]);
 
@@ -305,9 +302,9 @@ const Booking = () => {
       newLastDate = parsedStartDate;
     }
 
-    setLastDate(newLastDate.toLocaleDateString());
+    setLastDate(format(newLastDate, 'dd.MM.yyyy'));
 
-    return newLastDate.toLocaleDateString();
+    return format(newLastDate, 'dd.MM.yyyy');
   };
 
   useEffect(() => {
@@ -415,7 +412,7 @@ const Booking = () => {
             selectedDay = new Date();
         }
 
-        selectedDays.push(selectedDay.toLocaleDateString());
+        selectedDays.push(format(selectedDay, 'dd.MM.yyyy'));
       }
 
       setDates(selectedDays);
@@ -578,7 +575,8 @@ const Booking = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    //form validation
+
+    //if (apartmentSize && ((repeat === 'One-time' && date.replace(/\D/g, '').length === 8 && isDateValid) || (repeat === 'Custom schedule' && customSchedule.length >= 1 && !customSchedule.find((day) => day.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique)) || (repeat !== 'One-time' && repeat !== 'Custom schedule' && dates.length >= 1 && startDate.replace(/\D/g, '').length === 8 && isStartDateValid && lastDate.replace(/\D/g, '').length === 8 && isLastDateValid && duration && duration > 0)))
     if (user.isAuth) {
       dispatch(setDatesAction(dates));
       dispatch(setTimeAction(time));
@@ -870,7 +868,7 @@ const Booking = () => {
                         <InputMask
                           value={elem.date}
                           mask="99.99.9999"
-                          placeholder={new Date().toLocaleDateString()}
+                          placeholder={format(new Date(), 'dd.MM.yyyy')}
                           onChange={(e) =>
                             handleDateInput(
                               e.target.value,
@@ -908,7 +906,7 @@ const Booking = () => {
                     <InputMask
                       value={startDate}
                       mask="99.99.9999"
-                      placeholder={new Date().toLocaleDateString()}
+                      placeholder={format(new Date(), 'dd.MM.yyyy')}
                       onChange={(e) => handleDateInput(e.target.value, setStartDate, setIsStartDateValid)}
                       onFocus={() => setIsStartDateActive(true)}
                     >
@@ -926,7 +924,7 @@ const Booking = () => {
                     <InputMask
                       value={lastDate}
                       mask="99.99.9999"
-                      placeholder={new Date().toLocaleDateString()}
+                      placeholder={format(new Date(), 'dd.MM.yyyy')}
                       onChange={(e) => handleDateInput(e.target.value, setLastDate, setIsLastDateValid)}
                       onFocus={() => setIsLastDateActive(true)}
                     >
@@ -980,7 +978,7 @@ const Booking = () => {
                         <InputMask
                           value={elem.date}
                           mask="99.99.9999"
-                          placeholder={new Date().toLocaleDateString()}
+                          placeholder={format(new Date(), 'dd.MM.yyyy')}
                           onChange={(e) =>
                             handleDateInput(
                               e.target.value,
@@ -1030,7 +1028,7 @@ const Booking = () => {
                     className="input"
                     value={date}
                     mask="99.99.9999"
-                    placeholder={new Date().toLocaleDateString()}
+                    placeholder={format(new Date(), 'dd.MM.yyyy')}
                     onChange={(e) => handleDateInput(e.target.value, setDate, setIsDateValid)}
                   />
                   <p className={isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
