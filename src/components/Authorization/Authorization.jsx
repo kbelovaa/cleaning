@@ -88,6 +88,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       email &&
       isEmailValid &&
       mobile &&
+      isMobileValid &&
       password &&
       isPasswordValid &&
       passwordConf &&
@@ -133,6 +134,29 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
     const isPasswordConfValid = passwordConf === '' || passwordConf === password;
     setIsPasswordConfValid(isPasswordConfValid);
+  };
+
+  const checkIsFormValid = () => {
+    if (isLogin) {
+      if (email && password) {
+        return true;
+      }
+    } else if (
+      name &&
+      surname &&
+      email &&
+      isEmailValid &&
+      mobile &&
+      isMobileValid &&
+      password &&
+      isPasswordValid &&
+      passwordConf &&
+      isPasswordConfValid
+    ) {
+      return true;
+    }
+
+    return false;
   };
 
   return (
@@ -280,7 +304,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </span>
               </div>
             </div>
-            <button className="btn" type="submit">
+            <button className={`btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
               {isLogin ? t('logIn') : t('createAccount')}
             </button>
           </form>

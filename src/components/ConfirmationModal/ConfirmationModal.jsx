@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { knowingWays } from '../../constants/selectOptions';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import './ConfirmationModal.scss';
@@ -8,6 +9,8 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
   const [knowingWay, setKnowingWay] = useState('');
 
   const modalRef = useRef(null);
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -38,6 +41,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
     setIsOpen(false);
     navigate('/');
     setEmail('');
+    setKnowingWay('');
   };
 
   return (
@@ -50,20 +54,20 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
           <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#284657" strokeLinecap="round" />
         </svg>
         <h3 className={isConfirmation ? 'hidden' : 'confirmation__title'}>
-          {isContactUs ? 'Thank you for your message' : isLogin ? 'Log in' : 'Sign up'}
+          {isContactUs ? t('thankYouMessage') : isLogin ? t('logIn') : t('signUp')}
         </h3>
         <p className="confirmation__text">
           {isConfirmation
-            ? 'We have sent a Receipt to your email'
+            ? t('weHaveSentReceipt')
             : isContactUs
-            ? 'We will reply to your email'
+            ? t('weWillReplyToEmail')
             : isLogin
-            ? 'You are logged in with Google'
-            : 'We have sent a confirmation to your email'}
+            ? t('youAreLoggedIn')
+            : t('weHaveSentConfirmation')}
         </p>
         <span className="confirmation__email">{email}</span>
         <div className={!isLogin && !isContactUs && !isConfirmation ? 'confirmation__knowing-way' : 'hidden'}>
-          <span className="form__label">How did you hear about us?</span>
+          <span className="form__label">{t('howDidYouHearAboutUs')}</span>
           <CustomSelect
             options={knowingWays}
             selectedOption={knowingWay}
@@ -72,7 +76,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
           />
         </div>
         <button className="confirmation__btn btn btn_solid" onClick={handleButtonClick}>
-          {isLogin || isContactUs || isConfirmation ? 'Ok' : 'Go to Email'}
+          {isLogin || isContactUs || isConfirmation ? t('ok') : t('goToEmail')}
         </button>
       </div>
     </div>
