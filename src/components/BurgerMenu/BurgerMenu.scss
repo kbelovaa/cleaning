@@ -15,11 +15,9 @@
   }
 
   &__item {
-    cursor: pointer;
     display: flex;
     align-items: center;
     margin-top: 40px;
-    width: 105px;
   }
 
   &__link {
@@ -28,6 +26,7 @@
     line-height: 100%;
     letter-spacing: 1.15px;
     margin-right: 10px;
+    cursor: pointer;
 
     &.active {
       color: #268664;

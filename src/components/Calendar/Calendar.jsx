@@ -146,7 +146,7 @@ const Calendar = ({
       <div className="calendar__weekdays">
         {weekdays.map((weekday, index) => (
           <span key={index} className={`calendar__weekday ${getWeekDayClassName(weekday)}`}>
-            {weekday.name}
+            {weekday.name.slice(0, 1)}
           </span>
         ))}
       </div>

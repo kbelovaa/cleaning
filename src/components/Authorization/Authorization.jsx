@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { setIsAuthAction } from '../../store/actions/userActions';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
@@ -29,6 +30,8 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const modalRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -136,12 +139,12 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     <>
       <div className={`modal ${isOpen ? 'active' : ''}`}>
         <div className={`auth ${isLogin ? 'login' : 'reg'}`} ref={modalRef}>
-          <h2 className="auth__title">{isLogin ? 'Log in' : 'Sign up'}</h2>
+          <h2 className="auth__title">{isLogin ? t('logIn') : t('signUp')}</h2>
           <form className={`form auth-form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
             <div className="form__fields">
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
                 <label htmlFor="auth-name" className="form__label">
-                  Name
+                  {t('name')}
                 </label>
                 <input
                   id="auth-name"
@@ -154,7 +157,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
                 <label htmlFor="auth-surname" className="form__label">
-                  Surname
+                  {t('surname')}
                 </label>
                 <input
                   id="auth-surname"
@@ -167,7 +170,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </div>
               <div className="form__field-wrap">
                 <label htmlFor="auth-email" className="form__label">
-                  Email address
+                  {t('email')}
                 </label>
                 <input
                   id="auth-email"
@@ -177,9 +180,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   onChange={(e) => handleEmailChange(e.target.value)}
                   autoComplete="off"
                 />
-                <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>
-                  Please enter a valid email address.
-                </p>
+                <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
                 <p className={isEmailUnique ? 'auth__note' : 'hidden'}>{isEmailUnique}</p>
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
@@ -192,7 +193,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </div>
               <div className="form__field-wrap">
                 <label htmlFor="auth-password" className="form__label">
-                  Password
+                  {t('password')}
                 </label>
                 <input
                   id="auth-password"
@@ -203,7 +204,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   autoComplete="off"
                 />
                 <p className={isLogin ? 'hidden' : isPasswordValid ? 'hidden' : 'auth__note'}>
-                  The password must contain at least 6 characters. Use only Latin alphabet and numbers
+                  {t('passwordRequirements')}
                 </p>
                 <p className={!isLogin ? 'hidden' : areCredentialsValid ? 'auth__note' : 'hidden'}>
                   {areCredentialsValid}
@@ -215,7 +216,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       : 'hidden'
                   }
                 >
-                  Please fill in all fields
+                  {t('fillInAllFieldsMessage')}
                 </p>
                 <span className={showPassword ? 'hidden' : 'form__eye'} onClick={() => setShowPassword(true)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -243,7 +244,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
                 <label htmlFor="auth-passwordconf" className="form__label">
-                  Confirm password
+                  {t('confPassword')}
                 </label>
                 <input
                   id="auth-passwordconf"
@@ -253,9 +254,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   onChange={(e) => handlePasswordConfChange(e.target.value)}
                   autoComplete="off"
                 />
-                <p className={isPasswordConfValid ? 'hidden' : 'auth__note'}>
-                  Password and Confirm Password must match.
-                </p>
+                <p className={isPasswordConfValid ? 'hidden' : 'auth__note'}>{t('confPasswordMessage')}</p>
                 <span className={showPasswordConf ? 'hidden' : 'form__eye'} onClick={() => setShowPasswordConf(true)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
@@ -282,22 +281,22 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </div>
             </div>
             <button className="btn" type="submit">
-              {isLogin ? 'Log in' : 'Create an account'}
+              {isLogin ? t('logIn') : t('createAccount')}
             </button>
           </form>
           <div className="auth__details">
-            <p className="auth__note auth__note_socials">{isLogin ? 'Or log in via' : 'Or sign up via'}</p>
+            <p className="auth__note auth__note_socials">{isLogin ? t('orLogInVia') : t('orSignUpVia')}</p>
             <div className="auth__socials">
               <img src={googleImg} alt="Google" className="auth__social" />
               <img src={appleImg} alt="Apple" className="auth__social" />
             </div>
             {isLogin ? (
               <p className="auth__note auth__note_account">
-                I do not have an account. Go to <a onClick={() => setIsLogin(false)}>Sign up</a>
+                {t('iDontHaveAccount')} <a onClick={() => setIsLogin(false)}>{t('signUp')}</a>
               </p>
             ) : (
               <p className="auth__note auth__note_account">
-                I have an account. Go to <a onClick={() => setIsLogin(true)}>Log in</a>
+                {t('iHaveAccount')} <a onClick={() => setIsLogin(true)}>{t('logIn')}</a>
               </p>
             )}
           </div>

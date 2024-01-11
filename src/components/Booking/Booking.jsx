@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate, useOutletContext } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import InputMask from 'react-input-mask';
 import {
   parse,
@@ -38,6 +39,14 @@ import {
   setTimeSumAction,
   setAddress1Action,
   setAddress2Action,
+  setRepeatAction,
+  setDateAction,
+  setCustomScheduleAction,
+  setStartDateAction,
+  setLastDateAction,
+  setDurationAction,
+  setAddExcludedDatesAction,
+  setExcludedDatesAction,
 } from '../../store/actions/cleaningActions';
 import {
   months,
@@ -102,6 +111,7 @@ const Booking = () => {
   const [iva, setIva] = useState(cleaning.iva);
   const [total, setTotal] = useState(cleaning.total);
   const [isSummaryUnderlined, setIsSummaryUnderlined] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -122,6 +132,8 @@ const Booking = () => {
 
   const setIsAuthorizationOpen = useOutletContext();
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     const handleScroll = () => {
       const { scrollY } = window;
@@ -141,7 +153,7 @@ const Booking = () => {
 
   useEffect(() => {
     let currentRef;
-    switch (routes[2]) {
+    switch (routes[3]) {
       case 'date-time':
         currentRef = dateTimeRef;
         break;
@@ -479,28 +491,6 @@ const Booking = () => {
     }
   };
 
-  const generateOptionsBlock = (options, selectedOption, setSelectedOption) =>
-    options.map((elem, index) => (
-      <div
-        key={index}
-        onClick={() => setSelectedOption(elem)}
-        className={`form__option-variant ${selectedOption === elem ? 'checked' : ''}`}
-      >
-        <input
-          id={elem}
-          type="radio"
-          value={elem}
-          checked={selectedOption === elem}
-          onChange={(e) => setSelectedOption(e.target.value)}
-          onClick={(e) => e.stopPropagation()}
-          className="form__option-checker"
-        />
-        <label htmlFor={elem} className="form__option-label">
-          {elem}
-        </label>
-      </div>
-    ));
-
   const handleDurationChange = (duration) => {
     if (/^\d+$/.test(duration) || duration === '') {
       setIsAutoUpdate(false);
@@ -550,6 +540,14 @@ const Booking = () => {
     excludedDateRefs.current = [...excludedDateRefs.current, React.createRef()];
   };
 
+  const handleExcludedDatesCheck = () => {
+    if (!addExcludedDates && excludedDates.length === 0) {
+      addExcludedDate();
+    }
+
+    setAddExcludedDates((state) => !state);
+  };
+
   const handleMonthChange = (month) => {
     const selectedMonth = months.indexOf(month);
     const monthDiff = new Date().getMonth() - selectedMonth;
@@ -573,37 +571,102 @@ const Booking = () => {
     setCurrentDate(addMonths(currentDate, 1));
   };
 
+  const checkIsFormValid = () => {
+    if (
+      apartmentSize &&
+      ((repeat === 'One-time' && date.replace(/\D/g, '').length === 8 && isDateValid) ||
+        (repeat === 'Custom schedule' &&
+          customSchedule.length >= 1 &&
+          !customSchedule.find(
+            (day) => day.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique,
+          )) ||
+        (repeat !== 'One-time' &&
+          repeat !== 'Custom schedule' &&
+          dates.length >= 1 &&
+          startDate.replace(/\D/g, '').length === 8 &&
+          isStartDateValid &&
+          lastDate.replace(/\D/g, '').length === 8 &&
+          isLastDateValid &&
+          duration &&
+          duration > 0 &&
+          ((addExcludedDates &&
+            excludedDates.length >= 1 &&
+            !excludedDates.find(
+              (day) => day.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique,
+            )) ||
+            !addExcludedDates))) &&
+      address1 &&
+      address2 &&
+      postalCode &&
+      city &&
+      province
+    ) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const saveOrderData = () => {
+    dispatch(setRepeatAction(repeat));
+
+    if (repeat === 'One-time') {
+      dispatch(setDateAction(date));
+      dispatch(setTimeAction(time));
+    }
+
+    if (repeat === 'Custom schedule') {
+      dispatch(setCustomScheduleAction(customSchedule));
+    }
+
+    if (repeat === 'Weekly' || repeat === 'Every 2 weeks' || repeat === 'Monthly') {
+      dispatch(setDatesAction(dates));
+      dispatch(setStartDateAction(startDate));
+      dispatch(setLastDateAction(lastDate));
+      dispatch(setDurationAction(duration));
+      dispatch(setAddExcludedDatesAction(addExcludedDates));
+
+      if (addExcludedDates) {
+        dispatch(setExcludedDatesAction(excludedDates));
+      }
+    }
+
+    dispatch(setSelectedCleaningAction(selectedCleaning));
+    dispatch(setSelectedServicesAction(selectedServices));
+    dispatch(setApartmentSizeAction(apartmentSize));
+    dispatch(setSelectedSpeedAction(selectedSpeed));
+    dispatch(setBedroomsNumAction(bedroomsNum));
+    dispatch(setBathroomsNumAction(bathroomsNum));
+    dispatch(setKitchensNumAction(kitchensNum));
+    dispatch(setAddress1Action(address1));
+    dispatch(setAddress2Action(address2));
+    dispatch(setPostalCodeAction(postalCode));
+    dispatch(setCityAction(city));
+    dispatch(setProvinceAction(province));
+    dispatch(setInstructionsAction(instructions));
+    dispatch(setSavingAction(saving));
+    dispatch(setCleaningSumAction(cleaningSum));
+    dispatch(setExtrasSumAction(extrasSum));
+    dispatch(setSpeedSumAction(speedSum));
+    dispatch(setTimeSumAction(timeSum));
+    dispatch(setSubtotalAction(subtotal));
+    dispatch(setIvaAction(iva));
+    dispatch(setTotalAction(total));
+    navigate('/summary');
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    //if (apartmentSize && ((repeat === 'One-time' && date.replace(/\D/g, '').length === 8 && isDateValid) || (repeat === 'Custom schedule' && customSchedule.length >= 1 && !customSchedule.find((day) => day.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique)) || (repeat !== 'One-time' && repeat !== 'Custom schedule' && dates.length >= 1 && startDate.replace(/\D/g, '').length === 8 && isStartDateValid && lastDate.replace(/\D/g, '').length === 8 && isLastDateValid && duration && duration > 0)))
-    if (user.isAuth) {
-      dispatch(setDatesAction(dates));
-      dispatch(setTimeAction(time));
-      dispatch(setSelectedCleaningAction(selectedCleaning));
-      dispatch(setSelectedServicesAction(selectedServices));
-      dispatch(setApartmentSizeAction(apartmentSize));
-      dispatch(setSelectedSpeedAction(selectedSpeed));
-      dispatch(setBedroomsNumAction(bedroomsNum));
-      dispatch(setBathroomsNumAction(bathroomsNum));
-      dispatch(setKitchensNumAction(kitchensNum));
-      dispatch(setAddress1Action(address1));
-      dispatch(setAddress2Action(address2));
-      dispatch(setPostalCodeAction(postalCode));
-      dispatch(setCityAction(city));
-      dispatch(setProvinceAction(province));
-      dispatch(setInstructionsAction(instructions));
-      dispatch(setSavingAction(saving));
-      dispatch(setCleaningSumAction(cleaningSum));
-      dispatch(setExtrasSumAction(extrasSum));
-      dispatch(setSpeedSumAction(speedSum));
-      dispatch(setTimeSumAction(timeSum));
-      dispatch(setSubtotalAction(subtotal));
-      dispatch(setIvaAction(iva));
-      dispatch(setTotalAction(total));
-      navigate('/summary');
+    if (checkIsFormValid()) {
+      setIsFormValid(true);
+      if (user.isAuth) {
+        saveOrderData();
+      } else {
+        setIsAuthorizationOpen(true);
+      }
     } else {
-      setIsAuthorizationOpen(true);
+      setIsFormValid(false);
     }
   };
 
@@ -612,41 +675,42 @@ const Booking = () => {
       <section className="slide-wrap">
         <div className="container">
           <div className="slide">
-            <h1 className="slide__title">
-              Maid <br /> for perfection
-            </h1>
-            <p className="slide__text">Professional cleaning 7 days a week starting at € 10/hour</p>
+            <h1 className="slide__title">Sdl</h1>
+            <h2 className="slide__subtitle">Servicio de limpieza</h2>
+            <p className="slide__text">{t('professionalCleaning')}</p>
           </div>
         </div>
       </section>
       <div className="container">
         <section className="book">
           <div className="book__form">
-            <form className="form" onSubmit={handleFormSubmit}>
+            <form className={`form ${isFormValid ? '' : 'invalid'}`} onSubmit={handleFormSubmit}>
               <div className="form__section">
-                <h3 className="form__title">Property information</h3>
+                <h3 className="form__title">{t('propertyInformation')}</h3>
                 <div className="form__input-wrap" ref={sizeRef}>
                   <label htmlFor="size" className="form__label">
-                    Apartment size, m<sup className="top-index">2</sup>
+                    {t('apartmentSize')}
+                    <sup className="top-index">2</sup>
                   </label>
                   <input
                     id="size"
                     type="text"
-                    className="input"
+                    className={`input ${!apartmentSize ? 'invalid-field' : ''}`}
                     value={apartmentSize}
                     onChange={(e) => handleApartmentSizeChange(e.target.value)}
                   />
                   <p className={isApartmentSizeValid ? 'hidden' : 'auth__note'}>
-                    Apartment size cannot be more than 10000 m<sup className="top-index">2</sup>.
+                    {t('apartmentSizeMessage')}
+                    <sup className="top-index">2</sup>
                   </p>
                 </div>
                 <div className="form__properties" ref={propertyRef}>
                   <div className="form__property">
-                    <span className="form__label">How many bedrooms?</span>
+                    <span className="form__label">{t('howManyBedrooms')}</span>
                     <CustomSelect options={bedrooms} selectedOption={bedroomsNum} setSelectedOption={setBedroomsNum} />
                   </div>
                   <div className="form__property">
-                    <span className="form__label">How many bathrooms?</span>
+                    <span className="form__label">{t('howManyBathrooms')}</span>
                     <CustomSelect
                       options={bathrooms}
                       selectedOption={bathroomsNum}
@@ -654,16 +718,16 @@ const Booking = () => {
                     />
                   </div>
                   <div className="form__property">
-                    <span className="form__label">How many kitchens?</span>
+                    <span className="form__label">{t('howManyKitchens')}</span>
                     <CustomSelect options={kitchens} selectedOption={kitchensNum} setSelectedOption={setKitchensNum} />
                   </div>
                 </div>
               </div>
               <div className="form__section" ref={cleaningRef}>
-                <h3 className="form__title">Service type</h3>
+                <h3 className="form__title">{t('serviceType')}</h3>
                 <p className="form__text">
-                  Prices have a fixed and a variable rate based on m<sup className="top-index top-index_little">2</sup>.
-                  If you add extra services, the price will update automatically.
+                  {t('pricesDescription1')}
+                  <sup className="top-index top-index_little">2</sup>.{t('pricesDescription2')}
                 </p>
                 <div className="form__radios">
                   {cleaningTypes.map((elem, index) => (
@@ -700,7 +764,7 @@ const Booking = () => {
                           />
                         </svg>
                         <label htmlFor={elem.type.split(' ').join('')} className="form__radio-label">
-                          {elem.type}
+                          {t(elem.type)}
                         </label>
                       </div>
                       <span className="form__radio-price">
@@ -719,7 +783,7 @@ const Booking = () => {
                 </div>
               </div>
               <div className="form__section" ref={extrasRef}>
-                <h3 className="form__title">Extra services</h3>
+                <h3 className="form__title">{t('extraServices')}</h3>
                 <div className="form__services">
                   {extraServices.map((elem, index) => (
                     <div
@@ -743,7 +807,7 @@ const Booking = () => {
                             fill="white"
                           />
                         </svg>
-                        <span className="form__service-label">{elem.name}</span>
+                        <span className="form__service-label">{t(elem.name)}</span>
                       </div>
                       <div
                         className={
@@ -796,19 +860,35 @@ const Booking = () => {
                 </div>
               </div>
               <div className="form__section" ref={speedRef}>
-                <h3 className="form__title">How fast?</h3>
-                <p className="form__text">
-                  For a faster clean, select '2x' to reduce a 6-hour clean to 3 hours with two cleaners, or '3x' to
-                  reduce it to 2 hours with three cleaners. Subject to availability.
-                </p>
+                <h3 className="form__title">{t('howFastQuestion')}</h3>
+                <p className="form__text">{t('fastCleanDescription')}</p>
                 <div className="form__option">
-                  {generateOptionsBlock(speedOptions, selectedSpeed, setSelectedSpeed)}
+                  {speedOptions.map((elem, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setSelectedSpeed(elem)}
+                      className={`form__option-variant ${selectedSpeed === elem ? 'checked' : ''}`}
+                    >
+                      <input
+                        id={elem}
+                        type="radio"
+                        value={elem}
+                        checked={selectedSpeed === elem}
+                        onChange={(e) => setSelectedSpeed(e.target.value)}
+                        onClick={(e) => e.stopPropagation()}
+                        className="form__option-checker"
+                      />
+                      <label htmlFor={elem} className="form__option-label">
+                        {elem}
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </div>
               <div className="form__section">
-                <h3 className="form__title">Recurring</h3>
-                <p className="form__text">Here you can schedule regular cleaning</p>
-                <span className="form__label">How often?</span>
+                <h3 className="form__title">{t('recurring')}</h3>
+                <p className="form__text">{t('recurringDescription')}</p>
+                <span className="form__label">{t('howOften')}</span>
                 <CustomSelect
                   options={repeats}
                   selectedOption={repeat}
@@ -818,23 +898,28 @@ const Booking = () => {
               </div>
               <div className="form__section">
                 <h3 className="form__title" ref={dateTimeRef}>
-                  When?
+                  {t('when')}
                 </h3>
                 <div className="form__date-period">
                   <div className={`form__input-wrap form__one-time ${repeat === 'Custom schedule' ? 'hidden' : ''}`}>
-                    <span className="form__label">Time</span>
-                    <CustomSelect options={times} selectedOption={time} setSelectedOption={setTime} />
+                    <span className="form__label">{t('time')}</span>
+                    <CustomSelect
+                      options={times}
+                      selectedOption={time}
+                      setSelectedOption={setTime}
+                      noTranslation={true}
+                    />
                   </div>
                   <div
                     className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'form__input-wrap'}
                   >
                     <label htmlFor="duration" className="form__label">
-                      Duration
+                      {t('duration')}
                     </label>
                     <input
                       id="duration"
-                      type="number"
-                      className="input"
+                      type="text"
+                      className={`input ${!duration || duration <= 0 ? 'invalid-field' : ''}`}
                       value={duration}
                       onChange={(e) => handleDurationChange(e.target.value)}
                     />
@@ -844,7 +929,7 @@ const Booking = () => {
                   {customSchedule.map((elem, index) => (
                     <div key={index} className="form__date-custom">
                       <svg
-                        className="form__close"
+                        className={`form__close ${customSchedule.length === 1 ? 'hidden' : ''}`}
                         onClick={() => deleteDate(index, customSchedule, setCustomSchedule, customScheduleRefs)}
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -856,15 +941,16 @@ const Booking = () => {
                         <path d="M17.6563 6.34285L6.34262 17.6566" stroke="black" strokeLinecap="round" />
                       </svg>
                       <div className="form__input-wrap">
-                        <span className="form__label">Time</span>
+                        <span className="form__label">{t('time')}</span>
                         <CustomSelect
                           options={times}
                           selectedOption={elem.time}
                           setSelectedOption={(value) => handleDatesArrUpdate(setCustomSchedule, value, 'time', index)}
+                          noTranslation={true}
                         />
                       </div>
                       <div className="form__input-wrap">
-                        <span className="form__label">Date</span>
+                        <span className="form__label">{t('date')}</span>
                         <InputMask
                           value={elem.date}
                           mask="99.99.9999"
@@ -882,26 +968,28 @@ const Booking = () => {
                             <input
                               {...inputProps}
                               id={`custom-date${index}`}
-                              className="input"
+                              className={`input ${
+                                elem.date.replace(/\D/g, '').length !== 8 || !elem.isDateValid || !elem.isDateUnique
+                                  ? 'invalid-field'
+                                  : ''
+                              }`}
                               ref={customScheduleRefs.current[index]}
                             />
                           )}
                         </InputMask>
-                        <p className={elem.isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
-                        <p className={elem.isDateUnique ? 'hidden' : 'auth__note'}>
-                          This date has already been selected.
-                        </p>
+                        <p className={elem.isDateValid ? 'hidden' : 'auth__note'}>{t('correctDateMessage')}</p>
+                        <p className={elem.isDateUnique ? 'hidden' : 'auth__note'}>{t('selectedDateMessage')}</p>
                       </div>
                     </div>
                   ))}
                   <span className="form__date-add" onClick={addCustomDate}>
-                    Add
+                    {t('add')}
                   </span>
                 </div>
                 <div className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'form__date-period'}>
                   <div className="form__input-wrap">
                     <label htmlFor="start-date" className="form__label">
-                      Start date
+                      {t('startDate')}
                     </label>
                     <InputMask
                       value={startDate}
@@ -910,16 +998,25 @@ const Booking = () => {
                       onChange={(e) => handleDateInput(e.target.value, setStartDate, setIsStartDateValid)}
                       onFocus={() => setIsStartDateActive(true)}
                     >
-                      {(inputProps) => <input {...inputProps} id="start-date" className="input" ref={startDateRef} />}
+                      {(inputProps) => (
+                        <input
+                          {...inputProps}
+                          id="start-date"
+                          className={`input ${
+                            startDate.replace(/\D/g, '').length !== 8 || !isStartDateValid ? 'invalid-field' : ''
+                          }`}
+                          ref={startDateRef}
+                        />
+                      )}
                     </InputMask>
-                    <p className={isStartDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                    <p className={isStartDateValid ? 'hidden' : 'auth__note'}>{t('correctDateMessage')}</p>
                     <p className={Number(duration) !== 0 || duration === '' ? 'hidden' : 'auth__note'}>
-                      Change the date range or duration, as it doesn't cover any selected period
+                      {t('periodDateMessage')}
                     </p>
                   </div>
                   <div className="form__input-wrap">
                     <label htmlFor="last-date" className="form__label">
-                      Last date
+                      {t('lastDate')}
                     </label>
                     <InputMask
                       value={lastDate}
@@ -928,12 +1025,19 @@ const Booking = () => {
                       onChange={(e) => handleDateInput(e.target.value, setLastDate, setIsLastDateValid)}
                       onFocus={() => setIsLastDateActive(true)}
                     >
-                      {(inputProps) => <input {...inputProps} id="last-date" className="input" ref={lastDateRef} />}
+                      {(inputProps) => (
+                        <input
+                          {...inputProps}
+                          id="last-date"
+                          className={`input ${
+                            lastDate.replace(/\D/g, '').length !== 8 || !isLastDateValid ? 'invalid-field' : ''
+                          }`}
+                          ref={lastDateRef}
+                        />
+                      )}
                     </InputMask>
-                    <p className={isLastDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
-                    <p className={showNotification ? 'auth__note' : 'hidden'}>
-                      We have changed the last date according to the selected frequency
-                    </p>
+                    <p className={isLastDateValid ? 'hidden' : 'auth__note'}>{t('correctDateMessage')}</p>
+                    <p className={showNotification ? 'auth__note' : 'hidden'}>{t('changedDateMessage')}</p>
                   </div>
                 </div>
                 <div className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'checkbox'}>
@@ -941,9 +1045,9 @@ const Booking = () => {
                     id="excluded-dates"
                     type="checkbox"
                     checked={addExcludedDates}
-                    onChange={() => setAddExcludedDates(!addExcludedDates)}
+                    onChange={handleExcludedDatesCheck}
                   />
-                  <div className="checkbox__tick" onClick={() => setAddExcludedDates(!addExcludedDates)}>
+                  <div className="checkbox__tick" onClick={handleExcludedDatesCheck}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                       <path
                         d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
@@ -955,10 +1059,16 @@ const Booking = () => {
                     </svg>
                   </div>
                   <label htmlFor="excluded-dates" className="checkbox__label">
-                    Excluded dates
+                    {t('excludedDates')}
                   </label>
                 </div>
-                <div className={addExcludedDates ? 'form__date-excluded' : 'hidden'}>
+                <div
+                  className={
+                    addExcludedDates && repeat !== 'One-time' && repeat !== 'Custom schedule'
+                      ? 'form__date-excluded'
+                      : 'hidden'
+                  }
+                >
                   <div className="form__date-fields">
                     {excludedDates.map((elem, index) => (
                       <div key={index} className="form__input-wrap">
@@ -974,7 +1084,7 @@ const Booking = () => {
                           <path d="M17.6574 17.6566L6.34367 6.34285" stroke="black" strokeLinecap="round" />
                           <path d="M17.6563 6.34285L6.34262 17.6566" stroke="black" strokeLinecap="round" />
                         </svg>
-                        <span className="form__label">Excluded date</span>
+                        <span className="form__label">{t('excludedDate')}</span>
                         <InputMask
                           value={elem.date}
                           mask="99.99.9999"
@@ -992,15 +1102,17 @@ const Booking = () => {
                             <input
                               {...inputProps}
                               id={`excluded-date${index}`}
-                              className="input"
+                              className={`input ${
+                                elem.date.replace(/\D/g, '').length !== 8 || !elem.isDateValid || !elem.isDateUnique
+                                  ? 'invalid-field'
+                                  : ''
+                              }`}
                               ref={excludedDateRefs.current[index]}
                             />
                           )}
                         </InputMask>
-                        <p className={elem.isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
-                        <p className={elem.isDateUnique ? 'hidden' : 'auth__note'}>
-                          This date has already been excluded.
-                        </p>
+                        <p className={elem.isDateValid ? 'hidden' : 'auth__note'}>{t('correctDateMessage')}</p>
+                        <p className={elem.isDateUnique ? 'hidden' : 'auth__note'}>{t('excludedDateMessage')}</p>
                         <p
                           className={
                             elem.date.replace(/\D/g, '').length === 8 &&
@@ -1010,28 +1122,28 @@ const Booking = () => {
                               : 'hidden'
                           }
                         >
-                          This date isn't included in the selected cleaning dates.
+                          {t('notIncludedDateMessage')}
                         </p>
                       </div>
                     ))}
                   </div>
                   <span className="form__date-add" onClick={addExcludedDate}>
-                    Add
+                    {t('add')}
                   </span>
                 </div>
                 <div className={repeat === 'One-time' ? 'form__input-wrap form__one-time' : 'hidden'}>
                   <label htmlFor="date" className="form__label">
-                    Date
+                    {t('date')}
                   </label>
                   <InputMask
                     id="date"
-                    className="input"
+                    className={`input ${date.replace(/\D/g, '').length !== 8 || !isDateValid ? 'invalid-field' : ''}`}
                     value={date}
                     mask="99.99.9999"
                     placeholder={format(new Date(), 'dd.MM.yyyy')}
                     onChange={(e) => handleDateInput(e.target.value, setDate, setIsDateValid)}
                   />
-                  <p className={isDateValid ? 'hidden' : 'auth__note'}>Please enter a correct date.</p>
+                  <p className={isDateValid ? 'hidden' : 'auth__note'}>{t('correctDateMessage')}</p>
                 </div>
                 <div className="form__date">
                   <div className="form__date-group">
@@ -1138,22 +1250,22 @@ const Booking = () => {
                 </div>
               </div>
               <div className="form__section" ref={addressRef}>
-                <h3 className="form__title">Property address</h3>
+                <h3 className="form__title">{t('propertyAddress')}</h3>
                 <div className="form__input-wrap">
                   <label htmlFor="address1" className="form__label">
-                    Address
+                    {t('address')}
                   </label>
                   <input
                     id="address1"
                     type="text"
-                    className="input form__address"
+                    className={`input form__address ${!address1 ? 'invalid-field' : ''}`}
                     value={address1}
                     onChange={(e) => setAddress1(e.target.value)}
                   />
                   <input
                     id="address2"
                     type="text"
-                    className="input form__address"
+                    className={`input form__address ${!address2 ? 'invalid-field' : ''}`}
                     value={address2}
                     onChange={(e) => setAddress2(e.target.value)}
                   />
@@ -1161,24 +1273,24 @@ const Booking = () => {
                 <div className="form__city">
                   <div className="form__input-wrap form__code">
                     <label htmlFor="code" className="form__label">
-                      Postal code
+                      {t('postalCode')}
                     </label>
                     <input
                       id="code"
                       type="number"
-                      className="input form__address"
+                      className={`input form__address ${!postalCode ? 'invalid-field' : ''}`}
                       value={postalCode}
                       onChange={(e) => setPostalCode(e.target.value)}
                     />
                   </div>
                   <div className="form__input-wrap form__city-name">
                     <label htmlFor="city" className="form__label">
-                      City
+                      {t('city')}
                     </label>
                     <input
                       id="city"
                       type="text"
-                      className="input form__address"
+                      className={`input form__address ${!city ? 'invalid-field' : ''}`}
                       value={city}
                       onChange={(e) => setCity(e.target.value)}
                     />
@@ -1186,19 +1298,19 @@ const Booking = () => {
                 </div>
                 <div className="form__input-wrap">
                   <label htmlFor="province" className="form__label">
-                    Province
+                    {t('province')}
                   </label>
                   <input
                     id="province"
                     type="text"
-                    className="input form__address"
+                    className={`input form__address ${!province ? 'invalid-field' : ''}`}
                     value={province}
                     onChange={(e) => setProvince(e.target.value)}
                   />
                 </div>
                 <div className="form__input-wrap">
                   <label htmlFor="instructions" className="form__label">
-                    Special Instructions
+                    {t('specialInstructions')}
                   </label>
                   <textarea
                     id="instructions"
@@ -1212,6 +1324,7 @@ const Booking = () => {
                     }}
                   ></textarea>
                 </div>
+                <p className={!isFormValid ? 'auth__note' : 'hidden'}>{t('fillInAllFieldsMessage')}</p>
               </div>
               <div className="checkbox">
                 <input id="save" type="checkbox" checked={saving} onChange={() => setSaving(!saving)} />
@@ -1227,23 +1340,23 @@ const Booking = () => {
                   </svg>
                 </div>
                 <label htmlFor="save" className="checkbox__label">
-                  Save information for future
+                  {t('saveInformationForFuture')}
                 </label>
               </div>
-              <button className="btn form__btn form__btn" type="submit">
-                {routes[1] ? 'Save' : 'Next'}
+              <button className={`btn form__btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
+                {routes[2] ? t('save') : t('next')}
               </button>
             </form>
           </div>
           <div className="book__summary">
             <div className={`summary ${isSummaryUnderlined ? 'underlined' : ''}`}>
-              <h2 className="summary__title">Summary</h2>
+              <h2 className="summary__title">{t('summary')}</h2>
               <div className="summary__line summary__line_bold">
-                <h3 className="summary__subtitle">{selectedCleaning.type}</h3>
+                <h3 className="summary__subtitle">{t(selectedCleaning.type)}</h3>
                 <span className="summary__price">{`€${roundPrice(cleaningSum)}`}</span>
               </div>
               <div className={selectedServices.length !== 0 ? 'summary__line summary__line_list' : 'hidden'}>
-                <span className="summary__item">Extra services</span>
+                <span className="summary__item">{t('extraServices')}</span>
                 <span className="summary__price">{`€${roundPrice(extrasSum)}`}</span>
               </div>
               <div className="summary__extras">
@@ -1253,7 +1366,7 @@ const Booking = () => {
                   ).number;
                   return (
                     <div key={index} className="summary__line summary__line_list">
-                      <span className="summary__item">{`${service.name}${
+                      <span className="summary__item">{`${t(service.name)}${
                         serviceNumber > 1 ? ` (x${serviceNumber})` : ''
                       }`}</span>
                       <span className="summary__price">{`€${roundPrice(service.price * serviceNumber)}`}</span>
@@ -1261,30 +1374,30 @@ const Booking = () => {
                   );
                 })}
               </div>
-              <div className={selectedSpeed !== 'x1' ? 'summary__line' : 'hidden'}>
-                <span className="summary__item">How fast</span>
+              <div className={speedSum !== 0 ? 'summary__line' : 'hidden'}>
+                <span className="summary__item">{t('howFast')}</span>
                 <span className="summary__price">{`€${roundPrice(speedSum)}`}</span>
               </div>
               <div className={timeSum !== 0 ? 'summary__line' : 'hidden'}>
-                <span className="summary__item">Off-peak hours</span>
+                <span className="summary__item">{t('offPeakHours')}</span>
                 <span className="summary__price">{`€${roundPrice(timeSum)}`}</span>
               </div>
               <div className="summary__subtotal">
                 <div className="summary__line">
-                  <span className="summary__item">Subtotal</span>
+                  <span className="summary__item">{t('subtotal')}</span>
                   <span className="summary__price">{`€${roundPrice(subtotal)}`}</span>
                 </div>
                 <div className="summary__line">
-                  <span className="summary__item">IVA 21%</span>
+                  <span className="summary__item">{t('iva')} 21%</span>
                   <span className="summary__price">{`€${roundPrice(iva)}`}</span>
                 </div>
               </div>
               <div className="summary__line summary__line_bold">
-                <span className="summary__subtitle">Total</span>
+                <span className="summary__subtitle">{t('total')}</span>
                 <span className="summary__price">{`€${roundPrice(total)}`}</span>
               </div>
-              <button className="btn form__btn summary__btn" type="submit">
-                {routes[1] ? 'Save' : 'Next'}
+              <button className={`btn summary__btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
+                {routes[2] ? t('save') : t('next')}
               </button>
             </div>
           </div>

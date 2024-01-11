@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './ContactUs.scss';
 
@@ -14,13 +15,25 @@ const ContactUs = () => {
   const [isFormValid, setIsFormValid] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
-  const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const handleEmailChange = (email) => {
     setEmail(email);
 
     const isEmailValid = email === '' || /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/.test(email);
     setIsEmailValid(isEmailValid);
+  };
+
+  const checkIsFormValid = () => {
+    if (isAuth) {
+      if (text) {
+        return true;
+      }
+    } else if (name && email && isEmailValid && text) {
+      return true;
+    }
+
+    return false;
   };
 
   const handleFormSubmit = (e) => {
@@ -44,13 +57,11 @@ const ContactUs = () => {
   return (
     <div className="container">
       <div className="contact-us">
-        <h2 className="contact-us__title">
-          {pathname === '/faq' ? 'Did not find what you are looking for? Contact us here' : 'Contact us'}
-        </h2>
+        <h2 className="contact-us__title">{t('contactUs')}</h2>
         <form className={`contact-us__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
           <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="name" className="form__label">
-              Name
+              {t('name')}
             </label>
             <input
               id="name"
@@ -62,7 +73,7 @@ const ContactUs = () => {
           </div>
           <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="email" className="form__label">
-              Email
+              {t('email')}
             </label>
             <input
               id="email"
@@ -71,11 +82,11 @@ const ContactUs = () => {
               value={email}
               onChange={(e) => handleEmailChange(e.target.value)}
             />
-            <p className={isEmailValid ? 'hidden' : 'auth__note'}>Please enter a valid email address.</p>
+            <p className={isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
           </div>
           <div className="form__input-wrap">
             <label htmlFor="text" className="form__label">
-              Text
+              {t('text')}
             </label>
             <textarea
               id="text"
@@ -95,10 +106,10 @@ const ContactUs = () => {
                   : 'hidden'
               }
             >
-              Please fill in all fields
+              {t('fillInAllFieldsMessage')}
             </p>
           </div>
-          <button className="btn contact-us__btn">Submit</button>
+          <button className={`btn contact-us__btn ${checkIsFormValid() ? '' : 'inactive'}`}>{t('submit')}</button>
         </form>
       </div>
       <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={false} email={email} />

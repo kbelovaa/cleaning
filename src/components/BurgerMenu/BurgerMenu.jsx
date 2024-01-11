@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { setIsAuthAction } from '../../store/actions/userActions';
 import './BurgerMenu.scss';
@@ -13,6 +14,8 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch();
 
   const modalRef = useRef(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -58,13 +61,13 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
         </svg>
         <ul className="burger-menu__list">
           <li>
-            <NavLink className="burger-menu__link" to="/" onClick={closeBurgerMenu}>
-              Book
+            <NavLink className="burger-menu__link" to="/booking" onClick={closeBurgerMenu}>
+              {t('book')}
             </NavLink>
           </li>
           <li className={isAuth ? '' : 'hidden'}>
             <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>
-              <span className="burger-menu__link">Profile</span>
+              <span className="burger-menu__link">{t('profile')}</span>
               <svg
                 className={`arrow ${isProfileExpanded ? 'rotated' : ''}`}
                 xmlns="http://www.w3.org/2000/svg"
@@ -79,34 +82,34 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
             <ul className={`burger-menu__sublist ${isProfileExpanded ? 'expanded' : ''}`}>
               <li>
                 <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}>
-                  Personal info
+                  {t('personalInfo')}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}>
-                  Addresses
+                  {t('addresses')}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}>
-                  Orders
+                  {t('orders')}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}>
-                  Settings
+                  {t('settings')}
                 </NavLink>
               </li>
               <li>
                 <span className="burger-menu__sublink" onClick={handleLogOut}>
-                  Log out
+                  {t('logOut')}
                 </span>
               </li>
             </ul>
           </li>
           <li>
             <div className="burger-menu__item" onClick={() => setIsInfoExpanded((state) => !state)}>
-              <span className="burger-menu__link">Info</span>
+              <span className="burger-menu__link">{t('info')}</span>
               <svg
                 className={`arrow ${isInfoExpanded ? 'rotated' : ''}`}
                 xmlns="http://www.w3.org/2000/svg"
@@ -121,22 +124,22 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
             <ul className={`burger-menu__sublist ${isInfoExpanded ? 'expanded' : ''}`}>
               <li>
                 <NavLink className="burger-menu__sublink" to="/info-price" onClick={closeBurgerMenu}>
-                  Services
+                  {t('services')}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="burger-menu__sublink" to="/cancellation-policy" onClick={closeBurgerMenu}>
-                  Cancellation Policy
+                  {t('cancellationPolicy')}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="burger-menu__sublink" to="/faq" onClick={closeBurgerMenu}>
-                  FAQ
+                  {t('faq')}
                 </NavLink>
               </li>
               <li>
                 <NavLink className="burger-menu__sublink" to="/contact-us" onClick={closeBurgerMenu}>
-                  Contact us
+                  {t('contactUs')}
                 </NavLink>
               </li>
             </ul>

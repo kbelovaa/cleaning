@@ -1,11 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './CustomSelect.scss';
 
-const CustomSelect = ({ options, selectedOption, setSelectedOption, defaultOption, setIsAutoUpdate }) => {
+const CustomSelect = ({
+  options,
+  selectedOption,
+  setSelectedOption,
+  defaultOption,
+  setIsAutoUpdate,
+  noTranslation,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const selectRef = useRef(null);
+
+  const { t } = useTranslation();
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -39,7 +49,13 @@ const CustomSelect = ({ options, selectedOption, setSelectedOption, defaultOptio
     <div className="custom-select" ref={selectRef}>
       <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
         <span className={`selected-option__name ${defaultOption && !selectedOption ? 'default' : ''}`}>
-          {defaultOption && !selectedOption ? defaultOption : selectedOption}
+          {defaultOption && !selectedOption
+            ? noTranslation
+              ? defaultOption
+              : t(defaultOption)
+            : noTranslation
+            ? selectedOption
+            : t(selectedOption)}
         </span>
         <svg
           className={`arrow ${isOpen ? 'rotated' : ''}`}
@@ -63,7 +79,7 @@ const CustomSelect = ({ options, selectedOption, setSelectedOption, defaultOptio
             <ul className="options-list">
               {options.map((option, index) => (
                 <li key={index} onClick={() => handleOptionSelect(option)}>
-                  {option}
+                  {noTranslation ? option : t(option)}
                 </li>
               ))}
             </ul>

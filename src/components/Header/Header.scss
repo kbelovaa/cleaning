@@ -7,6 +7,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px 100px;
+  position: relative;
+
+  &.flex-end {
+    justify-content: flex-end;
+  }
 
   &-section {
     background: transparent;
@@ -16,6 +21,10 @@
     z-index: 2;
     width: 100%;
     transition: all 0.4s ease;
+
+    &.main {
+      position: static;
+    }
 
     &.white {
       background: #fff;
@@ -27,8 +36,19 @@
   }
 
   &__label {
-    font-size: 20px;
+    color: #268664;
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 90%;
+    text-transform: uppercase;
     cursor: pointer;
+    opacity: 1;
+    transition: all 0.4s ease;
+
+    &_hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   &__menu {
@@ -54,6 +74,90 @@
 
     &:last-of-type {
       margin-right: 46px;
+    }
+  }
+}
+
+.language {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 43px;
+  right: 170px;
+  max-height: 17px;
+  overflow: hidden;
+  transition: max-height 0.2s;
+
+  @media screen and (max-width: 1440px) {
+    top: 40px;
+    right: 120px;
+    max-height: 12px;
+  }
+
+  &.opened {
+    max-height: 200px;
+  }
+
+  &__selected {
+    display: flex;
+    width: 45px;
+    justify-content: space-between;
+
+    @media screen and (max-width: 1440px) {
+      width: 32px;
+    }
+  }
+
+  &__value {
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+
+    @media screen and (max-width: 1440px) {
+      font-size: 10px;
+      letter-spacing: 0.498px;
+    }
+
+    &.not-selected {
+      color: #fff;
+    }
+  }
+
+  &__arrow {
+    transition: transform 0.2s;
+
+    @media screen and (max-width: 1440px) {
+      width: 11px;
+      height: 11px;
+    }
+
+    .opened & {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__variants {
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+
+    @media screen and (max-width: 1440px) {
+      padding: 5px 10px;
+    }
+
+    & .language__value {
+      margin-bottom: 10px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 }

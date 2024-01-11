@@ -27,21 +27,23 @@
   }
 
   &__links {
-    width: 405px;
     display: flex;
-    justify-content: space-between;
-    list-style-type: none;
     margin-top: 10px;
 
     @media screen and (max-width: 744px) {
       flex-direction: column;
       align-items: center;
       margin-top: 0;
-      width: 100%;
+    }
+
+    & li:last-of-type .footer__link {
+      margin-right: 0;
     }
   }
 
   &__link {
+    margin-right: 10px;
+
     @media screen and (max-width: 744px) {
       margin-top: 10px;
       display: block;

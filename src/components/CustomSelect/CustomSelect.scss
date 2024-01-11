@@ -118,6 +118,7 @@
 
 .arrow {
   transition: transform 0.2s;
+  cursor: pointer;
 
   &.rotated {
     transform: rotate(180deg);
