@@ -5,7 +5,6 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
-        professionalCleaning: 'Professional cleaning 7 days a week starting at € 10/hour',
         propertyInformation: 'Property information',
         apartmentSize: 'Apartment size, m',
         apartmentSizeMessage: 'Apartment size cannot be more than 10000 m',
@@ -318,7 +317,6 @@ i18n.use(initReactI18next).init({
     },
     es: {
       translation: {
-        professionalCleaning: 'Limpieza profesional los 7 días de la semana a partir de € 10/hora',
         propertyInformation: 'Información de la propiedad',
         apartmentSize: 'Tamaño del apartamento, m',
         apartmentSizeMessage: 'El tamaño del apartamento no puede ser superior a 10000 m',

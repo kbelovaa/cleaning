@@ -78,7 +78,7 @@
 }
 
 .system {
-  padding: 30px 0 360px;
+  padding: 30px 100px 360px;
 
   @media screen and (max-width: 1440px) {
     padding: 21px 0 166px;
@@ -115,6 +115,10 @@
     &::-webkit-scrollbar {
       width: 0;
     }
+
+    &-wrap {
+      position: relative;
+    }
   }
 
   &__stage {
@@ -135,22 +139,6 @@
       min-width: 882px;
       height: 250px;
       margin-right: 7px;
-    }
-
-    &:first-of-type {
-      margin-left: calc((100% - 1440px) / 2 + 100px);
-
-      @media screen and (max-width: 1440px) {
-        margin-left: calc((100% - 1024px) / 2 + 71px);
-      }
-    }
-
-    &:last-of-type {
-      margin-right: calc((100% - 1440px) / 2 + 100px);
-
-      @media screen and (max-width: 1440px) {
-        margin-right: calc((100% - 1024px) / 2 + 71px);
-      }
     }
   }
 
@@ -193,6 +181,28 @@
       width: 199px;
       top: 36px;
       left: 36px;
+    }
+  }
+
+  &__arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 15px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0px 1px 16px 0px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    position: absolute;
+    top: 150px;
+
+    &_prev {
+      left: calc((100% - 1440px) / 2 + 75px);
+    }
+
+    &_next {
+      right: calc((100% - 1440px) / 2 + 75px);
     }
   }
 }
@@ -276,7 +286,6 @@
     letter-spacing: 0.8px;
     display: block;
     margin-top: 30px;
-    margin-left: 40px;
   }
 }
 

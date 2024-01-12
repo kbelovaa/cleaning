@@ -677,7 +677,6 @@ const Booking = () => {
           <div className="slide">
             <h1 className="slide__title">Sdl</h1>
             <h2 className="slide__subtitle">Servicio de limpieza</h2>
-            <p className="slide__text">{t('professionalCleaning')}</p>
           </div>
         </div>
       </section>

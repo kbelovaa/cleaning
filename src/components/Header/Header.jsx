@@ -42,6 +42,7 @@ const Header = () => {
       if (isBook) {
         if (scrollY > 410) {
           color = 'white';
+          setShowSdl(true);
         } else if (scrollY > 0) {
           if (scrollY > 170) {
             setShowSdl(true);
@@ -106,45 +107,47 @@ const Header = () => {
               Sdl
             </span>
             <nav className="header__menu">
+              <div className="language-wrap">
+                <div className={`language ${isLanguageOpened ? 'opened' : ''}`} ref={lngRef}>
+                  <div className="language__selected" onClick={openLanguages}>
+                    <span className="language__value">{language}</span>
+                    <svg
+                      className="language__arrow"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M0.716265 3.83318C0.314979 4.25521 0.314979 4.91773 0.716265 5.33976L8 13L15.2837 5.33976C15.685 4.91773 15.685 4.25521 15.2837 3.83318C14.8528 3.37997 14.1302 3.37997 13.6993 3.83318L8 9.82706L2.30072 3.83318C1.86979 3.37998 1.14719 3.37998 0.716265 3.83318Z"
+                        fill="#B0B0B0"
+                      />
+                    </svg>
+                  </div>
+                  <div className="language__variants">
+                    {availableLanguages.map((elem, index) => (
+                      <span
+                        key={index}
+                        className={`language__value ${elem !== language ? 'not-selected' : ''}`}
+                        onClick={() => changeLanguage(elem)}
+                      >
+                        {elem}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
               <ul className="header__auth">
-                <li className={isMain ? 'hidden' : 'header__link'} onClick={() => handleAuthModalOpen(false)}>
+                <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   {t('signUp')}
                 </li>
-                <li className={isMain ? 'hidden' : 'header__link'} onClick={() => handleAuthModalOpen(true)}>
+                <li className="header__link" onClick={() => handleAuthModalOpen(true)}>
                   {t('logIn')}
                 </li>
               </ul>
-              <div className={`language ${isLanguageOpened ? 'opened' : ''} ${isMain ? '' : 'hidden'}`} ref={lngRef}>
-                <div className="language__selected" onClick={openLanguages}>
-                  <span className="language__value">{language}</span>
-                  <svg
-                    className="language__arrow"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M0.716265 3.83318C0.314979 4.25521 0.314979 4.91773 0.716265 5.33976L8 13L15.2837 5.33976C15.685 4.91773 15.685 4.25521 15.2837 3.83318C14.8528 3.37997 14.1302 3.37997 13.6993 3.83318L8 9.82706L2.30072 3.83318C1.86979 3.37998 1.14719 3.37998 0.716265 3.83318Z"
-                      fill="#B0B0B0"
-                    />
-                  </svg>
-                </div>
-                <div className="language__variants">
-                  {availableLanguages.map((elem, index) => (
-                    <span
-                      key={index}
-                      className={`language__value ${elem !== language ? 'not-selected' : ''}`}
-                      onClick={() => changeLanguage(elem)}
-                    >
-                      {elem}
-                    </span>
-                  ))}
-                </div>
-              </div>
               <div className="burger" onClick={() => setIsBurgerMenuOpen(true)}>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>

@@ -159,6 +159,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     return false;
   };
 
+  const switchAuth = (value) => {
+    setIsLogin(value);
+    setIsFormValid(true);
+  };
+
   return (
     <>
       <div className={`modal ${isOpen ? 'active' : ''}`}>
@@ -316,11 +321,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             </div>
             {isLogin ? (
               <p className="auth__note auth__note_account">
-                {t('iDontHaveAccount')} <a onClick={() => setIsLogin(false)}>{t('signUp')}</a>
+                {t('iDontHaveAccount')} <a onClick={() => switchAuth(false)}>{t('signUp')}</a>
               </p>
             ) : (
               <p className="auth__note auth__note_account">
-                {t('iHaveAccount')} <a onClick={() => setIsLogin(true)}>{t('logIn')}</a>
+                {t('iHaveAccount')} <a onClick={() => switchAuth(true)}>{t('logIn')}</a>
               </p>
             )}
           </div>
