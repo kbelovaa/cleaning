@@ -1,7 +1,7 @@
 import { SET_IS_AUTH, SET_IP_COUNTRY } from '../../constants/actionsRedux';
 
 const defaultState = {
-  isAuth: true,
+  isAuth: false,
   ipCountry: '',
 };
 
