@@ -1,17 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import screensGroup from '../../images/screens_group.png';
-import requestImg from '../../images/request_img.png';
-import confirmationImg from '../../images/confirmation_img.png';
-import payImg from '../../images/pay_img.png';
-import enjoyImg from '../../images/enjoy_img.png';
+import cleaningImg from '../../images/cleaning.png';
 import './Main.scss';
 
 const Main = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const stagesRefs = useRef(Array.from({ length: 4 }, () => React.createRef()));
+  const stagesRefs = useRef(Array.from({ length: 3 }, () => React.createRef()));
   const scrollContainerRef = useRef(null);
   const scrollTimeoutRef = useRef(null);
 
@@ -75,8 +71,22 @@ const Main = () => {
               <h1 className="general__title">Sdl</h1>
               <h3 className="general__subtitle">Servicio de limpieza</h3>
               <div className="general__text">{t('whatIsSdl')}</div>
+              <button className="btn main__btn" onClick={() => navigate('/booking')}>
+                {t('bookNow')}
+                <svg
+                  className="btn__arrow"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="25"
+                  viewBox="0 0 24 25"
+                  fill="none"
+                >
+                  <path d="M3 12.5L21 12.5" stroke="white" strokeLinecap="round" />
+                  <path d="M15 18.5L21 12.5L15 6.5" stroke="white" strokeLinecap="round" />
+                </svg>
+              </button>
             </div>
-            <img className="general__img" src={screensGroup} alt="Screens" />
+            <img className="general__img" src={cleaningImg} alt="Cleaning" />
           </div>
         </div>
       </section>
@@ -89,7 +99,7 @@ const Main = () => {
               <br />
               {t('weDeliverCare')}
             </p>
-            <button className="btn description__btn" onClick={() => navigate('/booking')}>
+            <button className="btn main__btn" onClick={() => navigate('/booking')}>
               {t('bookNow')}
               <svg
                 className="btn__arrow"
@@ -109,56 +119,43 @@ const Main = () => {
       <section className="system-section">
         <div className="container">
           <div className="system">
-            <h2 className="title system__title">{t('howtheSystemWorks')}</h2>
+            <h2 className="title system__title">{t('cleanHomeIn3Steps')}</h2>
             <div className="system__stages-wrap">
               <div className="system__stages" ref={scrollContainerRef}>
                 <div className="system__stage" ref={stagesRefs.current[0]}>
-                  <h3 className="system__subtitle">1. {t('sendRequest')}</h3>
+                  <h3 className="system__subtitle">{t('sendRequest')}</h3>
                   <p className="system__text">{t('requestCleaning')}</p>
-                  <img className="system__img" src={requestImg} alt="Request screen" />
                 </div>
                 <div className="system__stage" ref={stagesRefs.current[1]}>
-                  <h3 className="system__subtitle">2. {t('receiveConf')}</h3>
+                  <h3 className="system__subtitle">{t('receiveConf')}</h3>
                   <p className="system__text">{t('receiveConfIn15Min')}</p>
-                  <img className="system__img" src={confirmationImg} alt="Confirmation screen" />
                 </div>
                 <div className="system__stage" ref={stagesRefs.current[2]}>
-                  <h3 className="system__subtitle">3. {t('pay')}</h3>
+                  <h3 className="system__subtitle">{t('pay')}</h3>
                   <p className="system__text">{t('securelyPay')}</p>
-                  <img className="system__img" src={payImg} alt="Pay screen" />
                 </div>
-                <div className="system__stage" ref={stagesRefs.current[3]}>
-                  <h3 className="system__subtitle">4. {t('enjoy')}</h3>
-                  <p className="system__text">{t('enjoyCleanedHome')}</p>
-                  <img className="system__img" src={enjoyImg} alt="Enjoy screen" />
-                </div>
+              </div>
+              <div className="system__dots">
+                <div className={`system__dot ${currentIndex === 0 ? 'system__dot_active' : ''}`}></div>
+                <div className={`system__dot ${currentIndex === 1 ? 'system__dot_active' : ''}`}></div>
+                <div className={`system__dot ${currentIndex === 2 ? 'system__dot_active' : ''}`}></div>
               </div>
               <div
                 className={currentIndex === 0 ? 'hidden' : 'system__arrow system__arrow_prev'}
                 onClick={() => scrollToStage(-1)}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
-                  <path d="M19 6.00195L1 6.00195" stroke="#268664" strokeWidth="0.872414" strokeLinecap="round" />
-                  <path
-                    d="M6.38928 11L1.00006 6L6.38928 1"
-                    stroke="#268664"
-                    strokeWidth="0.872414"
-                    strokeLinecap="round"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M4 15.9993L28 15.9993" stroke="#268664" strokeLinecap="round" />
+                  <path d="M20 8L28 16L20 24" stroke="#268664" strokeLinecap="round" />
                 </svg>
               </div>
               <div
-                className={currentIndex === 3 ? 'hidden' : 'system__arrow system__arrow_next'}
+                className={currentIndex === 2 ? 'hidden' : 'system__arrow system__arrow_next'}
                 onClick={() => scrollToStage(1)}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="12" viewBox="0 0 20 12" fill="none">
-                  <path d="M1 6.00195L19 6.00195" stroke="#268664" strokeWidth="0.872414" strokeLinecap="round" />
-                  <path
-                    d="M13.6107 11L18.9999 6L13.6107 1"
-                    stroke="#268664"
-                    strokeWidth="0.872414"
-                    strokeLinecap="round"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                  <path d="M4 15.9993L28 15.9993" stroke="#268664" strokeLinecap="round" />
+                  <path d="M20 8L28 16L20 24" stroke="#268664" strokeLinecap="round" />
                 </svg>
               </div>
             </div>
@@ -195,17 +192,23 @@ const Main = () => {
                 <p className="join__text">{t('trustedDescr')}</p>
               </div>
             </div>
-            <span className="join__note">+ {t('returningToCleanHome')}</span>
+            <div className="join__note">
+              <div className="join__note-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M2 12.5L8.25 18.75L22 5" stroke="white" strokeWidth="2" strokeLinecap="round" />
+                </svg>
+              </div>
+              <p className="join__note-text">{t('returningToCleanHome')}</p>
+            </div>
           </div>
         </div>
-        <div className="background"></div>
       </section>
       <section className="start-section">
         <div className="container">
           <div className="start">
             <h2 className="start__title">{t('start')}</h2>
             <p className="start__text">{t('hereYouCanCustomizeOrder')}</p>
-            <button className="btn start__btn" onClick={() => navigate('/booking')}>
+            <button className="btn main__btn" onClick={() => navigate('/booking')}>
               {t('bookNow')}
               <svg
                 className="btn__arrow"

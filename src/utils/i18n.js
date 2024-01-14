@@ -288,15 +288,13 @@ i18n.use(initReactI18next).init({
         weDeliverCare:
           'We deliver trustworthy, professional care by employing expert techniques and equipment to ensure an exceptional level of cleanliness. And our commitment to excellence is reflected in our 100% Satisfaction Guarantee.',
         bookNow: 'Book now',
-        howtheSystemWorks: 'How the system works',
+        cleanHomeIn3Steps: 'A clean home in 3 steps',
         sendRequest: 'Send request',
         requestCleaning:
           'Request cleaning, even on short notice, with just a few clicks on the user-friendly website/mobile app',
         receiveConf: 'Receive confirmation',
         receiveConfIn15Min: 'Receive confirmation within 15 minutes',
         securelyPay: 'Securely pay on the website or mobile app',
-        enjoy: 'Enjoy',
-        enjoyCleanedHome: 'Enjoy a professionally cleaned home',
         whyWeStandOut: 'Why we stand out?',
         convenient: 'Convenient',
         convenientDescr: 'Schedule your cleaning service in a few simple steps',
@@ -605,15 +603,13 @@ i18n.use(initReactI18next).init({
         weDeliverCare:
           'Ofrecemos cuidado confiable y profesional empleando técnicas y equipos expertos para garantizar un nivel excepcional de limpieza. Y nuestro compromiso con la excelencia se refleja en nuestra Garantía de Satisfacción del 100%.',
         bookNow: 'Reservar ahora',
-        howtheSystemWorks: 'Cómo funciona el sistema',
+        cleanHomeIn3Steps: 'Un hogar limpio en 3 pasos',
         sendRequest: 'Enviar solicitud',
         requestCleaning:
           'Solicitar limpieza, incluso con poco aviso, con solo unos clics en el sitio web o la aplicación móvil fácil de usar',
         receiveConf: 'Recibir confirmación',
         receiveConfIn15Min: 'Recibir confirmación en 15 minutos',
         securelyPay: 'Pagar de forma segura en el sitio web o la aplicación móvil',
-        enjoy: 'Disfrutar',
-        enjoyCleanedHome: 'Disfrutar de un hogar profesionalmente limpio',
         whyWeStandOut: '¿Por qué destacamos?',
         convenient: 'Conveniente',
         convenientDescr: 'Programa tu servicio de limpieza en unos simples pasos',
