@@ -10,7 +10,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className={`footer-section ${isMain} ? 'white' : ''`}>
+    <footer className={`footer-section ${isMain ? 'white' : ''}`}>
       <div className="container">
         <div className="footer">
           <p className="footer__text">{t('copyright')}</p>
