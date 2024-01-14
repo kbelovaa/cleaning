@@ -11,6 +11,10 @@
 
   &-section {
     background: #f7f7f7;
+
+    &.white {
+      background: #fff;
+    }
   }
 
   &__text {

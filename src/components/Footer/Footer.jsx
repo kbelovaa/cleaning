@@ -1,12 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Footer.scss';
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  const isMain = pathname === '/';
+
   const { t } = useTranslation();
 
   return (
-    <footer className="footer-section">
+    <footer className={`footer-section ${isMain} ? 'white' : ''`}>
       <div className="container">
         <div className="footer">
           <p className="footer__text">{t('copyright')}</p>
