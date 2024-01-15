@@ -1,16 +1,16 @@
 .cancellation {
-  padding: 170px 100px 440px 100px;
+  padding: 114px 100px 50px;
 
   @media screen and (max-width: 1440px) {
-    padding: 80px;
+    padding: 114px 80px 50px;
   }
 
   @media screen and (max-width: 1024px) {
-    padding: 80px 60px;
+    padding: 114px 60px 50px;
   }
 
   @media screen and (max-width: 744px) {
-    padding: 30px 16px;
+    padding: 114px 16px 30px;
   }
 
   &__point {
@@ -26,11 +26,7 @@
     font-weight: 600;
     line-height: 100%;
     letter-spacing: 0.68px;
-    margin-bottom: 90px;
-
-    @media screen and (max-width: 1440px) {
-      margin-bottom: 50px;
-    }
+    margin-bottom: 50px;
 
     @media screen and (max-width: 744px) {
       font-size: 30px;

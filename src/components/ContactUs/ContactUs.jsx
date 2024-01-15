@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './ContactUs.scss';

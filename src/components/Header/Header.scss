@@ -9,6 +9,14 @@
   padding: 40px 100px;
   position: relative;
 
+  @media screen and (max-width: 1440px) {
+    padding: 60px 80px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 60px;
+  }
+
   &.flex-end {
     justify-content: flex-end;
   }
@@ -45,6 +53,13 @@
     opacity: 1;
     transition: all 0.4s ease;
 
+    @media screen and (max-width: 744px) {
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 100%;
+      letter-spacing: 1.2px;
+    }
+
     &_hidden {
       opacity: 0;
       pointer-events: none;
@@ -59,6 +74,7 @@
   &__auth {
     font-size: 16px;
     display: flex;
+    margin-right: 45px;
 
     .isauth & {
       display: none;
@@ -81,12 +97,7 @@
   max-height: 17px;
   overflow: hidden;
   transition: max-height 0.2s;
-
-  @media screen and (max-width: 1440px) {
-    top: 40px;
-    right: 120px;
-    max-height: 12px;
-  }
+  z-index: 2;
 
   &.opened {
     max-height: 200px;
@@ -102,10 +113,6 @@
     display: flex;
     width: 45px;
     justify-content: space-between;
-
-    @media screen and (max-width: 1440px) {
-      width: 32px;
-    }
   }
 
   &__value {
@@ -116,11 +123,6 @@
     letter-spacing: 0.7px;
     text-transform: uppercase;
 
-    @media screen and (max-width: 1440px) {
-      font-size: 10px;
-      letter-spacing: 0.498px;
-    }
-
     &.not-selected {
       color: #fff;
     }
@@ -128,11 +130,6 @@
 
   &__arrow {
     transition: transform 0.2s;
-
-    @media screen and (max-width: 1440px) {
-      width: 11px;
-      height: 11px;
-    }
 
     .opened & {
       transform: rotate(180deg);

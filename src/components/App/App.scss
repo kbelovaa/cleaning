@@ -44,6 +44,10 @@
     height: 53px;
   }
 
+  @media screen and (max-width: 744px) {
+    padding: 16px 40px;
+  }
+
   &.inactive {
     background: #1a543f;
     color: #a3bbb3;

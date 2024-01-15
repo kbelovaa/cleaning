@@ -33,11 +33,15 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
   const { t } = useTranslation();
 
+  const closeModal = () => {
+    setIsOpen(false);
+    setIsFormValid(true);
+  };
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
-        setIsOpen(false);
-        setIsFormValid(true);
+        closeModal();
       }
     };
 
@@ -168,6 +172,18 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     <>
       <div className={`modal ${isOpen ? 'active' : ''}`}>
         <div className={`auth ${isLogin ? 'login' : 'reg'}`} ref={modalRef}>
+          <svg
+            className="auth__close"
+            onClick={closeModal}
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <path d="M23.5425 23.5424L8.45758 8.45746" stroke="#268664" strokeLinecap="round" />
+            <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
+          </svg>
           <h2 className="auth__title">{isLogin ? t('logIn') : t('signUp')}</h2>
           <form className={`form auth-form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
             <div className="form__fields">

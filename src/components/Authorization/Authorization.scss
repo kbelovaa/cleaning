@@ -24,15 +24,53 @@
   border-radius: 4px;
   background: #fff;
   width: 1240px;
-  margin-top: 104px;
-  margin-bottom: 104px;
+  margin: 104px 0;
+  position: relative;
+
+  @media screen and (max-width: 1440px) {
+    padding: 100px;
+    width: 824px;
+    margin: 100px 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 100px 60px;
+    width: 624px;
+    margin: 60px 0;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 50px 20px;
+    width: 100%;
+    margin: 16px;
+  }
 
   &.login {
     height: 787px;
+
+    @media screen and (max-width: 1024px) {
+      height: 806px;
+    }
+
+    @media screen and (max-width: 744px) {
+      height: 641px;
+    }
   }
 
   &.reg {
     height: 900px;
+
+    @media screen and (max-width: 1440px) {
+      height: 919px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      height: 1210px;
+    }
+
+    @media screen and (max-width: 744px) {
+      height: 1050px;
+    }
   }
 
   &__title {
@@ -41,6 +79,33 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     text-align: center;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 400;
+      letter-spacing: 0.6px;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    cursor: pointer;
+
+    @media screen and (max-width: 1440px) {
+      top: 60px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      top: 50px;
+      right: 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      top: 20px;
+      right: 20px;
+    }
   }
 
   &__details {
@@ -57,11 +122,19 @@
       letter-spacing: 0.8px;
       margin-top: 50px;
       margin-bottom: 10px;
+
+      @media screen and (max-width: 744px) {
+        margin-top: 40px;
+      }
     }
 
     &_account {
       letter-spacing: 0.8px;
       margin-top: 50px;
+
+      @media screen and (max-width: 744px) {
+        margin-top: 40px;
+      }
 
       & a {
         color: #92a1a9;
@@ -92,6 +165,10 @@
     flex-wrap: wrap;
     width: 670px;
     margin: 50px 0;
+
+    @media screen and (max-width: 1440px) {
+      width: 100%;
+    }
   }
 
   &__field-wrap {
@@ -101,8 +178,16 @@
     margin-bottom: 10px;
     position: relative;
 
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
+
     &:nth-of-type(2n) {
       margin-left: 10px;
+
+      @media screen and (max-width: 1024px) {
+        margin-left: 0;
+      }
     }
 
     .login & {

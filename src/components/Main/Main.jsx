@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cleaningImg from '../../images/cleaning.png';
+import cleaningImg1024 from '../../images/cleaning-1024.png';
 import './Main.scss';
 
 const Main = () => {
@@ -87,6 +88,7 @@ const Main = () => {
               </button>
             </div>
             <img className="general__img" src={cleaningImg} alt="Cleaning" />
+            <img className="general__img_little" src={cleaningImg1024} alt="Cleaning" />
           </div>
         </div>
       </section>
@@ -144,7 +146,14 @@ const Main = () => {
                 className={currentIndex === 0 ? 'hidden' : 'system__arrow system__arrow_prev'}
                 onClick={() => scrollToStage(-1)}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <svg
+                  className="system__arrow-sign"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                >
                   <path d="M4 15.9993L28 15.9993" stroke="#268664" strokeLinecap="round" />
                   <path d="M20 8L28 16L20 24" stroke="#268664" strokeLinecap="round" />
                 </svg>

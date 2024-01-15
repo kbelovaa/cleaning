@@ -107,6 +107,14 @@ const Header = () => {
               Sdl
             </span>
             <nav className="header__menu">
+              <ul className="header__auth">
+                <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
+                  {t('signUp')}
+                </li>
+                <li className="header__link" onClick={() => handleAuthModalOpen(true)}>
+                  {t('logIn')}
+                </li>
+              </ul>
               <div className="language-wrap">
                 <div className={`language ${isLanguageOpened ? 'opened' : ''}`} ref={lngRef}>
                   <div className="language__selected" onClick={openLanguages}>
@@ -140,14 +148,6 @@ const Header = () => {
                   </div>
                 </div>
               </div>
-              <ul className="header__auth">
-                <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
-                  {t('signUp')}
-                </li>
-                <li className="header__link" onClick={() => handleAuthModalOpen(true)}>
-                  {t('logIn')}
-                </li>
-              </ul>
               <div className="burger" onClick={() => setIsBurgerMenuOpen(true)}>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>

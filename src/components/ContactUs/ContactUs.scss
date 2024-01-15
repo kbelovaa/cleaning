@@ -1,16 +1,16 @@
 .contact-us {
-  padding: 170px 100px 400px 100px;
+  padding: 170px 100px 400px;
 
   @media screen and (max-width: 1440px) {
-    padding: 80px 80px 480px 80px;
+    padding: 104px 80px 400px;
   }
 
   @media screen and (max-width: 1024px) {
-    padding: 80px 60px 480px 60px;
+    padding: 104px 60px 400px;
   }
 
   @media screen and (max-width: 744px) {
-    padding: 30px 16px 220px 16px;
+    padding: 104px 16px 200px;
   }
 
   &__title {
@@ -19,7 +19,6 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     margin-bottom: 50px;
-    width: 600px;
 
     @media screen and (max-width: 744px) {
       font-size: 30px;

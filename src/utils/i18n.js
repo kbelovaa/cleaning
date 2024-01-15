@@ -518,7 +518,7 @@ i18n.use(initReactI18next).init({
           'Los reembolsos por cancelaciones se acreditarán en tu cuenta con nosotros, que puedes usar para un servicio de limpieza futuro o retirar de nuevo a tu tarjeta de pago. Si el tiempo que cancelaste es reservado por otro cliente, recibirás un reembolso por ese tiempo.',
         exceptionalCircumstances: 'Circunstancias excepcionales',
         unforeseenSituations:
-          'Entendemos que pueden surgir situaciones imprevistas, como la solicitud de cancelación del propietario o dificultades para encontrar las llaves. En tales casos raros, podemos ofrecer un reembolso completo. Al cancelar, por favor selecciona la razón más apropiada de las opciones proporcionadas en la aplicación o el sitio web. Si tu motivo no está en la lista, selecciona "Otro" y ponte en contacto con nuestro servicio de atención al cliente para obtener ayuda.',
+          'Entendemos que pueden surgir situaciones imprevistas, como la solicitud de cancelación del propietario o dificultades para encontrar las llaves. En tales casos raros, podemos ofrecer un reembolso completo. Al cancelar, por favor selecciona la razón más apropiada de las opciones proporcionadas en la aplicación o el pagina web. Si tu motivo no está en la lista, selecciona "Otro" y ponte en contacto con nuestro servicio de atención al cliente para obtener ayuda.',
         clarityAndTransparency:
           'Esperamos que esta política proporcione claridad y transparencia en cuanto a las cancelaciones y modificaciones de tus citas de limpieza. Si tienes alguna pregunta adicional o necesitas ayuda, no dudes en contactarnos. Tu satisfacción es nuestra prioridad.',
         exampleScenarios: 'Escenarios de ejemplo para servicios de limpieza',
@@ -595,21 +595,21 @@ i18n.use(initReactI18next).init({
         weWillReplyToEmail: 'Responderemos a tu correo electrónico',
         ok: 'Ok',
         whatIsSdl:
-          'SDL es un nuevo servicio de limpieza donde reservar es tan rápido y sencillo como solicitar un Uber. Nuestro sitio web y aplicación móvil fáciles de usar permiten a los clientes solicitar servicios de limpieza, incluso con poco aviso, con solo unos clics.',
+          'SDL es un nuevo servicio de limpieza donde reservar es tan rápido y sencillo como solicitar un Uber. Nuestro pagina web y aplicación móvil fáciles de usar permiten a los clientes solicitar servicios de limpieza, incluso con poco tiempo de aviso, con solo unos clics.',
         timeIsInvaluable:
-          'El tiempo es invaluable, gástelo donde realmente importa, mientras nosotros nos encargamos de la limpieza.',
+          'El tiempo es incalculable, gástelo donde realmente importa, mientras nosotros nos encargamos de la limpieza.',
         wellMainrainedHome:
           'Un hogar bien mantenido conserva su valor, se presenta mejor y ofrece un entorno de vida más agradable.',
         weDeliverCare:
-          'Ofrecemos cuidado confiable y profesional empleando técnicas y equipos expertos para garantizar un nivel excepcional de limpieza. Y nuestro compromiso con la excelencia se refleja en nuestra Garantía de Satisfacción del 100%.',
+          'Ofrecemos servicio profesional de confianza empleando técnicas y equipos expertos para garantizar un nivel excepcional de limpieza. Y nuestro compromiso con la excelencia se refleja en nuestra Garantía de Satisfacción del 100%.',
         bookNow: 'Reservar ahora',
         cleanHomeIn3Steps: 'Un hogar limpio en 3 pasos',
         sendRequest: 'Enviar solicitud',
         requestCleaning:
-          'Solicitar limpieza, incluso con poco aviso, con solo unos clics en el sitio web o la aplicación móvil fácil de usar',
+          'Solicitar limpieza, incluso con poco tiempo de aviso, con solo unos clics en el pagina web o la aplicación móvil fácil de usar',
         receiveConf: 'Recibir confirmación',
         receiveConfIn15Min: 'Recibir confirmación en 15 minutos',
-        securelyPay: 'Pagar de forma segura en el sitio web o la aplicación móvil',
+        securelyPay: 'Pagar de forma segura en el pagina web o la aplicación móvil',
         whyWeStandOut: '¿Por qué destacamos?',
         convenient: 'Conveniente',
         convenientDescr: 'Programa tu servicio de limpieza en unos simples pasos',
@@ -619,9 +619,9 @@ i18n.use(initReactI18next).init({
         professionalDescr: 'Disfruta de un hogar limpio profesionalmente',
         compliant: 'Cumplimiento',
         compliantDescr: 'Totalmente conforme con todas las regulaciones locales',
-        reliable: 'Confiable',
-        reliableDescr: 'Cuidado confiable y profesional en el que puedes confiar',
-        trusted: 'Confiable',
+        reliable: 'Confianza',
+        reliableDescr: 'Servicio profesional y de confianza en el que puedes confiar',
+        trusted: 'Seguro',
         trustedDescr: 'Ofrecemos una Garantía de Satisfacción del 100%',
         returningToCleanHome: 'Y volver a casa limpia se siente genial',
         start: 'Comenzar',
