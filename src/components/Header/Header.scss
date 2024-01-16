@@ -91,7 +91,7 @@
     margin-right: 45px;
 
     @media screen and (max-width: 744px) {
-      font-size: 14px;
+      display: none;
     }
 
     .isauth & {

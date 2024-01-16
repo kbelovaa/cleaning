@@ -62,6 +62,15 @@
     &.active {
       color: #268664;
     }
+
+    &-auth {
+      display: none;
+
+      @media screen and (max-width: 744px) {
+        margin-top: 40px;
+        display: block;
+      }
+    }
   }
 
   &__sublist {

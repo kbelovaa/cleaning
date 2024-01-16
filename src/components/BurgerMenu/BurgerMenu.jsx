@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { setIsAuthAction } from '../../store/actions/userActions';
 import './BurgerMenu.scss';
 
-const BurgerMenu = ({ isOpen, setIsOpen }) => {
+const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen }) => {
   const isAuth = useSelector((state) => state.user.isAuth);
 
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
@@ -42,6 +42,12 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
     dispatch(setIsAuthAction(false));
   };
 
+  const handleAuthModalOpen = (isLoginOpen) => {
+    closeBurgerMenu();
+    setIsLoginOpen(isLoginOpen);
+    setIsAuthorizationOpen(true);
+  };
+
   return (
     <div className={`modal ${isOpen ? 'active' : ''}`}>
       <div className="burger-menu" ref={modalRef}>
@@ -64,6 +70,12 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
             <NavLink className="burger-menu__link" to="/booking" onClick={closeBurgerMenu}>
               {t('book')}
             </NavLink>
+          </li>
+          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : ''} onClick={() => handleAuthModalOpen(false)}>
+            {t('signUp')}
+          </li>
+          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : ''} onClick={() => handleAuthModalOpen(true)}>
+            {t('logIn')}
           </li>
           <li className={isAuth ? '' : 'hidden'}>
             <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>
