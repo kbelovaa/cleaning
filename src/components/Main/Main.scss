@@ -264,6 +264,8 @@
     scroll-snap-type: x mandatory;
 
     &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 0;
       height: 0;
     }
 
