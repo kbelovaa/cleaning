@@ -6,8 +6,21 @@
   border-radius: 4px;
   background: #fff;
   width: 1240px;
-  margin-top: 104px;
-  margin-bottom: 104px;
+  margin: 104px 0;
+
+  @media screen and (max-width: 1440px) {
+    padding: 100px;
+    width: 824px;
+    margin: 100px 0;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 744px;
+  }
+
+  @media screen and (max-width: 744px) {
+    width: 100%;
+  }
 
   &.login {
     height: 513px;
