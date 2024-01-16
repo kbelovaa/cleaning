@@ -135,6 +135,22 @@
     justify-content: center;
   }
 
+  .form__section:nth-of-type(7) + & {
+    @media screen and (max-width: 1440px) {
+      margin-bottom: 80px;
+    }
+
+    @media screen and (max-width: 744px) {
+      margin-bottom: 0;
+    }
+  }
+
+  .form__date-period + & {
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 40px;
+    }
+  }
+
   &__tick {
     width: 20px;
     height: 20px;

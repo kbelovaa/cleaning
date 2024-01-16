@@ -112,6 +112,7 @@ const Booking = () => {
   const [total, setTotal] = useState(cleaning.total);
   const [isSummaryUnderlined, setIsSummaryUnderlined] = useState(false);
   const [isFormValid, setIsFormValid] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -134,10 +135,33 @@ const Booking = () => {
 
   const { t } = useTranslation();
 
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const { scrollY } = window;
-      if (scrollY > 490) {
+
+      let yBreakPoint = 0;
+
+      if (windowWidth > 1440) {
+        yBreakPoint = 431;
+      } else if (windowWidth > 1024) {
+        yBreakPoint = 400;
+      } else if (windowWidth > 744) {
+        yBreakPoint = 380;
+      }
+
+      if (scrollY > yBreakPoint) {
         setIsSummaryUnderlined(true);
       } else if (scrollY > 0) {
         setIsSummaryUnderlined(false);
@@ -428,6 +452,8 @@ const Booking = () => {
       }
 
       setDates(selectedDays);
+    } else {
+      setDates([]);
     }
   }, [startDate, lastDate, duration]);
 
@@ -900,7 +926,7 @@ const Booking = () => {
                   {t('when')}
                 </h3>
                 <div className="form__date-period">
-                  <div className={`form__input-wrap form__one-time ${repeat === 'Custom schedule' ? 'hidden' : ''}`}>
+                  <div className={`form__input-wrap form__time ${repeat !== 'One-time' ? 'subscription' : ''} ${repeat === 'Custom schedule' ? 'hidden' : ''}`}>
                     <span className="form__label">{t('time')}</span>
                     <CustomSelect
                       options={times}
@@ -1130,7 +1156,7 @@ const Booking = () => {
                     {t('add')}
                   </span>
                 </div>
-                <div className={repeat === 'One-time' ? 'form__input-wrap form__one-time' : 'hidden'}>
+                <div className={repeat === 'One-time' ? 'form__input-wrap form__time' : 'hidden'}>
                   <label htmlFor="date" className="form__label">
                     {t('date')}
                   </label>
@@ -1355,8 +1381,8 @@ const Booking = () => {
                 <span className="summary__price">{`€${roundPrice(cleaningSum)}`}</span>
               </div>
               <div className={selectedServices.length !== 0 ? 'summary__line summary__line_list' : 'hidden'}>
-                <span className="summary__item">{t('extraServices')}</span>
-                <span className="summary__price">{`€${roundPrice(extrasSum)}`}</span>
+                <span className="summary__item">{t('extraServices')}:</span>
+                {/* <span className="summary__price">{`€${roundPrice(extrasSum)}`}</span> */}
               </div>
               <div className="summary__extras">
                 {selectedServices.map((service, index) => {

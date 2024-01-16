@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { format, startOfWeek, endOfWeek, startOfMonth, endOfMonth, isToday, addDays, parse } from 'date-fns';
 import { weekdays } from '../../constants/selectOptions';
 import './Calendar.scss';
@@ -26,6 +27,8 @@ const Calendar = ({
   handleExcludedDatesUpdate,
   excludedDates,
 }) => {
+  const { t, } = useTranslation();
+
   const daysInCalendar = () => {
     const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
     const end = endOfWeek(endOfMonth(currentDate), { weekStartsOn: 1 });
@@ -146,7 +149,7 @@ const Calendar = ({
       <div className="calendar__weekdays">
         {weekdays.map((weekday, index) => (
           <span key={index} className={`calendar__weekday ${getWeekDayClassName(weekday)}`}>
-            {weekday.name.slice(0, 1)}
+            {t(weekday.name).slice(0, 1)}
           </span>
         ))}
       </div>
