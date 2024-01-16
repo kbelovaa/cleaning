@@ -115,7 +115,7 @@
       letter-spacing: 0.9px;
     }
 
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 390px) {
       width: 100%;
       font-size: 16px;
       letter-spacing: 0.8px;
@@ -195,6 +195,7 @@
       border-radius: 4px;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       margin-bottom: 4px;
     }
   }
@@ -263,11 +264,12 @@
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
+    // padding-bottom: 10px;
+    // overflow-y: hidden;
+    // height: calc(100% - 10px);
 
     &::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 0;
-      height: 0;
+      display: none;
     }
 
     &-wrap {
