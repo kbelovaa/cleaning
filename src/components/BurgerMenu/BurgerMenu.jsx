@@ -71,10 +71,10 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
               {t('book')}
             </NavLink>
           </li>
-          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : ''} onClick={() => handleAuthModalOpen(false)}>
+          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : 'hidden'} onClick={() => handleAuthModalOpen(false)}>
             {t('signUp')}
           </li>
-          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : ''} onClick={() => handleAuthModalOpen(true)}>
+          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : 'hidden'} onClick={() => handleAuthModalOpen(true)}>
             {t('logIn')}
           </li>
           <li className={isAuth ? '' : 'hidden'}>
@@ -93,22 +93,26 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
             </div>
             <ul className={`burger-menu__sublist ${isProfileExpanded ? 'expanded' : ''}`}>
               <li>
-                <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}>
+                {/* <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}> */}
+                <NavLink className="burger-menu__sublink" to="/p" onClick={closeBurgerMenu}>
                   {t('personalInfo')}
                 </NavLink>
               </li>
               <li>
-                <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}>
+                {/* <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}> */}
+                <NavLink className="burger-menu__sublink" to="/a" onClick={closeBurgerMenu}>
                   {t('addresses')}
                 </NavLink>
               </li>
               <li>
-                <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}>
+                {/* <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}> */}
+                <NavLink className="burger-menu__sublink" to="/o" onClick={closeBurgerMenu}>
                   {t('orders')}
                 </NavLink>
               </li>
               <li>
-                <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}>
+                {/* <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}> */}
+                <NavLink className="burger-menu__sublink" to="/s" onClick={closeBurgerMenu}>
                   {t('settings')}
                 </NavLink>
               </li>

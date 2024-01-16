@@ -174,7 +174,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         <div className={`auth ${isLogin ? 'login' : 'reg'}`} ref={modalRef}>
           <svg className="auth__close" onClick={closeModal} xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
             <path d="M22.0712 22.0709L7.9291 7.92881" stroke="#268664" strokeLinecap="round"/>
-            <path d="M22.0709 7.92881L7.92876 22.0709" stroke="#268664" stroke-Linecap="round"/>
+            <path d="M22.0709 7.92881L7.92876 22.0709" stroke="#268664" strokeLinecap="round"/>
           </svg>
           <h2 className="auth__title">{isLogin ? t('logIn') : t('signUp')}</h2>
           <form className={`form auth-form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>

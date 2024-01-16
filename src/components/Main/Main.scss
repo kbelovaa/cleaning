@@ -53,7 +53,7 @@
     @media screen and (max-width: 744px) {
       font-size: 160px;
       letter-spacing: 4.8px;
-      margin: 26px 0 20px;
+      margin: 56px 0 20px;
     }
 
     @media screen and (max-width: 350px) {
@@ -123,14 +123,14 @@
   }
 
   &__img {
-    height: 878px;
+    height: 900px;
     position: absolute;
     top: 0;
-    left: 723px;
+    left: 794px;
 
     @media screen and (max-width: 1440px) {
-      height: 714px;
-      left: 487px;
+      height: 688px;
+      left: 558px;
     }
 
     @media screen and (max-width: 1024px) {
@@ -143,15 +143,15 @@
 
       @media screen and (max-width: 1024px) {
         display: block;
-        height: 821px;
-        left: 389px;
-        top: 125px;
+        height: 948px;
+        left: 318px;
+        top: 65px;
       }
 
       @media screen and (max-width: 744px) {
-        height: 676px;
-        top: 150px;
-        left: calc(100vw - 294px);
+        height: 670px;
+        top: 162px;
+        left: calc(100vw - 301px);
       }
     }
   }
