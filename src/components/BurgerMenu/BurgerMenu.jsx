@@ -71,10 +71,16 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
               {t('book')}
             </NavLink>
           </li>
-          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : 'hidden'} onClick={() => handleAuthModalOpen(false)}>
+          <li
+            className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : 'hidden'}
+            onClick={() => handleAuthModalOpen(false)}
+          >
             {t('signUp')}
           </li>
-          <li className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : 'hidden'} onClick={() => handleAuthModalOpen(true)}>
+          <li
+            className={!isAuth ? 'burger-menu__link burger-menu__link-auth' : 'hidden'}
+            onClick={() => handleAuthModalOpen(true)}
+          >
             {t('logIn')}
           </li>
           <li className={isAuth ? '' : 'hidden'}>

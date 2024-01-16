@@ -165,7 +165,12 @@ const Header = () => {
         isLogin={isLoginOpen}
         setIsLogin={setIsLoginOpen}
       />
-      <BurgerMenu isOpen={isBurgerMenuOpen} setIsOpen={setIsBurgerMenuOpen} setIsLoginOpen={setIsLoginOpen} setIsAuthorizationOpen={setIsAuthorizationOpen} />
+      <BurgerMenu
+        isOpen={isBurgerMenuOpen}
+        setIsOpen={setIsBurgerMenuOpen}
+        setIsLoginOpen={setIsLoginOpen}
+        setIsAuthorizationOpen={setIsAuthorizationOpen}
+      />
     </div>
   );
 };

@@ -1353,7 +1353,9 @@ const Booking = () => {
                     }}
                   ></textarea>
                 </div>
-                <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>{t('fillInAllFieldsMessage')}</p>
+                <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
+                  {t('fillInAllFieldsMessage')}
+                </p>
               </div>
               <div className="checkbox">
                 <input id="save" type="checkbox" checked={saving} onChange={() => setSaving(!saving)} />
@@ -1428,7 +1430,9 @@ const Booking = () => {
               <button className={`btn summary__btn ${checkIsFormValid() ? '' : 'inactive'}`} onClick={handleFormSubmit}>
                 {routes[2] ? t('save') : t('next')}
               </button>
-              <p className={!isFormValid && windowWidth <= 744 ? 'auth__note' : 'hidden'}>{t('fillInAllFieldsMessage')}</p>
+              <p className={!isFormValid && windowWidth <= 744 ? 'auth__note' : 'hidden'}>
+                {t('fillInAllFieldsMessage')}
+              </p>
             </div>
           </div>
         </section>
