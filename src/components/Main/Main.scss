@@ -263,10 +263,18 @@
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
 
-    &::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 0;
-      height: 0;
+    &::-webkit-scrollbar-horizontal {
+      display: none;
+    }
+  
+  /* Скрыть трек скроллбара (полосу) */
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+    
+    /* Скрыть ползунок скроллбара */
+    &::-webkit-scrollbar-thumb {
+        display: none;
     }
 
     &-wrap {
