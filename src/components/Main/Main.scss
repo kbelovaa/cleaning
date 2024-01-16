@@ -263,18 +263,10 @@
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
 
-    &::-webkit-scrollbar-horizontal {
-      display: none;
-    }
-  
-  /* Скрыть трек скроллбара (полосу) */
-    &::-webkit-scrollbar-track {
-        display: none;
-    }
-    
-    /* Скрыть ползунок скроллбара */
-    &::-webkit-scrollbar-thumb {
-        display: none;
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      width: 0;
+      height: 0;
     }
 
     &-wrap {
@@ -350,19 +342,14 @@
     display: flex;
     width: 50px;
     justify-content: space-between;
-    margin: 24px auto 0;
+    margin: 40px auto 0;
 
     @media screen and (max-width: 1440px) {
-      margin-top: 3px;
-    }
-
-    @media screen and (max-width: 1024px) {
-      margin-top: 4px;
+      margin-top: 20px;
     }
 
     @media screen and (max-width: 744px) {
       width: 38px;
-      margin-top: 2px;
     }
   }
 
@@ -393,7 +380,7 @@
     background: #fff;
     cursor: pointer;
     position: absolute;
-    top: calc((100% - 17px) / 2);
+    top: 50%;
 
     @media screen and (max-width: 744px) {
       height: 26px;
