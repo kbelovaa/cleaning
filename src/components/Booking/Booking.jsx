@@ -926,7 +926,11 @@ const Booking = () => {
                   {t('when')}
                 </h3>
                 <div className="form__date-period">
-                  <div className={`form__input-wrap form__time ${repeat !== 'One-time' ? 'subscription' : ''} ${repeat === 'Custom schedule' ? 'hidden' : ''}`}>
+                  <div
+                    className={`form__input-wrap form__time ${repeat !== 'One-time' ? 'subscription' : ''} ${
+                      repeat === 'Custom schedule' ? 'hidden' : ''
+                    }`}
+                  >
                     <span className="form__label">{t('time')}</span>
                     <CustomSelect
                       options={times}

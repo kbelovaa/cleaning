@@ -137,11 +137,6 @@ const Main = () => {
                   <p className="system__text">{t('securelyPay')}</p>
                 </div>
               </div>
-              <div className="system__dots">
-                <div className={`system__dot ${currentIndex === 0 ? 'system__dot_active' : ''}`}></div>
-                <div className={`system__dot ${currentIndex === 1 ? 'system__dot_active' : ''}`}></div>
-                <div className={`system__dot ${currentIndex === 2 ? 'system__dot_active' : ''}`}></div>
-              </div>
               <div
                 className={currentIndex === 0 ? 'hidden' : 'system__arrow system__arrow_prev'}
                 onClick={() => scrollToStage(-1)}
@@ -167,6 +162,11 @@ const Main = () => {
                   <path d="M20 8L28 16L20 24" stroke="#268664" strokeLinecap="round" />
                 </svg>
               </div>
+            </div>
+            <div className="system__dots">
+              <div className={`system__dot ${currentIndex === 0 ? 'system__dot_active' : ''}`}></div>
+              <div className={`system__dot ${currentIndex === 1 ? 'system__dot_active' : ''}`}></div>
+              <div className={`system__dot ${currentIndex === 2 ? 'system__dot_active' : ''}`}></div>
             </div>
           </div>
         </div>

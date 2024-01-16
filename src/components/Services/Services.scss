@@ -1,16 +1,16 @@
 .info-price {
-  padding: 114px 100px 395px;
+  padding: 124px 100px 395px;
 
   @media screen and (max-width: 1440px) {
-    padding: 114px 80px 394px;
+    padding: 160px 80px 394px;
   }
 
   @media screen and (max-width: 1024px) {
-    padding: 114px 60px 390px 60px;
+    padding: 156px 60px 390px 60px;
   }
 
   @media screen and (max-width: 744px) {
-    padding: 114px 16px 190px 16px;
+    padding: 60px 16px 190px 16px;
   }
 
   &__title {

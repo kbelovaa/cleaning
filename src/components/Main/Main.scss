@@ -55,6 +55,11 @@
       letter-spacing: 4.8px;
       margin: 26px 0 20px;
     }
+
+    @media screen and (max-width: 350px) {
+      font-size: 140px;
+      letter-spacing: 4px;
+    }
   }
 
   &__subtitle {
@@ -107,6 +112,12 @@
       width: 358px;
       font-size: 18px;
       letter-spacing: 0.9px;
+    }
+
+    @media screen and (max-width: 360px) {
+      width: 100%;
+      font-size: 16px;
+      letter-spacing: 0.8px;
     }
   }
 
@@ -245,6 +256,7 @@
     border-radius: 4px;
     display: flex;
     overflow-x: auto;
+    overflow-y: visible;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
@@ -370,30 +382,21 @@
     background: #fff;
     cursor: pointer;
     position: absolute;
-    top: 101px;
-
-    @media screen and (max-width: 1440px) {
-      top: 116px;
-    }
-
-    @media screen and (max-width: 1024px) {
-      top: 69px;
-    }
+    top: calc((100% - 17px) / 2);
 
     @media screen and (max-width: 744px) {
       height: 26px;
       width: 26px;
       padding: 5px;
-      top: 87px;
     }
 
     &_prev {
-      transform: rotate(180deg) translateX(50%);
+      transform: rotate(180deg) translateX(50%) translateY(-50%);
     }
 
     &_next {
       right: 0;
-      transform: translateX(50%);
+      transform: translateX(50%) translateY(-50%);
     }
 
     &-sign {

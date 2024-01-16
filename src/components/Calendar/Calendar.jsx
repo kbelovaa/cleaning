@@ -27,7 +27,7 @@ const Calendar = ({
   handleExcludedDatesUpdate,
   excludedDates,
 }) => {
-  const { t, } = useTranslation();
+  const { t } = useTranslation();
 
   const daysInCalendar = () => {
     const start = startOfWeek(startOfMonth(currentDate), { weekStartsOn: 1 });
