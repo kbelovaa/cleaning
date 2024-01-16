@@ -1425,7 +1425,7 @@ const Booking = () => {
                 <span className="summary__subtitle">{t('total')}</span>
                 <span className="summary__price">{`€${roundPrice(total)}`}</span>
               </div>
-              <button className={`btn summary__btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
+              <button className={`btn summary__btn ${checkIsFormValid() ? '' : 'inactive'}`} onClick={handleFormSubmit}>
                 {routes[2] ? t('save') : t('next')}
               </button>
             </div>
