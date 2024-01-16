@@ -264,9 +264,6 @@
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
     scroll-snap-type: x mandatory;
-    // padding-bottom: 10px;
-    // overflow-y: hidden;
-    // height: calc(100% - 10px);
 
     &::-webkit-scrollbar {
       display: none;
