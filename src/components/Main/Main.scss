@@ -186,7 +186,7 @@
         width: auto;
       }
 
-      @media screen and (max-width: 390px) {
+      @media screen and (max-width: 391px) {
         display: none;
       }
     }
@@ -195,9 +195,9 @@
       position: absolute;
       display: none;
 
-      @media screen and (max-width: 390px) {
+      @media screen and (max-width: 391px) {
         display: block;
-        height: 100%;
+        width: 100%;
       }
     }
   }
