@@ -50,6 +50,17 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail }) => {
         className={`confirmation ${isLogin || isContactUs ? 'login' : isConfirmation ? 'conf' : 'reg'}`}
         ref={modalRef}
       >
+        <svg
+          className="confirmation__close"
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
+          fill="none"
+        >
+          <path d="M23.5425 23.5424L8.45758 8.45746" stroke="#268664" strokeLinecap="round" />
+          <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
+        </svg>
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
           <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#284657" strokeLinecap="round" />
         </svg>

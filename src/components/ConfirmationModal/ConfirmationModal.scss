@@ -7,6 +7,7 @@
   background: #fff;
   width: 1240px;
   margin: 104px 0;
+  position: relative;
 
   @media screen and (max-width: 1440px) {
     padding: 100px;
@@ -15,7 +16,8 @@
   }
 
   @media screen and (max-width: 1024px) {
-    width: 744px;
+    padding: 100px 60px;
+    width: 624px;
   }
 
   @media screen and (max-width: 744px) {
@@ -23,15 +25,30 @@
   }
 
   &.login {
-    height: 513px;
+    min-height: 513px;
   }
 
   &.conf {
-    height: 439px;
+    min-height: 439px;
   }
 
   &.reg {
-    height: 651px;
+    min-height: 651px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 70px;
+    right: 100px;
+
+    @media screen and (max-width: 1440px) {
+      top: 60px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      top: 50px;
+      right: 60px;
+    }
   }
 
   &__title {

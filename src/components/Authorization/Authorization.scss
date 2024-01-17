@@ -46,30 +46,30 @@
   }
 
   &.login {
-    height: 787px;
+    min-height: 787px;
 
     @media screen and (max-width: 1024px) {
-      height: 806px;
+      min-height: 806px;
     }
 
     @media screen and (max-width: 744px) {
-      height: 641px;
+      min-height: 641px;
     }
   }
 
   &.reg {
-    height: 900px;
+    min-height: 900px;
 
     @media screen and (max-width: 1440px) {
-      height: 919px;
+      min-height: 919px;
     }
 
     @media screen and (max-width: 1024px) {
-      height: 1210px;
+      min-height: 1210px;
     }
 
     @media screen and (max-width: 744px) {
-      height: 1050px;
+      min-height: 1050px;
     }
   }
 

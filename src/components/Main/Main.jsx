@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cleaningImg from '../../images/cleaning.png';
+import cleaningImg1440 from '../../images/cleaning-1440.png';
 import cleaningImg1024 from '../../images/cleaning-1024.png';
+import cleaningImg390 from '../../images/cleaning-390.png';
 import './Main.scss';
 
 const Main = () => {
@@ -72,7 +74,7 @@ const Main = () => {
               <h1 className="general__title">Sdl</h1>
               <h3 className="general__subtitle">Servicio de limpieza</h3>
               <div className="general__text">{t('whatIsSdl')}</div>
-              <button className="btn main__btn" onClick={() => navigate('/booking')}>
+              <button className="btn general__btn main__btn" onClick={() => navigate('/booking')}>
                 {t('bookNow')}
                 <svg
                   className="btn__arrow"
@@ -88,9 +90,11 @@ const Main = () => {
               </button>
             </div>
             <img className="general__img" src={cleaningImg} alt="Cleaning" />
-            <img className="general__img_little" src={cleaningImg1024} alt="Cleaning" />
+            <img className="general__img_1440" src={cleaningImg1440} alt="Cleaning" />
           </div>
         </div>
+        <img className="general__img_1024" src={cleaningImg1024} alt="Cleaning" />
+        <img className="general__img_390" src={cleaningImg390} alt="Cleaning" />
       </section>
       <section className="description-section">
         <div className="container">
