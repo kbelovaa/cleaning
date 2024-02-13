@@ -75,20 +75,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setIsFormValid(true);
   };
 
-  const handleAuth = async () => {
+  const handleAuth = (result) => {
     finishFormSending();
     dispatch(setIsAuthAction(true));
     navigate('/');
-    const token = getCookieToken();
-
-    if (token) {
-      const userId = jwtDecode(token).id;
-      const result = await auth(userId);
-
-      if (!result.message) {
-        dispatch(setUserAction(result));
-      }
-    }
+    dispatch(setUserAction(result));
   };
 
   const handleFormSubmit = async (e) => {
@@ -105,7 +96,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         } else {
           setLoading(false);
           setIsConfirmationOpen(true);
-          handleAuth();
+          handleAuth(result);
         }
       } else {
         setIsFormValid(false);
@@ -131,7 +122,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       } else {
         setLoading(false);
         setIsConfirmationOpen(true);
-        handleAuth();
+        handleAuth(result);
       }
     } else {
       setIsFormValid(false);
