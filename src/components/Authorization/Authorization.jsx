@@ -27,6 +27,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const [areCredentialsValid, setAreCredentialsValid] = useState('');
   const [isFormValid, setIsFormValid] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConf, setShowPasswordConf] = useState(false);
@@ -95,11 +96,14 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
     if (isLogin) {
       if (email && password) {
+        setLoading(true);
         const result = await signIn(email, password);
         if (result.message) {
           setAreCredentialsValid(result.message);
           setIsFormValid(false);
+          setLoading(false);
         } else {
+          setLoading(false);
           setIsConfirmationOpen(true);
           handleAuth();
         }
@@ -118,11 +122,14 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       passwordConf &&
       isPasswordConfValid
     ) {
+      setLoading(true);
       const result = await signUp(name, surname, email, mobile, password);
       if (result.message && result.error) {
         setIsEmailUnique(result.message);
         setIsFormValid(false);
+        setLoading(false);
       } else {
+        setLoading(false);
         setIsConfirmationOpen(true);
         handleAuth();
       }
@@ -356,9 +363,13 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </span>
               </div>
             </div>
-            <button className={`btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
-              {isLogin ? t('logIn') : t('createAccount')}
-            </button>
+            {loading ? (
+              <div className="spinner spinner_small"></div>
+            ) : (
+              <button className={`btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
+                {isLogin ? t('logIn') : t('createAccount')}
+              </button>
+            )}
           </form>
           <div className="auth__details">
             <p className="auth__note auth__note_socials">{isLogin ? t('orLogInVia') : t('orSignUpVia')}</p>
