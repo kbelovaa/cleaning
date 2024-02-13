@@ -27,9 +27,9 @@ export const signIn = async (email, password) => {
   }
 };
 
-export const auth = async (id) => {
+export const auth = async () => {
   try {
-    const { data } = await $host.get('api/auth/auth_web', { id });
+    const { data } = await $host.get('api/auth/auth_web');
     return data;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {

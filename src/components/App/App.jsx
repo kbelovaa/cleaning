@@ -37,25 +37,6 @@ const App = () => {
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
 
-  const token = getCookieToken();
-  console.log(token)
-
-  useEffect(() => {
-    const getUserByToken = async () => {
-      if (token) {
-        const userId = jwtDecode(token).id;
-        const result = await auth(userId);
-
-        if (!result.message) {
-          dispatch(setIsAuthAction(true));
-          dispatch(setUserAction(result));
-        }
-      }
-    };
-
-    getUserByToken();
-  }, [token]);
-
   useEffect(() => {
     dispatch(setServicesAsync());
     dispatch(setExtraServicesAsync());
@@ -63,6 +44,17 @@ const App = () => {
     dispatch(setTimePricingAsync());
     dispatch(setCleaningPricingAsync());
     dispatch(setSqmPricingAsync());
+
+    const getUser = async () => {
+      const result = await auth();
+
+      if (!result.message) {
+        dispatch(setIsAuthAction(true));
+        dispatch(setUserAction(result));
+      }
+    };
+
+    getUser();
 
     const getCountryFromIP = async () => {
       try {
