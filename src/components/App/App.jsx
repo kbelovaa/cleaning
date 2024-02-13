@@ -38,6 +38,7 @@ const App = () => {
   const { i18n } = useTranslation();
 
   const token = getCookieToken();
+  console.log(token)
 
   useEffect(() => {
     const getUserByToken = async () => {
