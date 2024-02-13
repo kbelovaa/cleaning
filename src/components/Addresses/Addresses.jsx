@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { deleteAddress, getAddresses, setDefaultAddress } from '../../http/addressAPI';
 import edit from '../../images/edit.png';
 import './Addresses.scss';
@@ -13,6 +13,9 @@ const Addresses = () => {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  console.log(user)
 
   useEffect(() => {
     const getAdressesData = async () => {
@@ -24,7 +27,7 @@ const Addresses = () => {
     if (user.id) {
       getAdressesData();
     }
-  }, [user]);
+  }, [user, pathname]);
 
   useEffect(() => {
     const defaultAddress = addresses.find((address) => address.isDefault);

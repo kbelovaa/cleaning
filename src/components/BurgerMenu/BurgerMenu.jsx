@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
+import { logOut } from '../../http/authAPI';
 import './BurgerMenu.scss';
 
 const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen }) => {
@@ -41,7 +42,7 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
 
   const handleLogOut = () => {
     closeBurgerMenu();
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    logOut();
     dispatch(setIsAuthAction(false));
     dispatch(
       setUserAction({

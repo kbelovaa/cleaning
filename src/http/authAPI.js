@@ -39,3 +39,16 @@ export const auth = async () => {
     return { error: 'Unexpected error' };
   }
 };
+
+export const logOut = async () => {
+  try {
+    const { data } = await $host.get('api/auth/logout_web');
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};
