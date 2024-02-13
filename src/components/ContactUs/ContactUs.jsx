@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './ContactUs.scss';
 
 const ContactUs = () => {
-  const isAuth = useSelector((state) => state.user.isAuth);
+  const user = useSelector((state) => state.user);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,8 +13,15 @@ const ContactUs = () => {
   const [text, setText] = useState('');
   const [isFormValid, setIsFormValid] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (user.email) {
+      setEmail(user.email);
+    }
+  }, [user]);
 
   const handleEmailChange = (email) => {
     setEmail(email);
@@ -24,7 +31,7 @@ const ContactUs = () => {
   };
 
   const checkIsFormValid = () => {
-    if (isAuth) {
+    if (user.isAuth) {
       if (text) {
         return true;
       }
@@ -38,16 +45,20 @@ const ContactUs = () => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (isAuth) {
+    if (user.isAuth) {
       if (text) {
-        //отправить запрос
+        setLoading(true);
+        // отправить запрос
+        setLoading(false);
         setIsConfirmationOpen(true);
       } else {
         setIsFormValid(false);
       }
     } else if (name && email && isEmailValid && text) {
-      setIsConfirmationOpen(true);
+      setLoading(true);
       // отправить запрос
+      setLoading(false);
+      setIsConfirmationOpen(true);
     } else {
       setIsFormValid(false);
     }
@@ -58,7 +69,7 @@ const ContactUs = () => {
       <div className="contact-us">
         <h2 className="contact-us__title">{t('contactUs')}</h2>
         <form className={`contact-us__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
-          <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
+          <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="name" className="form__label">
               {t('name')}
             </label>
@@ -70,7 +81,7 @@ const ContactUs = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className={isAuth ? 'hidden' : 'form__input-wrap'}>
+          <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
             <label htmlFor="email" className="form__label">
               {t('email')}
             </label>
@@ -100,7 +111,7 @@ const ContactUs = () => {
             ></textarea>
             <p
               className={
-                (!isFormValid && !isAuth && (!name || !email || !text)) || (!isFormValid && isAuth && !text)
+                (!isFormValid && !user.isAuth && (!name || !email || !text)) || (!isFormValid && user.isAuth && !text)
                   ? 'auth__note'
                   : 'hidden'
               }
@@ -108,7 +119,11 @@ const ContactUs = () => {
               {t('fillInAllFieldsMessage')}
             </p>
           </div>
-          <button className={`btn contact-us__btn ${checkIsFormValid() ? '' : 'inactive'}`}>{t('submit')}</button>
+          {loading ? (
+            <div className="spinner spinner_small"></div>
+          ) : (
+            <button className={`btn contact-us__btn ${checkIsFormValid() ? '' : 'inactive'}`}>{t('submit')}</button>
+          )}
         </form>
       </div>
       <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={false} email={email} />

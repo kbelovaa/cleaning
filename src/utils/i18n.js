@@ -8,6 +8,19 @@ i18n.use(initReactI18next).init({
         propertyInformation: 'Property information',
         apartmentSize: 'Apartment size, m',
         apartmentSizeMessage: 'Apartment size cannot be more than 10000 m',
+        howManyLivingRooms: 'How many living rooms?',
+        '1 living room': '1 living room',
+        '2 living rooms': '2 living rooms',
+        '3 living rooms': '3 living rooms',
+        '4 living rooms': '4 living rooms',
+        '5 living rooms': '5 living rooms',
+        '6 living rooms': '6 living rooms',
+        '7 living rooms': '7 bedrliving roomsooms',
+        '8 living rooms': '8 living rooms',
+        '9 living rooms': '9 living rooms',
+        '10 living rooms': '10 living rooms',
+        '11 living rooms': '11 living rooms',
+        '12 living room': '12 living rooms',
         howManyBedrooms: 'How many bedrooms?',
         '1 bedroom': '1 bedroom',
         '2 bedrooms': '2 bedrooms',
@@ -144,10 +157,10 @@ i18n.use(initReactI18next).init({
         signUp: 'Sign up',
         name: 'Name',
         surname: 'Surname',
-        email: 'Email address',
+        email: 'Email',
         validEmailMessage: 'Please enter a valid email address',
-        mobile: 'Mobile nr',
-        validMobileMessage: 'Please enter a valid mobile number',
+        mobile: 'Phone nr',
+        validMobileMessage: 'Please enter a valid phone number',
         password: 'Password',
         confPassword: 'Confirm password',
         confPasswordMessage: 'Password and Confirm Password must match',
@@ -176,15 +189,15 @@ i18n.use(initReactI18next).init({
         paid: 'Paid',
         learnCancellationPolicy: 'Learn Cancellation Policy',
         services: 'Services',
-        basicCleaningInfo:
+        BasicCleaningInfo:
           'Basic cleaning starts with an assessment, followed by systematic dusting, vacuuming, and mopping. The kitchen and bathroom receive special attention, including surface sanitization. After the final touch-ups, we perform a walk-through to ensure our high standards are met, leaving your home in pristine condition.',
-        detailedCleaningInfo:
+        DetailedCleaningInfo:
           'Detailed cleaning takes the BASIC cleaning to the next level, leaving no corner untouched. We meticulously clean and sanitize every surface and crevice in your home. From deep cleaning kitchen appliances to thorough dusting, we ensure that your living space is truly immaculate.',
-        moveInOutCleaningInfo:
+        MoveinoutCleaningInfo:
           'Designed for transitioning in or out of a home, this service includes a thorough cleaning of all areas, with extra attention to spaces that may have been neglected. We take care of cabinets, appliances, and ensure the entire space is ready for the next chapter.',
-        afterBuildersCleaningInfo:
+        AfterbuildersCleaningInfo:
           'Perfect for post-construction or renovation clean-ups, we tackle the mess and dust left behind by builders, leaving you with a clean and comfortable environment. From cleaning surfaces to removing construction debris, we make your newly built or renovated area shine.',
-        afterPartyCleaningInfo:
+        AfterpartyCleaningInfo:
           'After a great event, the last thing you want to do is clean up. We handle the cleanup, from removing spills and stains to general tidying up, ensuring every surface is sparkling. Allowing you to wake up to a refreshed and clean home.',
         cancellationPolicy: 'Cancellation Policy',
         shortAnswer: 'Short answer',
@@ -318,6 +331,19 @@ i18n.use(initReactI18next).init({
         propertyInformation: 'Información de la propiedad',
         apartmentSize: 'Tamaño del apartamento, m',
         apartmentSizeMessage: 'El tamaño del apartamento no puede ser superior a 10000 m',
+        howManyLivingRooms: '¿Cuántas salas de estar?',
+        '1 living room': '1 sala de estar',
+        '2 living rooms': '2 salas de estar',
+        '3 living rooms': '3 salas de estar',
+        '4 living rooms': '4 salas de estar',
+        '5 living rooms': '5 salas de estar',
+        '6 living rooms': '6 salas de estar',
+        '7 living rooms': '7 salas de estar',
+        '8 living rooms': '8 salas de estar',
+        '9 living rooms': '9 salas de estar',
+        '10 living rooms': '10 salas de estar',
+        '11 living rooms': '11 salas de estar',
+        '12 living room': '12 salas de estar',
         howManyBedrooms: '¿Cuántos dormitorios?',
         '1 bedroom': '1 dormitorio',
         '2 bedrooms': '2 dormitorios',
@@ -454,10 +480,10 @@ i18n.use(initReactI18next).init({
         signUp: 'Registrarse',
         name: 'Nombre',
         surname: 'Apellido',
-        email: 'Dirección de correo electrónico',
+        email: 'Correo electrónico',
         validEmailMessage: 'Por favor, introduce una dirección de correo electrónico válida',
-        mobile: 'Número de teléfono móvil',
-        validMobileMessage: 'Por favor, introduce un número de teléfono móvil válido',
+        mobile: 'Número de teléfono',
+        validMobileMessage: 'Por favor, ingrese un número de teléfono válido',
         password: 'Contraseña',
         confPassword: 'Confirmar contraseña',
         confPasswordMessage: 'La contraseña y la confirmación de la contraseña deben coincidir',
@@ -488,15 +514,15 @@ i18n.use(initReactI18next).init({
         paid: 'Pagado',
         learnCancellationPolicy: 'Conoce la Política de Cancelación',
         services: 'Servicios',
-        basicCleaningInfo:
+        BasicCleaningInfo:
           'La limpieza básica comienza con una evaluación, seguida de un desempolvado, aspirado y fregado sistemático. La cocina y el baño reciben atención especial, incluida la desinfección de superficies. Después de los últimos toques, realizamos un recorrido para asegurarnos de que se cumplan nuestros altos estándares, dejando tu hogar en condiciones impecables.',
-        detailedCleaningInfo:
+        DetailedCleaningInfo:
           'La limpieza detallada lleva la limpieza BÁSICA al siguiente nivel, sin dejar ningún rincón sin tocar. Limpiamos y desinfectamos meticulosamente cada superficie y grieta de tu hogar. Desde la limpieza profunda de electrodomésticos de cocina hasta el desempolvado minucioso, nos aseguramos de que tu espacio vital esté verdaderamente inmaculado.',
-        moveInOutCleaningInfo:
+        MoveinoutCleaningInfo:
           'Diseñado para la transición dentro o fuera de un hogar, este servicio incluye una limpieza exhaustiva de todas las áreas, con atención especial a espacios que pueden haber sido descuidados. Nos encargamos de los armarios, electrodomésticos y aseguramos que todo el espacio esté listo para el próximo capítulo.',
-        afterBuildersCleaningInfo:
+        AfterbuildersCleaningInfo:
           'Perfecto para limpiezas después de construcciones o renovaciones, abordamos el desorden y el polvo dejado por los constructores, dejándote un entorno limpio y cómodo. Desde la limpieza de superficies hasta la eliminación de escombros de construcción, hacemos que tu área recién construida o renovada brille.',
-        afterPartyCleaningInfo:
+        AfterpartyCleaningInfo:
           'Después de un gran evento, lo último que quieres hacer es limpiar. Nos encargamos de la limpieza, desde la eliminación de derrames y manchas hasta la limpieza general, asegurando que cada superficie esté reluciente. Permitiéndote despertar en un hogar renovado y limpio.',
         cancellationPolicy: 'Política de cancelación',
         shortAnswer: 'Respuesta corta',

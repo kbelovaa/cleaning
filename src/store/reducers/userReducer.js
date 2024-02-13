@@ -1,8 +1,14 @@
-import { SET_IS_AUTH, SET_IP_COUNTRY } from '../../constants/actionsRedux';
+import { SET_IS_AUTH, SET_IP_COUNTRY, SET_USER } from '../../constants/actionsRedux';
 
 const defaultState = {
   isAuth: false,
   ipCountry: '',
+  id: '',
+  name: '',
+  surname: '',
+  mobile: '',
+  email: '',
+  role: '',
 };
 
 const userReducer = (state = defaultState, action) => {
@@ -11,6 +17,8 @@ const userReducer = (state = defaultState, action) => {
       return { ...state, isAuth: action.payload };
     case SET_IP_COUNTRY:
       return { ...state, ipCountry: action.payload };
+    case SET_USER:
+      return { ...state, ...action.payload };
     default:
       return state;
   }

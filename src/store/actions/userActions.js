@@ -1,4 +1,4 @@
-import { SET_IS_AUTH, SET_IP_COUNTRY } from '../../constants/actionsRedux';
+import { SET_IS_AUTH, SET_IP_COUNTRY, SET_USER } from '../../constants/actionsRedux';
 
 export const setIsAuthAction = (payload) => ({
   type: SET_IS_AUTH,
@@ -7,5 +7,10 @@ export const setIsAuthAction = (payload) => ({
 
 export const setIpCountryAction = (payload) => ({
   type: SET_IP_COUNTRY,
+  payload,
+});
+
+export const setUserAction = (payload) => ({
+  type: SET_USER,
   payload,
 });

@@ -2,8 +2,19 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { setIpCountryAction } from '../../store/actions/userActions';
+import { auth } from '../../http/authAPI';
+import {
+  setCleaningPricingAsync,
+  setExtraServicesAsync,
+  setPricingAsync,
+  setServicesAsync,
+  setSqmPricingAsync,
+  setTimePricingAsync,
+} from '../../store/actions/servicesActions';
+import { setIpCountryAction, setIsAuthAction, setUserAction } from '../../store/actions/userActions';
+import getCookieToken from '../../utils/cookiesToken';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -14,9 +25,11 @@ import Services from '../Services/Services';
 import Faq from '../Faq/Faq';
 import CancellationPolicy from '../CancellationPolicy/CancellationPolicy';
 import PersonalInfo from '../PersonalInfo/PersonalInfo';
+import Address from '../Address/Address';
 import Addresses from '../Addresses/Addresses';
 import Orders from '../Orders/Orders';
 import Settings from '../Settings/Settings';
+import Password from '../Password/Password';
 import '../../utils/i18n';
 import './App.scss';
 
@@ -25,6 +38,29 @@ const App = () => {
   const { i18n } = useTranslation();
 
   useEffect(() => {
+    dispatch(setServicesAsync());
+    dispatch(setExtraServicesAsync());
+    dispatch(setPricingAsync());
+    dispatch(setTimePricingAsync());
+    dispatch(setCleaningPricingAsync());
+    dispatch(setSqmPricingAsync());
+
+    const getUserByToken = async () => {
+      const token = getCookieToken();
+
+      if (token) {
+        const userId = jwtDecode(token).id;
+        const result = await auth(userId);
+
+        if (!result.message) {
+          dispatch(setIsAuthAction(true));
+          dispatch(setUserAction(result));
+        }
+      }
+    };
+
+    getUserByToken();
+
     const getCountryFromIP = async () => {
       try {
         const response = await axios.get('https://ipinfo.io/json?token=353f74029ca066');
@@ -62,14 +98,18 @@ const App = () => {
           <Route path="booking" element={<Booking />} />
           <Route path="booking/edit/*" element={<Booking />} />
           <Route path="summary" element={<Summary />} />
+          <Route path="confirmation" element={<Summary />} />
           <Route path="contact-us" element={<ContactUs />} />
           <Route path="info-price" element={<Services />} />
           <Route path="faq" element={<Faq />} />
           <Route path="cancellation-policy" element={<CancellationPolicy />} />
           <Route path="personal-info" element={<PersonalInfo />} />
+          <Route path="address/new" element={<Address />} />
+          <Route path="address/edit/:addressId" element={<Address />} />
           <Route path="addresses" element={<Addresses />} />
           <Route path="orders" element={<Orders />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="settings/change-password" element={<Password />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

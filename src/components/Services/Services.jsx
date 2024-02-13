@@ -1,10 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { cleaningTypes } from '../../constants/selectOptions';
 import ServiceCard from './ServiceCard/ServiceCard';
 import './Services.scss';
 
 const Services = () => {
+  const cleaningTypes = useSelector((state) => state.services.serviceTypes);
+
   const { t } = useTranslation();
 
   return (

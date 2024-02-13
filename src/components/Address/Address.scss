@@ -1,0 +1,27 @@
+.address {
+  padding: 140px 100px 500px;
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    margin-bottom: 30px;
+  }
+
+  &__form {
+    width: 690px;
+  }
+
+  &__data {
+    margin-bottom: 50px;
+  }
+
+  &__btn {
+    margin-top: 30px;
+  }
+
+  & .spinner {
+    margin-top: 60px;
+  }
+}

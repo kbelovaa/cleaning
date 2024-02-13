@@ -1,5 +1,6 @@
 .profile {
-  padding: 126px 100px 500px;
+  padding: 140px 100px 500px;
+  min-height: calc(100vh - 200px);
 
   &__title {
     font-size: 34px;

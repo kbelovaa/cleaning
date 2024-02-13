@@ -109,14 +109,18 @@
   }
 }
 
+.bell {
+  margin-right: 40px;
+  cursor: pointer;
+}
+
 .language {
   cursor: pointer;
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: -1px;
   right: 0;
-  max-height: 17px;
+  max-height: 30px;
   overflow: hidden;
   transition: max-height 0.2s;
   z-index: 2;
@@ -127,7 +131,7 @@
 
   &-wrap {
     position: relative;
-    height: 17px;
+    height: 30px;
     margin-right: 40px;
 
     @media screen and (max-width: 744px) {
@@ -139,12 +143,14 @@
     display: flex;
     width: 45px;
     justify-content: space-between;
+    align-items: center;
+    padding: 1px 0;
   }
 
   &__value {
     color: #b0b0b0;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: normal;
     letter-spacing: 0.7px;
     text-transform: uppercase;
@@ -188,16 +194,15 @@
   cursor: pointer;
 
   &__bar {
-    width: 30px;
-    height: 4px;
-    border-radius: 47px;
+    width: 22px;
+    height: 1px;
+    border-radius: 40px;
     background: #000;
-    margin-top: 5px;
+    margin-top: 7px;
 
-    @media screen and (max-width: 1440px) {
-      width: 24px;
-      height: 3px;
-      margin-top: 3.5px;
+    @media screen and (max-width: 744px) {
+      width: 20px;
+      margin-top: 6.5px;
     }
 
     &:first-of-type {

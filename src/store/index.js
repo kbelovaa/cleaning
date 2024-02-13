@@ -3,10 +3,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import cleaningReducer from './reducers/cleaningReducer';
 import userReducer from './reducers/userReducer';
+import servicesReducer from './reducers/servicesReducer';
 
 const rootReducer = combineReducers({
   cleaning: cleaningReducer,
   user: userReducer,
+  services: servicesReducer,
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

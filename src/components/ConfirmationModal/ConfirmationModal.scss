@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: min-content;
   padding: 100px 200px;
   border-radius: 4px;
   background: #fff;
@@ -24,22 +25,11 @@
     width: 100%;
   }
 
-  &.login {
-    min-height: 513px;
-  }
-
-  &.conf {
-    min-height: 439px;
-  }
-
-  &.reg {
-    min-height: 651px;
-  }
-
   &__close {
     position: absolute;
     top: 70px;
     right: 100px;
+    cursor: pointer;
 
     @media screen and (max-width: 1440px) {
       top: 60px;
@@ -49,6 +39,10 @@
       top: 50px;
       right: 60px;
     }
+  }
+
+  &__tick {
+    margin-bottom: 20px;
   }
 
   &__title {
@@ -66,6 +60,32 @@
     letter-spacing: 1.2px;
   }
 
+  &__schedule {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__dates {
+    margin-right: 20px;
+  }
+
+  &__date {
+    margin-bottom: 10px;
+    text-align: right;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__time {
+    margin-bottom: 10px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
   &__email {
     font-size: 18px;
     font-weight: 600;
@@ -81,5 +101,17 @@
 
   &__btn {
     margin-top: 50px;
+  }
+
+  &__edit-btn {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__edit {
+    margin: 1px 10px 0 0;
+    width: 24px;
+    height: 24px;
   }
 }

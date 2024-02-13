@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { setIsAuthAction } from '../../store/actions/userActions';
+import { jwtDecode } from 'jwt-decode';
+import getCookieToken from '../../utils/cookiesToken';
+import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
+import { auth, signIn, signUp } from '../../http/authAPI';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
 import PhoneField from '../PhoneField/PhoneField';
@@ -30,6 +34,8 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const modalRef = useRef(null);
 
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
 
@@ -68,21 +74,35 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setIsFormValid(true);
   };
 
+  const handleAuth = async () => {
+    finishFormSending();
+    dispatch(setIsAuthAction(true));
+    navigate('/');
+    const token = getCookieToken();
+
+    if (token) {
+      const userId = jwtDecode(token).id;
+      const result = await auth(userId);
+
+      if (!result.message) {
+        dispatch(setUserAction(result));
+      }
+    }
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (isLogin) {
       if (email && password) {
-        // const result = await login(email, password);
-        // if (result.error) {
-        //   setAreCredentialsValid(result.error.message);
-        //   setIsFormValid(false);
-        // } else {
-        //   setIsModalOpen(true);
-        //   handleAuth();
-        // }
-        finishFormSending();
-        dispatch(setIsAuthAction(true));
+        const result = await signIn(email, password);
+        if (result.message) {
+          setAreCredentialsValid(result.message);
+          setIsFormValid(false);
+        } else {
+          setIsConfirmationOpen(true);
+          handleAuth();
+        }
       } else {
         setIsFormValid(false);
       }
@@ -98,16 +118,14 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       passwordConf &&
       isPasswordConfValid
     ) {
-      // const result = await registration(name, surname, email, mobile, password);
-      // if (result.error) {
-      //   setIsEmailUnique(result.error.message);
-      //   setIsFormValid(false);
-      // } else {
-      //   setIsModalOpen(true);
-      //   handleAuth();
-      // }
-      finishFormSending();
-      dispatch(setIsAuthAction(true));
+      const result = await signUp(name, surname, email, mobile, password);
+      if (result.message && result.error) {
+        setIsEmailUnique(result.message);
+        setIsFormValid(false);
+      } else {
+        setIsConfirmationOpen(true);
+        handleAuth();
+      }
     } else {
       setIsFormValid(false);
     }
@@ -126,7 +144,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setPassword(password);
     setAreCredentialsValid('');
 
-    const isPasswordValid = /^[A-Za-z0-9]{6,}$/.test(password);
+    const isPasswordValid = password === '' || /^[A-Za-z0-9]{6,}$/.test(password);
     setIsPasswordValid(isPasswordValid);
 
     const isPasswordConfValid = passwordConf === '' || passwordConf === password;
@@ -220,7 +238,14 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <input
                   id="auth-email"
                   type="text"
-                  className={`input ${!email || !isEmailValid || isEmailUnique ? 'invalid-field' : ''}`}
+                  className={`input ${
+                    !email ||
+                    (!isLogin && !isEmailValid) ||
+                    isEmailUnique ||
+                    (areCredentialsValid !== '' && areCredentialsValid !== 'Incorrect password')
+                      ? 'invalid-field'
+                      : ''
+                  }`}
                   value={email}
                   onChange={(e) => handleEmailChange(e.target.value)}
                   autoComplete="off"
@@ -243,7 +268,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <input
                   id="auth-password"
                   type={showPassword ? 'text' : 'password'}
-                  className={`input ${!password || !isPasswordValid ? 'invalid-field' : ''}`}
+                  className={`input ${
+                    !password || (!isLogin && !isPasswordValid) || areCredentialsValid === 'Incorrect password'
+                      ? 'invalid-field'
+                      : ''
+                  }`}
                   value={password}
                   onChange={(e) => handlePasswordChange(e.target.value)}
                   autoComplete="off"
@@ -256,7 +285,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </p>
                 <p
                   className={
-                    !isFormValid && (!name || !surname || !email || !mobile || !password || !passwordConf)
+                    !isFormValid &&
+                    ((!isLogin && (!name || !surname || !email || !mobile || !password || !passwordConf)) ||
+                      (isLogin && (!email || !password)))
                       ? 'auth__note'
                       : 'hidden'
                   }

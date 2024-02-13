@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
-import { setIsAuthAction } from '../../store/actions/userActions';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
 import './BurgerMenu.scss';
 
 const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen }) => {
@@ -14,6 +14,8 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
   const dispatch = useDispatch();
 
   const modalRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const { t } = useTranslation();
 
@@ -39,7 +41,19 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
 
   const handleLogOut = () => {
     closeBurgerMenu();
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     dispatch(setIsAuthAction(false));
+    dispatch(
+      setUserAction({
+        id: '',
+        name: '',
+        surname: '',
+        mobile: '',
+        email: '',
+        role: '',
+      }),
+    );
+    navigate('/');
   };
 
   const handleAuthModalOpen = (isLoginOpen) => {
@@ -99,26 +113,22 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
             </div>
             <ul className={`burger-menu__sublist ${isProfileExpanded ? 'expanded' : ''}`}>
               <li>
-                {/* <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}> */}
-                <NavLink className="burger-menu__sublink" to="/p" onClick={closeBurgerMenu}>
+                <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}>
                   {t('personalInfo')}
                 </NavLink>
               </li>
               <li>
-                {/* <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}> */}
-                <NavLink className="burger-menu__sublink" to="/a" onClick={closeBurgerMenu}>
+                <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}>
                   {t('addresses')}
                 </NavLink>
               </li>
               <li>
-                {/* <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}> */}
-                <NavLink className="burger-menu__sublink" to="/o" onClick={closeBurgerMenu}>
+                <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}>
                   {t('orders')}
                 </NavLink>
               </li>
               <li>
-                {/* <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}> */}
-                <NavLink className="burger-menu__sublink" to="/s" onClick={closeBurgerMenu}>
+                <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}>
                   {t('settings')}
                 </NavLink>
               </li>

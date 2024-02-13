@@ -1,0 +1,39 @@
+.settings {
+  padding: 140px 100px 500px;
+  min-height: calc(100vh - 200px);
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    margin-bottom: 30px;
+  }
+
+  &__password {
+    width: 690px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      display: block;
+      content: '';
+      background: #d9d9d9;
+      height: 1px;
+      width: 100%;
+      border-radius: 2px;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+
+  &__label {
+    color: #3a3a3a;
+    font-size: 20px;
+    line-height: 130%;
+    letter-spacing: 0.6px;
+  }
+}

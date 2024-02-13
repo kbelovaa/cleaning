@@ -1,0 +1,41 @@
+import $host from './index';
+
+export const signUp = async (name, surname, email, mobile, password, role = 'client') => {
+  try {
+    const { data } = await $host.post('api/auth/signup_web', { name, surname, mobile, email, password, role });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message, error: true };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};
+
+export const signIn = async (email, password) => {
+  try {
+    const { data } = await $host.post('api/auth/signin_web', { email, password });
+
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};
+
+export const auth = async (id) => {
+  try {
+    const { data } = await $host.get('api/auth/auth_web', { id });
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};

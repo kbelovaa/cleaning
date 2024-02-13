@@ -166,6 +166,10 @@
       background-color: #268664;
       border-color: #268664;
     }
+
+    &.invalid {
+      border: 1px solid #a51f1f;
+    }
   }
 
   &__label {
@@ -202,6 +206,7 @@
   color: #92a1a9;
   position: relative;
   transition: all 0.3s ease;
+  cursor: pointer;
 
   &::after {
     display: block;
@@ -228,5 +233,56 @@
     &::after {
       background: #5e676c;
     }
+  }
+}
+
+.spinner {
+  margin: 200px auto 0;
+  border: 10px solid #f4f9f7;
+  border-radius: 50%;
+  border-top: 10px solid rgba(38, 134, 100, 0.5);
+  width: 100px;
+  height: 100px;
+  animation: spin 1s linear infinite;
+
+  @media screen and (max-width: 1440px) {
+    width: 85px;
+    height: 85px;
+    border-width: 8.5px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 70px;
+    height: 70px;
+    border-width: 7px;
+  }
+
+  @media screen and (max-width: 744px) {
+    width: 50px;
+    height: 50px;
+    border-width: 5px;
+  }
+
+  &_small {
+    width: 53px;
+    height: 53px;
+    margin: 0;
+    border-width: 7px;
+
+    @media screen and (max-width: 744px) {
+      width: 43px;
+      height: 43px;
+      border-width: 6px;
+      margin-top: 40px;
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

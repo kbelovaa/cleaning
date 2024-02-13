@@ -1,228 +1,740 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { format } from 'date-fns';
-import {
-  setApartmentSizeAction,
-  setBathroomsNumAction,
-  setBedroomsNumAction,
-  setCityAction,
-  setCleaningSumAction,
-  setDatesAction,
-  setExtrasSumAction,
-  setInstructionsAction,
-  setSavingAction,
-  setIvaAction,
-  setKitchensNumAction,
-  setPostalCodeAction,
-  setProvinceAction,
-  setSelectedCleaningAction,
-  setSelectedServicesAction,
-  setSelectedSpeedAction,
-  setSubtotalAction,
-  setTimeAction,
-  setTotalAction,
-  setSpeedSumAction,
-  setTimeSumAction,
-  setAddress1Action,
-  setAddress2Action,
-} from '../../store/actions/cleaningActions';
-import { bathrooms, bedrooms, cleaningTypes, kitchens, speedOptions, times } from '../../constants/selectOptions';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { setCleaningAction } from '../../store/actions/cleaningActions';
+import { defaultState } from '../../store/reducers/cleaningReducer';
 import formatDate from '../../utils/formatDate';
+import { createOrder, getSubscriptions } from '../../http/orderAPI';
 import { roundPrice } from '../../utils/calculatePrice';
+import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
 import edit from '../../images/edit.png';
+import ScheduleWindow from '../ScheduleWindow/ScheduleWindow';
 import './Summary.scss';
 
 const Summary = () => {
   const dispatch = useDispatch();
-  const cleaning = useSelector((state) => state.cleaning);
+
+  const user = useSelector((state) => state.user);
+  const pricing = useSelector((state) => state.services.pricing);
+  const cleaningState = useSelector((state) => state.cleaning);
+
   const [policyAccepting, setPolicyAccepting] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const [cleaning, setCleaning] = useState(cleaningState);
+  const [loading, setLoading] = useState(false);
+
+  const { pathname } = useLocation();
+  const isConfirmation = pathname === '/confirmation';
+
+  useEffect(() => {
+    if (!cleaningState.address1 && sessionStorage.getItem('cleaning')) {
+      const cleaning = JSON.parse(sessionStorage.getItem('cleaning'));
+      dispatch(setCleaningAction(cleaning));
+      setCleaning(cleaning);
+    }
+  }, []);
+
+  const getDateFromDateObject = (date) => {
+    const formattedDate = date.slice(0, 10).split('-').reverse().join('.');
+    return formattedDate;
+  };
+
+  useEffect(() => {
+    const getLastSubscription = async () => {
+      const subscriptions = await getSubscriptions(user.id);
+      const lastSubscription = subscriptions[subscriptions.length - 1];
+      const order = lastSubscription.orders[0];
+      const formattedOrder = {
+        selectedCleaning: order.serviceType,
+        selectedServices: order.extraServices,
+        repeat: lastSubscription.subscriptionType,
+        selectedSpeed: order.howFast,
+        addressId: order.address._id,
+        apartmentSize: order.address.size,
+        livingRoomsNum: livingRooms.find((elem) => Number(elem.split(' ')[0]) === order.address.livingRooms),
+        bedroomsNum: bedrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bedrooms),
+        bathroomsNum: bathrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bathrooms),
+        kitchensNum: kitchens.find((elem) => Number(elem.split(' ')[0]) === order.address.kitchens),
+        address1: order.address.address,
+        address2: order.address.secondAddress,
+        postalCode: order.address.postalCode,
+        city: order.address.city,
+        province: order.address.province,
+        instructions: order.specialInstructions,
+        cleaningSum: order.orderPriceId.cleaningSum,
+        speedSum: order.orderPriceId.speedSum,
+        ivaPercent: order.orderPriceId.taxPercent,
+      };
+
+      if (lastSubscription.subscriptionType === 'One-time') {
+        formattedOrder.date = getDateFromDateObject(order.date);
+        formattedOrder.time = order.time;
+        formattedOrder.tariff = order.orderPriceId.tariffNumber;
+        formattedOrder.timeCoeff = order.orderPriceId.timeCoeff;
+        formattedOrder.timeSum = order.orderPriceId.timeSum;
+        formattedOrder.subtotal = order.orderPriceId.subtotalSum;
+        formattedOrder.iva = order.orderPriceId.tax;
+        formattedOrder.total = order.orderPriceId.totalSum;
+      } else if (lastSubscription.subscriptionType === 'Custom schedule') {
+        formattedOrder.customSchedule = lastSubscription.orders.map((elem) => ({
+          date: getDateFromDateObject(elem.date),
+          time: elem.time,
+          timeSum: elem.orderPriceId.timeSum,
+          subtotal: elem.orderPriceId.subtotalSum,
+          iva: elem.orderPriceId.tax,
+          total: elem.orderPriceId.totalSum,
+          tariff: elem.orderPriceId.tariffNumber,
+          timeCoeff: elem.orderPriceId.timeCoeff,
+        }));
+      } else {
+        formattedOrder.dates = lastSubscription.orders.map((elem) => getDateFromDateObject(elem.date));
+        formattedOrder.time = order.time;
+        formattedOrder.startDate = getDateFromDateObject(lastSubscription.startDate);
+        formattedOrder.lastDate = getDateFromDateObject(lastSubscription.lastDate);
+        formattedOrder.duration = lastSubscription.duration;
+        formattedOrder.excludedDates = lastSubscription.excludedDates.map((elem) => ({
+          date: getDateFromDateObject(elem),
+        }));
+        formattedOrder.subscriptionPrices = lastSubscription.orders.map((elem) => ({
+          timeSum: elem.orderPriceId.timeSum,
+          subtotal: elem.orderPriceId.subtotalSum,
+          iva: elem.orderPriceId.tax,
+          total: elem.orderPriceId.totalSum,
+          tariff: elem.orderPriceId.tariffNumber,
+          timeCoeff: elem.orderPriceId.timeCoeff,
+        }));
+      }
+
+      setCleaning(formattedOrder);
+    };
+
+    if (isConfirmation && user.id) {
+      getLastSubscription();
+    }
+  }, [user, pathname]);
 
   const navigate = useNavigate();
 
-  const handlePayment = () => {
+  const createDateObject = (dateString) => {
+    const formattedDate = `${dateString.split('.').reverse().join('-')}T00:00:00.000+00:00`;
+    return formattedDate;
+  };
+
+  const formOrder = async () => {
+    const orderObject = {
+      userId: user.id,
+      subscriptionType: cleaning.repeat,
+      address: {},
+    };
+
+    const dateArr =
+      cleaning.repeat === 'One-time'
+        ? [cleaning.date]
+        : cleaning.repeat === 'Custom schedule'
+        ? cleaning.customSchedule
+        : cleaning.dates;
+
+    orderObject.orders = dateArr.map((elem, index) => {
+      const dateString = cleaning.repeat === 'Custom schedule' ? elem.date : elem;
+      const order = {
+        date: createDateObject(dateString),
+        serviceTypeId: cleaning.selectedCleaning._id,
+        extraServices: cleaning.selectedServices.map((elem) => ({ extraServiceId: elem._id, count: elem.count })),
+        howFast: cleaning.selectedSpeed,
+        specialInstructions: cleaning.instructions,
+        cleaningSum: cleaning.cleaningSum,
+        speedSum: cleaning.speedSum,
+        taxPercent: cleaning.ivaPercent,
+        feePercent: pricing.feePercent,
+        socialSecurityPercent: pricing.socialSecurityPercent,
+      };
+
+      if (cleaning.repeat !== 'Custom schedule') {
+        order.time = cleaning.time;
+      } else {
+        order.time = elem.time;
+      }
+
+      const obj =
+        cleaning.repeat === 'One-time'
+          ? cleaning
+          : cleaning.repeat === 'Custom schedule'
+          ? elem
+          : cleaning.subscriptionPrices[index];
+
+      order.timeCoeff = obj.timeCoeff;
+      order.tariffNumber = obj.tariff;
+      order.timeSum = obj.timeSum;
+      order.subtotalSum = obj.subtotal;
+      order.tax = obj.iva;
+      order.totalSum = obj.total;
+      order.feeSum = obj.subtotal * (pricing.feePercent / 100);
+      order.socialSecuritySum =
+        obj.subtotal -
+        obj.subtotal * (pricing.feePercent / 100) -
+        (obj.subtotal - obj.subtotal * (pricing.feePercent / 100)) / pricing.socialSecurityPercent;
+      order.salary = (obj.subtotal - obj.subtotal * (pricing.feePercent / 100)) / pricing.socialSecurityPercent;
+
+      if (cleaning.addressId) {
+        orderObject.addressId = cleaning.addressId;
+      } else {
+        orderObject.address.address = cleaning.address1;
+        orderObject.address.secondAddress = cleaning.address2;
+        orderObject.address.postalCode = cleaning.postalCode;
+        orderObject.address.city = cleaning.city;
+        orderObject.address.province = cleaning.province;
+        orderObject.address.size = Number(cleaning.apartmentSize);
+        orderObject.address.livingRooms = Number(cleaning.livingRoomsNum.split(' ')[0]);
+        orderObject.address.bedrooms = Number(cleaning.bedroomsNum.split(' ')[0]);
+        orderObject.address.bathrooms = Number(cleaning.bathroomsNum.split(' ')[0]);
+        orderObject.address.kitchens = Number(cleaning.kitchensNum.split(' ')[0]);
+      }
+
+      return order;
+    });
+
+    if (cleaning.repeat !== 'One-time' && cleaning.repeat !== 'Custom schedule') {
+      orderObject.startDate = createDateObject(cleaning.startDate);
+      orderObject.lastDate = createDateObject(cleaning.lastDate);
+      orderObject.duration = cleaning.duration;
+      orderObject.excludedDates = cleaning.excludedDates.every((elem) => elem.date) ? cleaning.excludedDates.map((elem) => createDateObject(elem.date)) : [];
+    }
+
+    const result = await createOrder(orderObject);
+    return result;
+  };
+
+  const clearStore = () => {
+    dispatch(setCleaningAction(defaultState));
+    sessionStorage.removeItem('cleaning');
+  };
+
+  const handlepolicyAcceptingChange = () => {
+    setPolicyAccepting((state) => !state);
+    setShowNotification(false);
+  };
+
+  const handlePayment = async () => {
     if (policyAccepting) {
-      //оплата
-      dispatch(setDatesAction([format(new Date(), 'dd.MM.yyyy')]));
-      dispatch(setTimeAction(times[50]));
-      dispatch(setSelectedCleaningAction(cleaningTypes[0]));
-      dispatch(setSelectedServicesAction([]));
-      dispatch(setApartmentSizeAction(''));
-      dispatch(setSelectedSpeedAction(speedOptions[0]));
-      dispatch(setBedroomsNumAction(bedrooms[0]));
-      dispatch(setBathroomsNumAction(bathrooms[0]));
-      dispatch(setKitchensNumAction(kitchens[0]));
-      dispatch(setAddress1Action(''));
-      dispatch(setAddress2Action(''));
-      dispatch(setPostalCodeAction(''));
-      dispatch(setCityAction(''));
-      dispatch(setProvinceAction(''));
-      dispatch(setInstructionsAction(''));
-      dispatch(setSavingAction(true));
-      dispatch(setCleaningSumAction(0));
-      dispatch(setExtrasSumAction(0));
-      dispatch(setSpeedSumAction(0));
-      dispatch(setTimeSumAction(0));
-      dispatch(setSubtotalAction(0));
-      dispatch(setIvaAction(0));
-      dispatch(setTotalAction(0));
-      navigate('/');
+      setLoading(true);
+      const result = await formOrder();
+      if (result.status === 201) {
+        //оплата
+        // если оплата успешна, то clearStore
+        clearStore();
+        // поменять статус заказа на paid
+        navigate('/confirmation');
+        setLoading(false);
+      }
+    } else {
+      setShowNotification(true);
     }
   };
 
   return (
-    <div className="container">
-      <div className="total-summary">
-        <h1 className="total-summary__title">Summary</h1>
-        <div className="total-summary__data">
-          <div className="total-summary__line total-summary__line_important">
-            <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/date-time')} src={edit} alt="Edit" />
-              Date
-            </span>
-            <span className="total-summary__value">{formatDate(cleaning.date)}</span>
-          </div>
-          <div className="total-summary__line total-summary__line_important">
-            <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/date-time')} src={edit} alt="Edit" />
-              Time
-            </span>
-            <span className="total-summary__value">{cleaning.time}</span>
-          </div>
-          <p className={`total-summary__address total-summary__line_important ${editMode ? 'edit' : ''}`}>
-            <img className="total-summary__edit" onClick={() => navigate('/edit/address')} src={edit} alt="Edit" />
-            {`${cleaning.address1}${cleaning.address2 ? `, ${cleaning.address2}` : ''}, ${cleaning.city}, ${
-              cleaning.province
-            }, ${cleaning.postalCode}`}
-          </p>
-          <div className="total-summary__line">
-            <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/speed')} src={edit} alt="Edit" />
-              How fast
-            </span>
-            <span className="total-summary__value">{cleaning.selectedSpeed}</span>
-          </div>
-          <div className="total-summary__line">
-            <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/size')} src={edit} alt="Edit" />
-              Apartment size, m<sup className="top-index">2</sup>
-            </span>
-            <span className="total-summary__value">{cleaning.apartmentSize}</span>
-          </div>
-          <div className="total-summary__line">
-            <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/property')} src={edit} alt="Edit" />
-              Property information
-            </span>
-            <div className="total-summary__list">
-              <span className="total-summary__list-item">{cleaning.bedroomsNum}</span>
-              <span className="total-summary__list-item">{cleaning.bathroomsNum}</span>
-              <span className="total-summary__list-item">{cleaning.kitchensNum}</span>
-            </div>
-          </div>
-          <div className="total-summary__line">
-            <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-              <img className="total-summary__edit" onClick={() => navigate('/edit/cleaning')} src={edit} alt="Edit" />
-              {cleaning.selectedCleaning.type}
-            </span>
-            <span className="total-summary__value">{`€${roundPrice(cleaning.cleaningSum)}`}</span>
-          </div>
-          {cleaning.selectedServices.length !== 0 && (
-            <div className="total-summary__extras">
-              <span className={`total-summary__line ${editMode ? 'edit' : ''}`}>
-                <img className="total-summary__edit" onClick={() => navigate('/edit/extras')} src={edit} alt="Edit" />
-                Extra services:
-              </span>
-              <div className="total-summary__extras-list">
-                {cleaning.selectedServices.map((service, index) => (
-                  <div key={index} className="total-summary__line">
-                    <span className="total-summary__name">
-                      {`${service.name}${service.number > 1 ? ` (x${service.number})` : ''}`}
-                    </span>
-                    <span className="total-summary__value">{`€${roundPrice(service.price * service.number)}`}</span>
+    <>
+      <div className="container">
+        <div className="total-summary">
+          <h1 className="total-summary__title">{isConfirmation ? 'Confirmation' : 'Summary'}</h1>
+          {!cleaning.address1 ? (
+            <div className="spinner"></div>
+          ) : (
+            <>
+              <div className="total-summary__data">
+                {cleaning.repeat === 'One-time' && (
+                  <div className="total-summary__one-time">
+                    <div className="total-summary__line total-summary__line_important">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Date
+                      </span>
+                      <span className="total-summary__value">{cleaning.date && formatDate(cleaning.date)}</span>
+                    </div>
+                    <div className="total-summary__line total-summary__line_important">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Time
+                      </span>
+                      <span className="total-summary__value">{cleaning.time}</span>
+                    </div>
                   </div>
-                ))}
+                )}
+                {cleaning.repeat === 'Custom schedule' && (
+                  <div className="total-summary__custom">
+                    <div className="total-summary__line total-summary__line_important">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/recurring')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Type of schedule
+                      </span>
+                      <span className="total-summary__value" onClick={() => setIsEditWindowOpen(true)}>
+                        Custom
+                      </span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Start date
+                      </span>
+                      <span className="total-summary__value">{formatDate(cleaning.customSchedule[0].date)}</span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        End date
+                      </span>
+                      <span className="total-summary__value">
+                        {formatDate(cleaning.customSchedule[cleaning.customSchedule.length - 1].date)}
+                      </span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Times
+                      </span>
+                      <span className="total-summary__value">{cleaning.customSchedule.length}</span>
+                    </div>
+                  </div>
+                )}
+                {cleaning.repeat !== 'One-time' && cleaning.repeat !== 'Custom schedule' && (
+                  <div className="total-summary__recurring">
+                    <div className="total-summary__line total-summary__line_important">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/recurring')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Type of schedule
+                      </span>
+                      <span className="total-summary__value">{cleaning.repeat}</span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Start date
+                      </span>
+                      <span className="total-summary__value">{formatDate(cleaning.startDate)}</span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        End date
+                      </span>
+                      <span className="total-summary__value">{formatDate(cleaning.lastDate)}</span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Times
+                      </span>
+                      <span className="total-summary__value">{
+                        cleaning.dates.filter((date) => {
+                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                          return !datesToRemove.includes(date);
+                        }).length
+                      }</span>
+                    </div>
+                    <div className="total-summary__line">
+                      <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                        <img
+                          className="total-summary__edit"
+                          onClick={() => navigate('/booking/edit/date-time')}
+                          src={edit}
+                          alt="Edit"
+                        />
+                        Start time
+                      </span>
+                      <span className="total-summary__value">{cleaning.time}</span>
+                    </div>
+                  </div>
+                )}
+                <p className={`total-summary__address total-summary__line_important ${editMode ? 'edit' : ''}`}>
+                  <img
+                    className="total-summary__edit"
+                    onClick={() => navigate('/booking/edit/address')}
+                    src={edit}
+                    alt="Edit"
+                  />
+                  {`${cleaning.address1}${cleaning.address2 ? `, ${cleaning.address2}` : ''}, ${cleaning.city}, ${
+                    cleaning.province
+                  }, ${cleaning.postalCode}`}
+                </p>
+                <div className="total-summary__line">
+                  <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                    <img
+                      className="total-summary__edit"
+                      onClick={() => navigate('/booking/edit/speed')}
+                      src={edit}
+                      alt="Edit"
+                    />
+                    How fast
+                  </span>
+                  <span className="total-summary__value">{cleaning.selectedSpeed}</span>
+                </div>
+                <div className="total-summary__line">
+                  <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                    <img
+                      className="total-summary__edit"
+                      onClick={() => navigate('/booking/edit/size')}
+                      src={edit}
+                      alt="Edit"
+                    />
+                    Apartment size, m<sup className="top-index">2</sup>
+                  </span>
+                  <span className="total-summary__value">{cleaning.apartmentSize}</span>
+                </div>
+                <div className={`total-summary__line ${cleaning.repeat === 'One-time' ? 'underlined' : ''}`}>
+                  <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                    <img
+                      className="total-summary__edit"
+                      onClick={() => navigate('/booking/edit/property')}
+                      src={edit}
+                      alt="Edit"
+                    />
+                    Property information
+                  </span>
+                  <div className="total-summary__list">
+                    <span className="total-summary__list-item">{cleaning.livingRoomsNum}</span>
+                    <span className="total-summary__list-item">{cleaning.bedroomsNum}</span>
+                    <span className="total-summary__list-item">{cleaning.bathroomsNum}</span>
+                    <span className="total-summary__list-item">{cleaning.kitchensNum}</span>
+                  </div>
+                </div>
+                <div className={cleaning.repeat === 'One-time' ? 'hidden' : 'total-summary__line'}>
+                  <span className="total-summary__link" onClick={() => setIsScheduleOpen(true)}>
+                    See schedule
+                  </span>
+                </div>
+                {cleaning.repeat !== 'One-time' && (
+                  <p className="total-summary__next-cleaning">
+                    {`Next upcoming cleaning ${formatDate(
+                      cleaning.repeat === 'Custom schedule'
+                        ? cleaning.customSchedule[0].date
+                        : cleaning.dates.filter((date) => {
+                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                            return !datesToRemove.includes(date);
+                          })[0],
+                    )}`}
+                  </p>
+                )}
+                <div className="total-summary__line">
+                  <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                    <img
+                      className="total-summary__edit"
+                      onClick={() => navigate('/booking/edit/cleaning')}
+                      src={edit}
+                      alt="Edit"
+                    />
+                    {cleaning.selectedCleaning.type}
+                  </span>
+                  <span className="total-summary__value">
+                    {cleaning.cleaningSum &&
+                      `€${
+                        cleaning.repeat === 'One-time'
+                          ? roundPrice(cleaning.cleaningSum * cleaning.timeCoeff)
+                          : cleaning.repeat === 'Custom schedule'
+                          ? roundPrice(cleaning.cleaningSum * cleaning.customSchedule[0].timeCoeff)
+                          : roundPrice(
+                              cleaning.cleaningSum *
+                                cleaning.subscriptionPrices[
+                                  cleaning.dates.indexOf(
+                                    cleaning.dates.filter((date) => {
+                                      const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                      return !datesToRemove.includes(date);
+                                    })[0],
+                                  )
+                                ].timeCoeff,
+                            )
+                      }`}
+                  </span>
+                </div>
+                {cleaning.selectedServices.length !== 0 && (
+                  <div className="total-summary__extras">
+                    <span className={`total-summary__line ${editMode ? 'edit' : ''}`}>
+                      <img
+                        className="total-summary__edit"
+                        onClick={() => navigate('/booking/edit/extras')}
+                        src={edit}
+                        alt="Edit"
+                      />
+                      Extra services:
+                    </span>
+                    <div className="total-summary__extras-list">
+                      {cleaning.selectedServices.map((service, index) => (
+                        <div key={index} className="total-summary__line">
+                          <span className="total-summary__name">
+                            {`${service.type}${service.count > 1 ? ` (x${service.count})` : ''}`}
+                          </span>
+                          <span className="total-summary__value">{`€${
+                            cleaning.repeat === 'One-time'
+                              ? roundPrice(service.price * service.count * cleaning.timeCoeff)
+                              : cleaning.repeat === 'Custom schedule'
+                              ? roundPrice(service.price * service.count * cleaning.customSchedule[0].timeCoeff)
+                              : roundPrice(
+                                  service.price *
+                                    service.count *
+                                    cleaning.subscriptionPrices[
+                                      cleaning.dates.indexOf(
+                                        cleaning.dates.filter((date) => {
+                                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                          return !datesToRemove.includes(date);
+                                        })[0],
+                                      )
+                                    ].timeCoeff,
+                                )
+                          }`}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {cleaning.selectedSpeed !== 'x1' && (
+                  <div className="total-summary__line">
+                    <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
+                      <img
+                        className="total-summary__edit"
+                        onClick={() => navigate('/booking/edit/speed')}
+                        src={edit}
+                        alt="Edit"
+                      />
+                      How fast
+                    </span>
+                    <span className="total-summary__value">
+                      {cleaning.speedSum && `€${roundPrice(cleaning.speedSum)}`}
+                    </span>
+                  </div>
+                )}
+                <div className="total-summary__line">
+                  <span className="total-summary__name">Subtotal</span>
+                  <span className="total-summary__value">
+                    {`€${
+                      cleaning.subtotal && cleaning.repeat === 'One-time'
+                      ? roundPrice(cleaning.subtotal)
+                      : cleaning.repeat === 'Custom schedule'
+                      ? roundPrice(cleaning.customSchedule[0].subtotal)
+                      : roundPrice(cleaning.subscriptionPrices[
+                        cleaning.dates.indexOf(
+                          cleaning.dates.filter((date) => {
+                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                            return !datesToRemove.includes(date);
+                          })[0]
+                        )
+                      ].subtotal)}`
+                    }
+                  </span>
+                </div>
+                <div className="total-summary__line">
+                  <span className="total-summary__name">IVA 21%</span>
+                  <span className="total-summary__value">
+                    {`€${
+                      cleaning.iva && cleaning.repeat === 'One-time'
+                      ? roundPrice(cleaning.iva)
+                      : cleaning.repeat === 'Custom schedule'
+                      ? roundPrice(cleaning.customSchedule[0].iva)
+                      : roundPrice(cleaning.subscriptionPrices[
+                        cleaning.dates.indexOf(
+                          cleaning.dates.filter((date) => {
+                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                            return !datesToRemove.includes(date);
+                          })[0]
+                        )
+                      ].iva)}`
+                    }
+                  </span>
+                </div>
+                <div className="total-summary__line">
+                  {isConfirmation ? (
+                    <span className="total-summary__name">
+                      <svg
+                        className="total-summary__tick"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="25"
+                        viewBox="0 0 24 25"
+                        fill="none"
+                      >
+                        <path
+                          d="M20 7L9 18L4 13"
+                          stroke="#268664"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      Paid
+                    </span>
+                  ) : (
+                    <span className="total-summary__name">Total</span>
+                  )}
+                  <span className="total-summary__value">
+                    {`€${
+                      cleaning.total && cleaning.repeat === 'One-time'
+                      ? roundPrice(cleaning.total)
+                      : cleaning.repeat === 'Custom schedule'
+                      ? roundPrice(cleaning.customSchedule[0].total)
+                      : roundPrice(cleaning.subscriptionPrices[
+                        cleaning.dates.indexOf(
+                          cleaning.dates.filter((date) => {
+                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                            return !datesToRemove.includes(date);
+                          })[0]
+                        )
+                      ].total)}`
+                    }
+                  </span>
+                </div>
+                <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                  {`Tariff ${
+                    cleaning.repeat === 'One-time'
+                      ? cleaning.tariff
+                      : cleaning.repeat === 'Custom schedule'
+                      ? cleaning.customSchedule[0].tariff
+                      : cleaning.dates.length !== 0 && cleaning.subscriptionPrices.length === Number(cleaning.duration)
+                      ? cleaning.subscriptionPrices[
+                          cleaning.dates.indexOf(
+                            cleaning.dates.filter((date) => {
+                              const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                              return !datesToRemove.includes(date);
+                            })[0],
+                          )
+                        ].tariff
+                      : 1
+                  }`}
+                </span>
               </div>
-            </div>
+              {loading ? (
+                <div className="spinner spinner_small"></div>
+              ) : (
+                <>
+                  <div className={editMode || isConfirmation ? 'hidden' : 'checkbox'}>
+                    <input
+                      id="save"
+                      type="checkbox"
+                      checked={policyAccepting}
+                      onChange={handlepolicyAcceptingChange}
+                    />
+                    <div className={`checkbox__tick ${showNotification ? 'invalid' : ''}`} onClick={() => setPolicyAccepting((state) => !state)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+                        <path
+                          d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
+                          stroke="white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <label htmlFor="save" className="checkbox__label">
+                      I understand and accept{' '}
+                      <NavLink to="/cancellation-policy" className="checkbox__link">
+                        The Cancellation Policy
+                      </NavLink>
+                      *
+                    </label>
+                  </div>
+                  <span
+                    className={isConfirmation ? 'link total-summary__policy' : 'hidden'}
+                    onClick={() => navigate('/cancellation-policy')}
+                  >
+                    Learn Cancellation Policy
+                  </span>
+                  <div className={isConfirmation ? 'hidden' : 'total-summary__buttons'}>
+                    <button
+                      className={`btn total-summary__btn ${editMode ? 'edit' : 'btn_light'}`}
+                      onClick={() => setEditMode((state) => !state)}
+                    >
+                      <img className={editMode ? 'hidden' : 'total-summary__edit'} src={edit} alt="Edit" />
+                      {editMode ? 'Save' : 'Edit'}
+                    </button>
+                    <button
+                      className={`btn total-summary__btn ${policyAccepting ? '' : 'inactive'} ${editMode ? 'hidden' : ''}`}
+                      onClick={handlePayment}
+                    >
+                      Pay
+                    </button>
+                  </div>
+                </>
+              )}
+              <p className={editMode || isConfirmation ? 'hidden' : 'total-summary__text'}>
+                We strive to reply within 15 minutes between 06:00 and 00:00
+              </p>
+            </>
           )}
-          {cleaning.selectedSpeed !== 'x1' && (
-            <div className="total-summary__line">
-              <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-                <img className="total-summary__edit" onClick={() => navigate('/edit/speed')} src={edit} alt="Edit" />
-                How fast
-              </span>
-              <span className="total-summary__value">{`€${roundPrice(cleaning.speedSum)}`}</span>
-            </div>
-          )}
-          {cleaning.timeSum !== 0 && (
-            <div className="total-summary__line">
-              <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-                <img className="total-summary__edit" onClick={() => navigate('/edit/time')} src={edit} alt="Edit" />
-                Off-peak hours
-              </span>
-              <span className="total-summary__value">{`€${roundPrice(cleaning.timeSum)}`}</span>
-            </div>
-          )}
-          <div className="total-summary__line">
-            <span className="total-summary__name">Subtotal</span>
-            <span className="total-summary__value">{`€${roundPrice(cleaning.subtotal)}`}</span>
-          </div>
-          <div className="total-summary__line">
-            <span className="total-summary__name">IVA 21%</span>
-            <span className="total-summary__value">{`€${roundPrice(cleaning.iva)}`}</span>
-          </div>
-          <div className="total-summary__line">
-            <span className="total-summary__name">Total</span>
-            <span className="total-summary__value">{`€${roundPrice(cleaning.total)}`}</span>
-          </div>
         </div>
-        <div className={editMode ? 'hidden' : 'checkbox'}>
-          <input
-            id="save"
-            type="checkbox"
-            checked={policyAccepting}
-            onChange={() => setPolicyAccepting((state) => !state)}
-          />
-          <div className="checkbox__tick" onClick={() => setPolicyAccepting((state) => !state)}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-              <path
-                d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
-                stroke="white"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <label htmlFor="save" className="checkbox__label">
-            I understand and accept{' '}
-            <NavLink to="/cancellation-policy" className="checkbox__link">
-              The Cancellation Policy
-            </NavLink>
-            *
-          </label>
-        </div>
-        <div className="total-summary__buttons">
-          <button
-            className={`btn total-summary__btn ${editMode ? 'edit' : 'btn_light'}`}
-            onClick={() => setEditMode((state) => !state)}
-          >
-            <img className={editMode ? 'hidden' : 'total-summary__edit'} src={edit} alt="Edit" />
-            {editMode ? 'Save' : 'Edit'}
-          </button>
-          <button
-            className={`btn total-summary__btn ${policyAccepting ? '' : 'inactive'} ${editMode ? 'hidden' : ''}`}
-            onClick={handlePayment}
-          >
-            Pay
-          </button>
-        </div>
-        <p className={editMode ? 'hidden' : 'total-summary__text'}>
-          We strive to reply within 15 minutes between 06:00 and 00:00
-        </p>
       </div>
-    </div>
+      <ScheduleWindow
+        isOpen={isScheduleOpen}
+        setIsOpen={setIsScheduleOpen}
+        repeat={cleaning.repeat}
+        duration={cleaning.duration}
+        dates={
+          cleaning.repeat === 'Custom schedule'
+            ? cleaning.customSchedule
+            : cleaning.repeat !== 'One-time'
+            ? cleaning.dates.filter((date) => {
+              const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+              return !datesToRemove.includes(date);
+            })
+            : []
+        }
+        time={cleaning.time}
+        subscriptionPrices={cleaning.subscriptionPrices}
+        selectedCleaning={cleaning.selectedCleaning}
+        selectedServices={cleaning.selectedServices}
+        cleaningSum={cleaning.cleaningSum}
+        selectedSpeed={cleaning.selectedSpeed}
+        speedSum={cleaning.speedSum}
+        ivaPercent={pricing.orderTaxPercent}
+      />
+    </>
   );
 };
 

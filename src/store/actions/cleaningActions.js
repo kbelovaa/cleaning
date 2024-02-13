@@ -1,4 +1,5 @@
 import {
+  SET_CLEANING,
   SET_REPEAT,
   SET_DATE,
   SET_TIME,
@@ -11,8 +12,10 @@ import {
   SET_LAST_DATE,
   SET_SELECTED_CLEANING,
   SET_SELECTED_SERVICES,
+  SET_ADDRESS_ID,
   SET_APARTMENT_SIZE,
   SET_SELECTED_SPEED,
+  SET_LIVING_ROOMS_NUM,
   SET_BEDROOMS_NUM,
   SET_BATHROOMS_NUM,
   SET_KITCHENS_NUM,
@@ -28,9 +31,15 @@ import {
   SET_SPEED_SUM,
   SET_TIME_SUM,
   SET_SUBTOTAL,
+  SET_IVA_PERCENT,
   SET_IVA,
   SET_TOTAL,
 } from '../../constants/actionsRedux';
+
+export const setCleaningAction = (payload) => ({
+  type: SET_CLEANING,
+  payload,
+});
 
 export const setRepeatAction = (payload) => ({
   type: SET_REPEAT,
@@ -92,6 +101,11 @@ export const setSelectedServicesAction = (payload) => ({
   payload,
 });
 
+export const setAddressId = (payload) => ({
+  type: SET_ADDRESS_ID,
+  payload,
+});
+
 export const setApartmentSizeAction = (payload) => ({
   type: SET_APARTMENT_SIZE,
   payload,
@@ -99,6 +113,11 @@ export const setApartmentSizeAction = (payload) => ({
 
 export const setSelectedSpeedAction = (payload) => ({
   type: SET_SELECTED_SPEED,
+  payload,
+});
+
+export const setLivingRoomsNumAction = (payload) => ({
+  type: SET_LIVING_ROOMS_NUM,
   payload,
 });
 
@@ -174,6 +193,11 @@ export const setTimeSumAction = (payload) => ({
 
 export const setSubtotalAction = (payload) => ({
   type: SET_SUBTOTAL,
+  payload,
+});
+
+export const setIvaPercentAction = (payload) => ({
+  type: SET_IVA_PERCENT,
   payload,
 });
 

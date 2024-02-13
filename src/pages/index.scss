@@ -24,6 +24,12 @@
 
 @font-face {
   font-family: 'Inter';
+  src: url('../fonts/inter-light.woff') format('woff');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Inter';
   src: url('../fonts/inter-regular.woff') format('woff');
   font-weight: 400;
 }

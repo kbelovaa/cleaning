@@ -122,17 +122,12 @@ const Header = () => {
                     <svg
                       className="language__arrow"
                       xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      viewBox="0 0 16 16"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
                       fill="none"
                     >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M0.716265 3.83318C0.314979 4.25521 0.314979 4.91773 0.716265 5.33976L8 13L15.2837 5.33976C15.685 4.91773 15.685 4.25521 15.2837 3.83318C14.8528 3.37997 14.1302 3.37997 13.6993 3.83318L8 9.82706L2.30072 3.83318C1.86979 3.37998 1.14719 3.37998 0.716265 3.83318Z"
-                        fill="#B0B0B0"
-                      />
+                      <path d="M6 9L12 15L18 9" stroke="#B0B0B0" strokeLinecap="round" />
                     </svg>
                   </div>
                   <div className="language__variants">
@@ -148,6 +143,23 @@ const Header = () => {
                   </div>
                 </div>
               </div>
+              <svg
+                className={isAuth ? 'bell' : 'hidden'}
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                viewBox="0 0 30 30"
+                fill="none"
+              >
+                <path
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                  d="M15 3.75C19.1421 3.75 22.5 7.1078 22.5 11.2499C22.5 13.6414 22.5 16.0427 22.5 17.5C22.5 21.25 25 22.5 25 22.5L5 22.5C5 22.5 7.5 21.25 7.5 17.5C7.5 16.0427 7.5 13.6414 7.5 11.2499C7.5 7.1078 10.8579 3.75 15 3.75V3.75Z"
+                  stroke="black"
+                  strokeLinejoin="round"
+                />
+                <path d="M12.5 22.5C12.5 23.8807 13.6193 25 15 25C16.3807 25 17.5 23.8807 17.5 22.5" stroke="black" />
+              </svg>
               <div className="burger" onClick={() => setIsBurgerMenuOpen(true)}>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>

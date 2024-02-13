@@ -1,5 +1,6 @@
 .contact-us {
-  padding: 134px 100px 400px;
+  padding: 140px 100px 400px;
+  min-height: calc(100vh - 200px);
 
   @media screen and (max-width: 1440px) {
     padding: 170px 80px 400px;
@@ -43,6 +44,10 @@
     @media screen and (max-width: 744px) {
       margin-top: 40px;
     }
+  }
+
+  & .spinner {
+    margin-top: 50px;
   }
 }
 
