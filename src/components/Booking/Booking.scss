@@ -338,6 +338,7 @@
     transition: all 0.3s ease;
     display: flex;
     justify-content: space-between;
+    user-select: none;
 
     @media screen and (max-width: 1024px) {
       width: 100%;
