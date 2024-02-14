@@ -2,10 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { jwtDecode } from 'jwt-decode';
-import getCookieToken from '../../utils/cookiesToken';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
-import { auth, signIn, signUp } from '../../http/authAPI';
+import { signIn, signUp } from '../../http/authAPI';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
 import PhoneField from '../PhoneField/PhoneField';
@@ -68,10 +66,15 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setIsConfirmationOpen(true);
     setName('');
     setSurname('');
+    setIsEmailValid(true);
+    setIsEmailUnique('');
     setMobile('');
+    setIsMobileValid(true);
     setPassword('');
     setIsPasswordValid(false);
     setPasswordConf('');
+    setIsPasswordConfValid(true);
+    setAreCredentialsValid('');
     setIsFormValid(true);
   };
 
@@ -182,6 +185,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const switchAuth = (value) => {
     setIsLogin(value);
     setIsFormValid(true);
+    setIsEmailUnique('');
   };
 
   return (
