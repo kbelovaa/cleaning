@@ -962,9 +962,9 @@ const Booking = () => {
                     {t('pricesDescription1')}
                     <sup className="top-index top-index_little">2</sup>.{t('pricesDescription2')}
                     <br />
-                    Prices are also dependent on time of service, see link to tariffs{' '}
+                    {`${t('pricesDependentOnTime')} `}
                     <span className="link form__link" onClick={() => navigate('/info-price')}>
-                      here
+                      {t('here')}
                     </span>
                   </p>
                   <div className="form__radios">
@@ -1028,7 +1028,7 @@ const Booking = () => {
                                     (price) => price.timeCoeff === subscriptionPrices[0].timeCoeff,
                                   )
                                     ? ''
-                                    : 'from '
+                                    : `${t('from')} `
                                 }€${roundPrice(
                                   calculateCleaningTypePrice(
                                     elem.price,
@@ -1046,7 +1046,7 @@ const Booking = () => {
                               ? `${
                                   customSchedule.every((price) => price.timeCoeff === customSchedule[0].timeCoeff)
                                     ? ''
-                                    : 'from '
+                                    : `${t('from')} `
                                 } €${roundPrice(
                                   calculateCleaningTypePrice(
                                     elem.price,
@@ -1060,7 +1060,7 @@ const Booking = () => {
                                       cleaningSum * min.timeCoeff < cleaningSum * curr.timeCoeff ? min : curr,
                                     ).timeCoeff,
                                 )}`
-                              : `from €${roundPrice(
+                              : `${t('from')} €${roundPrice(
                                   calculateCleaningTypePrice(
                                     elem.price,
                                     apartmentSize,
@@ -1705,7 +1705,7 @@ const Booking = () => {
                   </div>
                   <div className={repeat !== 'One-time' ? 'summary__subscription' : 'hidden'}>
                     <div className="summary__line">
-                      <span className="summary__item">Type</span>
+                      <span className="summary__item">{t('type')}</span>
                       <span className="summary__price">{repeat === 'Custom schedule' ? 'Custom' : repeat}</span>
                     </div>
                     <div
@@ -1718,7 +1718,7 @@ const Booking = () => {
                           : 'hidden'
                       }
                     >
-                      <span className="summary__item">Times</span>
+                      <span className="summary__item">{t('times')}</span>
                       <span className="summary__price">
                         {repeat === 'Custom schedule'
                           ? customSchedule.filter((day) => day.date.replace(/\D/g, '').length === 8).length
@@ -1774,7 +1774,7 @@ const Booking = () => {
                     </div>
                   </div>
                   <div className="summary__line summary__line_bold">
-                    <span className="summary__subtitle">Total</span>
+                    <span className="summary__subtitle">{t('total')}</span>
                     <span className="summary__price">
                       {`€${
                         repeat === 'One-time'
@@ -1798,7 +1798,7 @@ const Booking = () => {
                     className={repeat === 'One-time' ? 'link summary__tariff' : 'hidden'}
                     onClick={() => navigate('/info-price')}
                   >
-                    {`Tariff ${tariffNumber}`}
+                    {`${t('tariff')} ${tariffNumber}`}
                   </span>
                   <div
                     className={
@@ -1810,7 +1810,7 @@ const Booking = () => {
                         : 'hidden'
                     }
                   >
-                    <span className="next-cleaning__title">Next cleaning</span>
+                    <span className="next-cleaning__title">{t('nextCleaning')}</span>
                     <span className="next-cleaning__value">
                       {repeat === 'Custom schedule'
                         ? `${
@@ -1854,12 +1854,12 @@ const Booking = () => {
                     </span>
                     <span className="link next-cleaning__subtitle" onClick={() => navigate('/info-price')}>
                       {repeat === 'Custom schedule'
-                        ? `Tariff ${
+                        ? `${t('tariff')} ${
                             customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
                               .tariff
                           }`
                         : dates.length !== 0 && subscriptionPrices.length === Number(duration)
-                        ? `Tariff ${
+                        ? `${t('tariff')} ${
                             subscriptionPrices[
                               dates.indexOf(
                                 dates.filter((date) => {
@@ -1869,10 +1869,10 @@ const Booking = () => {
                               )
                             ].tariff
                           }`
-                        : 'Tariff 1'}
+                        : `${t('tariff')} 1`}
                     </span>
                     <span className="next-cleaning__link" onClick={() => setIsScheduleOpen(true)}>
-                      See full schedule
+                      {t('seeFullSchedule')}
                     </span>
                   </div>
                   <button

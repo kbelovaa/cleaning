@@ -122,7 +122,7 @@ const Address = () => {
   return (
     <div className="container">
       <div className="address">
-        <h2 className="address__title">{addressId ? 'Edit address' : 'New address'}</h2>
+        <h2 className="address__title">{addressId ? t('editAddress') : t('newAddress')}</h2>
         <form className={`address__form ${isFormValid ? '' : 'invalid'}`}>
           <div className="address__data">
             <div className="form__input-wrap">

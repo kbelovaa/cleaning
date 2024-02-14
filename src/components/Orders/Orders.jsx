@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { getOrders } from '../../http/orderAPI';
 import './Orders.scss';
 
@@ -10,6 +11,8 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
 
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getData = async () => {
@@ -38,9 +41,9 @@ const Orders = () => {
   return (
     <div className="container">
       <div className="orders">
-        <h2 className="orders__title">Orders</h2>
+        <h2 className="orders__title">{t('orders')}</h2>
         {orders.length === 0 ? (
-          <p className="orders__no-data">You don't have any orders yet</p>
+          <p className="orders__no-data">{t('noOrdersYet')}</p>
         ) : (
           <div className="orders__wrap"></div>
         )}

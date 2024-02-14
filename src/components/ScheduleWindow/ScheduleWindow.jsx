@@ -65,7 +65,7 @@ const ScheduleWindow = ({
           <path d="M23.5425 23.5424L8.45758 8.45746" stroke="#268664" strokeLinecap="round" />
           <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
         </svg>
-        <h3 className="schedule__title">Schedule</h3>
+        <h3 className="schedule__title">{t('schedule')}</h3>
         <PerfectScrollbar
           options={{
             wheelPropagation: false,
@@ -81,7 +81,7 @@ const ScheduleWindow = ({
                     : `${formatDate(date)}, ${time}`}
                 </span>
                 <div className="summary__line summary__line_bold">
-                  <span className="summary__subtitle">{selectedCleaning.type}</span>
+                  <span className="summary__subtitle">{t(selectedCleaning.type)}</span>
                   <span className="summary__price">{`€${
                     isCustom
                       ? roundPrice(cleaningSum * date.timeCoeff)
@@ -155,7 +155,7 @@ const ScheduleWindow = ({
                   </span>
                 </div>
                 <span className="link schedule__tariff" onClick={() => navigate('/info-price')}>
-                  {`Tariff ${
+                  {`${t('tariff')} ${
                     isCustom
                       ? date.tariff
                       : subscriptionPrices.length === Number(duration)

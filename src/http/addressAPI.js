@@ -22,7 +22,7 @@ export const getAddresses = async (userId) => {
   }
 };
 
-export const setDefaultAddress = async (addressId) => {
+export const saveDefaultAddress = async (addressId) => {
   try {
     const { data } = await $host.put(`api/address/set_default_address/${addressId}`);
     return data;

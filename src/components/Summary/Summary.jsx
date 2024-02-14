@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { defaultState } from '../../store/reducers/cleaningReducer';
 import formatDate from '../../utils/formatDate';
@@ -24,6 +25,8 @@ const Summary = () => {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [cleaning, setCleaning] = useState(cleaningState);
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const { pathname } = useLocation();
   const isConfirmation = pathname === '/confirmation';
@@ -199,7 +202,9 @@ const Summary = () => {
       orderObject.startDate = createDateObject(cleaning.startDate);
       orderObject.lastDate = createDateObject(cleaning.lastDate);
       orderObject.duration = cleaning.duration;
-      orderObject.excludedDates = cleaning.excludedDates.every((elem) => elem.date) ? cleaning.excludedDates.map((elem) => createDateObject(elem.date)) : [];
+      orderObject.excludedDates = cleaning.excludedDates.every((elem) => elem.date)
+        ? cleaning.excludedDates.map((elem) => createDateObject(elem.date))
+        : [];
     }
 
     const result = await createOrder(orderObject);
@@ -214,6 +219,18 @@ const Summary = () => {
   const handlepolicyAcceptingChange = () => {
     setPolicyAccepting((state) => !state);
     setShowNotification(false);
+  };
+
+  const handleEditClick = () => {
+    if (!editMode) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
+    }
+
+    setEditMode((state) => !state);
   };
 
   const handlePayment = async () => {
@@ -237,7 +254,7 @@ const Summary = () => {
     <>
       <div className="container">
         <div className="total-summary">
-          <h1 className="total-summary__title">{isConfirmation ? 'Confirmation' : 'Summary'}</h1>
+          <h1 className="total-summary__title">{isConfirmation ? t('confirmation') : t('summary')}</h1>
           {!cleaning.address1 ? (
             <div className="spinner"></div>
           ) : (
@@ -253,7 +270,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Date
+                        {t('date')}
                       </span>
                       <span className="total-summary__value">{cleaning.date && formatDate(cleaning.date)}</span>
                     </div>
@@ -265,7 +282,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Time
+                        {t('time')}
                       </span>
                       <span className="total-summary__value">{cleaning.time}</span>
                     </div>
@@ -281,10 +298,10 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Type of schedule
+                        {t('typeOfSchedule')}
                       </span>
-                      <span className="total-summary__value" onClick={() => setIsEditWindowOpen(true)}>
-                        Custom
+                      <span className="total-summary__value">
+                        {t('custom')}
                       </span>
                     </div>
                     <div className="total-summary__line">
@@ -295,7 +312,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Start date
+                        {t('startDate')}
                       </span>
                       <span className="total-summary__value">{formatDate(cleaning.customSchedule[0].date)}</span>
                     </div>
@@ -307,7 +324,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        End date
+                        {t('endDate')}
                       </span>
                       <span className="total-summary__value">
                         {formatDate(cleaning.customSchedule[cleaning.customSchedule.length - 1].date)}
@@ -321,7 +338,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Times
+                        {t('times')}
                       </span>
                       <span className="total-summary__value">{cleaning.customSchedule.length}</span>
                     </div>
@@ -337,7 +354,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Type of schedule
+                        {t('typeOfSchedule')}
                       </span>
                       <span className="total-summary__value">{cleaning.repeat}</span>
                     </div>
@@ -349,7 +366,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Start date
+                        {t('startDate')}
                       </span>
                       <span className="total-summary__value">{formatDate(cleaning.startDate)}</span>
                     </div>
@@ -361,7 +378,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        End date
+                        {t('endDate')}
                       </span>
                       <span className="total-summary__value">{formatDate(cleaning.lastDate)}</span>
                     </div>
@@ -373,14 +390,16 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Times
+                        {t('times')}
                       </span>
-                      <span className="total-summary__value">{
-                        cleaning.dates.filter((date) => {
-                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                          return !datesToRemove.includes(date);
-                        }).length
-                      }</span>
+                      <span className="total-summary__value">
+                        {
+                          cleaning.dates.filter((date) => {
+                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                            return !datesToRemove.includes(date);
+                          }).length
+                        }
+                      </span>
                     </div>
                     <div className="total-summary__line">
                       <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
@@ -390,7 +409,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        Start time
+                        {t('startTime')}
                       </span>
                       <span className="total-summary__value">{cleaning.time}</span>
                     </div>
@@ -415,7 +434,7 @@ const Summary = () => {
                       src={edit}
                       alt="Edit"
                     />
-                    How fast
+                    {t('howFast')}
                   </span>
                   <span className="total-summary__value">{cleaning.selectedSpeed}</span>
                 </div>
@@ -427,7 +446,8 @@ const Summary = () => {
                       src={edit}
                       alt="Edit"
                     />
-                    Apartment size, m<sup className="top-index">2</sup>
+                    {t('apartmentSize')}
+                    <sup className="top-index">2</sup>
                   </span>
                   <span className="total-summary__value">{cleaning.apartmentSize}</span>
                 </div>
@@ -439,23 +459,23 @@ const Summary = () => {
                       src={edit}
                       alt="Edit"
                     />
-                    Property information
+                    {t('propertyInformation')}
                   </span>
                   <div className="total-summary__list">
-                    <span className="total-summary__list-item">{cleaning.livingRoomsNum}</span>
-                    <span className="total-summary__list-item">{cleaning.bedroomsNum}</span>
-                    <span className="total-summary__list-item">{cleaning.bathroomsNum}</span>
-                    <span className="total-summary__list-item">{cleaning.kitchensNum}</span>
+                    <span className="total-summary__list-item">{t(cleaning.livingRoomsNum)}</span>
+                    <span className="total-summary__list-item">{t(cleaning.bedroomsNum)}</span>
+                    <span className="total-summary__list-item">{t(cleaning.bathroomsNum)}</span>
+                    <span className="total-summary__list-item">{t(cleaning.kitchensNum)}</span>
                   </div>
                 </div>
                 <div className={cleaning.repeat === 'One-time' ? 'hidden' : 'total-summary__line'}>
                   <span className="total-summary__link" onClick={() => setIsScheduleOpen(true)}>
-                    See schedule
+                    {t('seeFullSchedule')}
                   </span>
                 </div>
                 {cleaning.repeat !== 'One-time' && (
                   <p className="total-summary__next-cleaning">
-                    {`Next upcoming cleaning ${formatDate(
+                    {`${t('nextUpcomingCleaning')} ${formatDate(
                       cleaning.repeat === 'Custom schedule'
                         ? cleaning.customSchedule[0].date
                         : cleaning.dates.filter((date) => {
@@ -473,7 +493,7 @@ const Summary = () => {
                       src={edit}
                       alt="Edit"
                     />
-                    {cleaning.selectedCleaning.type}
+                    {t(cleaning.selectedCleaning.type)}
                   </span>
                   <span className="total-summary__value">
                     {cleaning.cleaningSum &&
@@ -505,13 +525,13 @@ const Summary = () => {
                         src={edit}
                         alt="Edit"
                       />
-                      Extra services:
+                      {t('extraServices')}:
                     </span>
                     <div className="total-summary__extras-list">
                       {cleaning.selectedServices.map((service, index) => (
                         <div key={index} className="total-summary__line">
                           <span className="total-summary__name">
-                            {`${service.type}${service.count > 1 ? ` (x${service.count})` : ''}`}
+                            {`${t(service.type)}${service.count > 1 ? ` (x${service.count})` : ''}`}
                           </span>
                           <span className="total-summary__value">{`€${
                             cleaning.repeat === 'One-time'
@@ -545,7 +565,7 @@ const Summary = () => {
                         src={edit}
                         alt="Edit"
                       />
-                      How fast
+                      {t('howFast')}
                     </span>
                     <span className="total-summary__value">
                       {cleaning.speedSum && `€${roundPrice(cleaning.speedSum)}`}
@@ -553,41 +573,45 @@ const Summary = () => {
                   </div>
                 )}
                 <div className="total-summary__line">
-                  <span className="total-summary__name">Subtotal</span>
+                  <span className="total-summary__name">{t('subtotal')}</span>
                   <span className="total-summary__value">
                     {`€${
                       cleaning.subtotal && cleaning.repeat === 'One-time'
-                      ? roundPrice(cleaning.subtotal)
-                      : cleaning.repeat === 'Custom schedule'
-                      ? roundPrice(cleaning.customSchedule[0].subtotal)
-                      : roundPrice(cleaning.subscriptionPrices[
-                        cleaning.dates.indexOf(
-                          cleaning.dates.filter((date) => {
-                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                            return !datesToRemove.includes(date);
-                          })[0]
-                        )
-                      ].subtotal)}`
-                    }
+                        ? roundPrice(cleaning.subtotal)
+                        : cleaning.repeat === 'Custom schedule'
+                        ? roundPrice(cleaning.customSchedule[0].subtotal)
+                        : roundPrice(
+                            cleaning.subscriptionPrices[
+                              cleaning.dates.indexOf(
+                                cleaning.dates.filter((date) => {
+                                  const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                  return !datesToRemove.includes(date);
+                                })[0],
+                              )
+                            ].subtotal,
+                          )
+                    }`}
                   </span>
                 </div>
                 <div className="total-summary__line">
-                  <span className="total-summary__name">IVA 21%</span>
+                  <span className="total-summary__name">{`${t('iva')} ${pricing.orderTaxPercent}%`}</span>
                   <span className="total-summary__value">
                     {`€${
                       cleaning.iva && cleaning.repeat === 'One-time'
-                      ? roundPrice(cleaning.iva)
-                      : cleaning.repeat === 'Custom schedule'
-                      ? roundPrice(cleaning.customSchedule[0].iva)
-                      : roundPrice(cleaning.subscriptionPrices[
-                        cleaning.dates.indexOf(
-                          cleaning.dates.filter((date) => {
-                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                            return !datesToRemove.includes(date);
-                          })[0]
-                        )
-                      ].iva)}`
-                    }
+                        ? roundPrice(cleaning.iva)
+                        : cleaning.repeat === 'Custom schedule'
+                        ? roundPrice(cleaning.customSchedule[0].iva)
+                        : roundPrice(
+                            cleaning.subscriptionPrices[
+                              cleaning.dates.indexOf(
+                                cleaning.dates.filter((date) => {
+                                  const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                  return !datesToRemove.includes(date);
+                                })[0],
+                              )
+                            ].iva,
+                          )
+                    }`}
                   </span>
                 </div>
                 <div className="total-summary__line">
@@ -609,30 +633,32 @@ const Summary = () => {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      Paid
+                      {t('paid')}
                     </span>
                   ) : (
-                    <span className="total-summary__name">Total</span>
+                    <span className="total-summary__name">{t('total')}</span>
                   )}
                   <span className="total-summary__value">
                     {`€${
                       cleaning.total && cleaning.repeat === 'One-time'
-                      ? roundPrice(cleaning.total)
-                      : cleaning.repeat === 'Custom schedule'
-                      ? roundPrice(cleaning.customSchedule[0].total)
-                      : roundPrice(cleaning.subscriptionPrices[
-                        cleaning.dates.indexOf(
-                          cleaning.dates.filter((date) => {
-                            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                            return !datesToRemove.includes(date);
-                          })[0]
-                        )
-                      ].total)}`
-                    }
+                        ? roundPrice(cleaning.total)
+                        : cleaning.repeat === 'Custom schedule'
+                        ? roundPrice(cleaning.customSchedule[0].total)
+                        : roundPrice(
+                            cleaning.subscriptionPrices[
+                              cleaning.dates.indexOf(
+                                cleaning.dates.filter((date) => {
+                                  const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                  return !datesToRemove.includes(date);
+                                })[0],
+                              )
+                            ].total,
+                          )
+                    }`}
                   </span>
                 </div>
                 <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-                  {`Tariff ${
+                  {`${t('tariff')} ${
                     cleaning.repeat === 'One-time'
                       ? cleaning.tariff
                       : cleaning.repeat === 'Custom schedule'
@@ -655,13 +681,11 @@ const Summary = () => {
               ) : (
                 <>
                   <div className={editMode || isConfirmation ? 'hidden' : 'checkbox'}>
-                    <input
-                      id="save"
-                      type="checkbox"
-                      checked={policyAccepting}
-                      onChange={handlepolicyAcceptingChange}
-                    />
-                    <div className={`checkbox__tick ${showNotification ? 'invalid' : ''}`} onClick={() => setPolicyAccepting((state) => !state)}>
+                    <input id="save" type="checkbox" checked={policyAccepting} onChange={handlepolicyAcceptingChange} />
+                    <div
+                      className={`checkbox__tick ${showNotification ? 'invalid' : ''}`}
+                      onClick={() => setPolicyAccepting((state) => !state)}
+                    >
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                         <path
                           d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
@@ -673,9 +697,9 @@ const Summary = () => {
                       </svg>
                     </div>
                     <label htmlFor="save" className="checkbox__label">
-                      I understand and accept{' '}
+                      {`${t('iUnderstandAndAccept')} `}
                       <NavLink to="/cancellation-policy" className="checkbox__link">
-                        The Cancellation Policy
+                        {t('theCancellationPolicy')}
                       </NavLink>
                       *
                     </label>
@@ -684,27 +708,29 @@ const Summary = () => {
                     className={isConfirmation ? 'link total-summary__policy' : 'hidden'}
                     onClick={() => navigate('/cancellation-policy')}
                   >
-                    Learn Cancellation Policy
+                    {t('learnCancellationPolicy')}
                   </span>
                   <div className={isConfirmation ? 'hidden' : 'total-summary__buttons'}>
                     <button
                       className={`btn total-summary__btn ${editMode ? 'edit' : 'btn_light'}`}
-                      onClick={() => setEditMode((state) => !state)}
+                      onClick={handleEditClick}
                     >
                       <img className={editMode ? 'hidden' : 'total-summary__edit'} src={edit} alt="Edit" />
-                      {editMode ? 'Save' : 'Edit'}
+                      {editMode ? t('save') : t('edit')}
                     </button>
                     <button
-                      className={`btn total-summary__btn ${policyAccepting ? '' : 'inactive'} ${editMode ? 'hidden' : ''}`}
+                      className={`btn total-summary__btn ${policyAccepting ? '' : 'inactive'} ${
+                        editMode ? 'hidden' : ''
+                      }`}
                       onClick={handlePayment}
                     >
-                      Pay
+                      {t('pay')}
                     </button>
                   </div>
                 </>
               )}
               <p className={editMode || isConfirmation ? 'hidden' : 'total-summary__text'}>
-                We strive to reply within 15 minutes between 06:00 and 00:00
+                {t('weStriveToReplyWithin15Minutes')}
               </p>
             </>
           )}
@@ -720,9 +746,9 @@ const Summary = () => {
             ? cleaning.customSchedule
             : cleaning.repeat !== 'One-time'
             ? cleaning.dates.filter((date) => {
-              const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-              return !datesToRemove.includes(date);
-            })
+                const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                return !datesToRemove.includes(date);
+              })
             : []
         }
         time={cleaning.time}

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
 import { signIn, signUp } from '../../http/authAPI';
@@ -34,8 +33,6 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
   const dispatch = useDispatch();
 
-  const navigate = useNavigate();
-
   const { t } = useTranslation();
 
   const closeModal = () => {
@@ -63,9 +60,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
 
   const finishFormSending = () => {
     setIsOpen(false);
-    setIsConfirmationOpen(true);
     setName('');
     setSurname('');
+    setEmail('');
     setIsEmailValid(true);
     setIsEmailUnique('');
     setMobile('');
@@ -81,7 +78,6 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const handleAuth = (result) => {
     finishFormSending();
     dispatch(setIsAuthAction(true));
-    navigate('/');
     dispatch(setUserAction(result));
   };
 
@@ -98,7 +94,6 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
           setLoading(false);
         } else {
           setLoading(false);
-          setIsConfirmationOpen(true);
           handleAuth(result);
         }
       } else {
@@ -124,8 +119,8 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
         setLoading(false);
       } else {
         setLoading(false);
-        setIsConfirmationOpen(true);
         handleAuth(result);
+        setIsConfirmationOpen(true);
       }
     } else {
       setIsFormValid(false);
@@ -253,7 +248,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   autoComplete="off"
                 />
                 <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
-                <p className={isEmailUnique ? 'auth__note' : 'hidden'}>{isEmailUnique}</p>
+                {isEmailUnique && (
+                  <p className="auth__note">{`${t('userWithEmail')} ${email} ${t(isEmailUnique.split(email)[1].trim())}`}</p>
+                )}
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
                 <PhoneField
@@ -282,9 +279,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 <p className={isLogin ? 'hidden' : isPasswordValid ? 'hidden' : 'auth__note'}>
                   {t('passwordRequirements')}
                 </p>
-                <p className={!isLogin ? 'hidden' : areCredentialsValid ? 'auth__note' : 'hidden'}>
-                  {areCredentialsValid}
-                </p>
+                {areCredentialsValid && (
+                  <p className={!isLogin ? 'hidden' : 'auth__note'}>
+                    {areCredentialsValid === 'Incorrect password' ? t('incorrectPassword') : `${t('userWithEmail')} ${email} ${t(areCredentialsValid.split(email)[1].trim())}`}
+                  </p>
+                )}
                 <p
                   className={
                     !isFormValid &&
@@ -387,7 +386,6 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       <ConfirmationModal
         isOpen={isConfirmationOpen}
         setIsOpen={setIsConfirmationOpen}
-        isLogin={isLogin}
         email={email}
         setEmail={setEmail}
       />

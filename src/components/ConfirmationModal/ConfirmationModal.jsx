@@ -5,10 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { knowingWays } from '../../constants/selectOptions';
 import { createKnowingWay } from '../../http/profileAPI';
 import CustomSelect from '../CustomSelect/CustomSelect';
-import edit from '../../images/edit.png';
 import './ConfirmationModal.scss';
 
-const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail, isNewEmail }) => {
+const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) => {
   const user = useSelector((state) => state.user);
 
   const [knowingWay, setKnowingWay] = useState('');
@@ -27,7 +26,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail, isNewE
 
   const handleCloseConfirmation = () => {
     // добавить отправку письма
-    if (knowingWay && !isLogin && !isContactUs && !isReceipt && !isPersonalInfo) {
+    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo) {
       createKnowingWay(user.id, knowingWay);
     }
     setIsOpen(false);
@@ -90,34 +89,30 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail, isNewE
           <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#284657" strokeLinecap="round" />
         </svg>
         <h3 className={isReceipt || isPersonalInfo || isPassword ? 'hidden' : 'confirmation__title'}>
-          {isContactUs ? t('thankYouMessage') : isLogin ? t('logIn') : t('signUp')}
+          {isContactUs ? t('thankYouMessage') : t('signUpSuccess')}
         </h3>
         <p className="confirmation__text">
           {isReceipt
             ? t('weHaveSentReceipt')
             : isContactUs
             ? t('weWillReplyToEmail')
-            : isLogin
-            ? t('youAreLoggedIn')
             : isPersonalInfo && !isNewEmail
-            ? 'Your personal info has been changed'
+            ? t('personalInfoSaved')
             : isPersonalInfo && isNewEmail
-            ? 'Changes saved.'
+            ? t('changesSaved')
             : isPassword
-            ? 'Your password has been changed'
-            : t('weHaveSentConfirmation')}
+            ? t('passwordChanged')
+            : t('confirmationEmailSent')}
         </p>
         <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>
-          Please verify your new email. We have sent instructions to your new email
+          {t('verifyNewEmail')}
         </p>
-        <span className={(isPersonalInfo && !isNewEmail) || isPassword ? 'hidden' : 'confirmation__email'}>
+        <span className={(isPersonalInfo && isNewEmail) || isContactUs ? 'confirmation__email' : 'hidden'}>
           {email}
         </span>
         <div
           className={
-            !isLogin && !isContactUs && !isReceipt && !isPersonalInfo && !isPassword
-              ? 'confirmation__knowing-way'
-              : 'hidden'
+            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword ? 'confirmation__knowing-way' : 'hidden'
           }
         >
           <span className="form__label">{t('howDidYouHearAboutUs')}</span>
@@ -129,7 +124,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, isLogin, email, setEmail, isNewE
           />
         </div>
         <button className="confirmation__btn btn btn_solid" onClick={handleCloseConfirmation}>
-          {isLogin || isContactUs || isReceipt || isPersonalInfo || isPassword ? t('ok') : t('goToEmail')}
+          {t('ok')}
         </button>
       </div>
     </div>

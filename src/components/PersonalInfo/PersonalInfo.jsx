@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { updateInfo } from '../../http/profileAPI';
 import PhoneField from '../PhoneField/PhoneField';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
@@ -18,6 +19,8 @@ const PersonalInfo = () => {
   const [isFormValid, setIsFormValid] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user.name) {
@@ -68,11 +71,11 @@ const PersonalInfo = () => {
     <>
       <div className="container">
         <div className="profile">
-          <h2 className="profile__title">Personal info</h2>
+          <h2 className="profile__title">{t('personalInfo')}</h2>
           <form className={`personal-info__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
             <div className="personal-info__field-wrap">
               <label htmlFor="name" className="form__label">
-                Name
+                {t('name')}
               </label>
               <input
                 id="name"
@@ -84,7 +87,7 @@ const PersonalInfo = () => {
             </div>
             <div className="personal-info__field-wrap">
               <label htmlFor="surname" className="form__label">
-                Surname
+                {t('surname')}
               </label>
               <input
                 id="surname"
@@ -103,12 +106,12 @@ const PersonalInfo = () => {
                 setIsMobileValid={setIsMobileValid}
               />
               <p className={!isFormValid && (!name || !surname || !email || !mobile) ? 'auth__note' : 'hidden'}>
-                Please fill in all fields
+                {t('fillInAllFieldsMessage')}
               </p>
             </div>
             <div className="personal-info__field-wrap">
               <label htmlFor="email" className="form__label">
-                Email
+                {t('email')}
               </label>
               <input
                 id="email"
@@ -117,13 +120,15 @@ const PersonalInfo = () => {
                 value={email}
                 onChange={(e) => handleEmailChange(e.target.value)}
               />
-              <p className={isEmailValid ? 'hidden' : 'auth__note'}>Please enter a valid email address.</p>
-              <p className={isEmailUnique ? 'auth__note' : 'hidden'}>{isEmailUnique}</p>
+              <p className={isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
+              {isEmailUnique && (
+                <p className="auth__note">{`${t('email')} ${email} ${t(isEmailUnique.split(email)[1].trim())}`}</p>
+              )}
             </div>
             {loading ? (
               <div className="spinner spinner_small"></div>
             ) : (
-              <button className={`btn personal-info__btn ${checkIsFormValid() ? '' : 'inactive'}`}>Save</button>
+              <button className={`btn personal-info__btn ${checkIsFormValid() ? '' : 'inactive'}`}>{t('save')}</button>
             )}
           </form>
         </div>
@@ -131,7 +136,6 @@ const PersonalInfo = () => {
       <ConfirmationModal
         isOpen={isConfirmationOpen}
         setIsOpen={setIsConfirmationOpen}
-        isLogin={false}
         email={email}
         isNewEmail={email !== user.email}
       />

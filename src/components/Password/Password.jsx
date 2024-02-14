@@ -83,11 +83,11 @@ const Password = () => {
     <>
       <div className="container">
         <div className="password">
-          <h2 className="password__title">Settings</h2>
+          <h2 className="password__title">{t('changePassword')}</h2>
           <form className={`password__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
             <div className="form__field-wrap">
               <label htmlFor="current-password" className="form__label">
-                Current password
+                {t('currentPassword')}
               </label>
               <input
                 id="current-password"
@@ -97,7 +97,7 @@ const Password = () => {
                 onChange={(e) => handleCurrentPasswordChange(e.target.value)}
                 autoComplete="off"
               />
-              <p className={isCurrentPasswordCorrect ? 'auth__note' : 'hidden'}>{isCurrentPasswordCorrect}</p>
+              <p className={isCurrentPasswordCorrect ? 'auth__note' : 'hidden'}>{t(isCurrentPasswordCorrect)}</p>
               <span
                 className={showCurrentPassword ? 'hidden' : 'form__eye'}
                 onClick={() => setShowCurrentPassword(true)}
@@ -130,7 +130,7 @@ const Password = () => {
             </div>
             <div className="form__field-wrap">
               <label htmlFor="new-password" className="form__label">
-                New password
+                {t('newPassword')}
               </label>
               <input
                 id="new-password"
@@ -167,7 +167,7 @@ const Password = () => {
             </div>
             <div className="form__field-wrap">
               <label htmlFor="conf-password" className="form__label">
-                Confirm new password
+                {t('confirmNewPassword')}
               </label>
               <input
                 id="conf-password"
@@ -219,7 +219,7 @@ const Password = () => {
           )}
         </div>
       </div>
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={false} />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} />
     </>
   );
 };

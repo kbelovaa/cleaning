@@ -126,7 +126,7 @@ const ContactUs = () => {
           )}
         </form>
       </div>
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isLogin={false} email={email} />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} email={email} />
     </div>
   );
 };
