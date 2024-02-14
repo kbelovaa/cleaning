@@ -87,7 +87,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     if (isLogin) {
       if (email && password) {
         setLoading(true);
-        const result = await signIn(email, password);
+        const result = await signIn(email.toLowerCase(), password);
         if (result.message) {
           setAreCredentialsValid(result.message);
           setIsFormValid(false);
@@ -112,7 +112,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       isPasswordConfValid
     ) {
       setLoading(true);
-      const result = await signUp(name, surname, email, mobile, password);
+      const result = await signUp(name, surname, email.toLowerCase(), mobile, password);
       if (result.message && result.error) {
         setIsEmailUnique(result.message);
         setIsFormValid(false);

@@ -8,7 +8,7 @@ function formatDate(dateString) {
 
   const date = new Date(year, month - 1, day);
 
-  const formattedDate = `${dateString}, ${format(date, 'EEE')}`;
+  const formattedDate = `${dateString}, ${format(date, 'EEEE')}`;
 
   return formattedDate;
 }

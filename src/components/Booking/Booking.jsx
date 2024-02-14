@@ -164,7 +164,7 @@ const Booking = () => {
   }, [cleaning]);
 
   useEffect(() => {
-    if (cleaningTypes.length !== 0) {
+    if (cleaningTypes.length !== 0 && !selectedCleaning.type) {
       setSelectedCleaning(cleaningTypes[0]);
     }
   }, [cleaningTypes]);
@@ -1654,7 +1654,7 @@ const Booking = () => {
                   <h2 className="summary__title">{t('summary')}</h2>
                   <div className="summary__line summary__line_bold">
                     <h3 className="summary__subtitle">
-                      {repeat !== 'One-time' ? 'Cleaning' : t(selectedCleaning.type)}
+                      {repeat !== 'One-time' ? t('cleaning') : t(selectedCleaning.type)}
                     </h3>
                     <span className="summary__price">{`€${
                       repeat === 'One-time'
@@ -1700,13 +1700,13 @@ const Booking = () => {
                     })}
                   </div>
                   <div className={repeat === 'One-time' && speedSum !== 0 ? 'summary__line' : 'hidden'}>
-                    <span className="summary__item">{t('howFast')}</span>
+                    <span className="summary__item">{`${t('howFast')} (${selectedSpeed})`}</span>
                     <span className="summary__price">{`€${roundPrice(speedSum)}`}</span>
                   </div>
                   <div className={repeat !== 'One-time' ? 'summary__subscription' : 'hidden'}>
                     <div className="summary__line">
                       <span className="summary__item">{t('type')}</span>
-                      <span className="summary__price">{repeat === 'Custom schedule' ? 'Custom' : repeat}</span>
+                      <span className="summary__price">{repeat === 'Custom schedule' ? t('custom') : repeat}</span>
                     </div>
                     <div
                       className={
@@ -1818,7 +1818,12 @@ const Booking = () => {
                             formatDate(
                               customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
                                 .date,
-                            )
+                            ).split(', ').map((elem, index) => {
+                              if (index === 1) {
+                                return t(elem).slice(0, 3);
+                              }
+                              return elem;
+                            }).join(', ')
                           }, ${
                             customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0].time
                           }`
@@ -1829,10 +1834,15 @@ const Booking = () => {
                                 const datesToRemove = excludedDates.map((elem) => elem.date);
                                 return !datesToRemove.includes(date);
                               })[0],
-                            )
+                            ).split(', ').map((elem, index) => {
+                              if (index === 1) {
+                                return t(elem).slice(0, 3);
+                              }
+                              return elem;
+                            }).join(', ')
                           }, ${time}`}
                     </span>
-                    <span className="next-cleaning__service">{selectedCleaning.type}</span>
+                    <span className="next-cleaning__service">{t(selectedCleaning.type)}</span>
                     <span className="next-cleaning__value">
                       {repeat === 'Custom schedule'
                         ? `€${roundPrice(

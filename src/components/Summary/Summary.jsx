@@ -272,7 +272,14 @@ const Summary = () => {
                         />
                         {t('date')}
                       </span>
-                      <span className="total-summary__value">{cleaning.date && formatDate(cleaning.date)}</span>
+                      <span className="total-summary__value">{
+                        cleaning.date && formatDate(cleaning.date).split(', ').map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        }).join(', ')
+                      }</span>
                     </div>
                     <div className="total-summary__line total-summary__line_important">
                       <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
@@ -314,7 +321,14 @@ const Summary = () => {
                         />
                         {t('startDate')}
                       </span>
-                      <span className="total-summary__value">{formatDate(cleaning.customSchedule[0].date)}</span>
+                      <span className="total-summary__value">{
+                        formatDate(cleaning.customSchedule[0].date).split(', ').map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        }).join(', ')
+                      }</span>
                     </div>
                     <div className="total-summary__line">
                       <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
@@ -327,7 +341,13 @@ const Summary = () => {
                         {t('endDate')}
                       </span>
                       <span className="total-summary__value">
-                        {formatDate(cleaning.customSchedule[cleaning.customSchedule.length - 1].date)}
+                        {formatDate(cleaning.customSchedule[cleaning.customSchedule.length - 1].date).split(', ').map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        }).join(', ')
+                        }
                       </span>
                     </div>
                     <div className="total-summary__line">
@@ -368,7 +388,14 @@ const Summary = () => {
                         />
                         {t('startDate')}
                       </span>
-                      <span className="total-summary__value">{formatDate(cleaning.startDate)}</span>
+                      <span className="total-summary__value">{
+                        formatDate(cleaning.startDate).split(', ').map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        }).join(', ')
+                      }</span>
                     </div>
                     <div className="total-summary__line">
                       <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
@@ -380,7 +407,14 @@ const Summary = () => {
                         />
                         {t('endDate')}
                       </span>
-                      <span className="total-summary__value">{formatDate(cleaning.lastDate)}</span>
+                      <span className="total-summary__value">{
+                        formatDate(cleaning.lastDate).split(', ').map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        }).join(', ')
+                      }</span>
                     </div>
                     <div className="total-summary__line">
                       <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
@@ -482,7 +516,12 @@ const Summary = () => {
                             const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
                             return !datesToRemove.includes(date);
                           })[0],
-                    )}`}
+                    ).split(', ').map((elem, index) => {
+                      if (index === 1) {
+                        return t(elem).slice(0, 3);
+                      }
+                      return elem;
+                    }).join(', ')}`}
                   </p>
                 )}
                 <div className="total-summary__line">

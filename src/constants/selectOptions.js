@@ -41,13 +41,13 @@ for (let hours = 0; hours <= 23; hours++) {
 const knowingWays = ['Google', 'Facebook', 'Instagram', 'Friend', 'Neighbour'];
 
 const weekdays = [
-  { name: 'monday', index: 1 },
-  { name: 'tuesday', index: 2 },
-  { name: 'wednesday', index: 3 },
-  { name: 'thursday', index: 4 },
-  { name: 'friday', index: 5 },
-  { name: 'saturday', index: 6 },
-  { name: 'sunday', index: 0 },
+  { name: 'Monday', index: 1 },
+  { name: 'Tuesday', index: 2 },
+  { name: 'Wednesday', index: 3 },
+  { name: 'Thursday', index: 4 },
+  { name: 'Friday', index: 5 },
+  { name: 'Saturday', index: 6 },
+  { name: 'Sunday', index: 0 },
 ];
 
 export {
