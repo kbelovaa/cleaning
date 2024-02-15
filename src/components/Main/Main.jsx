@@ -205,14 +205,7 @@ const Main = () => {
                 <p className="join__text">{t('trustedDescr')}</p>
               </div>
             </div>
-            <div className="join__note">
-              <div className="join__note-check">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M2 12.5L8.25 18.75L22 5" stroke="white" strokeWidth="2" strokeLinecap="round" />
-                </svg>
-              </div>
-              <p className="join__note-text">{t('returningToCleanHome')}</p>
-            </div>
+            <p className="join__note">{`${t('returningToCleanHome')}...`}</p>
           </div>
         </div>
       </section>
@@ -221,7 +214,7 @@ const Main = () => {
           <div className="start">
             <h2 className="start__title">{t('start')}</h2>
             <p className="start__text">{t('hereYouCanCustomizeOrder')}</p>
-            <button className="btn main__btn" onClick={() => navigate('/booking')}>
+            <button className="btn main__btn start__btn" onClick={() => navigate('/booking')}>
               {t('bookNow')}
               <svg
                 className="btn__arrow"

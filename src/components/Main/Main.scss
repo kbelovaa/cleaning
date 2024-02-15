@@ -102,8 +102,8 @@
     font-weight: 300;
     line-height: 130%;
     letter-spacing: 1.1px;
-    width: 784px;
-    margin-bottom: 40px;
+    width: 682px;
+    margin-bottom: 30px;
 
     @media screen and (max-width: 1440px) {
       width: 439px;
@@ -282,11 +282,10 @@
   &__title {
     color: #000;
     text-align: center;
-    font-size: 80px;
-    font-weight: 500;
+    font-size: 60px;
+    font-weight: 600;
     line-height: 100%;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
+    letter-spacing: 1.2px;
     margin-bottom: 50px;
 
     @media screen and (max-width: 1440px) {
@@ -469,11 +468,10 @@
 
   &__title {
     color: #225341;
-    font-size: 80px;
+    font-size: 60px;
     font-weight: 600;
     line-height: 100%;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
+    letter-spacing: 1.2px;
     margin-bottom: 60px;
 
     @media screen and (max-width: 1440px) {
@@ -577,68 +575,18 @@
   }
 
   &__note {
-    display: flex;
-    align-items: center;
+    color: #225341;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.8px;
     margin-top: 35px;
-
-    @media screen and (max-width: 1024px) {
-      margin-top: 15px;
-    }
-
-    @media screen and (max-width: 744px) {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 90px;
-    }
-
-    &-check {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #268664;
-      padding: 18px;
-      margin-right: 20px;
-
-      @media screen and (max-width: 1024px) {
-        width: 40px;
-        height: 40px;
-        padding: 8px;
-      }
-
-      @media screen and (max-width: 744px) {
-        margin-bottom: 20px;
-        margin-right: 0;
-      }
-    }
-
-    &-text {
-      color: #225341;
-      font-size: 40px;
-      font-weight: 400;
-      line-height: 100%;
-      letter-spacing: 0.8px;
-
-      @media screen and (max-width: 1440px) {
-        font-size: 30px;
-        letter-spacing: 0.6px;
-      }
-
-      @media screen and (max-width: 1024px) {
-        font-size: 24px;
-        letter-spacing: 0.48px;
-      }
-
-      @media screen and (max-width: 744px) {
-        font-size: 26px;
-        letter-spacing: 0.52px;
-        text-align: center;
-      }
-    }
   }
 }
 
 .start {
   padding: 100px;
+  text-align: center;
 
   @media screen and (max-width: 1024px) {
     padding: 60px;
@@ -659,11 +607,10 @@
   }
 
   &__title {
-    font-size: 80px;
+    font-size: 60px;
     font-weight: 600;
     line-height: 110%;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
+    letter-spacing: 1.8px;
     margin-bottom: 20px;
 
     @media screen and (max-width: 1024px) {
@@ -687,7 +634,7 @@
     font-weight: 300;
     line-height: 130%;
     letter-spacing: 1.2px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 
     @media screen and (max-width: 1024px) {
       font-size: 22px;
@@ -699,5 +646,9 @@
       letter-spacing: 0.9px;
       margin-bottom: 20px;
     }
+  }
+
+  &__btn {
+    margin: 0 auto;
   }
 }

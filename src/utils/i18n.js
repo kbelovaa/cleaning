@@ -94,7 +94,7 @@ i18n.use(initReactI18next).init({
         date: 'Date',
         correctDateMessage: 'Please enter a correct date',
         selectedDateMessage: 'This date has already been selected',
-        periodDateMessage: "Change the date range or duration, as it doesn't cover any selected period",
+        periodDateMessage: "Change the date range or repeats, as it doesn't cover any selected period",
         changedDateMessage: 'We have changed the last date according to the selected frequency',
         excludedDateMessage: 'This date has already been excluded',
         notIncludedDateMessage: "This date isn't included in the selected cleaning dates",
@@ -118,7 +118,8 @@ i18n.use(initReactI18next).init({
         Friday: 'Friday',
         Saturday: 'Saturday',
         Sunday: 'Sunday',
-        duration: 'Duration',
+        holidays: 'Holidays',
+        repeats: 'Repeats',
         startDate: 'Start date',
         lastDate: 'Last date',
         excludedDates: 'Excluded dates',
@@ -188,7 +189,7 @@ i18n.use(initReactI18next).init({
         confirmation: 'Confirmation',
         paid: 'Paid',
         learnCancellationPolicy: 'Learn Cancellation Policy',
-        services: 'Services',
+        services: 'Services / Tariffs',
         BasicCleaningInfo:
           'Basic cleaning starts with an assessment, followed by systematic dusting, vacuuming, and mopping. The kitchen and bathroom receive special attention, including surface sanitization. After the final touch-ups, we perform a walk-through to ensure our high standards are met, leaving your home in pristine condition.',
         DetailedCleaningInfo:
@@ -200,50 +201,28 @@ i18n.use(initReactI18next).init({
         AfterpartyCleaningInfo:
           'After a great event, the last thing you want to do is clean up. We handle the cleanup, from removing spills and stains to general tidying up, ensuring every surface is sparkling. Allowing you to wake up to a refreshed and clean home.',
         cancellationPolicy: 'Cancellation Policy',
-        shortAnswer: 'Short answer',
         cancelOrEditAppointment:
-          'You can cancel or edit your appointment for free within 1 hour of booking it or up to 48 hours before the time affected by the change. If you cancel or edit your appointment outside these times, you may receive a partial refund.',
-        timeOfCancellationOrEdit: 'Time of cancellation or edit',
+          'You have the flexibility to cancel or modify your appointment without charge within one hour of booking or up to 24 hours before the scheduled time. Any cancellations or modifications outside these timeframes may result in a partial refund.',
+        plansCanChange: "Recognizing that plans can change, we strive to accommodate our valued customers. Here's a breakdown of our cancellation policy:",
+        timeOfCancellationOrEdit: 'Time of Cancellation or Edit',
         refund: 'Refund',
         within1HourOfBooking: 'Within 1 hour of booking',
         fullRefund: 'Full refund',
-        over48HoursInAdvance: 'Over 48 hours in advance',
-        between24And48HoursInAdvance: '24 to 48 hours in advance',
-        partialRefund50: 'Partial refund: you’ll pay 50% of booking value',
-        lessThan24HoursInAdvance: 'Less than 24 hours in advance',
-        partialRefund100: 'Partial refund: you’ll pay 100% of booking value',
+        over24HoursInAdvance: 'Over 24 hours in advance',
+        between24And12HoursInAdvance: '24 to 12 hours in advance',
+        partialRefund50: 'Partial refund: 50% of booking value',
+        lessThan12HoursInAdvance: 'Less than 12 hours in advance',
+        noRefund: 'No refund: 100% of booking value',
         noteOnTiming:
           'Please note that the time of cancellation or editing is calculated based on the start time of your cleaning appointment or the earliest part of the appointment affected by the change.',
         refundProcess: 'Refund Process',
         refundsForCancellations:
-          'Refunds for cancellations will be credited to your account with us, which you can use for a future cleaning service or withdraw back to your payment card. If the time you canceled becomes booked by another customer, you will receive a refund for that time.',
+          'Refunds for cancellations will be credited to your account with us, providing you the option to use it for a future cleaning service or withdraw it back to your payment card. In case the time you canceled gets booked by another customer, you will receive a refund for that time.',
         exceptionalCircumstances: 'Exceptional Circumstances',
         unforeseenSituations:
-          'We understand that unforeseen situations may arise, such as an owner requesting cancellation or difficulties finding keys. In such rare cases, we may offer a full refund. When canceling, please select the most appropriate reason from the options provided in the app or website. If your reason is not listed, select “Other” and reach out to our customer support for assistance.',
+          'We understand that unforeseen situations may arise, such as an owner requesting cancellation or difficulties finding keys. In such rare cases, we may offer a full refund. When cancelling, please select the most appropriate reason from the options provided in the app or website. If your reason is not listed, choose "Other" and write it in the text field.',
         clarityAndTransparency:
-          'We hope this policy provides clarity and transparency regarding cancellations and edits to your cleaning appointments. If you have any further questions or require assistance, please do not hesitate to contact us. Your satisfaction is our priority.',
-        exampleScenarios: 'Example Scenarios for Cleaning Services',
-        michelleReservation:
-          'Michelle has reserved a cleaning appointment for €100. Her scheduled cleaning service is set to begin at 9 am on Friday.',
-        scenario1: 'Scenario 1: Cancelling a Cleaning Appointment',
-        michelleCancelsBefore48Hours:
-          'If Michelle cancels her appointment before 9 am on Wednesday (more than 48 hours in advance), she won’t incur any cancellation fees.',
-        michelleCancelsOnWednesday:
-          'Should she choose to cancel on Wednesday afternoon (less than 48 hours but more than 24 hours in advance), she will be charged 50%, which amounts to €50.',
-        michelleCancelsAfter9AMThursday:
-          'If Michelle cancels after 9 am on Thursday (less than 24 hours before the start time), she’ll be charged 100%, or €100.',
-        scenario2: 'Scenario 2: Changing the Start Time of a Cleaning Appointment',
-        lloydChangeWithin1Hour:
-          'If Lloyd makes this change within 1 hour of booking or before 9 am on Saturday, he won’t face any unused time fees, and the total cost will remain at €150 for Tuesday only.',
-        lloydScheduledCleaning:
-          'Lloyd has scheduled a cleaning appointment at 9 am on Monday for €150. Later, he decides to postpone the entire booking to Tuesday.',
-        lloydChangeBetween9AMOnSaturdayAnd9AMOnSunday:
-          'If he makes the change between 9 am on Saturday and 9 am on Sunday, an unused time fee of 50% of the reserved time applies. This results in a €75 charge for the unused time on Monday, in addition to the €150 for Tuesday.',
-        lloydChangeAfter9AMOnSunday:
-          'If the change occurs after 9 am on Sunday, an unused time fee of 100% of the reserved time, up to 12 hours, is incurred. In this case, the maximum charge of €150 is added to the €150 for Tuesday.',
-        scenario3: 'Scenario 3: Changing the Start Time of a Cleaning Appointment (Late Notice)',
-        monicaBookedCleaning:
-          'Monica has booked a cleaning appointment at 9 am on Saturday but oversleeps and decides to reschedule it to 10:30 am. The time from 9 am to 10:30 am is considered “unused time” and because the change was made with less than 24 hours’ notice, Monica will be charged 100% of the unused time in addition to the 2 hours she uses the cleaning service.',
+          'We trust that this policy brings clarity and transparency to your understanding of cancellations and modifications to your cleaning appointments. Should you have any further questions or require assistance, please feel free to contact us. Your satisfaction remains our top priority.',
         faq: 'FAQ',
         question0: 'How long is a typical cleaning service?',
         answer0:
@@ -301,7 +280,7 @@ i18n.use(initReactI18next).init({
         weDeliverCare:
           'We deliver trustworthy, professional care by employing expert techniques and equipment to ensure an exceptional level of cleanliness. And our commitment to excellence is reflected in our 100% Satisfaction Guarantee.',
         bookNow: 'Book now',
-        cleanHomeIn3Steps: 'A clean home in 3 steps',
+        cleanHomeIn3Steps: 'Get a clean home in 3 steps',
         sendRequest: 'Send request',
         requestCleaning:
           'Request cleaning, even on short notice, with just a few clicks on the user-friendly website/mobile app',
@@ -453,7 +432,7 @@ i18n.use(initReactI18next).init({
         date: 'Fecha',
         correctDateMessage: 'Por favor, ingresa una fecha correcta',
         selectedDateMessage: 'Esta fecha ya ha sido seleccionada',
-        periodDateMessage: 'Cambia el rango de fechas o la duración, ya que no cubre ningún período seleccionado',
+        periodDateMessage: 'Cambia el rango de fechas o las repeticiones, ya que no cubre ningún período seleccionado',
         changedDateMessage: 'Hemos cambiado la última fecha según la frecuencia seleccionada',
         excludedDateMessage: 'Esta fecha ya ha sido excluida',
         notIncludedDateMessage: 'Esta fecha no está incluida en las fechas de limpieza seleccionadas',
@@ -477,7 +456,8 @@ i18n.use(initReactI18next).init({
         Friday: 'Viernes',
         Saturday: 'Sábado',
         Sunday: 'Domingo',
-        duration: 'Duración',
+        holidays: 'Festivos',
+        repeats: 'Repeticiones',
         startDate: 'Fecha de inicio',
         lastDate: 'Última fecha',
         excludedDates: 'Fechas excluidas',
@@ -549,7 +529,7 @@ i18n.use(initReactI18next).init({
         confirmation: 'Confirmación',
         paid: 'Pagado',
         learnCancellationPolicy: 'Conoce la Política de Cancelación',
-        services: 'Servicios',
+        services: 'Servicios / Tarifas',
         BasicCleaningInfo:
           'La limpieza básica comienza con una evaluación, seguida de un desempolvado, aspirado y fregado sistemático. La cocina y el baño reciben atención especial, incluida la desinfección de superficies. Después de los últimos toques, realizamos un recorrido para asegurarnos de que se cumplan nuestros altos estándares, dejando tu hogar en condiciones impecables.',
         DetailedCleaningInfo:
@@ -561,50 +541,28 @@ i18n.use(initReactI18next).init({
         AfterpartyCleaningInfo:
           'Después de un gran evento, lo último que quieres hacer es limpiar. Nos encargamos de la limpieza, desde la eliminación de derrames y manchas hasta la limpieza general, asegurando que cada superficie esté reluciente. Permitiéndote despertar en un hogar renovado y limpio.',
         cancellationPolicy: 'Política de cancelación',
-        shortAnswer: 'Respuesta corta',
         cancelOrEditAppointment:
-          'Puedes cancelar o editar tu cita de forma gratuita dentro de la primera hora de reservarla o hasta 48 horas antes del horario afectado por el cambio. Si cancelas o editas tu cita fuera de estos tiempos, es posible que recibas un reembolso parcial.',
-        timeOfCancellationOrEdit: 'Tiempo de cancelación o edición',
+          'Tienes la flexibilidad de cancelar o modificar tu cita sin cargo dentro de una hora después de reservar o hasta 24 horas antes del horario programado. Cualquier cancelación o modificación fuera de estos plazos puede resultar en un reembolso parcial.',
+        plansCanChange: 'Reconociendo que los planes pueden cambiar, nos esforzamos por acomodar a nuestros valiosos clientes. Aquí tienes un resumen de nuestra política de cancelación:',
+        timeOfCancellationOrEdit: 'Tiempo de Cancelación o Edición',
         refund: 'Reembolso',
         within1HourOfBooking: 'Dentro de la primera hora de reserva',
         fullRefund: 'Reembolso completo',
-        over48HoursInAdvance: 'Más de 48 horas de anticipación',
-        between24And48HoursInAdvance: 'De 24 a 48 horas de anticipación',
-        partialRefund50: 'Reembolso parcial: pagarás el 50% del valor de la reserva',
-        lessThan24HoursInAdvance: 'Menos de 24 horas de anticipación',
-        partialRefund100: 'Reembolso parcial: pagarás el 100% del valor de la reserva',
+        over24HoursInAdvance: 'Más de 24 horas de anticipación',
+        between24And12HoursInAdvance: 'De 24 a 12 horas de anticipación',
+        partialRefund50: 'Reembolso parcial: 50% del valor de la reserva',
+        lessThan12HoursInAdvance: 'Menos de 12 horas de anticipación',
+        noRefund: 'Sin reembolso: 100% del valor de la reserva',
         noteOnTiming:
           'Ten en cuenta que la hora de cancelación o edición se calcula en función de la hora de inicio de tu cita de limpieza o de la parte más temprana de la cita afectada por el cambio.',
         refundProcess: 'Proceso de reembolso',
         refundsForCancellations:
-          'Los reembolsos por cancelaciones se acreditarán en tu cuenta con nosotros, que puedes usar para un servicio de limpieza futuro o retirar de nuevo a tu tarjeta de pago. Si el tiempo que cancelaste es reservado por otro cliente, recibirás un reembolso por ese tiempo.',
+          'Los reembolsos por cancelaciones se acreditarán en tu cuenta con nosotros, brindándote la opción de usarlo para un servicio de limpieza futuro o retirarlo de vuelta a tu tarjeta de pago. En caso de que el tiempo que cancelaste sea reservado por otro cliente, recibirás un reembolso por ese tiempo.',
         exceptionalCircumstances: 'Circunstancias excepcionales',
         unforeseenSituations:
-          'Entendemos que pueden surgir situaciones imprevistas, como la solicitud de cancelación del propietario o dificultades para encontrar las llaves. En tales casos raros, podemos ofrecer un reembolso completo. Al cancelar, por favor selecciona la razón más apropiada de las opciones proporcionadas en la aplicación o el pagina web. Si tu motivo no está en la lista, selecciona "Otro" y ponte en contacto con nuestro servicio de atención al cliente para obtener ayuda.',
+          'Entendemos que pueden surgir situaciones imprevistas, como la solicitud de cancelación por parte del propietario o dificultades para encontrar las llaves. En tales casos raros, podemos ofrecer un reembolso completo. Al cancelar, por favor selecciona la razón más apropiada de las opciones proporcionadas en la aplicación o el sitio web. Si tu razón no está en la lista, elige "Otro" y escríbela en el campo de texto.',
         clarityAndTransparency:
-          'Esperamos que esta política proporcione claridad y transparencia en cuanto a las cancelaciones y modificaciones de tus citas de limpieza. Si tienes alguna pregunta adicional o necesitas ayuda, no dudes en contactarnos. Tu satisfacción es nuestra prioridad.',
-        exampleScenarios: 'Escenarios de ejemplo para servicios de limpieza',
-        michelleReservation:
-          'Michelle ha reservado una cita de limpieza por €100. Su servicio de limpieza programado está programado para comenzar a las 9 am el viernes.',
-        scenario1: 'Escenario 1: Cancelación de una cita de limpieza',
-        michelleCancelsBefore48Hours:
-          'Si Michelle cancela su cita antes de las 9 am el miércoles (más de 48 horas de anticipación), no incurrirá en ninguna tarifa de cancelación.',
-        michelleCancelsOnWednesday:
-          'Si elige cancelar el miércoles por la tarde (menos de 48 horas pero más de 24 horas de anticipación), se le cobrará el 50%, lo que equivale a €50.',
-        michelleCancelsAfter9AMThursday:
-          'Si Michelle cancela después de las 9 am el jueves (menos de 24 horas antes de la hora de inicio), se le cobrará el 100%, es decir, €100.',
-        scenario2: 'Escenario 2: Cambio de la hora de inicio de una cita de limpieza',
-        lloydChangeWithin1Hour:
-          'Si Lloyd realiza este cambio dentro de la primera hora de la reserva o antes de las 9 am el sábado, no enfrentará cargos por tiempo no utilizado, y el costo total seguirá siendo de €150 solo para el martes.',
-        lloydScheduledCleaning:
-          'Lloyd ha programado una cita de limpieza a las 9 am el lunes por €150. Más tarde, decide posponer toda la reserva para el martes.',
-        lloydChangeBetween9AMOnSaturdayAnd9AMOnSunday:
-          'Si realiza el cambio entre las 9 am el sábado y las 9 am el domingo, se aplica un cargo por tiempo no utilizado del 50% del tiempo reservado. Esto resulta en un cargo de €75 por el tiempo no utilizado el lunes, además de los €150 para el martes.',
-        lloydChangeAfter9AMOnSunday:
-          'Si el cambio ocurre después de las 9 am el domingo, se incurre en un cargo por tiempo no utilizado del 100% del tiempo reservado, hasta 12 horas. En este caso, se agrega el cargo máximo de €150 a los €150 para el martes.',
-        scenario3: 'Escenario 3: Cambio de la hora de inicio de una cita de limpieza (Aviso tardío)',
-        monicaBookedCleaning:
-          'Monica ha reservado una cita de limpieza a las 9 am el sábado pero se queda dormida y decide reprogramarla para las 10:30 am. El tiempo de 9 am a 10:30 am se considera "tiempo no utilizado" y debido a que el cambio se realizó con menos de 24 horas de anticipación, Monica pagará el 100% del tiempo no utilizado además de las 2 horas que utiliza el servicio de limpieza.',
+          'Confiamos en que esta política brinde claridad y transparencia a tu comprensión de las cancelaciones y modificaciones de tus citas de limpieza. Si tienes alguna pregunta adicional o necesitas ayuda, no dudes en contactarnos. Tu satisfacción sigue siendo nuestra máxima prioridad.',
         faq: 'Preguntas frecuentes',
         question0: '¿Cuánto dura un servicio típico de limpieza?',
         answer0:
@@ -665,7 +623,7 @@ i18n.use(initReactI18next).init({
         weDeliverCare:
           'Ofrecemos servicio profesional de confianza empleando técnicas y equipos expertos para garantizar un nivel excepcional de limpieza. Y nuestro compromiso con la excelencia se refleja en nuestra Garantía de Satisfacción del 100%.',
         bookNow: 'Reservar ahora',
-        cleanHomeIn3Steps: 'Un hogar limpio en 3 pasos',
+        cleanHomeIn3Steps: 'Conseguir un hogar limpio en 3 pasos',
         sendRequest: 'Enviar solicitud',
         requestCleaning:
           'Solicitar limpieza, incluso con poco tiempo de aviso, con solo unos clics en el pagina web o la aplicación móvil fácil de usar',

@@ -376,13 +376,15 @@ const Booking = () => {
         default:
           newLastDate = new Date();
       }
-    } else {
-      newLastDate = parsedStartDate;
+
+      setLastDate(format(newLastDate, 'dd.MM.yyyy'));
+
+      return format(newLastDate, 'dd.MM.yyyy');
     }
 
-    setLastDate(format(newLastDate, 'dd.MM.yyyy'));
+    setLastDate('');
 
-    return format(newLastDate, 'dd.MM.yyyy');
+    return '';
   };
 
   useEffect(() => {
@@ -584,14 +586,12 @@ const Booking = () => {
     if (pricing.length !== 0 && timePricing.length !== 0) {
       const { speedSum, timeCoeff, timeSum, subtotal, iva, total, tariffNumber } = calculatePrice(time, date);
       setSpeedSum(speedSum);
-      if (repeat === 'One-time') {
-        setTimeCoeff(timeCoeff);
-        setTimeSum(timeSum);
-        setSubtotal(subtotal);
-        setIva(iva);
-        setTotal(total);
-        setTariffNumber(tariffNumber);
-      }
+      setTimeCoeff(timeCoeff);
+      setTimeSum(timeSum);
+      setSubtotal(subtotal);
+      setIva(iva);
+      setTotal(total);
+      setTariffNumber(tariffNumber);
     }
   }, [repeat, pricing, timePricing, cleaningSum, extrasSum, selectedSpeed, time, date]);
 
@@ -1214,7 +1214,7 @@ const Booking = () => {
                       className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'form__input-wrap'}
                     >
                       <label htmlFor="duration" className="form__label">
-                        {t('duration')}
+                        {t('repeats')}
                       </label>
                       <input
                         id="duration"
@@ -1661,6 +1661,8 @@ const Booking = () => {
                         ? roundPrice(cleaningSum * timeCoeff)
                         : repeat === 'Custom schedule'
                         ? roundPrice(customSchedule.reduce((acc, curr) => acc + curr.subtotal, 0))
+                        : subscriptionPrices.length === 0
+                        ? roundPrice(subtotal)
                         : subscriptionPrices.length === Number(duration)
                         ? roundPrice(
                             dates
@@ -1706,11 +1708,11 @@ const Booking = () => {
                   <div className={repeat !== 'One-time' ? 'summary__subscription' : 'hidden'}>
                     <div className="summary__line">
                       <span className="summary__item">{t('type')}</span>
-                      <span className="summary__price">{repeat === 'Custom schedule' ? t('custom') : repeat}</span>
+                      <span className="summary__price">{repeat === 'Custom schedule' ? t('custom') : t(repeat)}</span>
                     </div>
                     <div
                       className={
-                        (repeat !== 'Custom schedule' && repeat !== 'One-time' && dates.length !== 0) ||
+                        (repeat !== 'Custom schedule' && repeat !== 'One-time' && dates.length !== 0 && Number(duration) !== 0) ||
                         (repeat === 'Custom schedule' &&
                           customSchedule[0].date.replace(/\D/g, '').length === 8 &&
                           customSchedule[0].isDateValid)
@@ -1738,6 +1740,8 @@ const Booking = () => {
                             ? roundPrice(subtotal)
                             : repeat === 'Custom schedule'
                             ? roundPrice(customSchedule.reduce((acc, curr) => acc + curr.subtotal, 0))
+                            : subscriptionPrices.length === 0
+                            ? roundPrice(subtotal)
                             : subscriptionPrices.length === Number(duration)
                             ? roundPrice(
                                 dates
@@ -1759,6 +1763,8 @@ const Booking = () => {
                             ? roundPrice(iva)
                             : repeat === 'Custom schedule'
                             ? roundPrice(customSchedule.reduce((acc, curr) => acc + curr.iva, 0))
+                            : subscriptionPrices.length === 0
+                            ? roundPrice(iva)
                             : subscriptionPrices.length === Number(duration)
                             ? roundPrice(
                                 dates
@@ -1774,13 +1780,23 @@ const Booking = () => {
                     </div>
                   </div>
                   <div className="summary__line summary__line_bold">
-                    <span className="summary__subtitle">{t('total')}</span>
+                    <span className="summary__subtitle">
+                      {t('total')}
+                      <span
+                        className={repeat === 'One-time' ? 'link summary__tariff' : 'hidden'}
+                        onClick={() => navigate('/info-price')}
+                      >
+                        {`(${t('tariff')} ${tariffNumber})`}
+                      </span>
+                    </span>
                     <span className="summary__price">
                       {`€${
                         repeat === 'One-time'
                           ? roundPrice(total)
                           : repeat === 'Custom schedule'
                           ? roundPrice(customSchedule.reduce((acc, curr) => acc + curr.total, 0))
+                          : subscriptionPrices.length === 0
+                          ? roundPrice(total)
                           : subscriptionPrices.length === Number(duration)
                           ? roundPrice(
                               dates
@@ -1794,15 +1810,9 @@ const Booking = () => {
                       }`}
                     </span>
                   </div>
-                  <span
-                    className={repeat === 'One-time' ? 'link summary__tariff' : 'hidden'}
-                    onClick={() => navigate('/info-price')}
-                  >
-                    {`${t('tariff')} ${tariffNumber}`}
-                  </span>
                   <div
                     className={
-                      (repeat !== 'Custom schedule' && repeat !== 'One-time' && dates.length !== 0) ||
+                      (repeat !== 'Custom schedule' && repeat !== 'One-time' && dates.length !== 0 && Number(duration) !== 0) ||
                       (repeat === 'Custom schedule' &&
                         customSchedule[0].date.replace(/\D/g, '').length === 8 &&
                         customSchedule[0].isDateValid)
@@ -1855,7 +1865,7 @@ const Booking = () => {
                             customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
                               .total,
                           )}`
-                        : dates.length !== 0 && subscriptionPrices.length === Number(duration)
+                        : dates.length !== 0 && Number(duration) !== 0 && subscriptionPrices.length === Number(duration)
                         ? `€${roundPrice(
                             subscriptionPrices[
                               dates.indexOf(
@@ -1867,25 +1877,25 @@ const Booking = () => {
                             ].total,
                           )}`
                         : '€0'}
-                    </span>
-                    <span className="link next-cleaning__subtitle" onClick={() => navigate('/info-price')}>
-                      {repeat === 'Custom schedule'
-                        ? `${t('tariff')} ${
-                            customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
-                              .tariff
-                          }`
-                        : dates.length !== 0 && subscriptionPrices.length === Number(duration)
-                        ? `${t('tariff')} ${
-                            subscriptionPrices[
-                              dates.indexOf(
-                                dates.filter((date) => {
-                                  const datesToRemove = excludedDates.map((elem) => elem.date);
-                                  return !datesToRemove.includes(date);
-                                })[0],
-                              )
-                            ].tariff
-                          }`
-                        : `${t('tariff')} 1`}
+                      <span className="link next-cleaning__subtitle" onClick={() => navigate('/info-price')}>
+                        {repeat === 'Custom schedule'
+                          ? `(${t('tariff')} ${
+                              customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
+                                .tariff
+                            })`
+                          : dates.length !== 0 && Number(duration) !== 0 && subscriptionPrices.length === Number(duration)
+                          ? `(${t('tariff')} ${
+                              subscriptionPrices[
+                                dates.indexOf(
+                                  dates.filter((date) => {
+                                    const datesToRemove = excludedDates.map((elem) => elem.date);
+                                    return !datesToRemove.includes(date);
+                                  })[0],
+                                )
+                              ].tariff
+                            })`
+                          : `(${t('tariff')} 1)`}
+                      </span>
                     </span>
                     <span className="next-cleaning__link" onClick={() => setIsScheduleOpen(true)}>
                       {t('seeFullSchedule')}

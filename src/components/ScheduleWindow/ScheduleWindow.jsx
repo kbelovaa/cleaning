@@ -102,7 +102,7 @@ const ScheduleWindow = ({
                   <span className="summary__price">{`€${
                     isCustom
                       ? roundPrice(cleaningSum * date.timeCoeff)
-                      : subscriptionPrices.length !== 0 &&
+                      : subscriptionPrices.length === Number(duration) && Number(duration) !== 0 &&
                         roundPrice(cleaningSum * subscriptionPrices[dates.indexOf(date)].timeCoeff)
                   }`}</span>
                 </div>
@@ -122,7 +122,7 @@ const ScheduleWindow = ({
                         <span className="summary__price">{`€${
                           isCustom
                             ? roundPrice(service.price * serviceNumber * date.timeCoeff)
-                            : subscriptionPrices.length !== 0 &&
+                            : subscriptionPrices.length === Number(duration) && Number(duration) !== 0 &&
                               roundPrice(
                                 service.price * serviceNumber * subscriptionPrices[dates.indexOf(date)].timeCoeff,
                               )
@@ -141,7 +141,7 @@ const ScheduleWindow = ({
                     {`€${
                       isCustom
                         ? roundPrice(date.subtotal)
-                        : subscriptionPrices.length === Number(duration)
+                        : subscriptionPrices.length === Number(duration) && Number(duration) !== 0
                         ? roundPrice(subscriptionPrices[dates.indexOf(date)].subtotal)
                         : 0
                     }`}
@@ -153,33 +153,35 @@ const ScheduleWindow = ({
                     {`€${
                       isCustom
                         ? roundPrice(date.iva)
-                        : subscriptionPrices.length === Number(duration)
+                        : subscriptionPrices.length === Number(duration) && Number(duration) !== 0
                         ? roundPrice(subscriptionPrices[dates.indexOf(date)].iva)
                         : 0
                     }`}
                   </span>
                 </div>
                 <div className="summary__line summary__line_bold">
-                  <span className="summary__subtitle">{t('total')}</span>
+                  <span className="summary__subtitle">
+                    {t('total')}
+                    <span className="link schedule__tariff" onClick={() => navigate('/info-price')}>
+                      {`(${t('tariff')} ${
+                        isCustom
+                          ? date.tariff
+                          : subscriptionPrices.length === Number(duration) && Number(duration) !== 0
+                          ? subscriptionPrices[dates.indexOf(date)].tariff
+                          : 1
+                      })`}
+                    </span>
+                  </span>
                   <span className="summary__price">
                     {`€${
                       isCustom
                         ? roundPrice(date.total)
-                        : subscriptionPrices.length === Number(duration)
+                        : subscriptionPrices.length === Number(duration) && Number(duration) !== 0
                         ? roundPrice(subscriptionPrices[dates.indexOf(date)].total)
                         : 0
                     }`}
                   </span>
                 </div>
-                <span className="link schedule__tariff" onClick={() => navigate('/info-price')}>
-                  {`${t('tariff')} ${
-                    isCustom
-                      ? date.tariff
-                      : subscriptionPrices.length === Number(duration)
-                      ? subscriptionPrices[dates.indexOf(date)].tariff
-                      : 1
-                  }`}
-                </span>
               </div>
             ))}
           </div>

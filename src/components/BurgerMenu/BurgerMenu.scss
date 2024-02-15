@@ -56,8 +56,9 @@
     font-size: 23px;
     line-height: 100%;
     letter-spacing: 1.15px;
-    margin-right: 10px;
+    margin-right: 2px;
     cursor: pointer;
+    user-select: none;
 
     &.active {
       color: #268664;
@@ -91,6 +92,7 @@
     margin-top: 20px;
     display: inline-block;
     cursor: pointer;
+    user-select: none;
 
     &.active {
       color: #268664;

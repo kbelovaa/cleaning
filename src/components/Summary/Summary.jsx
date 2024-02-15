@@ -689,9 +689,47 @@ const Summary = () => {
                         />
                       </svg>
                       {t('paid')}
+                      <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                        {`(${t('tariff')} ${
+                          cleaning.repeat === 'One-time'
+                            ? cleaning.tariff
+                            : cleaning.repeat === 'Custom schedule'
+                            ? cleaning.customSchedule[0].tariff
+                            : cleaning.dates.length !== 0 && cleaning.subscriptionPrices.length === Number(cleaning.duration)
+                            ? cleaning.subscriptionPrices[
+                                cleaning.dates.indexOf(
+                                  cleaning.dates.filter((date) => {
+                                    const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                    return !datesToRemove.includes(date);
+                                  })[0],
+                                )
+                              ].tariff
+                            : 1
+                        })`}
+                      </span>
                     </span>
                   ) : (
-                    <span className="total-summary__name">{t('total')}</span>
+                    <span className="total-summary__name">
+                      {t('total')}
+                      <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                        {`(${t('tariff')} ${
+                          cleaning.repeat === 'One-time'
+                            ? cleaning.tariff
+                            : cleaning.repeat === 'Custom schedule'
+                            ? cleaning.customSchedule[0].tariff
+                            : cleaning.dates.length !== 0 && cleaning.subscriptionPrices.length === Number(cleaning.duration)
+                            ? cleaning.subscriptionPrices[
+                                cleaning.dates.indexOf(
+                                  cleaning.dates.filter((date) => {
+                                    const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                    return !datesToRemove.includes(date);
+                                  })[0],
+                                )
+                              ].tariff
+                            : 1
+                        })`}
+                      </span>
+                    </span>
                   )}
                   <span className="total-summary__value">
                     {`€${
@@ -712,24 +750,6 @@ const Summary = () => {
                     }`}
                   </span>
                 </div>
-                <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-                  {`${t('tariff')} ${
-                    cleaning.repeat === 'One-time'
-                      ? cleaning.tariff
-                      : cleaning.repeat === 'Custom schedule'
-                      ? cleaning.customSchedule[0].tariff
-                      : cleaning.dates.length !== 0 && cleaning.subscriptionPrices.length === Number(cleaning.duration)
-                      ? cleaning.subscriptionPrices[
-                          cleaning.dates.indexOf(
-                            cleaning.dates.filter((date) => {
-                              const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                              return !datesToRemove.includes(date);
-                            })[0],
-                          )
-                        ].tariff
-                      : 1
-                  }`}
-                </span>
               </div>
               {loading ? (
                 <div className="spinner spinner_small"></div>
