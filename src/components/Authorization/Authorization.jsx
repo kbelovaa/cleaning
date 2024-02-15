@@ -249,7 +249,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 />
                 <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
                 {isEmailUnique && (
-                  <p className="auth__note">{`${t('userWithEmail')} ${email} ${t(isEmailUnique.split(email)[1].trim())}`}</p>
+                  <p className="auth__note">{`${t('userWithEmail')} ${email} ${t(
+                    isEmailUnique.split(email)[1].trim(),
+                  )}`}</p>
                 )}
               </div>
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
@@ -281,7 +283,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </p>
                 {areCredentialsValid && (
                   <p className={!isLogin ? 'hidden' : 'auth__note'}>
-                    {areCredentialsValid === 'Incorrect password' ? t('incorrectPassword') : `${t('userWithEmail')} ${email} ${t(areCredentialsValid.split(email)[1].trim())}`}
+                    {areCredentialsValid === 'Incorrect password'
+                      ? t('incorrectPassword')
+                      : `${t('userWithEmail')} ${email} ${t(areCredentialsValid.split(email)[1].trim())}`}
                   </p>
                 )}
                 <p

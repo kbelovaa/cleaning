@@ -77,22 +77,25 @@ const ScheduleWindow = ({
               <div className="schedule__cleaning" key={index}>
                 <span className="schedule__date">
                   {isCustom
-                    ? date.date.replace(/\D/g, '').length === 8 && `${
-                      formatDate(date.date).split(', ').map((elem, index) => {
-                      if (index === 1) {
-                        return t(elem).slice(0, 3);
-                      }
-                      return elem;
-                    }).join(', ')
-                  }, ${date.time}`
-                    : `${
-                      formatDate(date).split(', ').map((elem, index) => {
-                        if (index === 1) {
-                          return t(elem).slice(0, 3);
-                        }
-                        return elem;
-                      }).join(', ')
-                      }, ${time}`}
+                    ? date.date.replace(/\D/g, '').length === 8 &&
+                      `${formatDate(date.date)
+                        .split(', ')
+                        .map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        })
+                        .join(', ')}, ${date.time}`
+                    : `${formatDate(date)
+                        .split(', ')
+                        .map((elem, index) => {
+                          if (index === 1) {
+                            return t(elem).slice(0, 3);
+                          }
+                          return elem;
+                        })
+                        .join(', ')}, ${time}`}
                 </span>
                 <div className="summary__line summary__line_bold">
                   <span className="summary__subtitle">{t(selectedCleaning.type)}</span>

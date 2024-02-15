@@ -104,9 +104,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
             ? t('passwordChanged')
             : t('confirmationEmailSent')}
         </p>
-        <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>
-          {t('verifyNewEmail')}
-        </p>
+        <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>{t('verifyNewEmail')}</p>
         <span className={(isPersonalInfo && isNewEmail) || isContactUs ? 'confirmation__email' : 'hidden'}>
           {email}
         </span>

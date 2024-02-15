@@ -1818,12 +1818,15 @@ const Booking = () => {
                             formatDate(
                               customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
                                 .date,
-                            ).split(', ').map((elem, index) => {
-                              if (index === 1) {
-                                return t(elem).slice(0, 3);
-                              }
-                              return elem;
-                            }).join(', ')
+                            )
+                              .split(', ')
+                              .map((elem, index) => {
+                                if (index === 1) {
+                                  return t(elem).slice(0, 3);
+                                }
+                                return elem;
+                              })
+                              .join(', ')
                           }, ${
                             customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0].time
                           }`
@@ -1834,12 +1837,15 @@ const Booking = () => {
                                 const datesToRemove = excludedDates.map((elem) => elem.date);
                                 return !datesToRemove.includes(date);
                               })[0],
-                            ).split(', ').map((elem, index) => {
-                              if (index === 1) {
-                                return t(elem).slice(0, 3);
-                              }
-                              return elem;
-                            }).join(', ')
+                            )
+                              .split(', ')
+                              .map((elem, index) => {
+                                if (index === 1) {
+                                  return t(elem).slice(0, 3);
+                                }
+                                return elem;
+                              })
+                              .join(', ')
                           }, ${time}`}
                     </span>
                     <span className="next-cleaning__service">{t(selectedCleaning.type)}</span>
