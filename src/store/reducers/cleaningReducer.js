@@ -73,7 +73,7 @@ export const defaultState = {
   lastDate: '',
   selectedCleaning: {},
   selectedServices: [],
-  addressId: '',
+  defaultAddressId: '',
   apartmentSize: '',
   selectedSpeed: speedOptions[0],
   livingRoomsNum: livingRooms[0],

@@ -32,7 +32,8 @@
     }
   }
 
-  &__cards, &__tariff-cards {
+  &__cards,
+  &__tariff-cards {
     display: flex;
     flex-wrap: wrap;
   }

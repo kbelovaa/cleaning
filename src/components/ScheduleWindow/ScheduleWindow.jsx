@@ -102,7 +102,8 @@ const ScheduleWindow = ({
                   <span className="summary__price">{`€${
                     isCustom
                       ? roundPrice(cleaningSum * date.timeCoeff)
-                      : subscriptionPrices.length === Number(duration) && Number(duration) !== 0 &&
+                      : subscriptionPrices.length === Number(duration) &&
+                        Number(duration) !== 0 &&
                         roundPrice(cleaningSum * subscriptionPrices[dates.indexOf(date)].timeCoeff)
                   }`}</span>
                 </div>
@@ -122,7 +123,8 @@ const ScheduleWindow = ({
                         <span className="summary__price">{`€${
                           isCustom
                             ? roundPrice(service.price * serviceNumber * date.timeCoeff)
-                            : subscriptionPrices.length === Number(duration) && Number(duration) !== 0 &&
+                            : subscriptionPrices.length === Number(duration) &&
+                              Number(duration) !== 0 &&
                               roundPrice(
                                 service.price * serviceNumber * subscriptionPrices[dates.indexOf(date)].timeCoeff,
                               )

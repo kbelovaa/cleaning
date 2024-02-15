@@ -119,7 +119,7 @@ i18n.use(initReactI18next).init({
         Saturday: 'Saturday',
         Sunday: 'Sunday',
         holidays: 'Holidays',
-        repeats: 'Repeats',
+        numberOfCleans: 'Number of cleans',
         startDate: 'Start date',
         lastDate: 'Last date',
         excludedDates: 'Excluded dates',
@@ -203,7 +203,8 @@ i18n.use(initReactI18next).init({
         cancellationPolicy: 'Cancellation Policy',
         cancelOrEditAppointment:
           'You have the flexibility to cancel or modify your appointment without charge within one hour of booking or up to 24 hours before the scheduled time. Any cancellations or modifications outside these timeframes may result in a partial refund.',
-        plansCanChange: "Recognizing that plans can change, we strive to accommodate our valued customers. Here's a breakdown of our cancellation policy:",
+        plansCanChange:
+          "Recognizing that plans can change, we strive to accommodate our valued customers. Here's a breakdown of our cancellation policy:",
         timeOfCancellationOrEdit: 'Time of Cancellation or Edit',
         refund: 'Refund',
         within1HourOfBooking: 'Within 1 hour of booking',
@@ -316,7 +317,6 @@ i18n.use(initReactI18next).init({
         from: 'from',
         tariff: 'Tariff',
         type: 'Type',
-        times: 'Times',
         nextCleaning: 'Next cleaning',
         seeFullSchedule: 'See full schedule',
         signUpSuccess: 'You are now signed up',
@@ -457,7 +457,7 @@ i18n.use(initReactI18next).init({
         Saturday: 'Sábado',
         Sunday: 'Domingo',
         holidays: 'Festivos',
-        repeats: 'Repeticiones',
+        numberOfCleans: 'Número de limpiezas',
         startDate: 'Fecha de inicio',
         lastDate: 'Última fecha',
         excludedDates: 'Fechas excluidas',
@@ -543,7 +543,8 @@ i18n.use(initReactI18next).init({
         cancellationPolicy: 'Política de cancelación',
         cancelOrEditAppointment:
           'Tienes la flexibilidad de cancelar o modificar tu cita sin cargo dentro de una hora después de reservar o hasta 24 horas antes del horario programado. Cualquier cancelación o modificación fuera de estos plazos puede resultar en un reembolso parcial.',
-        plansCanChange: 'Reconociendo que los planes pueden cambiar, nos esforzamos por acomodar a nuestros valiosos clientes. Aquí tienes un resumen de nuestra política de cancelación:',
+        plansCanChange:
+          'Reconociendo que los planes pueden cambiar, nos esforzamos por acomodar a nuestros valiosos clientes. Aquí tienes un resumen de nuestra política de cancelación:',
         timeOfCancellationOrEdit: 'Tiempo de Cancelación o Edición',
         refund: 'Reembolso',
         within1HourOfBooking: 'Dentro de la primera hora de reserva',
@@ -659,7 +660,6 @@ i18n.use(initReactI18next).init({
         from: 'desde',
         tariff: 'Tarifa',
         type: 'Tipo',
-        times: 'Veces',
         nextCleaning: 'Próxima limpieza',
         seeFullSchedule: 'Ver horario completo',
         signUpSuccess: 'Ahora estás registrado',

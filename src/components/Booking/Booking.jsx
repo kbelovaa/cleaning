@@ -16,6 +16,7 @@ import {
   format,
 } from 'date-fns';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
+import { getAddresses } from '../../http/addressAPI';
 import {
   months,
   bedrooms,
@@ -28,6 +29,7 @@ import {
 } from '../../constants/selectOptions';
 import { getTimeCoeff, calculateCleaningTypePrice, roundPrice } from '../../utils/calculatePrice';
 import formatDate from '../../utils/formatDate';
+import AddressSelect from '../AddressSelect/AddressSelect';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import Calendar from '../Calendar/Calendar';
 import ScheduleWindow from '../ScheduleWindow/ScheduleWindow';
@@ -73,7 +75,6 @@ const Booking = () => {
   const [bedroomsNum, setBedroomsNum] = useState(cleaning.bedroomsNum);
   const [bathroomsNum, setBathroomsNum] = useState(cleaning.bathroomsNum);
   const [kitchensNum, setKitchensNum] = useState(cleaning.kitchensNum);
-  // const [defaultAddress, setDefaultAddress] = useState(cleaning.defaultAddress);
   const [address1, setAddress1] = useState(cleaning.address1);
   const [address2, setAddress2] = useState(cleaning.address2);
   const [postalCode, setPostalCode] = useState(cleaning.postalCode);
@@ -94,6 +95,8 @@ const Booking = () => {
   const [isFormValid, setIsFormValid] = useState(true);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
+  const [addresses, setAddresses] = useState([]);
+  const [defaultAddressId, setDefaultAddressId] = useState(cleaning.defaultAddressId);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -102,6 +105,7 @@ const Booking = () => {
   const customScheduleRefs = useRef([]);
   const excludedDateRefs = useRef([]);
   const dateTimeRef = useRef(null);
+  const addressSelect = useRef(null);
   const addressRef = useRef(null);
   const speedRef = useRef(null);
   const recurringRef = useRef(null);
@@ -129,6 +133,43 @@ const Booking = () => {
   }, []);
 
   useEffect(() => {
+    const getAdressesData = async () => {
+      const addresses = await getAddresses(user.id);
+      setAddresses(addresses);
+
+      if (!defaultAddressId || (defaultAddressId && !addresses.find((address) => address._id === defaultAddressId))) {
+        const defaultAddress = addresses.find((address) => address.isDefault);
+        if (defaultAddress) {
+          setDefaultAddressId(defaultAddress._id);
+        }
+      }
+    };
+
+    if (user.id) {
+      getAdressesData();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (defaultAddressId && addresses.length !== 0) {
+      const defaultAddress = addresses.find((address) => address._id === defaultAddressId);
+
+      if (defaultAddress) {
+        setApartmentSize(defaultAddress.size);
+        setLivingRoomsNum(livingRooms.find((elem) => Number(elem.split(' ')[0]) === defaultAddress.livingRooms));
+        setBedroomsNum(bedrooms.find((elem) => Number(elem.split(' ')[0]) === defaultAddress.bedrooms));
+        setBathroomsNum(bathrooms.find((elem) => Number(elem.split(' ')[0]) === defaultAddress.bathrooms));
+        setKitchensNum(kitchens.find((elem) => Number(elem.split(' ')[0]) === defaultAddress.kitchens));
+        setAddress1(defaultAddress.address);
+        setAddress2(defaultAddress.secondAddress);
+        setPostalCode(defaultAddress.postalCode);
+        setCity(defaultAddress.city);
+        setProvince(defaultAddress.province);
+      }
+    }
+  }, [defaultAddressId, addresses]);
+
+  useEffect(() => {
     setRepeat(cleaning.repeat);
     setDate(cleaning.date);
     setTime(cleaning.time);
@@ -141,6 +182,7 @@ const Booking = () => {
     setLastDate(cleaning.lastDate);
     setSelectedCleaning(cleaning.selectedCleaning);
     setSelectedServices(cleaning.selectedServices);
+    setDefaultAddressId(cleaning.defaultAddressId);
     setApartmentSize(cleaning.apartmentSize);
     setSelectedSpeed(cleaning.selectedSpeed);
     setLivingRoomsNum(cleaning.livingRoomsNum);
@@ -210,6 +252,9 @@ const Booking = () => {
     switch (routes[3]) {
       case 'date-time':
         currentRef = dateTimeRef;
+        break;
+      case 'address-select':
+        currentRef = addressSelect;
         break;
       case 'address':
         currentRef = addressRef;
@@ -744,34 +789,34 @@ const Booking = () => {
 
   const checkIsFormValid = () => {
     if (
-      apartmentSize &&
-      ((repeat === 'One-time' && date.replace(/\D/g, '').length === 8 && isDateValid) ||
-        (repeat === 'Custom schedule' &&
-          customSchedule.length >= 1 &&
-          !customSchedule.find(
+      (repeat === 'One-time' && date.replace(/\D/g, '').length === 8 && isDateValid) ||
+      (repeat === 'Custom schedule' &&
+        customSchedule.length >= 1 &&
+        !customSchedule.find(
+          (day) => day.date.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique,
+        )) ||
+      (repeat !== 'One-time' &&
+        repeat !== 'Custom schedule' &&
+        dates.length >= 1 &&
+        startDate.replace(/\D/g, '').length === 8 &&
+        isStartDateValid &&
+        lastDate.replace(/\D/g, '').length === 8 &&
+        isLastDateValid &&
+        duration &&
+        duration > 0 &&
+        ((addExcludedDates &&
+          excludedDates.length >= 1 &&
+          !excludedDates.find(
             (day) => day.date.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique,
           )) ||
-        (repeat !== 'One-time' &&
-          repeat !== 'Custom schedule' &&
-          dates.length >= 1 &&
-          startDate.replace(/\D/g, '').length === 8 &&
-          isStartDateValid &&
-          lastDate.replace(/\D/g, '').length === 8 &&
-          isLastDateValid &&
-          duration &&
-          duration > 0 &&
-          ((addExcludedDates &&
-            excludedDates.length >= 1 &&
-            !excludedDates.find(
-              (day) => day.date.replace(/\D/g, '').length !== 8 || !day.isDateValid || !day.isDateUnique,
-            )) ||
-            !addExcludedDates))) &&
-      address1 &&
-      postalCode &&
-      city &&
-      province
+          !addExcludedDates))
     ) {
-      return true;
+      if (
+        (addresses.length === 0 && apartmentSize && address1 && postalCode && city && province) ||
+        (addresses.length !== 0 && defaultAddressId)
+      ) {
+        return true;
+      }
     }
 
     return false;
@@ -798,6 +843,7 @@ const Booking = () => {
     cleaningState.excludedDates = excludedDates;
     cleaningState.selectedCleaning = selectedCleaning;
     cleaningState.selectedServices = selectedServices;
+    cleaningState.defaultAddressId = defaultAddressId;
     cleaningState.apartmentSize = apartmentSize;
     cleaningState.selectedSpeed = selectedSpeed;
     cleaningState.livingRoomsNum = livingRoomsNum;
@@ -852,7 +898,7 @@ const Booking = () => {
     bedroomsNum,
     bathroomsNum,
     kitchensNum,
-    // defaultAddress,
+    defaultAddressId,
     address1,
     address2,
     postalCode,
@@ -901,61 +947,72 @@ const Booking = () => {
         <div className="container">
           <section className="book">
             <div className="book__form">
-              <form className={`form ${isFormValid ? '' : 'invalid'}`} onSubmit={handleFormSubmit}>
-                <div className="form__section">
-                  <h3 className="form__title">{t('propertyInformation')}</h3>
-                  <div className="form__input-wrap" ref={sizeRef}>
-                    <label htmlFor="size" className="form__label">
-                      {t('apartmentSize')}
-                      <sup className="top-index">2</sup>
-                    </label>
-                    <input
-                      id="size"
-                      type="text"
-                      className={`input ${!apartmentSize ? 'invalid-field' : ''}`}
-                      value={apartmentSize}
-                      onChange={(e) => handleApartmentSizeChange(e.target.value)}
+              <form className={`form ${isFormValid ? '' : 'invalid'}`} onSubmit={handleFormSubmit} ref={addressSelect}>
+                {addresses.length === 0 ? (
+                  <div className="form__section">
+                    <h3 className="form__title">{t('propertyInformation')}</h3>
+                    <div className="form__input-wrap" ref={sizeRef}>
+                      <label htmlFor="size" className="form__label">
+                        {t('apartmentSize')}
+                        <sup className="top-index">2</sup>
+                      </label>
+                      <input
+                        id="size"
+                        type="text"
+                        className={`input ${!apartmentSize ? 'invalid-field' : ''}`}
+                        value={apartmentSize}
+                        onChange={(e) => handleApartmentSizeChange(e.target.value)}
+                      />
+                      <p className={isApartmentSizeValid ? 'hidden' : 'auth__note'}>
+                        {t('apartmentSizeMessage')}
+                        <sup className="top-index">2</sup>
+                      </p>
+                    </div>
+                    <div className="form__properties" ref={propertyRef}>
+                      <div className="form__property">
+                        <span className="form__label">{t('howManyLivingRooms')}</span>
+                        <CustomSelect
+                          options={livingRooms}
+                          selectedOption={livingRoomsNum}
+                          setSelectedOption={setLivingRoomsNum}
+                        />
+                      </div>
+                      <div className="form__property">
+                        <span className="form__label">{t('howManyBedrooms')}</span>
+                        <CustomSelect
+                          options={bedrooms}
+                          selectedOption={bedroomsNum}
+                          setSelectedOption={setBedroomsNum}
+                        />
+                      </div>
+                      <div className="form__property">
+                        <span className="form__label">{t('howManyBathrooms')}</span>
+                        <CustomSelect
+                          options={bathrooms}
+                          selectedOption={bathroomsNum}
+                          setSelectedOption={setBathroomsNum}
+                        />
+                      </div>
+                      <div className="form__property">
+                        <span className="form__label">{t('howManyKitchens')}</span>
+                        <CustomSelect
+                          options={kitchens}
+                          selectedOption={kitchensNum}
+                          setSelectedOption={setKitchensNum}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="form__section">
+                    <h3 className="form__label">{t('address')}</h3>
+                    <AddressSelect
+                      options={addresses}
+                      selectedOption={defaultAddressId}
+                      setSelectedOption={setDefaultAddressId}
                     />
-                    <p className={isApartmentSizeValid ? 'hidden' : 'auth__note'}>
-                      {t('apartmentSizeMessage')}
-                      <sup className="top-index">2</sup>
-                    </p>
                   </div>
-                  <div className="form__properties" ref={propertyRef}>
-                    <div className="form__property">
-                      <span className="form__label">{t('howManyLivingRooms')}</span>
-                      <CustomSelect
-                        options={livingRooms}
-                        selectedOption={livingRoomsNum}
-                        setSelectedOption={setLivingRoomsNum}
-                      />
-                    </div>
-                    <div className="form__property">
-                      <span className="form__label">{t('howManyBedrooms')}</span>
-                      <CustomSelect
-                        options={bedrooms}
-                        selectedOption={bedroomsNum}
-                        setSelectedOption={setBedroomsNum}
-                      />
-                    </div>
-                    <div className="form__property">
-                      <span className="form__label">{t('howManyBathrooms')}</span>
-                      <CustomSelect
-                        options={bathrooms}
-                        selectedOption={bathroomsNum}
-                        setSelectedOption={setBathroomsNum}
-                      />
-                    </div>
-                    <div className="form__property">
-                      <span className="form__label">{t('howManyKitchens')}</span>
-                      <CustomSelect
-                        options={kitchens}
-                        selectedOption={kitchensNum}
-                        setSelectedOption={setKitchensNum}
-                      />
-                    </div>
-                  </div>
-                </div>
+                )}
                 <div className="form__section" ref={cleaningRef}>
                   <h3 className="form__title">{t('serviceType')}</h3>
                   <p className="form__text">
@@ -1214,7 +1271,7 @@ const Booking = () => {
                       className={repeat === 'One-time' || repeat === 'Custom schedule' ? 'hidden' : 'form__input-wrap'}
                     >
                       <label htmlFor="duration" className="form__label">
-                        {t('repeats')}
+                        {t('numberOfCleans')}
                       </label>
                       <input
                         id="duration"
@@ -1547,102 +1604,128 @@ const Booking = () => {
                     />
                   </div>
                 </div>
-                <div className="form__section" ref={addressRef}>
-                  <h3 className="form__title">{t('propertyAddress')}</h3>
-                  <div className="form__input-wrap">
-                    <label htmlFor="address1" className="form__label">
-                      {t('address')}
-                    </label>
-                    <input
-                      id="address1"
-                      type="text"
-                      className={`input form__address ${!address1 ? 'invalid-field' : ''}`}
-                      value={address1}
-                      onChange={(e) => setAddress1(e.target.value)}
-                    />
-                    <input
-                      id="address2"
-                      type="text"
-                      className="input form__address"
-                      value={address2}
-                      onChange={(e) => setAddress2(e.target.value)}
-                    />
-                  </div>
-                  <div className="form__city">
-                    <div className="form__input-wrap form__code">
-                      <label htmlFor="code" className="form__label">
-                        {t('postalCode')}
+                {addresses.length === 0 ? (
+                  <div className="form__section" ref={addressRef}>
+                    <h3 className="form__title">{t('propertyAddress')}</h3>
+                    <div className="form__input-wrap">
+                      <label htmlFor="address1" className="form__label">
+                        {t('address')}
                       </label>
                       <input
-                        id="code"
-                        type="number"
-                        className={`input form__address ${!postalCode ? 'invalid-field' : ''}`}
-                        value={postalCode}
-                        onChange={(e) => setPostalCode(e.target.value)}
-                      />
-                    </div>
-                    <div className="form__input-wrap form__city-name">
-                      <label htmlFor="city" className="form__label">
-                        {t('city')}
-                      </label>
-                      <input
-                        id="city"
+                        id="address1"
                         type="text"
-                        className={`input form__address ${!city ? 'invalid-field' : ''}`}
-                        value={city}
-                        onChange={(e) => setCity(e.target.value)}
+                        className={`input form__address ${!address1 ? 'invalid-field' : ''}`}
+                        value={address1}
+                        onChange={(e) => setAddress1(e.target.value)}
+                      />
+                      <input
+                        id="address2"
+                        type="text"
+                        className="input form__address"
+                        value={address2}
+                        onChange={(e) => setAddress2(e.target.value)}
                       />
                     </div>
-                  </div>
-                  <div className="form__input-wrap">
-                    <label htmlFor="province" className="form__label">
-                      {t('province')}
-                    </label>
-                    <input
-                      id="province"
-                      type="text"
-                      className={`input form__address ${!province ? 'invalid-field' : ''}`}
-                      value={province}
-                      onChange={(e) => setProvince(e.target.value)}
-                    />
-                  </div>
-                  <div className="form__input-wrap">
-                    <label htmlFor="instructions" className="form__label">
-                      {t('specialInstructions')}
-                    </label>
-                    <textarea
-                      id="instructions"
-                      rows="1"
-                      className="input form__instructions"
-                      value={instructions}
-                      onChange={(e) => setInstructions(e.target.value)}
-                      onInput={(e) => {
-                        e.target.style.height = 'auto';
-                        e.target.style.height = `${e.target.scrollHeight + 2}px`;
-                      }}
-                    ></textarea>
-                  </div>
-                  <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
-                    {t('fillInAllFieldsMessage')}
-                  </p>
-                </div>
-                <div className="checkbox">
-                  <input id="save" type="checkbox" checked={saving} onChange={() => setSaving(!saving)} />
-                  <div className="checkbox__tick" onClick={() => setSaving(!saving)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
-                      <path
-                        d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                    <div className="form__city">
+                      <div className="form__input-wrap form__code">
+                        <label htmlFor="code" className="form__label">
+                          {t('postalCode')}
+                        </label>
+                        <input
+                          id="code"
+                          type="number"
+                          className={`input form__address ${!postalCode ? 'invalid-field' : ''}`}
+                          value={postalCode}
+                          onChange={(e) => setPostalCode(e.target.value)}
+                        />
+                      </div>
+                      <div className="form__input-wrap form__city-name">
+                        <label htmlFor="city" className="form__label">
+                          {t('city')}
+                        </label>
+                        <input
+                          id="city"
+                          type="text"
+                          className={`input form__address ${!city ? 'invalid-field' : ''}`}
+                          value={city}
+                          onChange={(e) => setCity(e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="form__input-wrap">
+                      <label htmlFor="province" className="form__label">
+                        {t('province')}
+                      </label>
+                      <input
+                        id="province"
+                        type="text"
+                        className={`input form__address ${!province ? 'invalid-field' : ''}`}
+                        value={province}
+                        onChange={(e) => setProvince(e.target.value)}
                       />
-                    </svg>
+                    </div>
+                    <div className="form__input-wrap">
+                      <label htmlFor="instructions" className="form__label">
+                        {t('specialInstructions')}
+                      </label>
+                      <textarea
+                        id="instructions"
+                        rows="1"
+                        className="input form__instructions"
+                        value={instructions}
+                        onChange={(e) => setInstructions(e.target.value)}
+                        onInput={(e) => {
+                          e.target.style.height = 'auto';
+                          e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                        }}
+                      ></textarea>
+                    </div>
+                    <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
+                      {t('fillInAllFieldsMessage')}
+                    </p>
                   </div>
-                  <label htmlFor="save" className="checkbox__label">
-                    {t('saveInformationForFuture')}
-                  </label>
-                </div>
+                ) : (
+                  <div className="form__section">
+                    <div className="form__input-wrap">
+                      <label htmlFor="instructions" className="form__label">
+                        {t('specialInstructions')}
+                      </label>
+                      <textarea
+                        id="instructions"
+                        rows="1"
+                        className="input form__instructions"
+                        value={instructions}
+                        onChange={(e) => setInstructions(e.target.value)}
+                        onInput={(e) => {
+                          e.target.style.height = 'auto';
+                          e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                        }}
+                      ></textarea>
+                    </div>
+                    <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
+                      {t('fillInAllFieldsMessage')}
+                    </p>
+                  </div>
+                )}
+                {addresses.length === 0 && (
+                  <div className="checkbox">
+                    <input id="save" type="checkbox" checked={saving} onChange={() => setSaving(!saving)} />
+                    <div className="checkbox__tick" onClick={() => setSaving(!saving)}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
+                        <path
+                          d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
+                          stroke="white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <label htmlFor="save" className="checkbox__label">
+                      {t('saveInformationForFuture')}
+                    </label>
+                  </div>
+                )}
                 <button className={`btn form__btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
                   {routes[2] ? t('save') : t('next')}
                 </button>
@@ -1712,7 +1795,10 @@ const Booking = () => {
                     </div>
                     <div
                       className={
-                        (repeat !== 'Custom schedule' && repeat !== 'One-time' && dates.length !== 0 && Number(duration) !== 0) ||
+                        (repeat !== 'Custom schedule' &&
+                          repeat !== 'One-time' &&
+                          dates.length !== 0 &&
+                          Number(duration) !== 0) ||
                         (repeat === 'Custom schedule' &&
                           customSchedule[0].date.replace(/\D/g, '').length === 8 &&
                           customSchedule[0].isDateValid)
@@ -1720,7 +1806,7 @@ const Booking = () => {
                           : 'hidden'
                       }
                     >
-                      <span className="summary__item">{t('times')}</span>
+                      <span className="summary__item">{t('numberOfCleans')}</span>
                       <span className="summary__price">
                         {repeat === 'Custom schedule'
                           ? customSchedule.filter((day) => day.date.replace(/\D/g, '').length === 8).length
@@ -1812,7 +1898,10 @@ const Booking = () => {
                   </div>
                   <div
                     className={
-                      (repeat !== 'Custom schedule' && repeat !== 'One-time' && dates.length !== 0 && Number(duration) !== 0) ||
+                      (repeat !== 'Custom schedule' &&
+                        repeat !== 'One-time' &&
+                        dates.length !== 0 &&
+                        Number(duration) !== 0) ||
                       (repeat === 'Custom schedule' &&
                         customSchedule[0].date.replace(/\D/g, '').length === 8 &&
                         customSchedule[0].isDateValid)
@@ -1883,7 +1972,9 @@ const Booking = () => {
                               customSchedule.sort((date1, date2) => parseDate(date1.date) - parseDate(date2.date))[0]
                                 .tariff
                             })`
-                          : dates.length !== 0 && Number(duration) !== 0 && subscriptionPrices.length === Number(duration)
+                          : dates.length !== 0 &&
+                            Number(duration) !== 0 &&
+                            subscriptionPrices.length === Number(duration)
                           ? `(${t('tariff')} ${
                               subscriptionPrices[
                                 dates.indexOf(

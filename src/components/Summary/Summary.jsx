@@ -54,7 +54,7 @@ const Summary = () => {
         selectedServices: order.extraServices,
         repeat: lastSubscription.subscriptionType,
         selectedSpeed: order.howFast,
-        addressId: order.address._id,
+        defaultAddressId: order.address._id,
         apartmentSize: order.address.size,
         livingRoomsNum: livingRooms.find((elem) => Number(elem.split(' ')[0]) === order.address.livingRooms),
         bedroomsNum: bedrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bedrooms),
@@ -180,8 +180,8 @@ const Summary = () => {
         (obj.subtotal - obj.subtotal * (pricing.feePercent / 100)) / pricing.socialSecurityPercent;
       order.salary = (obj.subtotal - obj.subtotal * (pricing.feePercent / 100)) / pricing.socialSecurityPercent;
 
-      if (cleaning.addressId) {
-        orderObject.addressId = cleaning.addressId;
+      if (cleaning.defaultAddressId) {
+        orderObject.addressId = cleaning.defaultAddressId;
       } else {
         orderObject.address.address = cleaning.address1;
         orderObject.address.secondAddress = cleaning.address2;
@@ -365,7 +365,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        {t('times')}
+                        {t('numberOfCleans')}
                       </span>
                       <span className="total-summary__value">{cleaning.customSchedule.length}</span>
                     </div>
@@ -383,7 +383,7 @@ const Summary = () => {
                         />
                         {t('typeOfSchedule')}
                       </span>
-                      <span className="total-summary__value">{cleaning.repeat}</span>
+                      <span className="total-summary__value">{t(cleaning.repeat)}</span>
                     </div>
                     <div className="total-summary__line">
                       <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
@@ -437,7 +437,7 @@ const Summary = () => {
                           src={edit}
                           alt="Edit"
                         />
-                        {t('times')}
+                        {t('numberOfCleans')}
                       </span>
                       <span className="total-summary__value">
                         {
@@ -465,7 +465,7 @@ const Summary = () => {
                 <p className={`total-summary__address total-summary__line_important ${editMode ? 'edit' : ''}`}>
                   <img
                     className="total-summary__edit"
-                    onClick={() => navigate('/booking/edit/address')}
+                    onClick={() => (cleaning.defaultAddressId ? navigate('/booking/edit/address-select') : navigate('/booking/edit/address'))}
                     src={edit}
                     alt="Edit"
                   />
@@ -695,7 +695,8 @@ const Summary = () => {
                             ? cleaning.tariff
                             : cleaning.repeat === 'Custom schedule'
                             ? cleaning.customSchedule[0].tariff
-                            : cleaning.dates.length !== 0 && cleaning.subscriptionPrices.length === Number(cleaning.duration)
+                            : cleaning.dates.length !== 0 &&
+                              cleaning.subscriptionPrices.length === Number(cleaning.duration)
                             ? cleaning.subscriptionPrices[
                                 cleaning.dates.indexOf(
                                   cleaning.dates.filter((date) => {
@@ -717,7 +718,8 @@ const Summary = () => {
                             ? cleaning.tariff
                             : cleaning.repeat === 'Custom schedule'
                             ? cleaning.customSchedule[0].tariff
-                            : cleaning.dates.length !== 0 && cleaning.subscriptionPrices.length === Number(cleaning.duration)
+                            : cleaning.dates.length !== 0 &&
+                              cleaning.subscriptionPrices.length === Number(cleaning.duration)
                             ? cleaning.subscriptionPrices[
                                 cleaning.dates.indexOf(
                                   cleaning.dates.filter((date) => {

@@ -62,8 +62,12 @@ const Addresses = () => {
     deleteAddress(address._id);
     setAddresses((addresses) => {
       const filteredAddresses = addresses.filter((elem) => elem._id !== address._id);
-      filteredAddresses[0] = { ...filteredAddresses[0], isDefault: true };
-      return filteredAddresses;
+      if (filteredAddresses.length !== 0) {
+        filteredAddresses[0] = { ...filteredAddresses[0], isDefault: true };
+        return filteredAddresses;
+      }
+
+      return [];
     });
   };
 

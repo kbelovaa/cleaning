@@ -1,0 +1,32 @@
+.selected-option {
+  &__value {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .address-select &__name {
+    letter-spacing: 0.32px;
+  }
+
+  &__info {
+    color: #92a1a9;
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.22px;
+  }
+}
+
+.options-wrapper {
+  &.s {
+    height: 64px;
+  }
+
+  &.m {
+    height: 112px;
+  }
+
+  &.l {
+    height: 160px;
+  }
+}

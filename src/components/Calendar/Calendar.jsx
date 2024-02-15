@@ -246,7 +246,8 @@ const Calendar = ({
                   <span className="calendar__price">
                     {repeat !== 'Custom schedule' &&
                     repeat !== 'One-time' &&
-                    subscriptionPrices.length === Number(duration) && Number(duration) !== 0
+                    subscriptionPrices.length === Number(duration) &&
+                    Number(duration) !== 0
                       ? `€${roundPrice(
                           subscriptionPrices[selectedDays.findIndex((elem) => elem === format(day, 'dd.MM.yyyy'))]
                             .total,
