@@ -12,6 +12,7 @@ const CancellationPolicy = () => {
           <h2 className="cancellation__title">{t('cancellationPolicy')}</h2>
           <div className="cancellation__point">
             <p className="cancellation__text">{t('cancelOrEditAppointment')}</p>
+            <p className="cancellation__text">{t('plansCanChange')}</p>
           </div>
           <div className="cancellation__point">
             <table className="cancellation__conditions">
