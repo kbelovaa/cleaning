@@ -59,7 +59,7 @@ const AddressSelect = ({ options, selectedOption, setSelectedOption }) => {
         <div className="selected-option" onClick={() => setIsOpen(!isOpen)}>
           <div className="selected-option__value">
             <span className="selected-option__name">
-              {`${selectedAddress.address}, ${selectedAddress.secondAddress}, ${selectedAddress.postalCode}, ${selectedAddress.city}, ${selectedAddress.province}`}
+              {`${selectedAddress.address}${selectedAddress.secondAddress ? `, ${selectedAddress.secondAddress}` : ''}, ${selectedAddress.postalCode}, ${selectedAddress.city}, ${selectedAddress.province}`}
             </span>
             <span className="selected-option__info">
               {`${selectedAddress.size} m`}
@@ -94,7 +94,7 @@ const AddressSelect = ({ options, selectedOption, setSelectedOption }) => {
             <ul className="options-list">
               {options.map((option, index) => (
                 <li key={index} onClick={() => handleOptionSelect(option._id)}>
-                  {`${option.address}, ${option.secondAddress}, ${option.postalCode}, ${option.city}, ${option.province}`}
+                  {`${option.address}${option.secondAddress ? `, ${option.secondAddress}` : ''}, ${option.postalCode}, ${option.city}, ${option.province}`}
                 </li>
               ))}
             </ul>

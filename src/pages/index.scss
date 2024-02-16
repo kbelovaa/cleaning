@@ -23,6 +23,12 @@
 }
 
 @font-face {
+  font-family: 'SF Pro Display';
+  src: url('../fonts/sfProDisplay-bold.woff') format('woff');
+  font-weight: 700;
+}
+
+@font-face {
   font-family: 'Inter';
   src: url('../fonts/inter-light.woff') format('woff');
   font-weight: 300;

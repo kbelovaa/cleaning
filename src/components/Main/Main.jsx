@@ -5,6 +5,7 @@ import cleaningImg from '../../images/cleaning.png';
 import cleaningImg1440 from '../../images/cleaning-1440.png';
 import cleaningImg1024 from '../../images/cleaning-1024.png';
 import cleaningImg390 from '../../images/cleaning-390.png';
+import stageImg from '../../images/stage.png';
 import './Main.scss';
 
 const Main = () => {
@@ -125,52 +126,32 @@ const Main = () => {
       <section className="system-section">
         <div className="container">
           <div className="system">
-            <h2 className="title system__title">{t('cleanHomeIn3Steps')}</h2>
+            <h2 className="title system__title">{t('howItWorks')}</h2>
             <div className="system__stages-wrap">
-              <div className="system__stages" ref={scrollContainerRef}>
-                <div className="system__stage" ref={stagesRefs.current[0]}>
-                  <h3 className="system__subtitle">{t('sendRequest')}</h3>
-                  <p className="system__text">{t('requestCleaning')}</p>
-                </div>
-                <div className="system__stage" ref={stagesRefs.current[1]}>
-                  <h3 className="system__subtitle">{t('receiveConf')}</h3>
-                  <p className="system__text">{t('receiveConfIn15Min')}</p>
-                </div>
-                <div className="system__stage" ref={stagesRefs.current[2]}>
-                  <h3 className="system__subtitle">{t('pay')}</h3>
-                  <p className="system__text">{t('securelyPay')}</p>
+              <div className="system__stage">
+                <img className="system__stage-background" src={stageImg} alt="Stage" />
+                <span className="system__stage-number">01</span>
+                <div className="system__stage-info">
+                  <h3 className="system__stage-subtitle">{t('request')}</h3>
+                  <p className="system__stage-text">{t('requestCleaning')}<br />{t('withClicks')}</p>
                 </div>
               </div>
-              <div
-                className={currentIndex === 0 ? 'hidden' : 'system__arrow system__arrow_prev'}
-                onClick={() => scrollToStage(-1)}
-              >
-                <svg
-                  className="system__arrow-sign"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                >
-                  <path d="M4 15.9993L28 15.9993" stroke="#268664" strokeLinecap="round" />
-                  <path d="M20 8L28 16L20 24" stroke="#268664" strokeLinecap="round" />
-                </svg>
+              <div className="system__stage">
+                <img className="system__stage-background" src={stageImg} alt="Stage" />
+                <span className="system__stage-number">02</span>
+                <div className="system__stage-info">
+                  <h3 className="system__stage-subtitle">{t('confirmation')}</h3>
+                  <p className="system__stage-text">{t('receiveConfIn15Min')}</p>
+                </div>
               </div>
-              <div
-                className={currentIndex === 2 ? 'hidden' : 'system__arrow system__arrow_next'}
-                onClick={() => scrollToStage(1)}
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
-                  <path d="M4 15.9993L28 15.9993" stroke="#268664" strokeLinecap="round" />
-                  <path d="M20 8L28 16L20 24" stroke="#268664" strokeLinecap="round" />
-                </svg>
+              <div className="system__stage">
+                <img className="system__stage-background" src={stageImg} alt="Stage" />
+                <span className="system__stage-number">03</span>
+                <div className="system__stage-info">
+                  <h3 className="system__stage-subtitle">{t('enjoy')}</h3>
+                  <p className="system__stage-text">{t('spendYourTime')}</p>
+                </div>
               </div>
-            </div>
-            <div className="system__dots">
-              <div className={`system__dot ${currentIndex === 0 ? 'system__dot_active' : ''}`}></div>
-              <div className={`system__dot ${currentIndex === 1 ? 'system__dot_active' : ''}`}></div>
-              <div className={`system__dot ${currentIndex === 2 ? 'system__dot_active' : ''}`}></div>
             </div>
           </div>
         </div>
@@ -228,6 +209,30 @@ const Main = () => {
                 <path d="M15 18.5L21 12.5L15 6.5" stroke="white" strokeLinecap="round" />
               </svg>
             </button>
+          </div>
+        </div>
+      </section>
+      <section className="reviews-section">
+        <div className="container">
+          <div className="reviews">
+            <div className="reviews__block">
+              <h5 className="reviews__subtitle">{t('happyUsers')}</h5>
+              <span className="reviews__text">{'<250'}</span>
+            </div>
+            <div className="reviews__block">
+              <h5 className="reviews__subtitle">{t('service')}</h5>
+              <div className="reviews__stars">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <svg key={index} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M11.9996 17.8441L6.18281 20.9021L7.29371 14.4251L2.58786 9.838L9.09119 8.89301L11.9996 3L14.9079 8.89301L21.4113 9.838L16.7054 14.4251L17.8163 20.9021L11.9996 17.8441Z" fill="#268664" stroke="#268664" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                ))}
+              </div>
+            </div>
+            <div className="reviews__block">
+              <h5 className="reviews__subtitle">{t('paySecure')}</h5>
+              <span className="reviews__text">{t('withStripe')}</span>
+            </div>
           </div>
         </div>
       </section>
