@@ -134,7 +134,7 @@ const Orders = () => {
                                 .join(', ')}, ${findActiveOrders(order, jobs)[0].time}`}
                             </div>
                             {order.subscriptionType !== 'One-time' && (
-                              <p className="order__duration">{`Duration: ${findPastOrders(order.orders, jobs).length}/${
+                              <p className="order__duration">{`${t('duration')}: ${findPastOrders(order.orders, jobs).length}/${
                                 order.orders.length
                               }`}</p>
                             )}
