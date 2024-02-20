@@ -70,7 +70,7 @@ const AddressSelect = ({ options, selectedOption, setSelectedOption }) => {
                 bedrooms.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.bedrooms),
               )} - ${t(
                 bathrooms.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.bathrooms),
-              )} - ${kitchens.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.kitchens)}`}
+              )} - ${t(kitchens.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.kitchens))}`}
             </span>
           </div>
           <svg

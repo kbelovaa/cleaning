@@ -20,7 +20,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
     <div className={`order-card ${isExpanded ? 'expanded' : ''}`} onClick={handleToggle}>
       <div className="order-card__info">
         <div className="order-card__title">
-          <h3 className="order-card__type">{order.serviceType.type}</h3>
+          <h3 className="order-card__type">{t(order.serviceType.type)}</h3>
           <svg
             className={isExpanded ? 'arrow rotated' : 'arrow'}
             xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
         <div className="order-card__short">
           <p className="order-card__extras">
             {order.extraServices
-              .reduce((acc, curr) => acc + `${curr.type}${curr.count > 1 ? ` (x${curr.count})` : ''}, `, '')
+              .reduce((acc, curr) => acc + `${t(curr.type)}${curr.count > 1 ? ` (x${curr.count})` : ''}, `, '')
               .slice(0, -2)}
           </p>
           <p className="order-card__data">

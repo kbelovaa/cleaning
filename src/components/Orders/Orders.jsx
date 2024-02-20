@@ -172,7 +172,7 @@ const Orders = () => {
                         >
                           <div className="order__info">
                             <div className="order__title">
-                              <h3 className="order__type">{order.serviceType.type}</h3>
+                              <h3 className="order__type">{t(order.serviceType.type)}</h3>
                             </div>
                             <p className="order__address">
                               {`${order.address.address}${

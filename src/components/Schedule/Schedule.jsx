@@ -79,7 +79,7 @@ const Schedule = () => {
                     .join(', ')}, ${activeOrders[0].time}`}</h3>
                 </div>
                 <div className="cleaning__line">
-                  <span>{activeOrders[0].serviceType.type}</span>
+                  <span>{t(activeOrders[0].serviceType.type)}</span>
                   <span>{`€${roundPrice(
                     activeOrders[0].orderPriceId.cleaningSum * activeOrders[0].orderPriceId.timeCoeff,
                   )}`}</span>
