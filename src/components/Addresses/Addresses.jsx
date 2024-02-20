@@ -69,6 +69,14 @@ const Addresses = () => {
 
       return [];
     });
+
+    if (sessionStorage.getItem('cleaning')) {
+      const cleaning = JSON.parse(sessionStorage.getItem('cleaning'));
+      if (cleaning.defaultAddressId === address._id) {
+        const updatedCleaning = { ...cleaning, defaultAddressId: '' };
+        sessionStorage.setItem('cleaning', JSON.stringify(updatedCleaning));
+      }
+    }
   };
 
   return (

@@ -185,16 +185,42 @@ const Address = () => {
           </div>
           <div className="address__apartment">
             <div className="form__input-wrap">
-              <label htmlFor="size" className="form__label">
+              <label htmlFor="size" className={`form__label ${addressId ? 'disabled' : ''}`}>
                 {t('apartmentSize')}
                 <sup className="top-index">2</sup>
+                <svg
+                  className={address1 ? 'lock' : 'hidden'}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="17"
+                  viewBox="0 0 16 17"
+                  fill="none"
+                >
+                  <rect
+                    x="3.33337"
+                    y="7.83398"
+                    width="9.33333"
+                    height="6.66667"
+                    rx="1"
+                    stroke="#268664"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
+                    stroke="#268664"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
               </label>
               <input
                 id="size"
                 type="text"
-                className={`input ${!apartmentSize ? 'invalid-field' : ''}`}
+                className={`input ${addressId ? 'disabled' : !apartmentSize ? 'invalid-field' : ''}`}
                 value={apartmentSize}
                 onChange={(e) => handleApartmentSizeChange(e.target.value)}
+                disabled={addressId}
               />
               <p className={isApartmentSizeValid ? 'hidden' : 'auth__note'}>
                 {t('apartmentSizeMessage')}
@@ -202,24 +228,132 @@ const Address = () => {
               </p>
             </div>
             <div className="form__properties">
-              <div className="form__property">
-                <span className="form__label">{t('howManyLivingRooms')}</span>
+              <div className={`form__property ${addressId ? 'disabled' : ''}`}>
+                <span className="form__label">
+                  {t('howManyLivingRooms')}
+                  <svg
+                    className={address1 ? 'lock' : 'hidden'}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                  >
+                    <rect
+                      x="3.33337"
+                      y="7.83398"
+                      width="9.33333"
+                      height="6.66667"
+                      rx="1"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
                 <CustomSelect
                   options={livingRooms}
                   selectedOption={livingRoomsNum}
                   setSelectedOption={setLivingRoomsNum}
                 />
               </div>
-              <div className="form__property">
-                <span className="form__label">{t('howManyBedrooms')}</span>
+              <div className={`form__property ${addressId ? 'disabled' : ''}`}>
+                <span className="form__label">
+                  {t('howManyBedrooms')}
+                  <svg
+                    className={address1 ? 'lock' : 'hidden'}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                  >
+                    <rect
+                      x="3.33337"
+                      y="7.83398"
+                      width="9.33333"
+                      height="6.66667"
+                      rx="1"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
                 <CustomSelect options={bedrooms} selectedOption={bedroomsNum} setSelectedOption={setBedroomsNum} />
               </div>
-              <div className="form__property">
-                <span className="form__label">{t('howManyBathrooms')}</span>
+              <div className={`form__property ${addressId ? 'disabled' : ''}`}>
+                <span className="form__label">
+                  {t('howManyBathrooms')}
+                  <svg
+                    className={address1 ? 'lock' : 'hidden'}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                  >
+                    <rect
+                      x="3.33337"
+                      y="7.83398"
+                      width="9.33333"
+                      height="6.66667"
+                      rx="1"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
                 <CustomSelect options={bathrooms} selectedOption={bathroomsNum} setSelectedOption={setBathroomsNum} />
               </div>
-              <div className="form__property">
-                <span className="form__label">{t('howManyKitchens')}</span>
+              <div className={`form__property ${addressId ? 'disabled' : ''}`}>
+                <span className="form__label">
+                  {t('howManyKitchens')}
+                  <svg
+                    className={address1 ? 'lock' : 'hidden'}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="17"
+                    viewBox="0 0 16 17"
+                    fill="none"
+                  >
+                    <rect
+                      x="3.33337"
+                      y="7.83398"
+                      width="9.33333"
+                      height="6.66667"
+                      rx="1"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
                 <CustomSelect options={kitchens} selectedOption={kitchensNum} setSelectedOption={setKitchensNum} />
                 <p className={!isFormValid ? 'auth__note' : 'hidden'}>{t('fillInAllFieldsMessage')}</p>
               </div>

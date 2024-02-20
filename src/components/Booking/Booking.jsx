@@ -28,7 +28,7 @@ import {
   livingRooms,
 } from '../../constants/selectOptions';
 import { getTimeCoeff, calculateCleaningTypePrice, roundPrice } from '../../utils/calculatePrice';
-import formatDate from '../../utils/formatDate';
+import { formatDate } from '../../utils/formatDate';
 import AddressSelect from '../AddressSelect/AddressSelect';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import Calendar from '../Calendar/Calendar';

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import { roundPrice } from '../../utils/calculatePrice';
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import formatDate from '../../utils/formatDate';
+import { formatDate } from '../../utils/formatDate';
 import './ScheduleWindow.scss';
 
 const ScheduleWindow = ({

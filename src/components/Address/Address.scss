@@ -25,3 +25,25 @@
     margin-top: 60px;
   }
 }
+
+.form__property.disabled {
+  pointer-events: none;
+
+  & .selected-option__name {
+    color: #92a1a9;
+  }
+}
+
+.form__label {
+  position: relative;
+
+  &.disabled {
+    pointer-events: none;
+  }
+}
+
+.lock {
+  position: absolute;
+  bottom: 4px;
+  margin-left: 5px;
+}

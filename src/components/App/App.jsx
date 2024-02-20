@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { auth } from '../../http/authAPI';
 import {
@@ -14,7 +13,6 @@ import {
   setTimePricingAsync,
 } from '../../store/actions/servicesActions';
 import { setIpCountryAction, setIsAuthAction, setUserAction } from '../../store/actions/userActions';
-import getCookieToken from '../../utils/cookiesToken';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -30,6 +28,7 @@ import Addresses from '../Addresses/Addresses';
 import Orders from '../Orders/Orders';
 import Settings from '../Settings/Settings';
 import Password from '../Password/Password';
+import Schedule from '../Schedule/Schedule';
 import '../../utils/i18n';
 import './App.scss';
 
@@ -105,6 +104,8 @@ const App = () => {
           <Route path="orders" element={<Orders />} />
           <Route path="settings" element={<Settings />} />
           <Route path="settings/change-password" element={<Password />} />
+          <Route path="schedule/:subscriptionId" element={<Schedule />} />
+          <Route path="receipt/:orderId" element={<Summary />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

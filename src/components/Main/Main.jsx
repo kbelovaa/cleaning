@@ -133,7 +133,11 @@ const Main = () => {
                 <span className="system__stage-number">01</span>
                 <div className="system__stage-info">
                   <h3 className="system__stage-subtitle">{t('request')}</h3>
-                  <p className="system__stage-text">{t('requestCleaning')}<br />{t('withClicks')}</p>
+                  <p className="system__stage-text">
+                    {t('requestCleaning')}
+                    <br />
+                    {t('withClicks')}
+                  </p>
                 </div>
               </div>
               <div className="system__stage">
@@ -223,8 +227,23 @@ const Main = () => {
               <h5 className="reviews__subtitle">{t('service')}</h5>
               <div className="reviews__stars">
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <svg key={index} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M11.9996 17.8441L6.18281 20.9021L7.29371 14.4251L2.58786 9.838L9.09119 8.89301L11.9996 3L14.9079 8.89301L21.4113 9.838L16.7054 14.4251L17.8163 20.9021L11.9996 17.8441Z" fill="#268664" stroke="#268664" strokeLinecap="round" strokeLinejoin="round"/>
+                  <svg
+                    key={index}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M11.9996 17.8441L6.18281 20.9021L7.29371 14.4251L2.58786 9.838L9.09119 8.89301L11.9996 3L14.9079 8.89301L21.4113 9.838L16.7054 14.4251L17.8163 20.9021L11.9996 17.8441Z"
+                      fill="#268664"
+                      stroke="#268664"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 ))}
               </div>

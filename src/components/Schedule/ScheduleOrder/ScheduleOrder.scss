@@ -1,0 +1,125 @@
+.order-card {
+  padding: 30px 0;
+  cursor: pointer;
+  position: relative;
+
+  &.expanded {
+    padding-bottom: 8px;
+  }
+
+  &::after {
+    display: block;
+    content: '';
+    background: #d9d9d9;
+    width: 100%;
+    height: 1px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 0;
+  }
+
+  &:last-of-type::after {
+    display: none;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  &__type {
+    color: #3a3a3a;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 0.48px;
+  }
+
+  &__short {
+    max-height: 55px;
+    transition: max-height 0.4s ease;
+
+    .order-card.expanded & {
+      max-height: 0;
+      overflow: hidden;
+    }
+  }
+
+  &__extras {
+    color: #92a1a9;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+  }
+
+  &__data {
+    color: #3a3a3a;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  &__content {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.4s ease,
+      opacity 0.4s ease;
+    opacity: 0;
+
+    .order-card.expanded & {
+      max-height: 1000px;
+      opacity: 1;
+    }
+  }
+
+  &__line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 0.4px;
+    margin-bottom: 5px;
+
+    .order-card__extras-list & {
+      margin-bottom: 0;
+    }
+
+    .order-card__content > &:nth-last-of-type(2) .order-card__value {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.48px;
+    }
+
+    .order-card__content > &:nth-last-of-type(3) {
+      margin-bottom: 20px;
+    }
+
+    .order-card__content > &:nth-last-of-type(4) {
+      margin-top: 20px;
+    }
+
+    .order-card__content > &:last-of-type {
+      color: #92a1a9;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: normal;
+      margin: 30px 0 0;
+    }
+  }
+
+  &__value {
+    display: flex;
+    align-items: center;
+  }
+
+  &__extras-list {
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+}

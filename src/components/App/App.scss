@@ -103,6 +103,11 @@
   &:focus-visible {
     border: 1px solid #51ca9f;
   }
+
+  &.disabled {
+    color: #92a1a9;
+    pointer-events: none;
+  }
 }
 
 .invalid .invalid-field {

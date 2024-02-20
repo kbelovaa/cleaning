@@ -1,6 +1,6 @@
 import format from 'date-fns/format';
 
-function formatDate(dateString) {
+const formatDate = (dateString) => {
   const dateParts = dateString.split('.');
   const day = parseInt(dateParts[0], 10);
   const month = parseInt(dateParts[1], 10);
@@ -11,6 +11,16 @@ function formatDate(dateString) {
   const formattedDate = `${dateString}, ${format(date, 'EEEE')}`;
 
   return formattedDate;
-}
+};
 
-export default formatDate;
+const getDateFromDateObject = (date) => {
+  const formattedDate = date.slice(0, 10).split('-').reverse().join('.');
+  return formattedDate;
+};
+
+const createDateObject = (dateString) => {
+  const formattedDate = `${dateString.split('.').reverse().join('-')}T00:00:00.000+00:00`;
+  return formattedDate;
+};
+
+export { formatDate, getDateFromDateObject, createDateObject };

@@ -1,250 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { setCleaningAction } from '../../store/actions/cleaningActions';
-import { defaultState } from '../../store/reducers/cleaningReducer';
-import { formatDate, getDateFromDateObject, createDateObject } from '../../utils/formatDate';
-import { createOrder, getSubscriptions } from '../../http/orderAPI';
-import { roundPrice } from '../../utils/calculatePrice';
-import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
-import edit from '../../images/edit.png';
-import ScheduleWindow from '../ScheduleWindow/ScheduleWindow';
-import './Summary.scss';
+import { useParams } from 'react-router-dom';
+import { getOrder } from '../../http/orderAPI';
+import './Receipt.scss';
 
-const Summary = () => {
-  const dispatch = useDispatch();
+const Receipt = () => {
+  const [order, setOrder] = useState({});
 
-  const user = useSelector((state) => state.user);
-  const pricing = useSelector((state) => state.services.pricing);
-  const cleaningState = useSelector((state) => state.cleaning);
-
-  const [policyAccepting, setPolicyAccepting] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [isScheduleOpen, setIsScheduleOpen] = useState(false);
-  const [cleaning, setCleaning] = useState(cleaningState);
-  const [loading, setLoading] = useState(false);
-
-  const { t } = useTranslation();
-
-  const { pathname } = useLocation();
-  const isConfirmation = pathname === '/confirmation';
+  const { orderId } = useParams();
 
   useEffect(() => {
-    if (!cleaningState.address1 && sessionStorage.getItem('cleaning')) {
-      const cleaning = JSON.parse(sessionStorage.getItem('cleaning'));
-      dispatch(setCleaningAction(cleaning));
-      setCleaning(cleaning);
-    }
-  }, []);
-
-  useEffect(() => {
-    const getLastSubscription = async () => {
-      const subscriptions = await getSubscriptions(user.id);
-      const lastSubscription = subscriptions[subscriptions.length - 1];
-      const order = lastSubscription.orders[0];
-      const formattedOrder = {
-        selectedCleaning: order.serviceType,
-        selectedServices: order.extraServices,
-        repeat: lastSubscription.subscriptionType,
-        selectedSpeed: order.howFast,
-        defaultAddressId: order.address._id,
-        apartmentSize: order.address.size,
-        livingRoomsNum: livingRooms.find((elem) => Number(elem.split(' ')[0]) === order.address.livingRooms),
-        bedroomsNum: bedrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bedrooms),
-        bathroomsNum: bathrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bathrooms),
-        kitchensNum: kitchens.find((elem) => Number(elem.split(' ')[0]) === order.address.kitchens),
-        address1: order.address.address,
-        address2: order.address.secondAddress,
-        postalCode: order.address.postalCode,
-        city: order.address.city,
-        province: order.address.province,
-        instructions: order.specialInstructions,
-        cleaningSum: order.orderPriceId.cleaningSum,
-        speedSum: order.orderPriceId.speedSum,
-        ivaPercent: order.orderPriceId.taxPercent,
-      };
-
-      if (lastSubscription.subscriptionType === 'One-time') {
-        formattedOrder.date = getDateFromDateObject(order.date);
-        formattedOrder.time = order.time;
-        formattedOrder.tariff = order.orderPriceId.tariffNumber;
-        formattedOrder.timeCoeff = order.orderPriceId.timeCoeff;
-        formattedOrder.timeSum = order.orderPriceId.timeSum;
-        formattedOrder.subtotal = order.orderPriceId.subtotalSum;
-        formattedOrder.iva = order.orderPriceId.tax;
-        formattedOrder.total = order.orderPriceId.totalSum;
-      } else if (lastSubscription.subscriptionType === 'Custom schedule') {
-        formattedOrder.customSchedule = lastSubscription.orders.map((elem) => ({
-          date: getDateFromDateObject(elem.date),
-          time: elem.time,
-          timeSum: elem.orderPriceId.timeSum,
-          subtotal: elem.orderPriceId.subtotalSum,
-          iva: elem.orderPriceId.tax,
-          total: elem.orderPriceId.totalSum,
-          tariff: elem.orderPriceId.tariffNumber,
-          timeCoeff: elem.orderPriceId.timeCoeff,
-        }));
-      } else {
-        formattedOrder.dates = lastSubscription.orders.map((elem) => getDateFromDateObject(elem.date));
-        formattedOrder.time = order.time;
-        formattedOrder.startDate = getDateFromDateObject(lastSubscription.startDate);
-        formattedOrder.lastDate = getDateFromDateObject(lastSubscription.lastDate);
-        formattedOrder.duration = lastSubscription.duration;
-        formattedOrder.excludedDates = lastSubscription.excludedDates.map((elem) => ({
-          date: getDateFromDateObject(elem),
-        }));
-        formattedOrder.subscriptionPrices = lastSubscription.orders.map((elem) => ({
-          timeSum: elem.orderPriceId.timeSum,
-          subtotal: elem.orderPriceId.subtotalSum,
-          iva: elem.orderPriceId.tax,
-          total: elem.orderPriceId.totalSum,
-          tariff: elem.orderPriceId.tariffNumber,
-          timeCoeff: elem.orderPriceId.timeCoeff,
-        }));
-      }
-
-      setCleaning(formattedOrder);
+    const getData = async () => {
+      const order = await getOrder(orderId);
+      setOrder(order);
     };
 
-    if (isConfirmation && user.id) {
-      getLastSubscription();
+    if (orderId) {
+      getData();
     }
-  }, [user, pathname]);
-
-  const navigate = useNavigate();
-
-  const formOrder = async () => {
-    const orderObject = {
-      userId: user.id,
-      subscriptionType: cleaning.repeat,
-      address: {},
-    };
-
-    const dateArr =
-      cleaning.repeat === 'One-time'
-        ? [cleaning.date]
-        : cleaning.repeat === 'Custom schedule'
-        ? cleaning.customSchedule
-        : cleaning.dates;
-
-    orderObject.orders = dateArr.map((elem, index) => {
-      const dateString = cleaning.repeat === 'Custom schedule' ? elem.date : elem;
-      const order = {
-        date: createDateObject(dateString),
-        serviceTypeId: cleaning.selectedCleaning._id,
-        extraServices: cleaning.selectedServices.map((elem) => ({ extraServiceId: elem._id, count: elem.count })),
-        howFast: cleaning.selectedSpeed,
-        specialInstructions: cleaning.instructions,
-        cleaningSum: cleaning.cleaningSum,
-        speedSum: cleaning.speedSum,
-        taxPercent: cleaning.ivaPercent,
-        feePercent: pricing.feePercent,
-        socialSecurityPercent: pricing.socialSecurityPercent,
-      };
-
-      if (cleaning.repeat !== 'Custom schedule') {
-        order.time = cleaning.time;
-      } else {
-        order.time = elem.time;
-      }
-
-      const obj =
-        cleaning.repeat === 'One-time'
-          ? cleaning
-          : cleaning.repeat === 'Custom schedule'
-          ? elem
-          : cleaning.subscriptionPrices[index];
-
-      order.timeCoeff = obj.timeCoeff;
-      order.tariffNumber = obj.tariff;
-      order.timeSum = obj.timeSum;
-      order.subtotalSum = obj.subtotal;
-      order.tax = obj.iva;
-      order.totalSum = obj.total;
-      order.feeSum = obj.subtotal * (pricing.feePercent / 100);
-      order.socialSecuritySum =
-        obj.subtotal -
-        obj.subtotal * (pricing.feePercent / 100) -
-        (obj.subtotal - obj.subtotal * (pricing.feePercent / 100)) / pricing.socialSecurityPercent;
-      order.salary = (obj.subtotal - obj.subtotal * (pricing.feePercent / 100)) / pricing.socialSecurityPercent;
-
-      if (cleaning.defaultAddressId) {
-        orderObject.addressId = cleaning.defaultAddressId;
-      } else {
-        orderObject.address.address = cleaning.address1;
-        orderObject.address.secondAddress = cleaning.address2;
-        orderObject.address.postalCode = cleaning.postalCode;
-        orderObject.address.city = cleaning.city;
-        orderObject.address.province = cleaning.province;
-        orderObject.address.size = Number(cleaning.apartmentSize);
-        orderObject.address.livingRooms = Number(cleaning.livingRoomsNum.split(' ')[0]);
-        orderObject.address.bedrooms = Number(cleaning.bedroomsNum.split(' ')[0]);
-        orderObject.address.bathrooms = Number(cleaning.bathroomsNum.split(' ')[0]);
-        orderObject.address.kitchens = Number(cleaning.kitchensNum.split(' ')[0]);
-      }
-
-      return order;
-    });
-
-    if (cleaning.repeat !== 'One-time' && cleaning.repeat !== 'Custom schedule') {
-      orderObject.startDate = createDateObject(cleaning.startDate);
-      orderObject.lastDate = createDateObject(cleaning.lastDate);
-      orderObject.duration = cleaning.duration;
-      orderObject.excludedDates = cleaning.excludedDates.every((elem) => elem.date)
-        ? cleaning.excludedDates.map((elem) => createDateObject(elem.date))
-        : [];
-    }
-
-    const result = await createOrder(orderObject);
-    return result;
-  };
-
-  const clearStore = () => {
-    dispatch(setCleaningAction(defaultState));
-    sessionStorage.removeItem('cleaning');
-  };
-
-  const handlepolicyAcceptingChange = () => {
-    setPolicyAccepting((state) => !state);
-    setShowNotification(false);
-  };
-
-  const handleEditClick = () => {
-    if (!editMode) {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
-
-    setEditMode((state) => !state);
-  };
-
-  const handlePayment = async () => {
-    if (policyAccepting) {
-      setLoading(true);
-      const result = await formOrder();
-      if (result.status === 201) {
-        //оплата
-        // если оплата успешна, то clearStore
-        clearStore();
-        // поменять статус заказа на paid
-        navigate('/confirmation');
-        setLoading(false);
-      }
-    } else {
-      setShowNotification(true);
-    }
-  };
+  }, [orderId]);
 
   return (
     <>
       <div className="container">
         <div className="total-summary">
-          <h1 className="total-summary__title">{isConfirmation ? t('confirmation') : t('summary')}</h1>
+          <h1 className="total-summary__title">Receipt</h1>
           {!cleaning.address1 ? (
             <div className="spinner"></div>
           ) : (
@@ -791,4 +570,4 @@ const Summary = () => {
   );
 };
 
-export default Summary;
+export default Receipt;

@@ -28,7 +28,7 @@
     .total-summary__data > &:nth-of-type(6),
     .total-summary__data > &:last-of-type {
       font-size: 24px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.48px;
       margin-bottom: 20px;
     }
@@ -115,29 +115,50 @@
   &__edit {
     width: 24px;
     height: 24px;
-    margin: 1px 10px 0 0;
-    position: absolute;
-    left: 0;
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
-
-    .total-summary__data > .total-summary__line:nth-of-type(1) &,
-    .total-summary__data > .total-summary__line:nth-of-type(2) &,
-    .total-summary__address & {
-      margin-top: 3px;
-    }
 
     .total-summary__btn & {
       position: static;
       opacity: 1;
     }
 
-    .edit & {
-      opacity: 1;
-      left: -34px;
-      cursor: pointer;
-      pointer-events: auto;
+    &-wrap {
+      margin: 1px 10px 0 0;
+      position: absolute;
+      left: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+
+      .edit & {
+        opacity: 1;
+        left: -34px;
+        cursor: pointer;
+        pointer-events: auto;
+      }
+
+      &::after {
+        display: block;
+        content: '';
+        background: transparent;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        position: absolute;
+        top: -8px;
+        left: -8px;
+      }
+
+      &:hover::after {
+        background: rgba(38, 134, 100, 0.07);
+      }
+
+      &:active::after,
+      &:focus::after,
+      &:focus-visible::after,
+      &:focus-within::after {
+        background: rgba(38, 134, 100, 0.16);
+      }
     }
   }
 

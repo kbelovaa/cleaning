@@ -45,10 +45,17 @@
     }
   }
 
+  &__list > li {
+    margin-top: 40px;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
   &__item {
     display: flex;
     align-items: center;
-    margin-top: 40px;
   }
 
   &__link {
