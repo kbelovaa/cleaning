@@ -21,16 +21,23 @@ const ScheduleOrder = ({ order, isCompleted }) => {
       <div className="order-card__info">
         <div className="order-card__title">
           <h3 className="order-card__type">{t(order.serviceType.type)}</h3>
-          <svg
-            className={isExpanded ? 'arrow rotated' : 'arrow'}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <path d="M6 10L12 16L18 10" stroke="#000000" strokeLinecap="round" />
-          </svg>
+          <div className="order-card__price">
+            {isExpanded && (
+              <span className="order-card__price-sum">{`€${roundPrice(
+                order.orderPriceId.cleaningSum * order.orderPriceId.timeCoeff,
+              )}`}</span>
+            )}
+            <svg
+              className={isExpanded ? 'arrow rotated' : 'arrow'}
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path d="M6 10L12 16L18 10" stroke="#000000" strokeLinecap="round" />
+            </svg>
+          </div>
         </div>
         <div className="order-card__short">
           <p className="order-card__extras">

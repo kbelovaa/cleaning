@@ -3,7 +3,7 @@ import $host from './index';
 export const getOrder = async (orderId) => {
   try {
     const { data } = await $host.get(`api/order/get_order/${orderId}`);
-    return data.order;
+    return data;
   } catch (error) {
     return { error: 'Unexpected error' };
   }

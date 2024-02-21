@@ -7,7 +7,7 @@ import Authorization from '../Authorization/Authorization';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './Header.scss';
 
-const Header = () => {
+const Header = ({ loading }) => {
   const isAuth = useSelector((state) => state.user.isAuth);
 
   const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
@@ -106,7 +106,7 @@ const Header = () => {
             <span className={`header__label ${showSdl ? '' : 'header__label_hidden'}`} onClick={() => navigate('/')}>
               Sdl
             </span>
-            <nav className="header__menu">
+            <nav className={`header__menu ${loading ? '' : 'visible'}`}>
               <ul className="header__auth">
                 <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   {t('signUp')}
@@ -177,12 +177,7 @@ const Header = () => {
         isLogin={isLoginOpen}
         setIsLogin={setIsLoginOpen}
       />
-      <BurgerMenu
-        isOpen={isBurgerMenuOpen}
-        setIsOpen={setIsBurgerMenuOpen}
-        setIsLoginOpen={setIsLoginOpen}
-        setIsAuthorizationOpen={setIsAuthorizationOpen}
-      />
+      <BurgerMenu isOpen={isBurgerMenuOpen} setIsOpen={setIsBurgerMenuOpen} />
     </div>
   );
 };

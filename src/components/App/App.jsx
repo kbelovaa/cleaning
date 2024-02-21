@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -29,10 +29,13 @@ import Orders from '../Orders/Orders';
 import Settings from '../Settings/Settings';
 import Password from '../Password/Password';
 import Schedule from '../Schedule/Schedule';
+import Receipt from '../Receipt/Receipt';
 import '../../utils/i18n';
 import './App.scss';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
 
@@ -51,6 +54,8 @@ const App = () => {
         dispatch(setIsAuthAction(true));
         dispatch(setUserAction(result));
       }
+
+      setLoading(false);
     };
 
     getUser();
@@ -87,10 +92,10 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Header />}>
+        <Route path="/" element={<Header loading={loading} />}>
           <Route index element={<Main />} />
-          <Route path="booking" element={<Booking />} />
-          <Route path="booking/edit/*" element={<Booking />} />
+          <Route path="booking" element={<Booking loading={loading} />} />
+          <Route path="booking/edit/*" element={<Booking loading={loading} />} />
           <Route path="summary" element={<Summary />} />
           <Route path="confirmation" element={<Summary />} />
           <Route path="contact-us" element={<ContactUs />} />
@@ -105,7 +110,7 @@ const App = () => {
           <Route path="settings" element={<Settings />} />
           <Route path="settings/change-password" element={<Password />} />
           <Route path="schedule/:subscriptionId" element={<Schedule />} />
-          <Route path="receipt/:orderId" element={<Summary />} />
+          <Route path="receipt/:orderId" element={<Receipt />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

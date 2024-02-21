@@ -62,7 +62,12 @@
 }
 
 .book {
-  display: flex;
+  display: none;
+
+  &.visible {
+    display: flex;
+    animation: fadeIn 0.3s ease-in;
+  }
 
   @media screen and (max-width: 744px) {
     flex-direction: column;

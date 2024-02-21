@@ -553,13 +553,13 @@
   justify-content: center;
 
   &__block {
-    width: 248px;
+    min-width: 248px;
     height: 130px;
     background: rgba(38, 134, 100, 0.02);
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 30px;
+    padding: 30px;
     margin-right: 20px;
 
     &:last-of-type {

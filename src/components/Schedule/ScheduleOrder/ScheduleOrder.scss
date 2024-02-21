@@ -27,14 +27,24 @@
     align-items: center;
     justify-content: space-between;
     margin-bottom: 20px;
-  }
-
-  &__type {
     color: #3a3a3a;
     font-size: 24px;
     font-weight: 400;
     line-height: 130%;
     letter-spacing: 0.48px;
+  }
+
+  &__type {
+    font-weight: 400;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+
+    &-sum {
+      margin-right: 10px;
+    }
   }
 
   &__short {
@@ -54,6 +64,10 @@
     line-height: 130%;
     letter-spacing: 0.4px;
     margin-bottom: 5px;
+    width: calc(100% - 40px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__data {
@@ -70,6 +84,7 @@
       max-height 0.4s ease,
       opacity 0.4s ease;
     opacity: 0;
+    width: calc(100% - 34px);
 
     .order-card.expanded & {
       max-height: 1000px;

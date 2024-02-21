@@ -445,7 +445,14 @@ const Summary = () => {
                 </div>
                 <div className="total-summary__line">
                   <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
-                    <div className="total-summary__edit-wrap" onClick={() => navigate('/booking/edit/size')}>
+                    <div
+                      className="total-summary__edit-wrap"
+                      onClick={() =>
+                        cleaning.defaultAddressId
+                          ? navigate('/booking/edit/address-select')
+                          : navigate('/booking/edit/size')
+                      }
+                    >
                       <img className="total-summary__edit" src={edit} alt="Edit" />
                     </div>
                     {t('apartmentSize')}

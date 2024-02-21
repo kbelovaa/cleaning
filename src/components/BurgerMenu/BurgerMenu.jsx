@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
+import { setCleaningAction } from '../../store/actions/cleaningActions';
+import { defaultState } from '../../store/reducers/cleaningReducer';
 import { logOut } from '../../http/authAPI';
 import './BurgerMenu.scss';
 
-const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen }) => {
+const BurgerMenu = ({ isOpen, setIsOpen }) => {
   const isAuth = useSelector((state) => state.user.isAuth);
 
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
@@ -40,6 +42,11 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
 
   const closeBurgerMenu = () => setIsOpen(false);
 
+  const clearStore = () => {
+    dispatch(setCleaningAction(defaultState));
+    sessionStorage.removeItem('cleaning');
+  };
+
   const handleLogOut = () => {
     closeBurgerMenu();
     logOut();
@@ -55,12 +62,7 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
       }),
     );
     navigate('/');
-  };
-
-  const handleAuthModalOpen = (isLoginOpen) => {
-    closeBurgerMenu();
-    setIsLoginOpen(isLoginOpen);
-    setIsAuthorizationOpen(true);
+    clearStore();
   };
 
   return (

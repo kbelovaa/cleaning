@@ -68,9 +68,9 @@ const AddressSelect = ({ options, selectedOption, setSelectedOption }) => {
               <sup className="top-index top-index_little">2</sup>
               {` - ${t(livingRooms.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.livingRooms))} - ${t(
                 bedrooms.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.bedrooms),
-              )} - ${t(
-                bathrooms.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.bathrooms),
-              )} - ${t(kitchens.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.kitchens))}`}
+              )} - ${t(bathrooms.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.bathrooms))} - ${t(
+                kitchens.find((elem) => Number(elem.split(' ')[0]) === selectedAddress.kitchens),
+              )}`}
             </span>
           </div>
           <svg

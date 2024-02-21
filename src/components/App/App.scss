@@ -250,6 +250,10 @@
   height: 100px;
   animation: spin 1s linear infinite;
 
+  .booking & {
+    margin-bottom: 200px;
+  }
+
   @media screen and (max-width: 1440px) {
     width: 85px;
     height: 85px;
@@ -289,5 +293,14 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

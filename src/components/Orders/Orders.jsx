@@ -134,9 +134,9 @@ const Orders = () => {
                                 .join(', ')}, ${findActiveOrders(order, jobs)[0].time}`}
                             </div>
                             {order.subscriptionType !== 'One-time' && (
-                              <p className="order__duration">{`${t('duration')}: ${findPastOrders(order.orders, jobs).length}/${
-                                order.orders.length
-                              }`}</p>
+                              <p className="order__duration">{`${t('duration')}: ${
+                                findPastOrders(order.orders, jobs).length
+                              }/${order.orders.length}`}</p>
                             )}
                           </div>
                           <svg
@@ -166,10 +166,7 @@ const Orders = () => {
                           new Date(order.date).getMonth() !== new Date(pastOrders[index - 1].date).getMonth() && (
                             <p className="orders__month">{t(months[new Date(order.date).getMonth()])}</p>
                           )}
-                        <div
-                          className="order"
-                          // onClick={() => navigate(`/receipt/${order._id}`)}
-                        >
+                        <div className="order" onClick={() => navigate(`/receipt/${order._id}`)}>
                           <div className="order__info">
                             <div className="order__title">
                               <h3 className="order__type">{t(order.serviceType.type)}</h3>

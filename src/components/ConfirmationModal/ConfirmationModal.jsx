@@ -17,7 +17,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
   const { t } = useTranslation();
 
   const { pathname } = useLocation();
-  const isReceipt = pathname === '/receipt';
+  const isReceipt = pathname.startsWith('/receipt');
   const isContactUs = pathname === '/contact-us';
   const isPersonalInfo = pathname === '/personal-info';
   const isPassword = pathname === '/settings/change-password';
@@ -40,7 +40,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
       navigate('/settings');
     }
 
-    if (!isPersonalInfo && !isContactUs && !isPassword) {
+    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt) {
       setEmail('');
     }
   };
@@ -79,7 +79,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
           <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
         </svg>
         <svg
-          className={isPersonalInfo || isPassword ? 'confirmation__tick' : ''}
+          className={isPersonalInfo || isPassword || isReceipt ? 'confirmation__tick' : ''}
           xmlns="http://www.w3.org/2000/svg"
           width="30"
           height="30"
@@ -105,7 +105,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
             : t('confirmationEmailSent')}
         </p>
         <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>{t('verifyNewEmail')}</p>
-        <span className={(isPersonalInfo && isNewEmail) || isContactUs ? 'confirmation__email' : 'hidden'}>
+        <span className={(isPersonalInfo && isNewEmail) || isContactUs || isReceipt ? 'confirmation__email' : 'hidden'}>
           {email}
         </span>
         <div
