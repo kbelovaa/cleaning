@@ -1,42 +1,54 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getAllJobs, getSubscription } from '../../http/orderAPI';
 import { findActiveOrders, findPastOrders } from '../../utils/ordersFunctions';
+import { setOpenedSubscriptionAction } from '../../store/actions/ordersActions';
 import { formatDate, getDateFromDateObject } from '../../utils/formatDate';
 import { roundPrice } from '../../utils/calculatePrice';
 import ScheduleOrder from './ScheduleOrder/ScheduleOrder';
 import './Schedule.scss';
 
 const Schedule = () => {
-  const [subscription, setSubscription] = useState({});
+  const orders = useSelector((state) => state.orders);
+  const subscription = useSelector((state) => state.orders.openedSubscription);
+
   const [activeOrders, setActiveOrders] = useState([]);
   const [pastOrders, setPastOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { subscriptionId } = useParams();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
+  const { subscriptionId } = useParams();
+
   const { t } = useTranslation();
+
+  const parseSubscription = (subscription, jobs) => {
+    const activeOrders = findActiveOrders(subscription, jobs).sort(
+      (order1, order2) => new Date(order1.date) - new Date(order2.date),
+    );
+    setActiveOrders(activeOrders);
+    const pastOrders = findPastOrders(subscription.orders, jobs).sort(
+      (order1, order2) => new Date(order2.date) - new Date(order1.date),
+    );
+    setPastOrders(pastOrders);
+    setLoading(false);
+  };
 
   useEffect(() => {
     const getData = async () => {
       const subscription = await getSubscription(subscriptionId);
-      setSubscription(subscription);
-      const { jobs } = await getAllJobs();
-      const activeOrders = findActiveOrders(subscription, jobs).sort(
-        (order1, order2) => new Date(order1.date) - new Date(order2.date),
-      );
-      setActiveOrders(activeOrders);
-      const pastOrders = findPastOrders(subscription.orders, jobs).sort(
-        (order1, order2) => new Date(order2.date) - new Date(order1.date),
-      );
-      setPastOrders(pastOrders);
-      setLoading(false);
+      const jobs = await getAllJobs();
+      dispatch(setOpenedSubscriptionAction(subscription));
+      parseSubscription(subscription, jobs);
     };
 
-    if (subscriptionId) {
+    if (subscription._id === subscriptionId) {
+      parseSubscription(subscription, orders.jobs);
+    } else if (subscriptionId) {
       getData();
     }
   }, []);

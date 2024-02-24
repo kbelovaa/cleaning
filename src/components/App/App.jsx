@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { auth } from '../../http/authAPI';
 import {
   setCleaningPricingAsync,
@@ -98,7 +98,7 @@ const App = () => {
           <Route path="booking/edit/*" element={<Booking loading={loading} />} />
           <Route path="summary" element={<Summary />} />
           <Route path="confirmation" element={<Summary />} />
-          <Route path="contact-us" element={<ContactUs />} />
+          <Route path="contact-us" element={<ContactUs loading={loading} />} />
           <Route path="info-price" element={<Services />} />
           <Route path="faq" element={<Faq />} />
           <Route path="cancellation-policy" element={<CancellationPolicy />} />

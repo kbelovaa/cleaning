@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getOrder } from '../../http/orderAPI';
+import { setOpenedOrderAction } from '../../store/actions/ordersActions';
 import { formatDate, getDateFromDateObject } from '../../utils/formatDate';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
 import { roundPrice } from '../../utils/calculatePrice';
@@ -11,10 +12,12 @@ import './Receipt.scss';
 
 const Receipt = () => {
   const user = useSelector((state) => state.user);
+  const order = useSelector((state) => state.orders.openedOrder);
 
-  const [order, setOrder] = useState({});
   const [loading, setLoading] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const { orderId } = useParams();
 
@@ -25,13 +28,13 @@ const Receipt = () => {
   useEffect(() => {
     const getData = async () => {
       const order = await getOrder(orderId);
-      setOrder(order);
+      dispatch(setOpenedOrderAction(order));
     };
 
-    if (orderId) {
+    if (orderId && order._id !== orderId) {
       getData();
     }
-  }, [orderId]);
+  }, []);
 
   const sendToEmail = () => {
     setLoading(true);

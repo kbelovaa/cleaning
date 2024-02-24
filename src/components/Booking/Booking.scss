@@ -62,12 +62,8 @@
 }
 
 .book {
-  display: none;
-
-  &.visible {
-    display: flex;
-    animation: fadeIn 0.3s ease-in;
-  }
+  display: flex;
+  animation: fadeIn 0.3s ease-in;
 
   @media screen and (max-width: 744px) {
     flex-direction: column;
@@ -170,6 +166,7 @@
   &__input-wrap {
     display: flex;
     flex-direction: column;
+    animation: fadeIn 0.3s ease-in;
   }
 
   &__label {
@@ -497,6 +494,7 @@
     top: 0;
     right: 0;
     cursor: pointer;
+    z-index: 1;
   }
 
   &__date-add {

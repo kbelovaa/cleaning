@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { setAddressesAction } from '../../store/actions/userActions';
 import { deleteAddress, getAddresses, saveDefaultAddress } from '../../http/addressAPI';
 import edit from '../../images/edit.png';
 import './Addresses.scss';
 
 const Addresses = () => {
   const user = useSelector((state) => state.user);
+  const addresses = useSelector((state) => state.user.addresses);
 
-  const [addresses, setAddresses] = useState([]);
   const [defaultAddress, setDefaultAddress] = useState({});
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -20,35 +23,39 @@ const Addresses = () => {
   useEffect(() => {
     const getAdressesData = async () => {
       const addresses = await getAddresses(user.id);
-      setAddresses(addresses);
+      dispatch(setAddressesAction(addresses));
       setLoading(false);
     };
 
-    if (user.id) {
+    if (user.id && addresses.length === 0) {
       getAdressesData();
+    }
+
+    if (addresses.length !== 0) {
+      setLoading(false);
     }
   }, [user]);
 
   useEffect(() => {
-    const defaultAddress = addresses.find((address) => address.isDefault);
-    setDefaultAddress(defaultAddress);
+    if (addresses.length !== 0) {
+      const defaultAddress = addresses.find((address) => address.isDefault);
+      setDefaultAddress(defaultAddress);
+    }
   }, [addresses]);
 
   const handleDefaultAddressSetting = (address) => {
     if (!address.isDefault) {
       saveDefaultAddress(address._id);
-      setAddresses((addresses) => {
-        const updatedAddresses = [
-          ...addresses.map((elem) => {
-            if (elem._id !== address._id) {
-              return { ...elem, isDefault: false };
-            }
+      const updatedAddresses = [
+        ...addresses.map((elem) => {
+          if (elem._id !== address._id) {
+            return { ...elem, isDefault: false };
+          }
 
-            return { ...elem, isDefault: true };
-          }),
-        ];
-        return updatedAddresses;
-      });
+          return { ...elem, isDefault: true };
+        }),
+      ];
+      dispatch(setAddressesAction(updatedAddresses));
     }
   };
 
@@ -60,15 +67,15 @@ const Addresses = () => {
   const handleDeleteAddress = (e, address) => {
     e.stopPropagation();
     deleteAddress(address._id);
-    setAddresses((addresses) => {
-      const filteredAddresses = addresses.filter((elem) => elem._id !== address._id);
-      if (filteredAddresses.length !== 0) {
+    const filteredAddresses = addresses.filter((elem) => elem._id !== address._id);
+    if (filteredAddresses.length !== 0) {
+      if (address.isDefault) {
         filteredAddresses[0] = { ...filteredAddresses[0], isDefault: true };
-        return filteredAddresses;
       }
-
-      return [];
-    });
+      dispatch(setAddressesAction(filteredAddresses));
+    } else {
+      dispatch(setAddressesAction([]));
+    }
 
     if (sessionStorage.getItem('cleaning')) {
       const cleaning = JSON.parse(sessionStorage.getItem('cleaning'));
@@ -86,14 +93,14 @@ const Addresses = () => {
         {loading ? (
           <div className="spinner"></div>
         ) : (
-          <>
+          <div className="addresses__container">
             {addresses.length === 0 ? (
               <p className="addresses__no-data">{t('noSavedAddresses')}</p>
             ) : (
               <div className="addresses__wrap">
                 <p className="adresses__text">{t('chooseDefaultAddress')}</p>
                 <div className="addresses__list">
-                  {defaultAddress &&
+                  {defaultAddress._id &&
                     [defaultAddress, ...addresses.filter((address) => address._id !== defaultAddress._id)].map(
                       (address, index) => (
                         <div
@@ -101,6 +108,7 @@ const Addresses = () => {
                           onClick={() => handleDefaultAddressSetting(address)}
                           className={`form__radio ${address.isDefault ? 'checked' : ''}`}
                         >
+                          {console.log(address)}
                           <div className="form__radio-value">
                             <svg
                               className={`form__radio-checked ${address.isDefault ? 'checked' : ''}`}
@@ -169,7 +177,7 @@ const Addresses = () => {
               <img className="addresses__edit" src={edit} alt="Edit" />
               {t('newAddress')}
             </button>
-          </>
+          </div>
         )}
       </div>
     </div>

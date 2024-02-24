@@ -52,7 +52,7 @@ export const createOrder = async (orderObject) => {
 export const getAllJobs = async () => {
   try {
     const { data } = await $host.get('api/job/get_all_jobs');
-    return data;
+    return data.jobs;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       return { message: error.response.data.message };

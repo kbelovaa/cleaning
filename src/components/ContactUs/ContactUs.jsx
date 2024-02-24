@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './ContactUs.scss';
 
-const ContactUs = () => {
+const ContactUs = ({ loading }) => {
   const user = useSelector((state) => state.user);
 
   const [name, setName] = useState('');
@@ -13,12 +13,13 @@ const ContactUs = () => {
   const [text, setText] = useState('');
   const [isFormValid, setIsFormValid] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [requestLoading, setRequestLoading] = useState(false);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (user.email) {
+    if (user.email && user.name) {
+      setName(user.name);
       setEmail(user.email);
     }
   }, [user]);
@@ -47,17 +48,17 @@ const ContactUs = () => {
 
     if (user.isAuth) {
       if (text) {
-        setLoading(true);
+        setRequestLoading(true);
         // отправить запрос
-        setLoading(false);
+        setRequestLoading(false);
         setIsConfirmationOpen(true);
       } else {
         setIsFormValid(false);
       }
     } else if (name && email && isEmailValid && text) {
-      setLoading(true);
+      setRequestLoading(true);
       // отправить запрос
-      setLoading(false);
+      setRequestLoading(false);
       setIsConfirmationOpen(true);
     } else {
       setIsFormValid(false);
@@ -68,63 +69,67 @@ const ContactUs = () => {
     <div className="container">
       <div className="contact-us">
         <h2 className="contact-us__title">{t('contactUs')}</h2>
-        <form className={`contact-us__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
-          <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
-            <label htmlFor="name" className="form__label">
-              {t('name')}
-            </label>
-            <input
-              id="name"
-              type="text"
-              className={`input ${!name ? 'invalid-field' : ''}`}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
-            <label htmlFor="email" className="form__label">
-              {t('email')}
-            </label>
-            <input
-              id="email"
-              type="text"
-              className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`}
-              value={email}
-              onChange={(e) => handleEmailChange(e.target.value)}
-            />
-            <p className={isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
-          </div>
-          <div className="form__input-wrap">
-            <label htmlFor="text" className="form__label">
-              {t('text')}
-            </label>
-            <textarea
-              id="text"
-              rows="1"
-              className={`input form__message ${!text ? 'invalid-field' : ''}`}
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              onInput={(e) => {
-                e.target.style.height = 'auto';
-                e.target.style.height = `${e.target.scrollHeight + 2}px`;
-              }}
-            ></textarea>
-            <p
-              className={
-                (!isFormValid && !user.isAuth && (!name || !email || !text)) || (!isFormValid && user.isAuth && !text)
-                  ? 'auth__note'
-                  : 'hidden'
-              }
-            >
-              {t('fillInAllFieldsMessage')}
-            </p>
-          </div>
-          {loading ? (
-            <div className="spinner spinner_small"></div>
-          ) : (
-            <button className={`btn contact-us__btn ${checkIsFormValid() ? '' : 'inactive'}`}>{t('submit')}</button>
-          )}
-        </form>
+        {loading ? (
+          <div className="spinner"></div>
+        ) : (
+          <form className={`contact-us__form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
+            <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
+              <label htmlFor="name" className="form__label">
+                {t('name')}
+              </label>
+              <input
+                id="name"
+                type="text"
+                className={`input ${!name ? 'invalid-field' : ''}`}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
+              <label htmlFor="email" className="form__label">
+                {t('email')}
+              </label>
+              <input
+                id="email"
+                type="text"
+                className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`}
+                value={email}
+                onChange={(e) => handleEmailChange(e.target.value)}
+              />
+              <p className={isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
+            </div>
+            <div className="form__input-wrap">
+              <label htmlFor="text" className="form__label">
+                {t('text')}
+              </label>
+              <textarea
+                id="text"
+                rows="1"
+                className={`input form__message ${!text ? 'invalid-field' : ''}`}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                onInput={(e) => {
+                  e.target.style.height = 'auto';
+                  e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                }}
+              ></textarea>
+              <p
+                className={
+                  (!isFormValid && !user.isAuth && (!name || !email || !text)) || (!isFormValid && user.isAuth && !text)
+                    ? 'auth__note'
+                    : 'hidden'
+                }
+              >
+                {t('fillInAllFieldsMessage')}
+              </p>
+            </div>
+            {requestLoading ? (
+              <div className="spinner spinner_small"></div>
+            ) : (
+              <button className={`btn contact-us__btn ${checkIsFormValid() ? '' : 'inactive'}`}>{t('submit')}</button>
+            )}
+          </form>
+        )}
       </div>
       <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} email={email} />
     </div>

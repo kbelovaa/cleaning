@@ -3,12 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
+import {
+  setActiveOrdersAction,
+  setJobsAction,
+  setOpenedOrderAction,
+  setOpenedSubscriptionAction,
+  setPastOrdersAction,
+} from '../../store/actions/ordersActions';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { defaultState } from '../../store/reducers/cleaningReducer';
 import { logOut } from '../../http/authAPI';
 import './BurgerMenu.scss';
 
-const BurgerMenu = ({ isOpen, setIsOpen }) => {
+const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen }) => {
   const isAuth = useSelector((state) => state.user.isAuth);
 
   const [isProfileExpanded, setIsProfileExpanded] = useState(false);
@@ -59,10 +66,22 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
         mobile: '',
         email: '',
         role: '',
+        addresses: [],
       }),
     );
+    dispatch(setActiveOrdersAction([]));
+    dispatch(setPastOrdersAction([]));
+    dispatch(setOpenedSubscriptionAction({}));
+    dispatch(setOpenedOrderAction({}));
+    dispatch(setJobsAction([]));
     navigate('/');
     clearStore();
+  };
+
+  const handleAuthModalOpen = (isLoginOpen) => {
+    closeBurgerMenu();
+    setIsLoginOpen(isLoginOpen);
+    setIsAuthorizationOpen(true);
   };
 
   return (
@@ -83,6 +102,16 @@ const BurgerMenu = ({ isOpen, setIsOpen }) => {
           />
         </svg>
         <ul className="burger-menu__list">
+          {!isAuth && (
+            <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(false)}>
+              {t('signUp')}
+            </li>
+          )}
+          {!isAuth && (
+            <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(true)}>
+              {t('logIn')}
+            </li>
+          )}
           {isAuth && (
             <li>
               <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>

@@ -10,6 +10,10 @@
     margin-bottom: 30px;
   }
 
+  &__container {
+    animation: fadeIn 0.3s ease-in;
+  }
+
   &__no-data {
     color: #cacaca;
     font-size: 16px;

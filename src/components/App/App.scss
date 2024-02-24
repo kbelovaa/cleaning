@@ -1,6 +1,7 @@
 .container {
   width: 1440px;
   margin: 0 auto;
+  animation: fadeIn 0.3s ease-in;
 
   @media screen and (max-width: 1440px) {
     width: 1024px;

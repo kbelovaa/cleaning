@@ -29,6 +29,10 @@
     }
   }
 
+  &__form {
+    animation: fadeIn 0.3s ease-in;
+  }
+
   & .form__input-wrap {
     margin-top: 10px;
     width: 670px;

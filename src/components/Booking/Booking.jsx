@@ -118,7 +118,7 @@ const Booking = ({ loading }) => {
   const startDateRef = useRef(null);
   const lastDateRef = useRef(null);
 
-  const setIsAuthorizationOpen = useOutletContext();
+  const { setIsAuthorizationOpen } = useOutletContext();
 
   const { t } = useTranslation();
 
@@ -731,6 +731,7 @@ const Booking = ({ loading }) => {
   };
 
   const deleteDate = (index, state, setState, refs) => {
+    console.log('h');
     const newDates = [...state];
     newDates.splice(index, 1);
     setState(newDates);
@@ -953,7 +954,7 @@ const Booking = ({ loading }) => {
           {loading || addressesLoading ? (
             <div className="spinner"></div>
           ) : (
-            <section className={`book ${!loading && !addressesLoading ? 'visible' : ''}`}>
+            <section className="book">
               <div className="book__form">
                 <form
                   className={`form ${isFormValid ? '' : 'invalid'}`}
