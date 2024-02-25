@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { roundPrice } from '../../../utils/calculatePrice';
 import { formatDate, getDateFromDateObject } from '../../../utils/formatDate';
+import edit from '../../../images/edit.png';
 import './ScheduleOrder.scss';
 
 const ScheduleOrder = ({ order, isCompleted }) => {
@@ -20,7 +21,14 @@ const ScheduleOrder = ({ order, isCompleted }) => {
     <div className={`order-card ${isExpanded ? 'expanded' : ''}`} onClick={handleToggle}>
       <div className="order-card__info">
         <div className="order-card__title">
-          <h3 className="order-card__type">{t(order.serviceType.type)}</h3>
+          <h3 className="order-card__type">
+            {!isCompleted && (
+              <div className="total-summary__edit-wrap">
+                <img className="total-summary__edit" src={edit} alt="Edit" />
+              </div>
+            )}
+            {t(order.serviceType.type)}
+          </h3>
           <div className="order-card__price">
             {isExpanded && (
               <span className="order-card__price-sum">{`€${roundPrice(

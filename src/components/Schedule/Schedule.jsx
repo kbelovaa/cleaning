@@ -7,6 +7,7 @@ import { findActiveOrders, findPastOrders } from '../../utils/ordersFunctions';
 import { setOpenedSubscriptionAction } from '../../store/actions/ordersActions';
 import { formatDate, getDateFromDateObject } from '../../utils/formatDate';
 import { roundPrice } from '../../utils/calculatePrice';
+import edit from '../../images/edit.png';
 import ScheduleOrder from './ScheduleOrder/ScheduleOrder';
 import './Schedule.scss';
 
@@ -80,15 +81,20 @@ const Schedule = () => {
             {subscription.subscriptionType === 'One-time' && (
               <div className="cleaning">
                 <div className="cleaning__line">
-                  <h3 className="cleaning__date">{`${formatDate(getDateFromDateObject(activeOrders[0].date))
-                    .split(', ')
-                    .map((elem, index) => {
-                      if (index === 1) {
-                        return t(elem).slice(0, 3);
-                      }
-                      return elem;
-                    })
-                    .join(', ')}, ${activeOrders[0].time}`}</h3>
+                  <h3 className="cleaning__date">
+                    {`${formatDate(getDateFromDateObject(activeOrders[0].date))
+                      .split(', ')
+                      .map((elem, index) => {
+                        if (index === 1) {
+                          return t(elem).slice(0, 3);
+                        }
+                        return elem;
+                      })
+                      .join(', ')}, ${activeOrders[0].time}`}
+                  </h3>
+                  <div className="total-summary__edit-wrap">
+                    <img className="total-summary__edit" src={edit} alt="Edit" />
+                  </div>
                 </div>
                 <div className="cleaning__line">
                   <span>{t(activeOrders[0].serviceType.type)}</span>

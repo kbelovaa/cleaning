@@ -40,7 +40,7 @@ const Header = ({ loading }) => {
       const { scrollY } = window;
       let color = '';
       if (isBook) {
-        if (scrollY > 410) {
+        if (scrollY > 360) {
           color = 'white';
           setShowSdl(true);
         } else if (scrollY > 0) {

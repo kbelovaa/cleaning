@@ -46,6 +46,7 @@ import {
 } from '../../constants/actionsRedux';
 
 export const defaultState = {
+  currentDate: new Date(),
   repeat: repeats[0],
   date: '',
   time: times[24],

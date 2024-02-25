@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cleaningImg from '../../images/cleaning.png';
@@ -9,62 +9,9 @@ import stageImg from '../../images/stage.png';
 import './Main.scss';
 
 const Main = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const stagesRefs = useRef(Array.from({ length: 3 }, () => React.createRef()));
-  const scrollContainerRef = useRef(null);
-  const scrollTimeoutRef = useRef(null);
-
   const navigate = useNavigate();
 
   const { t } = useTranslation();
-
-  const handleScroll = () => {
-    if (scrollTimeoutRef.current) {
-      clearTimeout(scrollTimeoutRef.current);
-    }
-
-    scrollTimeoutRef.current = setTimeout(() => {
-      const scrollContainer = scrollContainerRef.current;
-      if (scrollContainer) {
-        const newIndex = Math.round(scrollContainer.scrollLeft / scrollContainer.offsetWidth);
-        setCurrentIndex(newIndex);
-      }
-    }, 100);
-  };
-
-  const scrollToStage = (direction) => {
-    const nextIndex = currentIndex + direction;
-    const nextStageRef = stagesRefs.current[nextIndex];
-
-    if (nextStageRef && nextStageRef.current) {
-      const scrollContainer = nextStageRef.current.parentElement;
-
-      if (scrollContainer) {
-        const scrollWidth = nextStageRef.current.offsetWidth;
-
-        scrollContainer.scrollTo({
-          left: scrollContainer.scrollLeft + direction * scrollWidth,
-          behavior: 'smooth',
-        });
-      }
-    }
-
-    setCurrentIndex(nextIndex);
-  };
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current;
-    if (scrollContainer) {
-      scrollContainer.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (scrollContainer) {
-        scrollContainer.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
 
   return (
     <div className="main">

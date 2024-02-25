@@ -47,7 +47,7 @@ const Booking = ({ loading }) => {
   const cleaningPricing = useSelector((state) => state.services.cleaningPricing);
   const sqmPricing = useSelector((state) => state.services.sqmPricing);
 
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(cleaning.currentDate);
   const [repeat, setRepeat] = useState(cleaning.repeat);
   const [date, setDate] = useState(cleaning.date);
   const [isDateValid, setIsDateValid] = useState(true);
@@ -175,6 +175,7 @@ const Booking = ({ loading }) => {
   }, [defaultAddressId, addresses]);
 
   useEffect(() => {
+    setCurrentDate(new Date(cleaning.currentDate));
     setRepeat(cleaning.repeat);
     setDate(cleaning.date);
     setTime(cleaning.time);
@@ -231,7 +232,7 @@ const Booking = ({ loading }) => {
       let yBreakPoint = 0;
 
       if (windowWidth > 1440) {
-        yBreakPoint = 431;
+        yBreakPoint = 440;
       } else if (windowWidth > 1024) {
         yBreakPoint = 400;
       } else if (windowWidth > 744) {
@@ -731,7 +732,6 @@ const Booking = ({ loading }) => {
   };
 
   const deleteDate = (index, state, setState, refs) => {
-    console.log('h');
     const newDates = [...state];
     newDates.splice(index, 1);
     setState(newDates);
@@ -830,6 +830,7 @@ const Booking = ({ loading }) => {
 
   const saveOrderData = () => {
     const cleaningState = {};
+    cleaningState.currentDate = currentDate;
     cleaningState.repeat = repeat;
     cleaningState.date = date;
     cleaningState.time = time;
@@ -1203,7 +1204,12 @@ const Booking = ({ loading }) => {
                                 {selectedServices.find((selectedService) => selectedService.type === elem.type)?.count}
                               </span>
                               <svg
-                                className="form__service-sign"
+                                className={`form__service-sign ${
+                                  selectedServices.find((selectedService) => selectedService.type === elem.type)
+                                    ?.count === 20
+                                    ? 'unactive'
+                                    : ''
+                                }`}
                                 onClick={(e) => handleServicesNumberChange(e, elem, true)}
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
