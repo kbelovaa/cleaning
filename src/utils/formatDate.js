@@ -33,7 +33,7 @@ const defineIsCleaningSoon = (date, time) => {
 
   const difference = targetDate.getTime() - currentDate.getTime();
 
-  if (difference > 24 * 60 * 60 * 1000) {
+  if (difference > 2 * 24 * 60 * 60 * 1000) {
     return false;
   }
 

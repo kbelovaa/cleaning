@@ -12,6 +12,7 @@ import { roundPrice } from '../../utils/calculatePrice';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
 import edit from '../../images/edit.png';
 import ScheduleWindow from '../ScheduleWindow/ScheduleWindow';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './Summary.scss';
 
 const Summary = () => {
@@ -27,6 +28,7 @@ const Summary = () => {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [cleaning, setCleaning] = useState(cleaningState);
   const [loading, setLoading] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
   const { t } = useTranslation();
 
@@ -262,8 +264,8 @@ const Summary = () => {
           });
         } else {
           clearStore();
-          navigate('/confirmation');
           setLoading(false);
+          setIsConfirmationOpen(true);
         }
       }
     } else {
@@ -833,6 +835,7 @@ const Summary = () => {
         speedSum={cleaning.speedSum}
         ivaPercent={pricing.orderTaxPercent}
       />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} />
     </>
   );
 };

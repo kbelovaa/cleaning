@@ -350,7 +350,9 @@ i18n.use(initReactI18next).init({
         duration: 'Duration',
         sendToEmail: 'Send to Email',
         receipt: 'Receipt',
-        confirm: 'Confirm'
+        confirm: 'Confirm',
+        confirmed: 'Confirmed',
+        paymentInstructions: 'Payment instructions will be sent by email before each service is provided. You can find your orders in profile'
       },
     },
     es: {
@@ -706,7 +708,9 @@ i18n.use(initReactI18next).init({
         duration: 'Duración',
         sendToEmail: 'Enviar por correo electrónico',
         receipt: 'Recibo',
-        confirm: 'Confirmar'
+        confirm: 'Confirmar',
+        confirmed: 'Confirmado',
+        paymentInstructions: 'Las instrucciones de pago se enviarán por correo electrónico antes de proporcionar cada servicio. Puedes encontrar tus pedidos en el perfil'
       },
     },
   },
