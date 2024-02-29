@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { loadStripe } from '@stripe/stripe-js';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { defaultState } from '../../store/reducers/cleaningReducer';
-import { formatDate, getDateFromDateObject, createDateObject } from '../../utils/formatDate';
+import { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon } from '../../utils/formatDate';
 import { createOrder, getSubscriptions } from '../../http/orderAPI';
+import { createCheckoutSession } from '../../http/paymentAPI';
 import { roundPrice } from '../../utils/calculatePrice';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
 import edit from '../../images/edit.png';
@@ -64,6 +66,7 @@ const Summary = () => {
         cleaningSum: order.orderPriceId.cleaningSum,
         speedSum: order.orderPriceId.speedSum,
         ivaPercent: order.orderPriceId.taxPercent,
+        paymentStatus: order.paymentStatus
       };
 
       if (lastSubscription.subscriptionType === 'One-time') {
@@ -228,12 +231,40 @@ const Summary = () => {
       setLoading(true);
       const result = await formOrder();
       if (result.status === 201) {
-        //оплата
-        // если оплата успешна, то clearStore
-        clearStore();
-        // поменять статус заказа на paid
-        navigate('/confirmation');
-        setLoading(false);
+        const date = cleaning.repeat === 'One-time' ? cleaning.date : cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].date : cleaning.dates
+        .filter((date) => {
+          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+          return !datesToRemove.includes(date);
+        })[0];
+        const time = cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].time : cleaning.time;
+
+        if (defineIsCleaningSoon(date, time)) {
+          const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
+          const response = await createCheckoutSession({
+            orderId: result.data.firstOrderId,
+            date,
+            time,
+            cleaning: cleaning.selectedCleaning.type,
+            extraServices: cleaning.selectedServices,
+            total: cleaning.repeat === 'One-time'
+              ? cleaning.total.toFixed(2)
+              : cleaning.repeat === 'Custom schedule'
+              ? cleaning.customSchedule[0].total.toFixed(2)
+              : Number(cleaning.subscriptionPrices[cleaning.dates.indexOf(cleaning.dates
+                .filter((date) => {
+                  const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                  return !datesToRemove.includes(date);
+                })[0])].total.toFixed(2))
+          });
+          clearStore();
+          await stripe.redirectToCheckout({
+            sessionId: response.id,
+          });
+        } else {
+          clearStore();
+          navigate('/confirmation');
+          setLoading(false);
+        }
       }
     } else {
       setShowNotification(true);
@@ -627,7 +658,7 @@ const Summary = () => {
                   </span>
                 </div>
                 <div className="total-summary__line">
-                  {isConfirmation ? (
+                  {cleaning.paymentStatus !== 'Not paid' ? (
                     <span className="total-summary__name">
                       <svg
                         className="total-summary__tick"
@@ -758,7 +789,15 @@ const Summary = () => {
                       }`}
                       onClick={handlePayment}
                     >
-                      {t('pay')}
+                      {
+                        defineIsCleaningSoon(cleaning.repeat === 'One-time' ? cleaning.date : cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].date : cleaning.dates
+                        .filter((date) => {
+                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                          return !datesToRemove.includes(date);
+                        })[0], cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].time : cleaning.time)
+                        ? t('pay')
+                        : t('confirm')
+                      }
                     </button>
                   </div>
                 </>

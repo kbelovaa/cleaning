@@ -350,6 +350,7 @@ i18n.use(initReactI18next).init({
         duration: 'Duration',
         sendToEmail: 'Send to Email',
         receipt: 'Receipt',
+        confirm: 'Confirm'
       },
     },
     es: {
@@ -705,6 +706,7 @@ i18n.use(initReactI18next).init({
         duration: 'Duración',
         sendToEmail: 'Enviar por correo electrónico',
         receipt: 'Recibo',
+        confirm: 'Confirmar'
       },
     },
   },

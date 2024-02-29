@@ -874,6 +874,7 @@ const Booking = ({ loading }) => {
     cleaningState.iva = iva;
     cleaningState.total = total;
     cleaningState.tariff = tariffNumber;
+    cleaningState.paymentStatus = 'Not paid';
     sessionStorage.setItem('cleaning', JSON.stringify(cleaningState));
 
     return cleaningState;

@@ -23,4 +23,21 @@ const createDateObject = (dateString) => {
   return formattedDate;
 };
 
-export { formatDate, getDateFromDateObject, createDateObject };
+const defineIsCleaningSoon = (date, time) => {
+  const dateParts = date.split('.').map((elem) => Number(elem));
+  const timeParts = time.split(':').map((elem) => Number(elem));
+
+  const targetDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1]);
+
+  const currentDate = new Date();
+
+  const difference = targetDate.getTime() - currentDate.getTime();
+
+  if (difference > 24 * 60 * 60 * 1000) {
+    return false;
+  }
+
+  return true;
+};
+
+export { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon };

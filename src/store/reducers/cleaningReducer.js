@@ -98,6 +98,7 @@ export const defaultState = {
   iva: 0,
   total: 0,
   tariff: 1,
+  paymentStatus: 'Not paid',
 };
 
 const cleaningReducer = (state = defaultState, action) => {
