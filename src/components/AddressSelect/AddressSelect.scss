@@ -1,3 +1,7 @@
+.custom-select.address-select {
+  height: 76px;
+}
+
 .selected-option {
   &__value {
     display: flex;
@@ -5,15 +9,17 @@
   }
 
   .address-select &__name {
-    letter-spacing: 0.32px;
+    font-size: 20px;
+    letter-spacing: 0.4px;
   }
 
   &__info {
     color: #92a1a9;
-    font-size: 11px;
+    font-size: 14px;
     font-weight: 300;
     line-height: 130%;
-    letter-spacing: 0.22px;
+    letter-spacing: 0.28px;
+    margin-top: 2px;
   }
 }
 

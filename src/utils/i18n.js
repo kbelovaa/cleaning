@@ -352,7 +352,7 @@ i18n.use(initReactI18next).init({
         receipt: 'Receipt',
         confirm: 'Confirm',
         confirmed: 'Confirmed',
-        paymentInstructions: 'Payment instructions will be sent by email before each service is provided. You can find your orders in profile'
+        paymentInstructions: 'Payment instructions will be sent by email 48 hours before cleaning. You can find your orders in profile'
       },
     },
     es: {
@@ -710,7 +710,7 @@ i18n.use(initReactI18next).init({
         receipt: 'Recibo',
         confirm: 'Confirmar',
         confirmed: 'Confirmado',
-        paymentInstructions: 'Las instrucciones de pago se enviarán por correo electrónico antes de proporcionar cada servicio. Puedes encontrar tus pedidos en el perfil'
+        paymentInstructions: 'Las instrucciones de pago se enviarán por correo electrónico 48 horas antes de la limpieza. Puedes encontrar tus pedidos en el perfil'
       },
     },
   },
