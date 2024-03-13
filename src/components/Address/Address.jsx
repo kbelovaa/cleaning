@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
-import CustomSelect from '../CustomSelect/CustomSelect';
 import { createAddress, getAddress, getAddresses, updateAddress } from '../../http/addressAPI';
 import { setAddressesAction, setUpdatedAddressesAction } from '../../store/actions/userActions';
+import { setDefaultAddressIdAction } from '../../store/actions/cleaningActions';
+import CustomSelect from '../CustomSelect/CustomSelect';
 import './Address.scss';
 
 const Address = () => {
@@ -30,6 +31,7 @@ const Address = () => {
   const dispatch = useDispatch();
 
   const { addressId } = useParams();
+  const { booking } = useParams();
 
   const { t } = useTranslation();
 
@@ -131,8 +133,17 @@ const Address = () => {
       }
       if (result.status === 201) {
         dispatch(setUpdatedAddressesAction(result.data.address));
+        const cleaningObj = JSON.parse(sessionStorage.getItem('cleaning'));
+        if (cleaningObj) {
+          dispatch(setDefaultAddressIdAction(result.data.address._id))
+          sessionStorage.setItem('cleaning', JSON.stringify({ ...cleaningObj, defaultAddressId: result.data.address._id }));
+        }
         setLoading(false);
-        navigate('/addresses');
+        if (booking) {
+          navigate('/booking');
+        } else {
+          navigate('/addresses');
+        }
       }
     } else {
       setIsFormValid(false);

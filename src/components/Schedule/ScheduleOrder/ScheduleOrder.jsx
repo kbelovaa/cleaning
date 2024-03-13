@@ -86,6 +86,11 @@ const ScheduleOrder = ({ order, isCompleted }) => {
             <span>{`€${roundPrice(order.orderPriceId.speedSum)}`}</span>
           </div>
         )}
+        {order.specialInstructions && (
+          <div className="order-card__line">
+            <p className="order-card__instructions">{order.specialInstructions}</p>
+          </div>
+        )}
         <div className="order-card__line">
           <span>{t('subtotal')}</span>
           <span>{`€${roundPrice(order.orderPriceId.subtotalSum)}`}</span>

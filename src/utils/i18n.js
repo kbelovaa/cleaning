@@ -188,7 +188,7 @@ i18n.use(initReactI18next).init({
         weStriveToReplyWithin15Minutes: 'We strive to reply within 15 minutes between 06:00 and 00:00',
         confirmation: 'Confirmation',
         paid: 'Paid',
-        learnCancellationPolicy: 'Learn Cancellation Policy',
+        learnCancellationPolicy: 'Cancellation Policy',
         services: 'Services / Tariffs',
         BasicCleaningInfo:
           'Basic cleaning starts with an assessment, followed by systematic dusting, vacuuming, and mopping. The kitchen and bathroom receive special attention, including surface sanitization. After the final touch-ups, we perform a walk-through to ensure our high standards are met, leaving your home in pristine condition.',
@@ -352,7 +352,8 @@ i18n.use(initReactI18next).init({
         receipt: 'Receipt',
         confirm: 'Confirm',
         confirmed: 'Confirmed',
-        paymentInstructions: 'Payment instructions will be sent by email 48 hours before cleaning. You can find your orders in profile'
+        paymentInstructions: 'Payment instructions will be emailed 48 hours before the start of service',
+        booked: 'Booked',
       },
     },
     es: {
@@ -418,8 +419,8 @@ i18n.use(initReactI18next).init({
         Basic: 'Básico',
         Detailed: 'Detallado',
         'Move in/out': 'Entrada/Salida',
-        'After builders': 'Después de constructores',
-        'After party': 'Después de la fiesta',
+        'After builders': 'Limpieza de obra',
+        'After party': 'Después de una fiesta',
         extraServices: 'Servicios adicionales',
         'Inside fridge': 'Dentro del refrigerador',
         'Inside oven': 'Dentro del horno',
@@ -428,7 +429,7 @@ i18n.use(initReactI18next).init({
         'Inside dryer': 'Dentro de la secadora',
         'Inside microwave': 'Dentro del microondas',
         'Inside kitchen cabinets': 'Dentro de los armarios de cocina',
-        'Inside windows': 'Dentro de las ventanas',
+        'Inside windows': 'Cristales',
         'Tile walls': 'Paredes de azulejos',
         howFastQuestion: '¿Qué tan rápido?',
         fastCleanDescription:
@@ -503,7 +504,7 @@ i18n.use(initReactI18next).init({
         weHaveSentConfirmationToNewEmail: 'Hemos enviado una confirmación a tu nuevo correo electrónico',
         personalInfo: 'Información personal',
         addresses: 'Direcciones',
-        orders: 'Pedidos',
+        orders: 'Solcitudes',
         settings: 'Configuraciones',
         logOut: 'Cerrar sesión',
         info: 'Información',
@@ -542,7 +543,7 @@ i18n.use(initReactI18next).init({
           'Nos esforzamos por responder dentro de los 15 minutos entre las 06:00 y las 00:00',
         confirmation: 'Confirmación',
         paid: 'Pagado',
-        learnCancellationPolicy: 'Conoce la Política de Cancelación',
+        learnCancellationPolicy: 'Política de Cancelación',
         services: 'Servicios / Tarifas',
         BasicCleaningInfo:
           'La limpieza básica comienza con una evaluación, seguida de un desempolvado, aspirado y fregado sistemático. La cocina y el baño reciben atención especial, incluida la desinfección de superficies. Después de los últimos toques, realizamos un recorrido para asegurarnos de que se cumplan nuestros altos estándares, dejando tu hogar en condiciones impecables.',
@@ -640,7 +641,7 @@ i18n.use(initReactI18next).init({
         bookNow: 'Reservar ahora',
         howItWorks: 'Cómo funciona',
         request: 'Solicitud',
-        requestCleaning: 'Solicite limpieza, incluso con poco aviso,',
+        requestCleaning: 'Solicite limpieza, incluso con poco tuempo de aviso,',
         withClicks: 'con unos pocos clics en el sitio web o en la aplicación móvil',
         receiveConfIn15Min: 'Reciba confirmación en 15 minutos',
         enjoy: 'Disfruta',
@@ -710,7 +711,8 @@ i18n.use(initReactI18next).init({
         receipt: 'Recibo',
         confirm: 'Confirmar',
         confirmed: 'Confirmado',
-        paymentInstructions: 'Las instrucciones de pago se enviarán por correo electrónico 48 horas antes de la limpieza. Puedes encontrar tus pedidos en el perfil'
+        paymentInstructions: 'Las instrucciones de pago se enviarán por correo electrónico 48 horas antes del inicio del servicio',
+        booked: 'Reservado'
       },
     },
   },

@@ -94,7 +94,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
           <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#284657" strokeLinecap="round" />
         </svg>
         <h3 className={isReceipt || isPersonalInfo || isPassword ? 'hidden' : 'confirmation__title'}>
-          {isContactUs ? t('thankYouMessage') : isSummary ? t('confirmed') : t('signUpSuccess')}
+          {isContactUs ? t('thankYouMessage') : isSummary ? t('booked') : t('signUpSuccess')}
         </h3>
         <p className="confirmation__text">
           {isReceipt

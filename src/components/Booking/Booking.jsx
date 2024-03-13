@@ -14,6 +14,7 @@ import {
   isBefore,
   differenceInDays,
   format,
+  isSameDay,
 } from 'date-fns';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { getAddresses } from '../../http/addressAPI';
@@ -28,7 +29,7 @@ import {
   livingRooms,
 } from '../../constants/selectOptions';
 import { getTimeCoeff, calculateCleaningTypePrice, roundPrice } from '../../utils/calculatePrice';
-import { formatDate } from '../../utils/formatDate';
+import { checkIsSameDate, filterTimes, formatDate } from '../../utils/formatDate';
 import AddressSelect from '../AddressSelect/AddressSelect';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import Calendar from '../Calendar/Calendar';
@@ -50,7 +51,7 @@ const Booking = ({ loading }) => {
   const [currentDate, setCurrentDate] = useState(cleaning.currentDate);
   const [repeat, setRepeat] = useState(cleaning.repeat);
   const [date, setDate] = useState(cleaning.date);
-  const [isDateValid, setIsDateValid] = useState(true);
+  const [isDateValid, setIsDateValid] = useState(cleaning.isDateValid);
   const [time, setTime] = useState(cleaning.time);
   const [dates, setDates] = useState(cleaning.dates);
   const [subscriptionPrices, setSubscriptionPrices] = useState(cleaning.subscriptionPrices);
@@ -59,10 +60,10 @@ const Booking = ({ loading }) => {
   const [customSchedule, setCustomSchedule] = useState(cleaning.customSchedule);
   const [duration, setDuration] = useState(cleaning.duration);
   const [startDate, setStartDate] = useState(cleaning.startDate);
-  const [isStartDateValid, setIsStartDateValid] = useState(true);
+  const [isStartDateValid, setIsStartDateValid] = useState(cleaning.isStartDateValid);
   const [isStartDateActive, setIsStartDateActive] = useState(false);
   const [lastDate, setLastDate] = useState(cleaning.lastDate);
-  const [isLastDateValid, setIsLastDateValid] = useState(true);
+  const [isLastDateValid, setIsLastDateValid] = useState(cleaning.isLastDateValid);
   const [isLastDateActive, setIsLastDateActive] = useState(false);
   const [isAutoUpdate, setIsAutoUpdate] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -106,7 +107,7 @@ const Booking = ({ loading }) => {
   const customScheduleRefs = useRef([]);
   const excludedDateRefs = useRef([]);
   const dateTimeRef = useRef(null);
-  const addressSelect = useRef(null);
+  const addressSelectRef = useRef(null);
   const addressRef = useRef(null);
   const speedRef = useRef(null);
   const recurringRef = useRef(null);
@@ -114,6 +115,8 @@ const Booking = ({ loading }) => {
   const propertyRef = useRef(null);
   const cleaningRef = useRef(null);
   const extrasRef = useRef(null);
+  const instructionsRef = useRef(null);
+  const instructionsTextareaRef = useRef(null);
   const calendarRef = useRef(null);
   const startDateRef = useRef(null);
   const lastDateRef = useRef(null);
@@ -156,6 +159,22 @@ const Booking = ({ loading }) => {
   }, [user, loading]);
 
   useEffect(() => {
+    if (repeat === 'One-time' && date && isDateValid && checkIsSameDate(date)) {
+      setTime(filterTimes(times)[0]);
+    } else {
+      setTime(times[24]);
+    }
+  }, [date, repeat]);
+
+  useEffect(() => {
+    if (repeat !== 'One-time' && repeat !== 'Custom schedule' && startDate && isStartDateValid && checkIsSameDate(startDate)) {
+      setTime(filterTimes(times)[0]);
+    } else {
+      setTime(times[24]);
+    }
+  }, [startDate, repeat]);
+
+  useEffect(() => {
     if (defaultAddressId && addresses.length !== 0) {
       const defaultAddress = addresses.find((address) => address._id === defaultAddressId);
 
@@ -178,6 +197,7 @@ const Booking = ({ loading }) => {
     setCurrentDate(new Date(cleaning.currentDate));
     setRepeat(cleaning.repeat);
     setDate(cleaning.date);
+    setIsDateValid(cleaning.isDateValid);
     setTime(cleaning.time);
     setDates(cleaning.dates);
     setAddExcludedDates(cleaning.addExcludedDates);
@@ -185,7 +205,9 @@ const Booking = ({ loading }) => {
     setCustomSchedule(cleaning.customSchedule);
     setDuration(cleaning.duration);
     setStartDate(cleaning.startDate);
+    setIsStartDateValid(cleaning.isStartDateValid);
     setLastDate(cleaning.lastDate);
+    setIsLastDateValid(cleaning.isLastDateValid);
     setSelectedCleaning(cleaning.selectedCleaning);
     setSelectedServices(cleaning.selectedServices);
     setDefaultAddressId(cleaning.defaultAddressId);
@@ -260,7 +282,7 @@ const Booking = ({ loading }) => {
         currentRef = dateTimeRef;
         break;
       case 'address-select':
-        currentRef = addressSelect;
+        currentRef = addressSelectRef;
         break;
       case 'address':
         currentRef = addressRef;
@@ -282,6 +304,9 @@ const Booking = ({ loading }) => {
         break;
       case 'extras':
         currentRef = extrasRef;
+        break;
+      case 'instructions':
+        currentRef = instructionsRef;
         break;
       default:
         currentRef = null;
@@ -429,6 +454,7 @@ const Booking = ({ loading }) => {
       }
 
       setLastDate(format(newLastDate, 'dd.MM.yyyy'));
+      setIsLastDateValid(true);
 
       return format(newLastDate, 'dd.MM.yyyy');
     }
@@ -614,6 +640,14 @@ const Booking = ({ loading }) => {
   }, [dates, time, repeat, pricing, timePricing, cleaningSum, extrasSum, selectedSpeed]);
 
   useEffect(() => {
+    if (instructionsTextareaRef.current && !loading && !addressesLoading) {
+      const textarea = instructionsTextareaRef.current;
+      textarea.style.height = 'auto';
+      textarea.style.height = `${textarea.scrollHeight + 2}px`;
+    }
+  }, [instructions, loading, addressesLoading]);
+
+  useEffect(() => {
     const cleaningSum =
       apartmentSize === '' || cleaningPricing.length === 0 || sqmPricing.length === 0
         ? 0
@@ -716,6 +750,10 @@ const Booking = ({ loading }) => {
     );
 
     calculateCustomSchedulePrice(index, e.target.value, null);
+
+    if (customSchedule[index].date && customSchedule[index].isDateValid && checkIsSameDate(customSchedule[index].date)) {
+      handleDatesArrUpdate(setCustomSchedule, filterTimes(times)[0], 'time', index);
+    }
   };
 
   const handleCustomTimeChange = (value, index) => {
@@ -833,6 +871,7 @@ const Booking = ({ loading }) => {
     cleaningState.currentDate = currentDate;
     cleaningState.repeat = repeat;
     cleaningState.date = date;
+    cleaningState.isDateValid = isDateValid;
     cleaningState.time = time;
 
     const sortedCustomSchedule =
@@ -844,7 +883,9 @@ const Booking = ({ loading }) => {
     cleaningState.dates = dates;
     cleaningState.subscriptionPrices = subscriptionPrices;
     cleaningState.startDate = startDate;
+    cleaningState.isStartDateValid = isStartDateValid;
     cleaningState.lastDate = lastDate;
+    cleaningState.isLastDateValid = isLastDateValid;
     cleaningState.duration = duration;
     cleaningState.addExcludedDates = addExcludedDates;
     cleaningState.excludedDates = excludedDates;
@@ -961,7 +1002,7 @@ const Booking = ({ loading }) => {
                 <form
                   className={`form ${isFormValid ? '' : 'invalid'}`}
                   onSubmit={handleFormSubmit}
-                  ref={addressSelect}
+                  ref={addressSelectRef}
                 >
                   {addresses.length === 0 ? (
                     <div className="form__section">
@@ -1026,6 +1067,13 @@ const Booking = ({ loading }) => {
                         selectedOption={defaultAddressId}
                         setSelectedOption={setDefaultAddressId}
                       />
+                      <div className="form__new-address">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <path d="M17 12H7" stroke="#268664" strokeLinecap="round"/>
+                          <path d="M12 17V7" stroke="#268664" strokeLinecap="round"/>
+                        </svg>
+                        <span className="form__new-address-text" onClick={() => navigate('/address/new/for-booking')}>{t('newAddress')}</span>
+                      </div>
                     </div>
                   )}
                   <div className="form__section" ref={cleaningRef}>
@@ -1193,12 +1241,12 @@ const Booking = ({ loading }) => {
                                 viewBox="0 0 24 24"
                                 fill="none"
                               >
-                                <path d="M17 12H7" stroke="#E8E7E7" strokeLinecap="round" />
+                                <path d="M17 12H7" stroke="#C9C7C7" strokeLinecap="round" />
                                 <path
                                   fillRule="evenodd"
                                   clipRule="evenodd"
                                   d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                  stroke="#E8E7E7"
+                                  stroke="#C9C7C7"
                                 />
                               </svg>
                               <span className="form__service-quantity">
@@ -1218,13 +1266,13 @@ const Booking = ({ loading }) => {
                                 viewBox="0 0 24 24"
                                 fill="none"
                               >
-                                <path d="M17 12H7" stroke="#E8E7E7" strokeLinecap="round" />
-                                <path d="M12 17V7" stroke="#E8E7E7" strokeLinecap="round" />
+                                <path d="M17 12H7" stroke="#C9C7C7" strokeLinecap="round" />
+                                <path d="M12 17V7" stroke="#C9C7C7" strokeLinecap="round" />
                                 <path
                                   fillRule="evenodd"
                                   clipRule="evenodd"
                                   d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                  stroke="#E8E7E7"
+                                  stroke="#C9C7C7"
                                 />
                               </svg>
                             </div>
@@ -1281,7 +1329,10 @@ const Booking = ({ loading }) => {
                       >
                         <span className="form__label">{t('time')}</span>
                         <CustomSelect
-                          options={times}
+                          options={(repeat === 'One-time' && date && isDateValid && checkIsSameDate(date)) || (repeat !== 'One-time' && repeat !== 'Custom schedule' && startDate && isStartDateValid && checkIsSameDate(startDate))
+                            ? filterTimes(times)
+                            : times
+                          }
                           selectedOption={time}
                           setSelectedOption={setTime}
                           noTranslation={true}
@@ -1347,7 +1398,10 @@ const Booking = ({ loading }) => {
                           <div className="form__input-wrap">
                             <span className="form__label">{t('time')}</span>
                             <CustomSelect
-                              options={times}
+                              options={repeat === 'Custom schedule' && customSchedule[index].date && customSchedule[index].isDateValid && checkIsSameDate(customSchedule[index].date)
+                                ? filterTimes(times)
+                                : times
+                              }
                               selectedOption={elem.time}
                               setSelectedOption={(value) => handleCustomTimeChange(value, index)}
                               noTranslation={true}
@@ -1600,6 +1654,7 @@ const Booking = ({ loading }) => {
                         repeat={repeat}
                         time={time}
                         date={date}
+                        isDateValid={isDateValid}
                         setIsDateValid={setIsDateValid}
                         setDate={setDate}
                         startDate={startDate}
@@ -1688,12 +1743,13 @@ const Booking = ({ loading }) => {
                           onChange={(e) => setProvince(e.target.value)}
                         />
                       </div>
-                      <div className="form__input-wrap">
+                      <div className="form__input-wrap" ref={instructionsRef}>
                         <label htmlFor="instructions" className="form__label">
                           {t('specialInstructions')}
                         </label>
                         <textarea
                           id="instructions"
+                          ref={instructionsTextareaRef}
                           rows="1"
                           className="input form__instructions"
                           value={instructions}
@@ -1710,12 +1766,13 @@ const Booking = ({ loading }) => {
                     </div>
                   ) : (
                     <div className="form__section">
-                      <div className="form__input-wrap">
+                      <div className="form__input-wrap" ref={instructionsRef}>
                         <label htmlFor="instructions" className="form__label">
                           {t('specialInstructions')}
                         </label>
                         <textarea
                           id="instructions"
+                          ref={instructionsTextareaRef}
                           rows="1"
                           className="input form__instructions"
                           value={instructions}

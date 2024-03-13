@@ -452,7 +452,7 @@ const Summary = () => {
                     </div>
                   </div>
                 )}
-                <p className={`total-summary__address total-summary__line_important ${editMode ? 'edit' : ''}`}>
+                <p className={`total-summary__address total-summary__line_important ${cleaning.instructions ? '' : 'total-summary__last-line'} ${editMode ? 'edit' : ''}`}>
                   <div
                     className="total-summary__edit-wrap"
                     onClick={() =>
@@ -467,6 +467,17 @@ const Summary = () => {
                     cleaning.province
                   }, ${cleaning.postalCode}`}
                 </p>
+                {cleaning.instructions && (
+                  <p className={`total-summary__instructions total-summary__last-line ${editMode ? 'edit' : ''}`}>
+                    <div
+                      className="total-summary__edit-wrap"
+                      onClick={() => navigate('/booking/edit/instructions')}
+                    >
+                      <img className="total-summary__edit" src={edit} alt="Edit" />
+                    </div>
+                    {cleaning.instructions}
+                  </p>
+                )}
                 <div className="total-summary__line">
                   <span className={`total-summary__name ${editMode ? 'edit' : ''}`}>
                     <div className="total-summary__edit-wrap" onClick={() => navigate('/booking/edit/speed')}>

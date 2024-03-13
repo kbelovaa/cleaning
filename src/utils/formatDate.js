@@ -1,3 +1,4 @@
+import { isSameDay, parse } from 'date-fns';
 import format from 'date-fns/format';
 
 const formatDate = (dateString) => {
@@ -40,4 +41,29 @@ const defineIsCleaningSoon = (date, time) => {
   return true;
 };
 
-export { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon };
+const filterTimes = (times) => {
+  const now = new Date();
+
+  const isLaterThanNow = (timeStr) => {
+    const [hours, minutes] = timeStr.split(':');
+    const timeToCompare = new Date();
+    timeToCompare.setHours(parseInt(hours, 10));
+    timeToCompare.setMinutes(parseInt(minutes, 10));
+
+    return timeToCompare > now;
+  };
+
+  const filteredTimes = times.filter(isLaterThanNow);
+
+  return filteredTimes;
+};
+
+const checkIsSameDate = (dateStr) => {
+  const today = new Date();
+  const date = parse(dateStr, 'dd.MM.yyyy', new Date());
+  const result = isSameDay(today, date);
+
+  return result;
+};
+
+export { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon, filterTimes, checkIsSameDate };

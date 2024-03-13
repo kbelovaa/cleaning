@@ -8,3 +8,21 @@ export const createCheckoutSession = async (order) => {
     return { error: 'Unexpected error' };
   }
 };
+
+export const createAccount = async () => {
+  try {
+    const { data } = await $host.get('api/payment/create-connected-account/65b775f919bb02e6a3b8d049');
+    return data;
+  } catch (error) {
+    return { error: 'Unexpected error' };
+  }
+};
+
+export const createPayout = async () => {
+  try {
+    const { data } = await $host.get('api/payment/create-payout');
+    return data;
+  } catch (error) {
+    return { error: 'Unexpected error' };
+  }
+};

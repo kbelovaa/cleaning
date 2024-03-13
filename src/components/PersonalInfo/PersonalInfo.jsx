@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { updateInfo } from '../../http/profileAPI';
+import { setUserAction } from '../../store/actions/userActions';
 import PhoneField from '../PhoneField/PhoneField';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './PersonalInfo.scss';
@@ -21,6 +22,8 @@ const PersonalInfo = () => {
   const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (user.name) {
@@ -49,6 +52,7 @@ const PersonalInfo = () => {
         setLoading(false);
         setIsFormValid(true);
         setIsConfirmationOpen(true);
+        dispatch(setUserAction({ name, surname, mobile, email }));
       } else if (result.message) {
         setLoading(false);
         setIsFormValid(false);

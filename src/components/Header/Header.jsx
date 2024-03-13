@@ -6,9 +6,11 @@ import Footer from '../Footer/Footer';
 import Authorization from '../Authorization/Authorization';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import './Header.scss';
+import { getNotifications } from '../../http/notificationsAPI';
 
-const Header = ({ loading }) => {
+const Header = ({ loading, socket }) => {
   const isAuth = useSelector((state) => state.user.isAuth);
+  const userId = useSelector((state) => state.user.id);
 
   const [isAuthorizationOpen, setIsAuthorizationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(true);
@@ -16,6 +18,9 @@ const Header = ({ loading }) => {
   const [headerColor, setHeaderColor] = useState('');
   const [showSdl, setShowSdl] = useState(false);
   const [isLanguageOpened, setIsLanguageOpened] = useState(false);
+  const [notifications, setNotifications] = useState([]);
+  const [newNotifications, setNewNotifications] = useState([]);
+  const [archiveNotifications, setArchiveNotifications] = useState([]);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -28,6 +33,40 @@ const Header = ({ loading }) => {
   const availableLanguages = Object.keys(i18n.options.resources);
 
   const lngRef = useRef(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const result = await getNotifications(userId);
+
+      if (!result.message) {
+        setNotifications(result.data.notifications);
+      }
+    };
+    if (userId) {
+      getData();
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    if (userId) {
+      socket.on('new-notification', ({ newNotification }) => {
+        if (newNotification.userId === userId) {
+          setNotifications((notifications) => [newNotification, ...notifications]);
+        }
+      });
+    }
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [socket, userId]);
+
+  useEffect(() => {
+    const newNotifications = notifications.map((elem) => !elem.readStatus);
+    setNewNotifications(newNotifications);
+    const archiveNotifications = notifications.map((elem) => elem.readStatus);
+    setArchiveNotifications(archiveNotifications);
+  }, [notifications]);
 
   useEffect(() => {
     if (isBook || isMain) {
@@ -143,23 +182,28 @@ const Header = ({ loading }) => {
                   </div>
                 </div>
               </div>
-              <svg
-                className={isAuth ? 'bell' : 'hidden'}
-                xmlns="http://www.w3.org/2000/svg"
-                width="30"
-                height="30"
-                viewBox="0 0 30 30"
-                fill="none"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M15 3.75C19.1421 3.75 22.5 7.1078 22.5 11.2499C22.5 13.6414 22.5 16.0427 22.5 17.5C22.5 21.25 25 22.5 25 22.5L5 22.5C5 22.5 7.5 21.25 7.5 17.5C7.5 16.0427 7.5 13.6414 7.5 11.2499C7.5 7.1078 10.8579 3.75 15 3.75V3.75Z"
-                  stroke="black"
-                  strokeLinejoin="round"
-                />
-                <path d="M12.5 22.5C12.5 23.8807 13.6193 25 15 25C16.3807 25 17.5 23.8807 17.5 22.5" stroke="black" />
-              </svg>
+              <div className={isAuth ? 'bell' : 'hidden'}>
+                <svg
+                  className='bell__sign'
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="30"
+                  height="30"
+                  viewBox="0 0 30 30"
+                  fill="none"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M15 3.75C19.1421 3.75 22.5 7.1078 22.5 11.2499C22.5 13.6414 22.5 16.0427 22.5 17.5C22.5 21.25 25 22.5 25 22.5L5 22.5C5 22.5 7.5 21.25 7.5 17.5C7.5 16.0427 7.5 13.6414 7.5 11.2499C7.5 7.1078 10.8579 3.75 15 3.75V3.75Z"
+                    stroke="black"
+                    strokeLinejoin="round"
+                  />
+                  <path d="M12.5 22.5C12.5 23.8807 13.6193 25 15 25C16.3807 25 17.5 23.8807 17.5 22.5" stroke="black" />
+                </svg>
+                <span className={newNotifications.length > 0 ? 'bell__counter' : 'hidden'}>
+                  {newNotifications.length > 99 ? '99+' : newNotifications.length}
+                </span>
+              </div>
               <div className="burger" onClick={() => setIsBurgerMenuOpen(true)}>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>

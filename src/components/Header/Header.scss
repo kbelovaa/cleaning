@@ -118,6 +118,23 @@
 .bell {
   margin-right: 40px;
   cursor: pointer;
+  position: relative;
+
+  &__counter {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0.5px;
+    border-radius: 100px;
+    height: 16px;
+    padding: 0 4px;
+    background: #268664;
+    animation: fadeIn 0.3s ease-in;
+  }
 }
 
 .language {

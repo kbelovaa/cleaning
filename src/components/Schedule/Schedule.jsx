@@ -96,6 +96,11 @@ const Schedule = () => {
                     <img className="total-summary__edit" src={edit} alt="Edit" />
                   </div>
                 </div>
+                {activeOrders[0].specialInstructions && (
+                  <p className="cleaning__instructions">
+                    {activeOrders[0].specialInstructions}
+                  </p>
+                )}
                 <div className="cleaning__line">
                   <span>{t(activeOrders[0].serviceType.type)}</span>
                   <span>{`€${roundPrice(

@@ -1,4 +1,5 @@
 import {
+  SET_DEFAULT_ADDRESS_ID,
   SET_CLEANING,
   SET_REPEAT,
   SET_DATE,
@@ -35,6 +36,11 @@ import {
   SET_IVA,
   SET_TOTAL,
 } from '../../constants/actionsRedux';
+
+export const setDefaultAddressIdAction = (payload) => ({
+  type: SET_DEFAULT_ADDRESS_ID,
+  payload,
+});
 
 export const setCleaningAction = (payload) => ({
   type: SET_CLEANING,

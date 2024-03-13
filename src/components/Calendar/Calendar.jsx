@@ -11,9 +11,10 @@ import {
   parse,
   isSameMonth,
 } from 'date-fns';
-import { weekdays } from '../../constants/selectOptions';
+import { times, weekdays } from '../../constants/selectOptions';
 import { roundPrice } from '../../utils/calculatePrice';
 import './Calendar.scss';
+import { checkIsSameDate, filterTimes } from '../../utils/formatDate';
 
 const Calendar = ({
   currentDate,
@@ -24,6 +25,7 @@ const Calendar = ({
   repeat,
   time,
   date,
+  isDateValid,
   setIsDateValid,
   setDate,
   startDate,
@@ -92,12 +94,22 @@ const Calendar = ({
             format(day, 'dd.MM.yyyy'),
             customSchedule[activeFieldIndex].time,
           );
+
+          // if (checkIsSameDate(format(day, 'dd.MM.yyyy'))) {
+          //   handleCustomScheduleUpdate(filterTimes(times)[0], 'time', customSchedule.findIndex((elem) => elem.date === format(day, 'dd.MM.yyyy')));
+          // }
+
           setCurrentDate(day);
         } else if (emptyIndex !== -1) {
           handleCustomScheduleUpdate(false, 'isDateActive', emptyIndex);
           handleCustomScheduleUpdate(true, 'isDateValid', emptyIndex);
           calculateCustomSchedulePrice(emptyIndex, format(day, 'dd.MM.yyyy'), customSchedule[emptyIndex].time);
           handleCustomScheduleUpdate(format(day, 'dd.MM.yyyy'), 'date', emptyIndex);
+
+          // if (checkIsSameDate(format(day, 'dd.MM.yyyy'))) {
+          //   handleCustomScheduleUpdate(filterTimes(times)[0], 'time', customSchedule.findIndex((elem) => elem.date === format(day, 'dd.MM.yyyy')));
+          // }
+
           setCurrentDate(day);
         }
       } else {
@@ -222,8 +234,8 @@ const Calendar = ({
                   selectedDays.includes(format(day, 'dd.MM.yyyy')) &&
                   !excludedDates.find((elem) => elem.date === format(day, 'dd.MM.yyyy'))) ||
                 (repeat === 'Custom schedule' &&
-                  customSchedule.find((elem) => elem.date === format(day, 'dd.MM.yyyy'))) ||
-                (repeat === 'One-time' && date === format(day, 'dd.MM.yyyy'))
+                  customSchedule.find((elem) => elem.isDateValid && elem.date === format(day, 'dd.MM.yyyy'))) ||
+                (repeat === 'One-time' && isDateValid && date === format(day, 'dd.MM.yyyy'))
                   ? 'calendar__day_selected'
                   : ''
               }`}

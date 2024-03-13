@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import io from 'socket.io-client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { auth } from '../../http/authAPI';
 import {
@@ -32,12 +33,15 @@ import Schedule from '../Schedule/Schedule';
 import Receipt from '../Receipt/Receipt';
 import '../../utils/i18n';
 import './App.scss';
+import { createAccount, createPayout } from '../../http/paymentAPI';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
   const { i18n } = useTranslation();
+
+  const socket = io.connect(process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     dispatch(setServicesAsync());
@@ -56,6 +60,10 @@ const App = () => {
       }
 
       setLoading(false);
+
+      // const url = await createAccount();
+      // window.location.href = url.redirectUrl
+      const payout = await createPayout();
     };
 
     getUser();
@@ -92,7 +100,7 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Header loading={loading} />}>
+        <Route path="/" element={<Header loading={loading} socket={socket} />}>
           <Route index element={<Main />} />
           <Route path="booking" element={<Booking loading={loading} />} />
           <Route path="booking/edit/*" element={<Booking loading={loading} />} />
@@ -103,7 +111,7 @@ const App = () => {
           <Route path="faq" element={<Faq />} />
           <Route path="cancellation-policy" element={<CancellationPolicy />} />
           <Route path="personal-info" element={<PersonalInfo />} />
-          <Route path="address/new" element={<Address />} />
+          <Route path="address/new/:booking" element={<Address />} />
           <Route path="address/edit/:addressId" element={<Address />} />
           <Route path="addresses" element={<Addresses />} />
           <Route path="orders" element={<Orders />} />

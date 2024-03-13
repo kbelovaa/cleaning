@@ -8,6 +8,7 @@ import {
   livingRooms,
 } from '../../constants/selectOptions';
 import {
+  SET_DEFAULT_ADDRESS_ID,
   SET_CLEANING,
   SET_REPEAT,
   SET_DATE,
@@ -49,6 +50,7 @@ export const defaultState = {
   currentDate: new Date(),
   repeat: repeats[0],
   date: '',
+  isDateValid: true,
   time: times[24],
   dates: [],
   subscriptionPrices: [],
@@ -71,7 +73,9 @@ export const defaultState = {
   ],
   duration: '',
   startDate: '',
+  isStartDateValid: true,
   lastDate: '',
+  isLastDateValid: true,
   selectedCleaning: {},
   selectedServices: [],
   defaultAddressId: '',
@@ -103,6 +107,8 @@ export const defaultState = {
 
 const cleaningReducer = (state = defaultState, action) => {
   switch (action.type) {
+    case SET_DEFAULT_ADDRESS_ID:
+      return { ...state, defaultAddressId: action.payload };
     case SET_CLEANING:
       return action.payload;
     case SET_REPEAT:
