@@ -91,6 +91,11 @@
     }
   }
 
+  &__value {
+    display: flex;
+    align-items: center;
+  }
+
   &__date {
     font-size: 24px;
     font-weight: 600;
@@ -111,5 +116,13 @@
   &__extras-list {
     padding-left: 20px;
     margin-bottom: 30px;
+  }
+
+  &__payment {
+    color: #92a1a9;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: normal;
+    margin-top: 5px;
   }
 }

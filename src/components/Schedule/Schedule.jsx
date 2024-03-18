@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { getAllJobs, getSubscription } from '../../http/orderAPI';
 import { findActiveOrders, findPastOrders } from '../../utils/ordersFunctions';
 import { setOpenedSubscriptionAction } from '../../store/actions/ordersActions';
-import { formatDate, getDateFromDateObject } from '../../utils/formatDate';
+import { formatDate, getDateFromDateObject, getPaymentDate } from '../../utils/formatDate';
 import { roundPrice } from '../../utils/calculatePrice';
 import edit from '../../images/edit.png';
 import ScheduleOrder from './ScheduleOrder/ScheduleOrder';
@@ -47,8 +47,17 @@ const Schedule = () => {
       parseSubscription(subscription, jobs);
     };
 
+    const parseSubscriptionWithJobs = async () => {
+      const jobs = await getAllJobs();
+      parseSubscription(subscription, jobs);
+    };
+
     if (subscription._id === subscriptionId) {
-      parseSubscription(subscription, orders.jobs);
+      if (orders.jobs.length === 0) {
+        parseSubscriptionWithJobs();
+      } else {
+        parseSubscription(subscription, orders.jobs);
+      }
     } else if (subscriptionId) {
       getData();
     }
@@ -97,9 +106,7 @@ const Schedule = () => {
                   </div>
                 </div>
                 {activeOrders[0].specialInstructions && (
-                  <p className="cleaning__instructions">
-                    {activeOrders[0].specialInstructions}
-                  </p>
+                  <p className="cleaning__instructions">{activeOrders[0].specialInstructions}</p>
                 )}
                 <div className="cleaning__line">
                   <span>{t(activeOrders[0].serviceType.type)}</span>
@@ -138,13 +145,44 @@ const Schedule = () => {
                 </div>
                 <div className="cleaning__line">
                   <span className="cleaning__value">
-                    {t('total')}
+                    {activeOrders[0].paymentStatus === 'Sum is reserved' && (
+                      <svg
+                        className="total-summary__tick"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="25"
+                        viewBox="0 0 24 25"
+                        fill="none"
+                      >
+                        <path
+                          d="M20 7L9 18L4 13"
+                          stroke="#268664"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                    {activeOrders[0].paymentStatus === 'Sum is reserved' ? t('paid') : t('total')}
                     <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
                       {`(${t('tariff')} ${activeOrders[0].orderPriceId.tariffNumber})`}
                     </span>
                   </span>
                   <span className="cleaning__value">{`€${roundPrice(activeOrders[0].orderPriceId.totalSum)}`}</span>
                 </div>
+                {activeOrders[0].paymentStatus === 'Not paid' && (
+                  <p className="cleaning__payment">
+                    {`${t('toBePaid')} ${formatDate(getDateFromDateObject(getPaymentDate(activeOrders[0].date)))
+                      .split(', ')
+                      .map((elem, index) => {
+                        if (index === 1) {
+                          return t(elem).slice(0, 3);
+                        }
+                        return elem;
+                      })
+                      .join(', ')}`}
+                  </p>
+                )}
               </div>
             )}
           </>

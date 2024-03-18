@@ -73,15 +73,17 @@ const Receipt = () => {
                     <span className="total-summary__value">{order.time}</span>
                   </div>
                 </div>
-                <p className={`total-summary__address total-summary__line_important ${order.specialInstructions ? '' : 'total-summary__last-line'}`}>
+                <p
+                  className={`total-summary__address total-summary__line_important ${
+                    order.specialInstructions ? '' : 'total-summary__last-line'
+                  }`}
+                >
                   {`${order.address.address}${order.address.secondAddress ? `, ${order.address.address2}` : ''}, ${
                     order.address.city
                   }, ${order.address.province}, ${order.address.postalCode}`}
                 </p>
                 {order.specialInstructions && (
-                  <p className="total-summary__instructions total-summary__last-line">
-                    {order.specialInstructions}
-                  </p>
+                  <p className="total-summary__instructions total-summary__last-line">{order.specialInstructions}</p>
                 )}
                 <div className="total-summary__line">
                   <span className="total-summary__name">{t('howFast')}</span>
@@ -167,7 +169,7 @@ const Receipt = () => {
                       />
                     </svg>
                     {t('paid')}
-                    {/* добавить payment date */}
+                    {` (${getDateFromDateObject(order.paymentDate)})`}
                     <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
                       {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
                     </span>

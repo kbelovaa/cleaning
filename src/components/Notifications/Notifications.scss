@@ -1,0 +1,173 @@
+.notifications {
+  padding: 100px 0 20px;
+  min-height: 545px;
+  max-height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 755px;
+  background-color: #fff;
+
+  &__close {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    cursor: pointer;
+
+    @media screen and (max-width: 1440px) {
+      top: 80px;
+      right: 80px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      top: 60px;
+      right: 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      width: 24px;
+      height: 24px;
+      top: 40px;
+      right: 16px;
+    }
+  }
+
+  &__panel {
+    padding: 0 100px;
+  }
+
+  &__title {
+    color: #268664;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 1.15px;
+  }
+
+  &__tabs {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 90%;
+    display: flex;
+    color: #717171;
+    margin: 20px 0;
+  }
+
+  &__tab {
+    cursor: pointer;
+    transition: all 0.4s ease;
+
+    &:first-of-type {
+      margin-right: 40px;
+    }
+
+    &.active {
+      color: #000;
+    }
+  }
+
+  &__tab-content {
+    display: none;
+
+    &.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in;
+    }
+  }
+
+  &__no-data {
+    color: #cacaca;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+    margin-top: 40px;
+    padding: 0 100px;
+  }
+
+  &__list {
+    padding: 0 100px;
+
+    &.new {
+      background: #f2f8f6;
+    }
+  }
+
+  &__item {
+    border-top: 1px solid rgba(58, 58, 58, 0.1);
+    padding: 20px 0;
+  }
+
+  &__line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__tick {
+    margin-right: 10px;
+  }
+
+  &__subtitle {
+    color: #3a3a3a;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: 0.6px;
+  }
+
+  &__time {
+    color: rgba(58, 58, 58, 0.3);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: 0.42px;
+  }
+
+  &__description {
+    color: #3a3a3a;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.48px;
+    margin-top: 5px;
+  }
+
+  &__rate {
+    color: #268664;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 130%;
+    letter-spacing: 0.36px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #185640;
+    }
+
+    &:active,
+    &:focus,
+    &:focus-visible {
+      color: #268664;
+    }
+  }
+
+  & .spinner {
+    margin: 50px 0 0 350px;
+  }
+
+  & .ps__rail-y {
+    margin-right: 80px;
+
+    &:hover .ps__thumb-y {
+      background: rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  & .ps__thumb-y {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}

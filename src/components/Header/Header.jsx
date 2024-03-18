@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { getNotifications } from '../../http/notificationsAPI';
 import Footer from '../Footer/Footer';
 import Authorization from '../Authorization/Authorization';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import Notifications from '../Notifications/Notifications';
 import './Header.scss';
-import { getNotifications } from '../../http/notificationsAPI';
 
 const Header = ({ loading, socket }) => {
   const isAuth = useSelector((state) => state.user.isAuth);
@@ -21,6 +22,8 @@ const Header = ({ loading, socket }) => {
   const [notifications, setNotifications] = useState([]);
   const [newNotifications, setNewNotifications] = useState([]);
   const [archiveNotifications, setArchiveNotifications] = useState([]);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [notificationsLoading, setNotificationsLoading] = useState(true);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -38,8 +41,9 @@ const Header = ({ loading, socket }) => {
     const getData = async () => {
       const result = await getNotifications(userId);
 
-      if (!result.message) {
+      if (result.status === 200) {
         setNotifications(result.data.notifications);
+        setNotificationsLoading(false);
       }
     };
     if (userId) {
@@ -51,7 +55,7 @@ const Header = ({ loading, socket }) => {
     if (userId) {
       socket.on('new-notification', ({ newNotification }) => {
         if (newNotification.userId === userId) {
-          setNotifications((notifications) => [newNotification, ...notifications]);
+          setNotifications((notifications) => [...notifications, newNotification]);
         }
       });
     }
@@ -62,10 +66,10 @@ const Header = ({ loading, socket }) => {
   }, [socket, userId]);
 
   useEffect(() => {
-    const newNotifications = notifications.map((elem) => !elem.readStatus);
-    setNewNotifications(newNotifications);
-    const archiveNotifications = notifications.map((elem) => elem.readStatus);
-    setArchiveNotifications(archiveNotifications);
+    const newNotifications = notifications.filter((elem) => !elem.readStatus);
+    setNewNotifications(newNotifications.reverse());
+    const archiveNotifications = notifications.filter((elem) => elem.readStatus);
+    setArchiveNotifications(archiveNotifications.reverse());
   }, [notifications]);
 
   useEffect(() => {
@@ -182,9 +186,9 @@ const Header = ({ loading, socket }) => {
                   </div>
                 </div>
               </div>
-              <div className={isAuth ? 'bell' : 'hidden'}>
+              <div className={isAuth ? 'bell' : 'hidden'} onClick={() => setIsNotificationsOpen(true)}>
                 <svg
-                  className='bell__sign'
+                  className="bell__sign"
                   xmlns="http://www.w3.org/2000/svg"
                   width="30"
                   height="30"
@@ -226,6 +230,14 @@ const Header = ({ loading, socket }) => {
         setIsOpen={setIsBurgerMenuOpen}
         setIsLoginOpen={setIsLoginOpen}
         setIsAuthorizationOpen={setIsAuthorizationOpen}
+      />
+      <Notifications
+        isOpen={isNotificationsOpen}
+        setIsOpen={setIsNotificationsOpen}
+        newNotifications={newNotifications}
+        archiveNotifications={archiveNotifications}
+        loading={notificationsLoading}
+        setNotifications={setNotifications}
       />
     </div>
   );

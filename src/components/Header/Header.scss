@@ -122,8 +122,7 @@
 
   &__counter {
     color: #fff;
-    display: flex;
-    justify-content: center;
+    text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 11px;
     font-weight: 500;
@@ -131,9 +130,13 @@
     letter-spacing: 0.5px;
     border-radius: 100px;
     height: 16px;
-    padding: 0 4px;
+    padding: 0 4.5px;
     background: #268664;
     animation: fadeIn 0.3s ease-in;
+    position: absolute;
+    top: -1px;
+    left: 15px;
+    user-select: none;
   }
 }
 

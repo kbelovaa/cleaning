@@ -27,14 +27,14 @@
     }
 
     &:focus {
-      border-color: #51CA9F;
+      border-color: #51ca9f;
 
       .invalid &.invalid-field {
         border-color: #a51f1f;
       }
 
       & + .flag-dropdown {
-        border-color: #51CA9F;
+        border-color: #51ca9f;
       }
     }
   }

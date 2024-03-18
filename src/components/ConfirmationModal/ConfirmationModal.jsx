@@ -22,12 +22,13 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
   const isPersonalInfo = pathname === '/personal-info';
   const isPassword = pathname === '/settings/change-password';
   const isSummary = pathname === '/summary';
+  const isConfirmation = pathname === '/confirmation';
 
   const navigate = useNavigate();
 
   const handleCloseConfirmation = () => {
     // добавить отправку письма
-    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo && !isSummary) {
+    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo && !isSummary && !isConfirmation) {
       createKnowingWay(user.id, knowingWay);
     }
     setIsOpen(false);
@@ -45,7 +46,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
       navigate('/');
     }
 
-    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt && !isSummary) {
+    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt && !isSummary && !isConfirmation) {
       setEmail('');
     }
   };
@@ -91,10 +92,16 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
           viewBox="0 0 30 30"
           fill="none"
         >
-          <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#284657" strokeLinecap="round" />
+          <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#268664" strokeLinecap="round" />
         </svg>
         <h3 className={isReceipt || isPersonalInfo || isPassword ? 'hidden' : 'confirmation__title'}>
-          {isContactUs ? t('thankYouMessage') : isSummary ? t('booked') : t('signUpSuccess')}
+          {isContactUs
+            ? t('thankYouMessage')
+            : isSummary
+            ? t('booked')
+            : isConfirmation
+            ? t('awaitingConfirmation')
+            : t('signUpSuccess')}
         </h3>
         <p className="confirmation__text">
           {isReceipt
@@ -109,15 +116,20 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
             ? t('passwordChanged')
             : isSummary
             ? t('paymentInstructions')
+            : isConfirmation
+            ? t('weAreLookingForCleaner')
             : t('confirmationEmailSent')}
         </p>
         <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>{t('verifyNewEmail')}</p>
+        <p className={isConfirmation ? 'confirmation__text' : 'hidden'}>{t('pleaseAllow15Min')}</p>
         <span className={(isPersonalInfo && isNewEmail) || isContactUs || isReceipt ? 'confirmation__email' : 'hidden'}>
           {email}
         </span>
         <div
           className={
-            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isSummary ? 'confirmation__knowing-way' : 'hidden'
+            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isSummary && !isConfirmation
+              ? 'confirmation__knowing-way'
+              : 'hidden'
           }
         >
           <span className="form__label">{t('howDidYouHearAboutUs')}</span>

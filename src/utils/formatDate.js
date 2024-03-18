@@ -14,6 +14,25 @@ const formatDate = (dateString) => {
   return formattedDate;
 };
 
+const getPaymentDate = (dateString) => {
+  const date = new Date(dateString);
+
+  date.setDate(date.getDate() - 2);
+
+  return date.toISOString();
+};
+
+const formatNotificationDate = (dateString) => {
+  const dateParts = dateString.split('.');
+  const day = parseInt(dateParts[0], 10);
+  const month = parseInt(dateParts[1], 10);
+  const year = parseInt(dateParts[2], 10);
+
+  const date = new Date(year, month - 1, day);
+
+  return [format(date, 'EEEE'), format(date, 'd'), format(date, 'MMMM')];
+};
+
 const getDateFromDateObject = (date) => {
   const formattedDate = date.slice(0, 10).split('-').reverse().join('.');
   return formattedDate;
@@ -66,4 +85,13 @@ const checkIsSameDate = (dateStr) => {
   return result;
 };
 
-export { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon, filterTimes, checkIsSameDate };
+export {
+  formatDate,
+  getPaymentDate,
+  formatNotificationDate,
+  getDateFromDateObject,
+  createDateObject,
+  defineIsCleaningSoon,
+  filterTimes,
+  checkIsSameDate,
+};

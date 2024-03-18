@@ -167,7 +167,13 @@ const Booking = ({ loading }) => {
   }, [date, repeat]);
 
   useEffect(() => {
-    if (repeat !== 'One-time' && repeat !== 'Custom schedule' && startDate && isStartDateValid && checkIsSameDate(startDate)) {
+    if (
+      repeat !== 'One-time' &&
+      repeat !== 'Custom schedule' &&
+      startDate &&
+      isStartDateValid &&
+      checkIsSameDate(startDate)
+    ) {
       setTime(filterTimes(times)[0]);
     } else {
       setTime(times[24]);
@@ -751,7 +757,11 @@ const Booking = ({ loading }) => {
 
     calculateCustomSchedulePrice(index, e.target.value, null);
 
-    if (customSchedule[index].date && customSchedule[index].isDateValid && checkIsSameDate(customSchedule[index].date)) {
+    if (
+      customSchedule[index].date &&
+      customSchedule[index].isDateValid &&
+      checkIsSameDate(customSchedule[index].date)
+    ) {
       handleDatesArrUpdate(setCustomSchedule, filterTimes(times)[0], 'time', index);
     }
   };
@@ -1069,10 +1079,12 @@ const Booking = ({ loading }) => {
                       />
                       <div className="form__new-address">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                          <path d="M17 12H7" stroke="#268664" strokeLinecap="round"/>
-                          <path d="M12 17V7" stroke="#268664" strokeLinecap="round"/>
+                          <path d="M17 12H7" stroke="#268664" strokeLinecap="round" />
+                          <path d="M12 17V7" stroke="#268664" strokeLinecap="round" />
                         </svg>
-                        <span className="form__new-address-text" onClick={() => navigate('/address/new/for-booking')}>{t('newAddress')}</span>
+                        <span className="form__new-address-text" onClick={() => navigate('/address/new/for-booking')}>
+                          {t('newAddress')}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -1329,9 +1341,15 @@ const Booking = ({ loading }) => {
                       >
                         <span className="form__label">{t('time')}</span>
                         <CustomSelect
-                          options={(repeat === 'One-time' && date && isDateValid && checkIsSameDate(date)) || (repeat !== 'One-time' && repeat !== 'Custom schedule' && startDate && isStartDateValid && checkIsSameDate(startDate))
-                            ? filterTimes(times)
-                            : times
+                          options={
+                            (repeat === 'One-time' && date && isDateValid && checkIsSameDate(date)) ||
+                            (repeat !== 'One-time' &&
+                              repeat !== 'Custom schedule' &&
+                              startDate &&
+                              isStartDateValid &&
+                              checkIsSameDate(startDate))
+                              ? filterTimes(times)
+                              : times
                           }
                           selectedOption={time}
                           setSelectedOption={setTime}
@@ -1398,9 +1416,13 @@ const Booking = ({ loading }) => {
                           <div className="form__input-wrap">
                             <span className="form__label">{t('time')}</span>
                             <CustomSelect
-                              options={repeat === 'Custom schedule' && customSchedule[index].date && customSchedule[index].isDateValid && checkIsSameDate(customSchedule[index].date)
-                                ? filterTimes(times)
-                                : times
+                              options={
+                                repeat === 'Custom schedule' &&
+                                customSchedule[index].date &&
+                                customSchedule[index].isDateValid &&
+                                checkIsSameDate(customSchedule[index].date)
+                                  ? filterTimes(times)
+                                  : times
                               }
                               selectedOption={elem.time}
                               setSelectedOption={(value) => handleCustomTimeChange(value, index)}

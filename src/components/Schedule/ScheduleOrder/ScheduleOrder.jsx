@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { roundPrice } from '../../../utils/calculatePrice';
-import { formatDate, getDateFromDateObject } from '../../../utils/formatDate';
+import { formatDate, getDateFromDateObject, getPaymentDate } from '../../../utils/formatDate';
 import edit from '../../../images/edit.png';
 import './ScheduleOrder.scss';
 
@@ -101,7 +101,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
         </div>
         <div className="order-card__line">
           <span className="order-card__value">
-            {isCompleted && (
+            {order.paymentStatus === 'Sum is reserved' && (
               <svg
                 className="total-summary__tick"
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,13 +119,26 @@ const ScheduleOrder = ({ order, isCompleted }) => {
                 />
               </svg>
             )}
-            {isCompleted ? t('paid') : t('total')}
+            {order.paymentStatus === 'Sum is reserved' ? t('paid') : t('total')}
             <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
               {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
             </span>
           </span>
           <span className="order-card__value">{`€${roundPrice(order.orderPriceId.totalSum)}`}</span>
         </div>
+        {order.paymentStatus === 'Not paid' && (
+          <p className="cleaning__payment">
+            {`${t('toBePaid')} ${formatDate(getDateFromDateObject(getPaymentDate(order.date)))
+              .split(', ')
+              .map((elem, index) => {
+                if (index === 1) {
+                  return t(elem).slice(0, 3);
+                }
+                return elem;
+              })
+              .join(', ')}`}
+          </p>
+        )}
         <div className="order-card__line">
           <span>
             {formatDate(getDateFromDateObject(order.date))

@@ -135,8 +135,11 @@ const Address = () => {
         dispatch(setUpdatedAddressesAction(result.data.address));
         const cleaningObj = JSON.parse(sessionStorage.getItem('cleaning'));
         if (cleaningObj) {
-          dispatch(setDefaultAddressIdAction(result.data.address._id))
-          sessionStorage.setItem('cleaning', JSON.stringify({ ...cleaningObj, defaultAddressId: result.data.address._id }));
+          dispatch(setDefaultAddressIdAction(result.data.address._id));
+          sessionStorage.setItem(
+            'cleaning',
+            JSON.stringify({ ...cleaningObj, defaultAddressId: result.data.address._id }),
+          );
         }
         setLoading(false);
         if (booking) {

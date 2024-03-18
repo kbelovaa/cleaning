@@ -225,20 +225,20 @@
         bottom: 0;
         transition: all 0.3s ease;
       }
-  
+
       .form__new-address:hover & {
         color: #185640;
-  
+
         &::after {
           background: #185640;
         }
       }
-  
+
       .form__new-address:active &,
       .form__new-address:focus &,
       .form__new-address:focus-visible & {
         color: #177152;
-  
+
         &::after {
           background: #177152;
         }
@@ -329,7 +329,7 @@
 
     &:hover {
       border-color: #cdcdcd;
-      
+
       &::after {
         background: rgba(58, 58, 58, 0.04);
       }
@@ -514,7 +514,7 @@
       &:active path,
       &:focus path,
       &:focus-visible path {
-        stroke: #C9C7C7;
+        stroke: #c9c7c7;
       }
 
       &.unactive {
@@ -524,7 +524,7 @@
         &:active path,
         &:focus path,
         &:focus-visible path {
-          stroke: #C9C7C7;
+          stroke: #c9c7c7;
         }
       }
     }
@@ -731,17 +731,17 @@
         z-index: 1;
 
         .form__option:hover & {
-          border: 1px solid #E8E7E7;
+          border: 1px solid #e8e7e7;
 
           &:hover {
-            border: 1px solid #1E9E71;
+            border: 1px solid #1e9e71;
             z-index: 2;
           }
         }
       }
 
       &:hover {
-        border: 1px solid #1E9E71;
+        border: 1px solid #1e9e71;
         z-index: 2;
       }
     }

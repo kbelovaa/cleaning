@@ -41,6 +41,10 @@ const Summary = () => {
       dispatch(setCleaningAction(cleaning));
       setCleaning(cleaning);
     }
+
+    if (isConfirmation) {
+      setIsConfirmationOpen(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -68,7 +72,7 @@ const Summary = () => {
         cleaningSum: order.orderPriceId.cleaningSum,
         speedSum: order.orderPriceId.speedSum,
         ivaPercent: order.orderPriceId.taxPercent,
-        paymentStatus: order.paymentStatus
+        paymentStatus: order.paymentStatus,
       };
 
       if (lastSubscription.subscriptionType === 'One-time') {
@@ -233,11 +237,15 @@ const Summary = () => {
       setLoading(true);
       const result = await formOrder();
       if (result.status === 201) {
-        const date = cleaning.repeat === 'One-time' ? cleaning.date : cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].date : cleaning.dates
-        .filter((date) => {
-          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-          return !datesToRemove.includes(date);
-        })[0];
+        const date =
+          cleaning.repeat === 'One-time'
+            ? cleaning.date
+            : cleaning.repeat === 'Custom schedule'
+            ? cleaning.customSchedule[0].date
+            : cleaning.dates.filter((date) => {
+                const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                return !datesToRemove.includes(date);
+              })[0];
         const time = cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].time : cleaning.time;
 
         if (defineIsCleaningSoon(date, time)) {
@@ -248,15 +256,21 @@ const Summary = () => {
             time,
             cleaning: cleaning.selectedCleaning.type,
             extraServices: cleaning.selectedServices,
-            total: cleaning.repeat === 'One-time'
-              ? cleaning.total.toFixed(2)
-              : cleaning.repeat === 'Custom schedule'
-              ? cleaning.customSchedule[0].total.toFixed(2)
-              : Number(cleaning.subscriptionPrices[cleaning.dates.indexOf(cleaning.dates
-                .filter((date) => {
-                  const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                  return !datesToRemove.includes(date);
-                })[0])].total.toFixed(2))
+            total:
+              cleaning.repeat === 'One-time'
+                ? cleaning.total.toFixed(2)
+                : cleaning.repeat === 'Custom schedule'
+                ? cleaning.customSchedule[0].total.toFixed(2)
+                : Number(
+                    cleaning.subscriptionPrices[
+                      cleaning.dates.indexOf(
+                        cleaning.dates.filter((date) => {
+                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                          return !datesToRemove.includes(date);
+                        })[0],
+                      )
+                    ].total.toFixed(2),
+                  ),
           });
           clearStore();
           await stripe.redirectToCheckout({
@@ -452,7 +466,11 @@ const Summary = () => {
                     </div>
                   </div>
                 )}
-                <p className={`total-summary__address total-summary__line_important ${cleaning.instructions ? '' : 'total-summary__last-line'} ${editMode ? 'edit' : ''}`}>
+                <p
+                  className={`total-summary__address total-summary__line_important ${
+                    cleaning.instructions ? '' : 'total-summary__last-line'
+                  } ${editMode ? 'edit' : ''}`}
+                >
                   <div
                     className="total-summary__edit-wrap"
                     onClick={() =>
@@ -469,10 +487,7 @@ const Summary = () => {
                 </p>
                 {cleaning.instructions && (
                   <p className={`total-summary__instructions total-summary__last-line ${editMode ? 'edit' : ''}`}>
-                    <div
-                      className="total-summary__edit-wrap"
-                      onClick={() => navigate('/booking/edit/instructions')}
-                    >
+                    <div className="total-summary__edit-wrap" onClick={() => navigate('/booking/edit/instructions')}>
                       <img className="total-summary__edit" src={edit} alt="Edit" />
                     </div>
                     {cleaning.instructions}
@@ -671,8 +686,8 @@ const Summary = () => {
                   </span>
                 </div>
                 <div className="total-summary__line">
-                  {cleaning.paymentStatus !== 'Not paid' ? (
-                    <span className="total-summary__name">
+                  <span className="total-summary__name">
+                    {cleaning.paymentStatus !== 'Not paid' && (
                       <svg
                         className="total-summary__tick"
                         xmlns="http://www.w3.org/2000/svg"
@@ -689,51 +704,28 @@ const Summary = () => {
                           strokeLinejoin="round"
                         />
                       </svg>
-                      {t('paid')}
-                      <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-                        {`(${t('tariff')} ${
-                          cleaning.repeat === 'One-time'
-                            ? cleaning.tariff
-                            : cleaning.repeat === 'Custom schedule'
-                            ? cleaning.customSchedule[0].tariff
-                            : cleaning.dates.length !== 0 &&
-                              cleaning.subscriptionPrices.length === Number(cleaning.duration)
-                            ? cleaning.subscriptionPrices[
-                                cleaning.dates.indexOf(
-                                  cleaning.dates.filter((date) => {
-                                    const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                                    return !datesToRemove.includes(date);
-                                  })[0],
-                                )
-                              ].tariff
-                            : 1
-                        })`}
-                      </span>
+                    )}
+                    {cleaning.paymentStatus !== 'Not paid' ? t('paid') : t('total')}
+                    <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                      {`(${t('tariff')} ${
+                        cleaning.repeat === 'One-time'
+                          ? cleaning.tariff
+                          : cleaning.repeat === 'Custom schedule'
+                          ? cleaning.customSchedule[0].tariff
+                          : cleaning.dates.length !== 0 &&
+                            cleaning.subscriptionPrices.length === Number(cleaning.duration)
+                          ? cleaning.subscriptionPrices[
+                              cleaning.dates.indexOf(
+                                cleaning.dates.filter((date) => {
+                                  const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                                  return !datesToRemove.includes(date);
+                                })[0],
+                              )
+                            ].tariff
+                          : 1
+                      })`}
                     </span>
-                  ) : (
-                    <span className="total-summary__name">
-                      {t('total')}
-                      <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-                        {`(${t('tariff')} ${
-                          cleaning.repeat === 'One-time'
-                            ? cleaning.tariff
-                            : cleaning.repeat === 'Custom schedule'
-                            ? cleaning.customSchedule[0].tariff
-                            : cleaning.dates.length !== 0 &&
-                              cleaning.subscriptionPrices.length === Number(cleaning.duration)
-                            ? cleaning.subscriptionPrices[
-                                cleaning.dates.indexOf(
-                                  cleaning.dates.filter((date) => {
-                                    const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                                    return !datesToRemove.includes(date);
-                                  })[0],
-                                )
-                              ].tariff
-                            : 1
-                        })`}
-                      </span>
-                    </span>
-                  )}
+                  </span>
                   <span className="total-summary__value">
                     {`€${
                       cleaning.total && cleaning.repeat === 'One-time'
@@ -802,15 +794,19 @@ const Summary = () => {
                       }`}
                       onClick={handlePayment}
                     >
-                      {
-                        defineIsCleaningSoon(cleaning.repeat === 'One-time' ? cleaning.date : cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].date : cleaning.dates
-                        .filter((date) => {
-                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                          return !datesToRemove.includes(date);
-                        })[0], cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].time : cleaning.time)
+                      {defineIsCleaningSoon(
+                        cleaning.repeat === 'One-time'
+                          ? cleaning.date
+                          : cleaning.repeat === 'Custom schedule'
+                          ? cleaning.customSchedule[0].date
+                          : cleaning.dates.filter((date) => {
+                              const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                              return !datesToRemove.includes(date);
+                            })[0],
+                        cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].time : cleaning.time,
+                      )
                         ? t('pay')
-                        : t('confirm')
-                      }
+                        : t('confirm')}
                     </button>
                   </div>
                 </>
