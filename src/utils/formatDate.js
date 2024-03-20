@@ -23,7 +23,7 @@ const getPaymentDate = (dateString) => {
 };
 
 const formatNotificationDate = (dateString) => {
-  const dateParts = dateString.split('.');
+  const dateParts = dateString.slice(0, 10).split('-').reverse();
   const day = parseInt(dateParts[0], 10);
   const month = parseInt(dateParts[1], 10);
   const year = parseInt(dateParts[2], 10);

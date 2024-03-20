@@ -82,7 +82,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
         )}
         {order.howFast !== 'x1' && (
           <div className="order-card__line">
-            <span>{t('howFast')}</span>
+            <span>{`${t('howFast')} (${order.howFast})`}</span>
             <span>{`€${roundPrice(order.orderPriceId.speedSum)}`}</span>
           </div>
         )}
@@ -101,7 +101,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
         </div>
         <div className="order-card__line">
           <span className="order-card__value">
-            {order.paymentStatus === 'Sum is reserved' && (
+            {(order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid') && (
               <svg
                 className="total-summary__tick"
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
                 />
               </svg>
             )}
-            {order.paymentStatus === 'Sum is reserved' ? t('paid') : t('total')}
+            {(order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid') ? t('paid') : t('total')}
             <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
               {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
             </span>

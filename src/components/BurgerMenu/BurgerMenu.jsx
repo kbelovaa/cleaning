@@ -5,7 +5,6 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
 import {
   setActiveOrdersAction,
-  setJobsAction,
   setOpenedOrderAction,
   setOpenedSubscriptionAction,
   setPastOrdersAction,
@@ -73,7 +72,6 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
     dispatch(setPastOrdersAction([]));
     dispatch(setOpenedSubscriptionAction({}));
     dispatch(setOpenedOrderAction({}));
-    dispatch(setJobsAction([]));
     navigate('/');
     clearStore();
   };

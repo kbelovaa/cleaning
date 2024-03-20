@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getAllJobs, getSubscription } from '../../http/orderAPI';
+import { getSubscription } from '../../http/orderAPI';
 import { findActiveOrders, findPastOrders } from '../../utils/ordersFunctions';
 import { setOpenedSubscriptionAction } from '../../store/actions/ordersActions';
 import { formatDate, getDateFromDateObject, getPaymentDate } from '../../utils/formatDate';
@@ -12,7 +12,6 @@ import ScheduleOrder from './ScheduleOrder/ScheduleOrder';
 import './Schedule.scss';
 
 const Schedule = () => {
-  const orders = useSelector((state) => state.orders);
   const subscription = useSelector((state) => state.orders.openedSubscription);
 
   const [activeOrders, setActiveOrders] = useState([]);
@@ -27,12 +26,12 @@ const Schedule = () => {
 
   const { t } = useTranslation();
 
-  const parseSubscription = (subscription, jobs) => {
-    const activeOrders = findActiveOrders(subscription, jobs).sort(
+  const parseSubscription = (subscription) => {
+    const activeOrders = findActiveOrders(subscription).sort(
       (order1, order2) => new Date(order1.date) - new Date(order2.date),
     );
     setActiveOrders(activeOrders);
-    const pastOrders = findPastOrders(subscription.orders, jobs).sort(
+    const pastOrders = findPastOrders(subscription.orders).sort(
       (order1, order2) => new Date(order2.date) - new Date(order1.date),
     );
     setPastOrders(pastOrders);
@@ -42,22 +41,12 @@ const Schedule = () => {
   useEffect(() => {
     const getData = async () => {
       const subscription = await getSubscription(subscriptionId);
-      const jobs = await getAllJobs();
       dispatch(setOpenedSubscriptionAction(subscription));
-      parseSubscription(subscription, jobs);
-    };
-
-    const parseSubscriptionWithJobs = async () => {
-      const jobs = await getAllJobs();
-      parseSubscription(subscription, jobs);
+      parseSubscription(subscription);
     };
 
     if (subscription._id === subscriptionId) {
-      if (orders.jobs.length === 0) {
-        parseSubscriptionWithJobs();
-      } else {
-        parseSubscription(subscription, orders.jobs);
-      }
+      parseSubscription(subscription);
     } else if (subscriptionId) {
       getData();
     }
@@ -131,7 +120,7 @@ const Schedule = () => {
                 )}
                 {activeOrders[0].howFast !== 'x1' && (
                   <div className="cleaning__line">
-                    <span>{t('howFast')}</span>
+                    <span>{`${t('howFast')} (${activeOrders[0].howFast})`}</span>
                     <span>{`€${roundPrice(activeOrders[0].orderPriceId.speedSum)}`}</span>
                   </div>
                 )}

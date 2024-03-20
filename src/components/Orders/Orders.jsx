@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getSubscriptions, getAllJobs, getOrders } from '../../http/orderAPI';
+import { getSubscriptions, getOrders } from '../../http/orderAPI';
 import {
   setActiveOrdersAction,
   setActiveTabAction,
-  setJobsAction,
   setOpenedOrderAction,
   setOpenedSubscriptionAction,
   setPastOrdersAction,
@@ -31,15 +30,8 @@ const Orders = () => {
   useEffect(() => {
     const getData = async () => {
       const subscriptions = await getSubscriptions(user.id);
-      const jobs = await getAllJobs();
-      dispatch(setJobsAction(jobs));
       let filteredSubscriptions = subscriptions.filter((subscription) =>
-        subscription.orders.some((order) => {
-          const orderJob = jobs.find((job) => job.orderId._id === order._id);
-          if (orderJob) {
-            return orderJob.status !== 'completed';
-          }
-        }),
+        subscription.orders.some((order) => !order.isCompleted)
       );
       filteredSubscriptions = filteredSubscriptions.map((subscription) => {
         if (subscription.orders.length > 1) {
@@ -51,31 +43,24 @@ const Orders = () => {
         return subscription;
       });
       const sortedSubscriptions = filteredSubscriptions.sort((subscription1, subscription2) => {
-        const date1 = findActiveOrders(subscription1, jobs)[0].date;
-        const date2 = findActiveOrders(subscription2, jobs)[0].date;
+        const date1 = findActiveOrders(subscription1)[0].date;
+        const date2 = findActiveOrders(subscription2)[0].date;
         return new Date(date1) - new Date(date2);
       });
       dispatch(setActiveOrdersAction(sortedSubscriptions));
 
       const orders = await getOrders(user.id);
-      const pastOrders = findPastOrders(orders, jobs).sort(
+      const pastOrders = findPastOrders(orders).sort(
         (order1, order2) => new Date(order2.date) - new Date(order1.date),
       );
       dispatch(setPastOrdersAction(pastOrders));
       setLoading(false);
     };
 
-    if (user.id && orders.jobs.length === 0) {
+    if (user.id) {
       getData();
     }
-
-    if (
-      (orders.openedSubscription._id || orders.openedOrder._id) &&
-      (orders.activeOrders.length !== 0 || orders.pastOrders.length !== 0)
-    ) {
-      setLoading(false);
-    }
-  }, [user, orders]);
+  }, [user]);
 
   const handleTabClick = (index) => {
     dispatch(setActiveTabAction(index));
@@ -119,12 +104,12 @@ const Orders = () => {
                     {orders.activeOrders.map((order, index) => (
                       <div key={index}>
                         {index !== 0 &&
-                          new Date(findActiveOrders(order, orders.jobs)[0].date).getMonth() !==
+                          new Date(findActiveOrders(order)[0].date).getMonth() !==
                             new Date(
-                              findActiveOrders(orders.activeOrders[index - 1], orders.jobs)[0].date,
+                              findActiveOrders(orders.activeOrders[index - 1])[0].date,
                             ).getMonth() && (
                             <p className="orders__month">
-                              {t(months[new Date(findActiveOrders(order, orders.jobs)[0].date).getMonth()])}
+                              {t(months[new Date(findActiveOrders(order)[0].date).getMonth()])}
                             </p>
                           )}
                         <div className="order" onClick={() => handleSubscriptionOpen(order)}>
@@ -137,7 +122,7 @@ const Orders = () => {
                                   ? t('custom')
                                   : t(order.subscriptionType)}
                               </h3>
-                              {!findActiveOrders(order, orders.jobs)[0].isConfirmed && (
+                              {!findActiveOrders(order)[0].isConfirmed && (
                                 <div className="order__label">{t('awaitingConfirmation')}</div>
                               )}
                             </div>
@@ -151,7 +136,7 @@ const Orders = () => {
                               }`}
                             </p>
                             <div className="order__date">
-                              {`${formatDate(getDateFromDateObject(findActiveOrders(order, orders.jobs)[0].date))
+                              {`${formatDate(getDateFromDateObject(findActiveOrders(order)[0].date))
                                 .split(', ')
                                 .map((elem, index) => {
                                   if (index === 1) {
@@ -159,11 +144,11 @@ const Orders = () => {
                                   }
                                   return elem;
                                 })
-                                .join(', ')}, ${findActiveOrders(order, orders.jobs)[0].time}`}
+                                .join(', ')}, ${findActiveOrders(order)[0].time}`}
                             </div>
                             {order.subscriptionType !== 'One-time' && (
                               <p className="order__duration">{`${t('duration')}: ${
-                                findPastOrders(order.orders, orders.jobs).length
+                                findPastOrders(order.orders).length
                               }/${order.orders.length}`}</p>
                             )}
                           </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getOrder } from '../../http/orderAPI';
 import { setOpenedOrderAction } from '../../store/actions/ordersActions';
@@ -16,12 +16,15 @@ const Receipt = () => {
 
   const [loading, setLoading] = useState(false);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [isInvoice, setIsInvoice] = useState(false);
 
   const dispatch = useDispatch();
 
   const { orderId } = useParams();
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
 
   const { t } = useTranslation();
 
@@ -34,9 +37,15 @@ const Receipt = () => {
     if (orderId && order._id !== orderId) {
       getData();
     }
+
+    if (isInvoiceReceipt) {
+      setIsConfirmationOpen(true);
+      setIsInvoice(true);
+    }
   }, []);
 
   const sendToEmail = () => {
+    setIsInvoice(false);
     setLoading(true);
     //отправка письма
     setLoading(false);
@@ -169,7 +178,7 @@ const Receipt = () => {
                       />
                     </svg>
                     {t('paid')}
-                    {` (${getDateFromDateObject(order.paymentDate)})`}
+                    {!isInvoiceReceipt && ` (${getDateFromDateObject(order.paymentDate)})`}
                     <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
                       {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
                     </span>
@@ -188,7 +197,7 @@ const Receipt = () => {
           )}
         </div>
       </div>
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} email={user.email} />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} email={user.email} isInvoice={isInvoice} />
     </>
   );
 };

@@ -33,7 +33,6 @@ import Schedule from '../Schedule/Schedule';
 import Receipt from '../Receipt/Receipt';
 import '../../utils/i18n';
 import './App.scss';
-import { createAccount, createPayout } from '../../http/paymentAPI';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -119,6 +118,7 @@ const App = () => {
           <Route path="settings/change-password" element={<Password />} />
           <Route path="schedule/:subscriptionId" element={<Schedule />} />
           <Route path="receipt/:orderId" element={<Receipt />} />
+          <Route path="invoice-receipt/:orderId" element={<Receipt />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

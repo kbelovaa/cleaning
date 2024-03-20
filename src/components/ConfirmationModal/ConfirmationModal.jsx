@@ -7,7 +7,7 @@ import { createKnowingWay } from '../../http/profileAPI';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import './ConfirmationModal.scss';
 
-const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) => {
+const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isInvoice }) => {
   const user = useSelector((state) => state.user);
 
   const [knowingWay, setKnowingWay] = useState('');
@@ -23,12 +23,13 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
   const isPassword = pathname === '/settings/change-password';
   const isSummary = pathname === '/summary';
   const isConfirmation = pathname === '/confirmation';
+  const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
 
   const navigate = useNavigate();
 
   const handleCloseConfirmation = () => {
     // добавить отправку письма
-    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo && !isSummary && !isConfirmation) {
+    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo && !isSummary && !isConfirmation && !isInvoiceReceipt) {
       createKnowingWay(user.id, knowingWay);
     }
     setIsOpen(false);
@@ -46,7 +47,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
       navigate('/');
     }
 
-    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt && !isSummary && !isConfirmation) {
+    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt && !isSummary && !isConfirmation && !isInvoiceReceipt) {
       setEmail('');
     }
   };
@@ -85,7 +86,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
           <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
         </svg>
         <svg
-          className={isPersonalInfo || isPassword || isReceipt ? 'confirmation__tick' : ''}
+          className={isPersonalInfo || isPassword || isReceipt || (isInvoiceReceipt && !isInvoice) ? 'confirmation__tick' : ''}
           xmlns="http://www.w3.org/2000/svg"
           width="30"
           height="30"
@@ -94,17 +95,17 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
         >
           <path d="M5 16.25L11.25 22.5L25 8.75" stroke="#268664" strokeLinecap="round" />
         </svg>
-        <h3 className={isReceipt || isPersonalInfo || isPassword ? 'hidden' : 'confirmation__title'}>
+        <h3 className={isReceipt || (isInvoiceReceipt && !isInvoice) || isPersonalInfo || isPassword ? 'hidden' : 'confirmation__title'}>
           {isContactUs
             ? t('thankYouMessage')
             : isSummary
             ? t('booked')
-            : isConfirmation
+            : isConfirmation || (isInvoiceReceipt && isInvoice)
             ? t('awaitingConfirmation')
             : t('signUpSuccess')}
         </h3>
         <p className="confirmation__text">
-          {isReceipt
+          {isReceipt || (isInvoiceReceipt && !isInvoice)
             ? t('weHaveSentReceipt')
             : isContactUs
             ? t('weWillReplyToEmail')
@@ -116,18 +117,18 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail }) =
             ? t('passwordChanged')
             : isSummary
             ? t('paymentInstructions')
-            : isConfirmation
+            : isConfirmation || (isInvoiceReceipt && isInvoice)
             ? t('weAreLookingForCleaner')
             : t('confirmationEmailSent')}
         </p>
         <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>{t('verifyNewEmail')}</p>
-        <p className={isConfirmation ? 'confirmation__text' : 'hidden'}>{t('pleaseAllow15Min')}</p>
-        <span className={(isPersonalInfo && isNewEmail) || isContactUs || isReceipt ? 'confirmation__email' : 'hidden'}>
+        <p className={isConfirmation || (isInvoiceReceipt && isInvoice) ? 'confirmation__text' : 'hidden'}>{t('pleaseAllow15Min')}</p>
+        <span className={(isPersonalInfo && isNewEmail) || isContactUs || isReceipt || (isInvoiceReceipt && !isInvoice) ? 'confirmation__email' : 'hidden'}>
           {email}
         </span>
         <div
           className={
-            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isSummary && !isConfirmation
+            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isSummary && !isConfirmation && !isInvoiceReceipt
               ? 'confirmation__knowing-way'
               : 'hidden'
           }

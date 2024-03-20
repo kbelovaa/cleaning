@@ -1,7 +1,6 @@
 import {
   SET_ACTIVE_ORDERS,
   SET_PAST_ORDERS,
-  SET_JOBS,
   SET_OPENED_SUBSCRIPTION,
   SET_OPENED_ORDER,
   SET_ACTIVE_TAB,
@@ -24,11 +23,6 @@ export const setOpenedSubscriptionAction = (payload) => ({
 
 export const setOpenedOrderAction = (payload) => ({
   type: SET_OPENED_ORDER,
-  payload,
-});
-
-export const setJobsAction = (payload) => ({
-  type: SET_JOBS,
   payload,
 });
 
