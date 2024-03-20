@@ -119,7 +119,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
                 />
               </svg>
             )}
-            {(order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid') ? t('paid') : t('total')}
+            {order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid' ? t('paid') : t('total')}
             <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
               {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
             </span>

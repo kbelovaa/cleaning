@@ -31,7 +31,7 @@ const Orders = () => {
     const getData = async () => {
       const subscriptions = await getSubscriptions(user.id);
       let filteredSubscriptions = subscriptions.filter((subscription) =>
-        subscription.orders.some((order) => !order.isCompleted)
+        subscription.orders.some((order) => !order.isCompleted),
       );
       filteredSubscriptions = filteredSubscriptions.map((subscription) => {
         if (subscription.orders.length > 1) {
@@ -50,9 +50,7 @@ const Orders = () => {
       dispatch(setActiveOrdersAction(sortedSubscriptions));
 
       const orders = await getOrders(user.id);
-      const pastOrders = findPastOrders(orders).sort(
-        (order1, order2) => new Date(order2.date) - new Date(order1.date),
-      );
+      const pastOrders = findPastOrders(orders).sort((order1, order2) => new Date(order2.date) - new Date(order1.date));
       dispatch(setPastOrdersAction(pastOrders));
       setLoading(false);
     };
@@ -105,9 +103,7 @@ const Orders = () => {
                       <div key={index}>
                         {index !== 0 &&
                           new Date(findActiveOrders(order)[0].date).getMonth() !==
-                            new Date(
-                              findActiveOrders(orders.activeOrders[index - 1])[0].date,
-                            ).getMonth() && (
+                            new Date(findActiveOrders(orders.activeOrders[index - 1])[0].date).getMonth() && (
                             <p className="orders__month">
                               {t(months[new Date(findActiveOrders(order)[0].date).getMonth()])}
                             </p>

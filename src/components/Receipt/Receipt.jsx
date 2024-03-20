@@ -197,7 +197,12 @@ const Receipt = () => {
           )}
         </div>
       </div>
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} email={user.email} isInvoice={isInvoice} />
+      <ConfirmationModal
+        isOpen={isConfirmationOpen}
+        setIsOpen={setIsConfirmationOpen}
+        email={user.email}
+        isInvoice={isInvoice}
+      />
     </>
   );
 };
