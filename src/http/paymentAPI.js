@@ -11,7 +11,7 @@ export const createCheckoutSession = async (order) => {
 
 export const createAccount = async () => {
   try {
-    const { data } = await $host.get('api/payment/create-connected-account/65b775f919bb02e6a3b8d049');
+    const { data } = await $host.get('api/payment/create-connected-account/65bcada67461422b1161244c');
     return data;
   } catch (error) {
     return { error: 'Unexpected error' };
