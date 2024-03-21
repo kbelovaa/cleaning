@@ -121,7 +121,7 @@ const Booking = ({ loading }) => {
   const startDateRef = useRef(null);
   const lastDateRef = useRef(null);
 
-  const { setIsAuthorizationOpen } = useOutletContext();
+  const setIsAuthorizationOpen = useOutletContext();
 
   const { t } = useTranslation();
 
