@@ -262,15 +262,15 @@ const Summary = () => {
                 : cleaning.repeat === 'Custom schedule'
                 ? cleaning.customSchedule[0].total.toFixed(2)
                 : Number(
-                    cleaning.subscriptionPrices[
-                      cleaning.dates.indexOf(
-                        cleaning.dates.filter((date) => {
-                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                          return !datesToRemove.includes(date);
-                        })[0],
-                      )
-                    ].total.toFixed(2),
-                  ),
+                  cleaning.subscriptionPrices[
+                    cleaning.dates.indexOf(
+                      cleaning.dates.filter((date) => {
+                        const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                        return !datesToRemove.includes(date);
+                      })[0],
+                    )
+                  ].total.toFixed(2),
+                ),
           });
           clearStore();
           await stripe.redirectToCheckout({
