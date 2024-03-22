@@ -108,7 +108,6 @@ const Addresses = () => {
                           onClick={() => handleDefaultAddressSetting(address)}
                           className={`form__radio ${address.isDefault ? 'checked' : ''}`}
                         >
-                          {console.log(address)}
                           <div className="form__radio-value">
                             <svg
                               className={`form__radio-checked ${address.isDefault ? 'checked' : ''}`}

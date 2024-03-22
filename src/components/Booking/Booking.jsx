@@ -14,7 +14,6 @@ import {
   isBefore,
   differenceInDays,
   format,
-  isSameDay,
 } from 'date-fns';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { getAddresses } from '../../http/addressAPI';
@@ -1082,7 +1081,7 @@ const Booking = ({ loading }) => {
                           <path d="M17 12H7" stroke="#268664" strokeLinecap="round" />
                           <path d="M12 17V7" stroke="#268664" strokeLinecap="round" />
                         </svg>
-                        <span className="form__new-address-text" onClick={() => navigate('/address/new/for-booking')}>
+                        <span className="form__new-address-text" onClick={() => navigate('/address/new/booking')}>
                           {t('newAddress')}
                         </span>
                       </div>

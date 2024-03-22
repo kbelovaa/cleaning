@@ -112,7 +112,8 @@ const App = () => {
           <Route path="faq" element={<Faq />} />
           <Route path="cancellation-policy" element={<CancellationPolicy />} />
           <Route path="personal-info" element={<PersonalInfo />} />
-          <Route path="address/new/:booking" element={<Address />} />
+          <Route path="address/new" element={<Address />} />
+          <Route path="address/new/booking" element={<Address />} />
           <Route path="address/edit/:addressId" element={<Address />} />
           <Route path="addresses" element={<Addresses />} />
           <Route path="orders" element={<Orders />} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
 import { createAddress, getAddress, getAddresses, updateAddress } from '../../http/addressAPI';
@@ -31,7 +31,9 @@ const Address = () => {
   const dispatch = useDispatch();
 
   const { addressId } = useParams();
-  const { booking } = useParams();
+  const { pathname } = useLocation();
+  const routes = pathname.split('/');
+  const booking = routes[3] === 'booking';
 
   const { t } = useTranslation();
 
@@ -176,7 +178,7 @@ const Address = () => {
                 <input
                   id="address2"
                   type="text"
-                  className={`input form__address ${!address2 ? 'invalid-field' : ''}`}
+                  className="input form__address"
                   value={address2}
                   onChange={(e) => setAddress2(e.target.value)}
                 />
@@ -226,7 +228,7 @@ const Address = () => {
                   {t('apartmentSize')}
                   <sup className="top-index">2</sup>
                   <svg
-                    className={address1 ? 'lock' : 'hidden'}
+                    className={addressId ? 'lock' : 'hidden'}
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="17"
@@ -269,7 +271,7 @@ const Address = () => {
                   <span className="form__label">
                     {t('howManyLivingRooms')}
                     <svg
-                      className={address1 ? 'lock' : 'hidden'}
+                      className={addressId ? 'lock' : 'hidden'}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="17"
@@ -304,7 +306,7 @@ const Address = () => {
                   <span className="form__label">
                     {t('howManyBedrooms')}
                     <svg
-                      className={address1 ? 'lock' : 'hidden'}
+                      className={addressId ? 'lock' : 'hidden'}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="17"
@@ -335,7 +337,7 @@ const Address = () => {
                   <span className="form__label">
                     {t('howManyBathrooms')}
                     <svg
-                      className={address1 ? 'lock' : 'hidden'}
+                      className={addressId ? 'lock' : 'hidden'}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="17"
@@ -366,7 +368,7 @@ const Address = () => {
                   <span className="form__label">
                     {t('howManyKitchens')}
                     <svg
-                      className={address1 ? 'lock' : 'hidden'}
+                      className={addressId ? 'lock' : 'hidden'}
                       xmlns="http://www.w3.org/2000/svg"
                       width="16"
                       height="17"
