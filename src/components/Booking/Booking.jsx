@@ -157,11 +157,23 @@ const Booking = ({ loading }) => {
     }
   }, [user, loading]);
 
+  const isTimeLessThanFiltered = (time1, time2) => {
+    const [hours1, minutes1] = time1.split(':').map(Number);
+    const [hours2, minutes2] = time2.split(':').map(Number);
+
+    const date1 = new Date(0, 0, 0, hours1, minutes1);
+    const date2 = new Date(0, 0, 0, hours2, minutes2);
+
+    if (date1 < date2) {
+      return true;
+    }
+
+    return false;
+  };
+
   useEffect(() => {
-    if (repeat === 'One-time' && date && isDateValid && checkIsSameDate(date)) {
+    if (repeat === 'One-time' && date && isDateValid && checkIsSameDate(date) && isTimeLessThanFiltered(time, filterTimes(times)[0])) {
       setTime(filterTimes(times)[0]);
-    } else {
-      setTime(times[24]);
     }
   }, [date, repeat]);
 
