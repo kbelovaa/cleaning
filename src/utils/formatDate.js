@@ -1,4 +1,4 @@
-import { isSameDay, parse } from 'date-fns';
+import { isBefore, isSameDay, parse, startOfDay } from 'date-fns';
 import format from 'date-fns/format';
 
 const formatDate = (dateString) => {
@@ -85,6 +85,39 @@ const checkIsSameDate = (dateStr) => {
   return result;
 };
 
+const isTimeLessThanFiltered = (time1, time2) => {
+  const [hours1, minutes1] = time1.split(':').map(Number);
+  const [hours2, minutes2] = time2.split(':').map(Number);
+
+  const date1 = new Date(0, 0, 0, hours1, minutes1);
+  const date2 = new Date(0, 0, 0, hours2, minutes2);
+
+  if (date1 < date2) {
+    return true;
+  }
+
+  return false;
+};
+
+const checkIsDateValid = (value) => {
+  const date = value.split('.');
+  const day = date[0];
+  const month = date[1];
+  const year = date[2];
+
+  if (
+    (!Number.isNaN(parseInt(day, 10)) && (parseInt(day, 10) < 1 || parseInt(date, 10) > 31)) ||
+    (!Number.isNaN(parseInt(month, 10)) && (parseInt(month, 10) > 12 || parseInt(month, 10) < 1)) ||
+    (!Number.isNaN(parseInt(year, 10)) &&
+      year.replace(/\D/g, '').length === 4 &&
+      isBefore(parse(value, 'dd.MM.yyyy', new Date()), startOfDay(new Date())))
+  ) {
+    return false;
+  }
+
+  return true;
+};
+
 export {
   formatDate,
   getPaymentDate,
@@ -94,4 +127,6 @@ export {
   defineIsCleaningSoon,
   filterTimes,
   checkIsSameDate,
+  isTimeLessThanFiltered,
+  checkIsDateValid
 };

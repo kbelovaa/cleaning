@@ -13,9 +13,9 @@ export const signUp = async (name, surname, email, mobile, password, role = 'cli
   }
 };
 
-export const signIn = async (email, password) => {
+export const signIn = async (email, password, role = 'client') => {
   try {
-    const { data } = await $host.post('api/auth/signin_web', { email, password });
+    const { data } = await $host.post('api/auth/signin_web', { email, password, role });
 
     return data;
   } catch (error) {

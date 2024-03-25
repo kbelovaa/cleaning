@@ -28,7 +28,7 @@ import {
   livingRooms,
 } from '../../constants/selectOptions';
 import { getTimeCoeff, calculateCleaningTypePrice, roundPrice } from '../../utils/calculatePrice';
-import { checkIsSameDate, filterTimes, formatDate } from '../../utils/formatDate';
+import { checkIsDateValid, checkIsSameDate, filterTimes, formatDate, isTimeLessThanFiltered } from '../../utils/formatDate';
 import AddressSelect from '../AddressSelect/AddressSelect';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import Calendar from '../Calendar/Calendar';
@@ -157,20 +157,6 @@ const Booking = ({ loading }) => {
     }
   }, [user, loading]);
 
-  const isTimeLessThanFiltered = (time1, time2) => {
-    const [hours1, minutes1] = time1.split(':').map(Number);
-    const [hours2, minutes2] = time2.split(':').map(Number);
-
-    const date1 = new Date(0, 0, 0, hours1, minutes1);
-    const date2 = new Date(0, 0, 0, hours2, minutes2);
-
-    if (date1 < date2) {
-      return true;
-    }
-
-    return false;
-  };
-
   useEffect(() => {
     if (repeat === 'One-time' && date && isDateValid && checkIsSameDate(date) && isTimeLessThanFiltered(time, filterTimes(times)[0])) {
       setTime(filterTimes(times)[0]);
@@ -183,11 +169,10 @@ const Booking = ({ loading }) => {
       repeat !== 'Custom schedule' &&
       startDate &&
       isStartDateValid &&
-      checkIsSameDate(startDate)
+      checkIsSameDate(startDate) &&
+      isTimeLessThanFiltered(time, filterTimes(times)[0])
     ) {
       setTime(filterTimes(times)[0]);
-    } else {
-      setTime(times[24]);
     }
   }, [startDate, repeat]);
 
@@ -740,19 +725,11 @@ const Booking = ({ loading }) => {
 
   const handleDateInput = (value, setSelectedDate, setIsDateValid) => {
     setIsDateValid(true);
-    const date = value.split('.');
-    const day = date[0];
-    const month = date[1];
-    const year = date[2];
 
-    if (
-      (!Number.isNaN(parseInt(day, 10)) && (parseInt(day, 10) < 1 || parseInt(date, 10) > 31)) ||
-      (!Number.isNaN(parseInt(month, 10)) && (parseInt(month, 10) > 12 || parseInt(month, 10) < 1)) ||
-      (!Number.isNaN(parseInt(year, 10)) &&
-        year.replace(/\D/g, '').length === 4 &&
-        isBefore(parse(value, 'dd.MM.yyyy', new Date()), startOfDay(new Date())))
-    ) {
-      setIsDateValid(false);
+    const isDateValid = checkIsDateValid(value);
+
+    if (!isDateValid) {
+      setIsDateValid(isDateValid);
     }
 
     setIsAutoUpdate(false);
@@ -769,9 +746,10 @@ const Booking = ({ loading }) => {
     calculateCustomSchedulePrice(index, e.target.value, null);
 
     if (
-      customSchedule[index].date &&
-      customSchedule[index].isDateValid &&
-      checkIsSameDate(customSchedule[index].date)
+      e.target.value &&
+      checkIsDateValid(e.target.value) &&
+      checkIsSameDate(e.target.value) &&
+      isTimeLessThanFiltered(customSchedule[index].time, filterTimes(times)[0])
     ) {
       handleDatesArrUpdate(setCustomSchedule, filterTimes(times)[0], 'time', index);
     }

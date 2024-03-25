@@ -14,7 +14,7 @@ import {
 import { times, weekdays } from '../../constants/selectOptions';
 import { roundPrice } from '../../utils/calculatePrice';
 import './Calendar.scss';
-import { checkIsSameDate, filterTimes } from '../../utils/formatDate';
+import { isTimeLessThanFiltered, checkIsSameDate, filterTimes } from '../../utils/formatDate';
 
 const Calendar = ({
   currentDate,
@@ -95,9 +95,9 @@ const Calendar = ({
             customSchedule[activeFieldIndex].time,
           );
 
-          // if (checkIsSameDate(format(day, 'dd.MM.yyyy'))) {
-          //   handleCustomScheduleUpdate(filterTimes(times)[0], 'time', customSchedule.findIndex((elem) => elem.date === format(day, 'dd.MM.yyyy')));
-          // }
+          if (checkIsSameDate(format(day, 'dd.MM.yyyy')) && isTimeLessThanFiltered(customSchedule[activeFieldIndex].time, filterTimes(times)[0])) {
+            handleCustomScheduleUpdate(filterTimes(times)[0], 'time', activeFieldIndex);
+          }
 
           setCurrentDate(day);
         } else if (emptyIndex !== -1) {
@@ -106,9 +106,9 @@ const Calendar = ({
           calculateCustomSchedulePrice(emptyIndex, format(day, 'dd.MM.yyyy'), customSchedule[emptyIndex].time);
           handleCustomScheduleUpdate(format(day, 'dd.MM.yyyy'), 'date', emptyIndex);
 
-          // if (checkIsSameDate(format(day, 'dd.MM.yyyy'))) {
-          //   handleCustomScheduleUpdate(filterTimes(times)[0], 'time', customSchedule.findIndex((elem) => elem.date === format(day, 'dd.MM.yyyy')));
-          // }
+          if (checkIsSameDate(format(day, 'dd.MM.yyyy')) && isTimeLessThanFiltered(customSchedule[emptyIndex].time, filterTimes(times)[0])) {
+            handleCustomScheduleUpdate(filterTimes(times)[0], 'time', emptyIndex);
+          }
 
           setCurrentDate(day);
         }
