@@ -33,7 +33,7 @@ const Summary = () => {
   const { t } = useTranslation();
 
   const { pathname } = useLocation();
-  const isConfirmation = pathname === '/confirmation';
+  const isConfirmation = pathname.startsWith('/confirmation');
 
   useEffect(() => {
     if (!cleaningState.address1 && sessionStorage.getItem('cleaning')) {
