@@ -369,6 +369,8 @@ i18n.use(initReactI18next).init({
         toBePaid: 'To be paid',
         weAreLookingForCleaner: 'We are looking for a cleaner.',
         pleaseAllow15Min: 'Please allow 15 min for confirmation',
+        address1Placeholder: 'Streetname and number',
+        address2Placeholder: 'Complex, building, apt. nr',
       },
     },
     es: {
@@ -745,6 +747,8 @@ i18n.use(initReactI18next).init({
         toBePaid: 'Ser pagado',
         weAreLookingForCleaner: 'Estamos buscando un limpiador.',
         pleaseAllow15Min: 'Por favor, permita 15 minutos para la confirmación',
+        address1Placeholder: 'Calle y número',
+        address2Placeholder: 'Complejo, edificio, número de apartamento',
       },
     },
   },

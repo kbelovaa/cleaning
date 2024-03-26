@@ -10,8 +10,6 @@ import {
   addMonths,
   subMonths,
   addWeeks,
-  startOfDay,
-  isBefore,
   differenceInDays,
   format,
 } from 'date-fns';
@@ -1707,6 +1705,7 @@ const Booking = ({ loading }) => {
                           className={`input form__address ${!address1 ? 'invalid-field' : ''}`}
                           value={address1}
                           onChange={(e) => setAddress1(e.target.value)}
+                          placeholder={t('address1Placeholder')}
                         />
                         <input
                           id="address2"
@@ -1714,6 +1713,7 @@ const Booking = ({ loading }) => {
                           className="input form__address"
                           value={address2}
                           onChange={(e) => setAddress2(e.target.value)}
+                          placeholder={t('address2Placeholder')}
                         />
                       </div>
                       <div className="form__city">
