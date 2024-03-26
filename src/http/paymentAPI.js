@@ -7,7 +7,7 @@ export const createCheckoutSession = async (order) => {
   } catch (error) {
     return { error: 'Unexpected error' };
   }
-};
+}; 
 
 export const createAccount = async () => {
   try {
