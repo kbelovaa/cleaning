@@ -18,11 +18,11 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
 
   const { pathname } = useLocation();
   const isReceipt = pathname.startsWith('/receipt');
-  const isContactUs = pathname === '/contact-us';
-  const isPersonalInfo = pathname === '/personal-info';
-  const isPassword = pathname === '/settings/change-password';
-  const isSummary = pathname === '/summary';
-  const isConfirmation = pathname === '/confirmation';
+  const isContactUs = pathname.startsWith('/contact-us');
+  const isPersonalInfo = pathname.startsWith('/personal-info');
+  const isPassword = pathname.startsWith('/settings/change-password');
+  const isSummary = pathname.startsWith('/summary');
+  const isConfirmation = pathname.startsWith('/confirmation');
   const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
 
   const navigate = useNavigate();
