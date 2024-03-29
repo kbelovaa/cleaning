@@ -112,13 +112,13 @@ const Receipt = () => {
                       {t(livingRooms.find((elem) => Number(elem.split(' ')[0]) === order.address.livingRooms))}
                     </span>
                     <span className="total-summary__list-item">
+                      {t(kitchens.find((elem) => Number(elem.split(' ')[0]) === order.address.kitchens))}
+                    </span>
+                    <span className="total-summary__list-item">
                       {t(bedrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bedrooms))}
                     </span>
                     <span className="total-summary__list-item">
                       {t(bathrooms.find((elem) => Number(elem.split(' ')[0]) === order.address.bathrooms))}
-                    </span>
-                    <span className="total-summary__list-item">
-                      {t(kitchens.find((elem) => Number(elem.split(' ')[0]) === order.address.kitchens))}
                     </span>
                   </div>
                 </div>

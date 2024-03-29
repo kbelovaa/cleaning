@@ -8,7 +8,7 @@ import edit from '../../images/edit.png';
 import './Addresses.scss';
 
 const Addresses = () => {
-  const user = useSelector((state) => state.user);
+  const userId = useSelector((state) => state.user.id);
   const addresses = useSelector((state) => state.user.addresses);
 
   const [defaultAddress, setDefaultAddress] = useState({});
@@ -22,19 +22,19 @@ const Addresses = () => {
 
   useEffect(() => {
     const getAdressesData = async () => {
-      const addresses = await getAddresses(user.id);
+      const addresses = await getAddresses(userId);
       dispatch(setAddressesAction(addresses));
       setLoading(false);
     };
 
-    if (user.id && addresses.length === 0) {
+    if (userId && addresses.length === 0) {
       getAdressesData();
     }
 
     if (addresses.length !== 0) {
       setLoading(false);
     }
-  }, [user]);
+  }, [userId]);
 
   useEffect(() => {
     if (addresses.length !== 0) {
@@ -75,6 +75,7 @@ const Addresses = () => {
       dispatch(setAddressesAction(filteredAddresses));
     } else {
       dispatch(setAddressesAction([]));
+      console.log(4)
     }
 
     if (sessionStorage.getItem('cleaning')) {

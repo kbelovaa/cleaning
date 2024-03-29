@@ -535,9 +535,9 @@ const Summary = () => {
                   </span>
                   <div className="total-summary__list">
                     <span className="total-summary__list-item">{t(cleaning.livingRoomsNum)}</span>
+                    <span className="total-summary__list-item">{t(cleaning.kitchensNum)}</span>
                     <span className="total-summary__list-item">{t(cleaning.bedroomsNum)}</span>
                     <span className="total-summary__list-item">{t(cleaning.bathroomsNum)}</span>
-                    <span className="total-summary__list-item">{t(cleaning.kitchensNum)}</span>
                   </div>
                 </div>
                 <div className={cleaning.repeat === 'One-time' ? 'hidden' : 'total-summary__line'}>

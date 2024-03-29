@@ -1031,6 +1031,14 @@ const Booking = ({ loading }) => {
                           />
                         </div>
                         <div className="form__property">
+                          <span className="form__label">{t('howManyKitchens')}</span>
+                          <CustomSelect
+                            options={kitchens}
+                            selectedOption={kitchensNum}
+                            setSelectedOption={setKitchensNum}
+                          />
+                        </div>
+                        <div className="form__property">
                           <span className="form__label">{t('howManyBedrooms')}</span>
                           <CustomSelect
                             options={bedrooms}
@@ -1044,14 +1052,6 @@ const Booking = ({ loading }) => {
                             options={bathrooms}
                             selectedOption={bathroomsNum}
                             setSelectedOption={setBathroomsNum}
-                          />
-                        </div>
-                        <div className="form__property">
-                          <span className="form__label">{t('howManyKitchens')}</span>
-                          <CustomSelect
-                            options={kitchens}
-                            selectedOption={kitchensNum}
-                            setSelectedOption={setKitchensNum}
                           />
                         </div>
                       </div>

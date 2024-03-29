@@ -306,6 +306,38 @@ const Address = () => {
                 </div>
                 <div className={`form__property ${addressId ? 'disabled' : ''}`}>
                   <span className="form__label">
+                    {t('howManyKitchens')}
+                    <svg
+                      className={addressId ? 'lock' : 'hidden'}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="17"
+                      viewBox="0 0 16 17"
+                      fill="none"
+                    >
+                      <rect
+                        x="3.33337"
+                        y="7.83398"
+                        width="9.33333"
+                        height="6.66667"
+                        rx="1"
+                        stroke="#268664"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
+                        stroke="#268664"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                  <CustomSelect options={kitchens} selectedOption={kitchensNum} setSelectedOption={setKitchensNum} />
+                  <p className={!isFormValid ? 'auth__note' : 'hidden'}>{t('fillInAllFieldsMessage')}</p>
+                </div>
+                <div className={`form__property ${addressId ? 'disabled' : ''}`}>
+                  <span className="form__label">
                     {t('howManyBedrooms')}
                     <svg
                       className={addressId ? 'lock' : 'hidden'}
@@ -365,38 +397,6 @@ const Address = () => {
                     </svg>
                   </span>
                   <CustomSelect options={bathrooms} selectedOption={bathroomsNum} setSelectedOption={setBathroomsNum} />
-                </div>
-                <div className={`form__property ${addressId ? 'disabled' : ''}`}>
-                  <span className="form__label">
-                    {t('howManyKitchens')}
-                    <svg
-                      className={addressId ? 'lock' : 'hidden'}
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="17"
-                      viewBox="0 0 16 17"
-                      fill="none"
-                    >
-                      <rect
-                        x="3.33337"
-                        y="7.83398"
-                        width="9.33333"
-                        height="6.66667"
-                        rx="1"
-                        stroke="#268664"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M4.66663 5.83333C4.66663 3.99239 6.15901 2.5 7.99996 2.5V2.5C9.84091 2.5 11.3333 3.99238 11.3333 5.83333V7.83333H4.66663V5.83333Z"
-                        stroke="#268664"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <CustomSelect options={kitchens} selectedOption={kitchensNum} setSelectedOption={setKitchensNum} />
-                  <p className={!isFormValid ? 'auth__note' : 'hidden'}>{t('fillInAllFieldsMessage')}</p>
                 </div>
               </div>
             </div>
