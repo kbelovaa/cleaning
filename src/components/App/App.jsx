@@ -53,7 +53,7 @@ const App = () => {
     const getUser = async () => {
       const result = await auth();
 
-      if (!result.message) {
+      if (!result.message && result.role === 'client') {
         dispatch(setIsAuthAction(true));
         dispatch(setUserAction(result));
       }
