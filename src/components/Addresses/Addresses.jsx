@@ -75,7 +75,6 @@ const Addresses = () => {
       dispatch(setAddressesAction(filteredAddresses));
     } else {
       dispatch(setAddressesAction([]));
-      console.log(4)
     }
 
     if (sessionStorage.getItem('cleaning')) {

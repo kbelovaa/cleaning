@@ -168,7 +168,7 @@ const Main = () => {
           <div className="reviews">
             <div className="reviews__block">
               <h5 className="reviews__subtitle">{t('happyUsers')}</h5>
-              <span className="reviews__text">{'<250'}</span>
+              <span className="reviews__text">{'>250'}</span>
             </div>
             <div className="reviews__block">
               <h5 className="reviews__subtitle">{t('service')}</h5>
