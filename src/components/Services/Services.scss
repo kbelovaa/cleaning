@@ -2,11 +2,11 @@
   padding: 130px 100px 395px;
 
   @media screen and (max-width: 1440px) {
-    padding: 160px 80px 394px;
+    padding: 160px 80px 395px;
   }
 
   @media screen and (max-width: 1024px) {
-    padding: 156px 60px 390px;
+    padding: 156px 60px 400px;
   }
 
   @media screen and (max-width: 744px) {
@@ -40,5 +40,15 @@
 
   &__tariff-cards {
     margin-top: 35px;
+
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+      height: 913px;
+    }
+
+    @media screen and (max-width: 744px) {
+      flex-direction: column;
+      height: auto;
+    }
   }
 }

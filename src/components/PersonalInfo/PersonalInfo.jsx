@@ -119,7 +119,7 @@ const PersonalInfo = () => {
               </label>
               <input
                 id="email"
-                type="text"
+                type="email"
                 className={`input ${!email || !isEmailValid || isEmailUnique ? 'invalid-field' : ''}`}
                 value={email}
                 onChange={(e) => handleEmailChange(e.target.value)}

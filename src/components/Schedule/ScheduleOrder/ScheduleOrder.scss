@@ -32,6 +32,11 @@
     font-weight: 400;
     line-height: 130%;
     letter-spacing: 0.48px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 20px;
+      letter-spacing: 0.4px;
+    }
   }
 
   &__type {

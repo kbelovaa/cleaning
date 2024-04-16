@@ -5,6 +5,11 @@
     font-weight: 600;
     font-size: 24px;
 
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      letter-spacing: 0.36px;
+    }
+
     &::after {
       display: none;
     }
@@ -12,5 +17,11 @@
 
   & .total-summary__btn {
     margin: 40px auto 0;
+    display: block;
+
+    @media screen and (max-width: 744px) {
+      width: 100%;
+      max-width: max-content;
+    }
   }
 }

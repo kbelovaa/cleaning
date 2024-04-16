@@ -1,6 +1,12 @@
 .main__btn {
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: 350px) {
+    &.btn {
+      padding: 16px 40px;
+    }
+  }
 }
 
 .general {

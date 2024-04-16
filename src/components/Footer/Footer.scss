@@ -6,7 +6,9 @@
   height: 200px;
 
   @media screen and (max-width: 744px) {
-    height: 234px;
+    min-height: 234px;
+    height: auto;
+    padding: 40px 16px;
   }
 
   &-section {
@@ -47,6 +49,7 @@
 
   &__link {
     margin-right: 10px;
+    text-align: center;
 
     @media screen and (max-width: 744px) {
       margin-top: 10px;

@@ -1,7 +1,20 @@
 .subscription {
   &-wrap {
-    padding: 140px 100px 500px;
+    padding: 130px 100px 500px;
     min-height: calc(100vh - 200px);
+
+    @media screen and (max-width: 1440px) {
+      padding: 160px 80px 500px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding: 156px 60px 500px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding: 70px 16px 500px;
+      min-height: calc(100vh - 234px);
+    }
 
     & .total-summary__edit-wrap {
       margin: 0;
@@ -20,10 +33,21 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
   }
 
   &__wrap {
     width: 690px;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 
   &__next-cleaning {
@@ -47,6 +71,10 @@
   width: 690px;
   padding-bottom: 30px;
   position: relative;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 
   &::after {
     display: block;
@@ -80,6 +108,10 @@
     .cleaning > &:last-of-type {
       font-size: 24px;
       font-weight: 700;
+
+      @media screen and (max-width: 744px) {
+        font-size: 20px;
+      }
     }
 
     .cleaning > &:nth-last-of-type(3) {
@@ -99,6 +131,10 @@
   &__date {
     font-size: 24px;
     font-weight: 600;
+
+    @media screen and (max-width: 744px) {
+      font-size: 20px;
+    }
   }
 
   &__instructions {

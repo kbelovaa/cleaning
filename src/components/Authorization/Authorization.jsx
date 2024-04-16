@@ -181,6 +181,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setIsLogin(value);
     setIsFormValid(true);
     setIsEmailUnique('');
+    modalRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -234,7 +235,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </label>
                 <input
                   id="auth-email"
-                  type="text"
+                  type="email"
                   className={`input ${
                     !email ||
                     (!isLogin && !isEmailValid) ||
@@ -364,7 +365,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             {loading ? (
               <div className="spinner spinner_small"></div>
             ) : (
-              <button className={`btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
+              <button className={`auth__btn btn ${checkIsFormValid() ? '' : 'inactive'}`} type="submit">
                 {isLogin ? t('logIn') : t('createAccount')}
               </button>
             )}

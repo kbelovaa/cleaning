@@ -8,6 +8,26 @@
   width: 755px;
   background-color: #fff;
 
+  @media screen and (max-width: 1440px) {
+    padding-top: 80px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 475px;
+    min-height: 443px;
+    padding-top: 60px;
+  }
+
+  @media screen and (max-width: 744px) {
+    width: 390px;
+    min-height: 373px;
+    padding-top: 40px;
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 100%;
+  }
+
   &__close {
     position: absolute;
     top: 100px;
@@ -34,6 +54,18 @@
 
   &__panel {
     padding: 0 100px;
+
+    @media screen and (max-width: 1440px) {
+      padding: 0 80px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding: 0 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding: 0 16px;
+    }
   }
 
   &__title {
@@ -84,10 +116,34 @@
     text-transform: uppercase;
     margin-top: 40px;
     padding: 0 100px;
+
+    @media screen and (max-width: 1440px) {
+      padding: 0 80px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding: 0 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding: 0 16px;
+    }
   }
 
   &__list {
     padding: 0 100px;
+
+    @media screen and (max-width: 1440px) {
+      padding: 0 80px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding: 0 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding: 0 16px;
+    }
 
     &.new {
       background: #f2f8f6;
@@ -158,6 +214,8 @@
   & .spinner {
     margin: 50px 0 0 350px;
   }
+
+  // set adaptives
 
   & .ps__rail-y {
     margin-right: 80px;

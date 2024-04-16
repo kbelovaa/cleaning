@@ -185,6 +185,12 @@
         margin-bottom: 16.72px;
       }
     }
+
+    .form__date-period & {
+      @media screen and (max-width: 744px) {
+        height: calc(100% - 60px);
+      }
+    }
   }
 
   &__properties {
@@ -401,6 +407,7 @@
       line-height: 130%;
       letter-spacing: 0.72px;
       margin-left: 10px;
+      text-align: right;
     }
   }
 
@@ -494,6 +501,7 @@
     &-number {
       display: flex;
       align-items: center;
+      margin-left: 10px;
     }
 
     &-quantity {

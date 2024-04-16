@@ -91,7 +91,7 @@ const ContactUs = ({ loading }) => {
               </label>
               <input
                 id="email"
-                type="text"
+                type="email"
                 className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`}
                 value={email}
                 onChange={(e) => handleEmailChange(e.target.value)}

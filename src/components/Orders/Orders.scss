@@ -1,6 +1,19 @@
 .orders {
-  padding: 140px 100px 500px;
+  padding: 130px 100px 500px;
   min-height: calc(100vh - 200px);
+
+  @media screen and (max-width: 1440px) {
+    padding: 160px 80px 500px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 156px 60px 500px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 70px 16px 500px;
+    min-height: calc(100vh - 234px);
+  }
 
   &__title {
     font-size: 34px;
@@ -8,6 +21,13 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
   }
 
   &__no-data {
@@ -21,6 +41,10 @@
 
   &__wrap {
     width: 690px;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 
   &__tabs {
@@ -39,6 +63,15 @@
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
+
+    @media screen and (max-width: 1024px) {
+      width: calc((100% - 10px) / 2);
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      letter-spacing: 0.54px;
+    }
 
     &:first-of-type {
       margin-right: 10px;
@@ -121,6 +154,11 @@
     font-weight: 600;
     line-height: 130%;
     letter-spacing: 0.6px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      letter-spacing: 0.54px;
+    }
   }
 
   &__label {
@@ -132,7 +170,8 @@
     border-radius: 2px;
     background: #268664;
     padding: 2px 5px;
-    height: 20px;
+    height: max-content;
+    min-height: 20px;
     margin-left: 5px;
     display: flex;
     align-items: center;
@@ -145,6 +184,11 @@
     line-height: 130%;
     letter-spacing: 0.36px;
     margin: 5px 0 20px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 16px;
+      letter-spacing: 0.32px;
+    }
   }
 
   &__date {
@@ -152,6 +196,11 @@
     font-weight: 600;
     line-height: 130%;
     letter-spacing: 0.48px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 14px;
+      letter-spacing: 0.42px;
+    }
   }
 
   &__duration {
@@ -160,5 +209,10 @@
     line-height: 130%;
     letter-spacing: 0.48px;
     margin-top: 5px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 14px;
+      letter-spacing: 0.42px;
+    }
   }
 }
