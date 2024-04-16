@@ -95,7 +95,10 @@ const Calendar = ({
             customSchedule[activeFieldIndex].time,
           );
 
-          if (checkIsSameDate(format(day, 'dd.MM.yyyy')) && isTimeLessThanFiltered(customSchedule[activeFieldIndex].time, filterTimes(times)[0])) {
+          if (
+            checkIsSameDate(format(day, 'dd.MM.yyyy')) &&
+            isTimeLessThanFiltered(customSchedule[activeFieldIndex].time, filterTimes(times)[0])
+          ) {
             handleCustomScheduleUpdate(filterTimes(times)[0], 'time', activeFieldIndex);
           }
 
@@ -106,7 +109,10 @@ const Calendar = ({
           calculateCustomSchedulePrice(emptyIndex, format(day, 'dd.MM.yyyy'), customSchedule[emptyIndex].time);
           handleCustomScheduleUpdate(format(day, 'dd.MM.yyyy'), 'date', emptyIndex);
 
-          if (checkIsSameDate(format(day, 'dd.MM.yyyy')) && isTimeLessThanFiltered(customSchedule[emptyIndex].time, filterTimes(times)[0])) {
+          if (
+            checkIsSameDate(format(day, 'dd.MM.yyyy')) &&
+            isTimeLessThanFiltered(customSchedule[emptyIndex].time, filterTimes(times)[0])
+          ) {
             handleCustomScheduleUpdate(filterTimes(times)[0], 'time', emptyIndex);
           }
 

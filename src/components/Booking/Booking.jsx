@@ -26,7 +26,13 @@ import {
   livingRooms,
 } from '../../constants/selectOptions';
 import { getTimeCoeff, calculateCleaningTypePrice, roundPrice } from '../../utils/calculatePrice';
-import { checkIsDateValid, checkIsSameDate, filterTimes, formatDate, isTimeLessThanFiltered } from '../../utils/formatDate';
+import {
+  checkIsDateValid,
+  checkIsSameDate,
+  filterTimes,
+  formatDate,
+  isTimeLessThanFiltered,
+} from '../../utils/formatDate';
 import AddressSelect from '../AddressSelect/AddressSelect';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import Calendar from '../Calendar/Calendar';
@@ -156,7 +162,13 @@ const Booking = ({ loading }) => {
   }, [user, loading]);
 
   useEffect(() => {
-    if (repeat === 'One-time' && date && isDateValid && checkIsSameDate(date) && isTimeLessThanFiltered(time, filterTimes(times)[0])) {
+    if (
+      repeat === 'One-time' &&
+      date &&
+      isDateValid &&
+      checkIsSameDate(date) &&
+      isTimeLessThanFiltered(time, filterTimes(times)[0])
+    ) {
       setTime(filterTimes(times)[0]);
     }
   }, [date, repeat]);

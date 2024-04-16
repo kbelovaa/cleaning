@@ -11,11 +11,42 @@
   max-height: calc(100vh - 200px);
   position: relative;
 
+  @media screen and (max-width: 1440px) {
+    padding: 100px 78px 50px 100px;
+    width: 824px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 100px 38px 60px 60px;
+    width: 624px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 50px 3px 20px 20px;
+    width: 358px;
+  }
+
   &__close {
     position: absolute;
     top: 70px;
     right: 100px;
     cursor: pointer;
+
+    @media screen and (max-width: 1440px) {
+      top: 60px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      top: 50px;
+      right: 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      top: 20px;
+      right: 20px;
+      width: 24px;
+      height: 24px;
+    }
   }
 
   &__tick {
@@ -28,6 +59,13 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     margin-bottom: 50px;
+
+    @media screen and (max-width: 744px) {
+      margin-bottom: 40px;
+      font-size: 30px;
+      font-weight: 400;
+      letter-spacing: 0.6px;
+    }
   }
 
   &__cleaning {
@@ -54,6 +92,10 @@
     line-height: normal;
     display: block;
     margin-bottom: 10px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 20px;
+    }
   }
 
   &__tariff {
@@ -78,10 +120,17 @@
     width: 100%;
     padding-right: 22px;
     height: auto;
+
+    @media screen and (max-width: 744px) {
+      padding-right: 17px;
+    }
   }
 
   & .summary__line_bold .summary__price,
-  & .summary__subtitle {
+  & .summary__line_bold .summary__subtitle,
+  & .summary__line_subtotal .summary__price,
+  & .summary__line_subtotal .summary__item {
     margin-top: 0;
+    font-weight: 700;
   }
 }

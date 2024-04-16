@@ -652,6 +652,10 @@
       display: flex;
       align-items: center;
     }
+
+    @media screen and (max-width: 744px) {
+      max-width: 400px;
+    }
   }
 
   &__year {
@@ -773,7 +777,7 @@
   }
 
   &__btn {
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 744px) {
       display: none;
     }
   }
@@ -788,7 +792,6 @@
   &_scrollable {
     height: calc(100vh - 130px);
     overflow-y: auto;
-    position: relative;
     position: sticky;
     top: 130px;
     scrollbar-width: thin;
@@ -799,18 +802,25 @@
     &::-webkit-scrollbar {
       display: none;
     }
+
+    @media screen and (max-width: 1440px) {
+      top: 160px;
+      height: calc(100vh - 160px);
+    }
+
+    @media screen and (max-width: 1024px) {
+      top: 156px;
+      height: calc(100vh - 156px);
+    }
+
+    @media screen and (max-width: 744px) {
+      position: static;
+      height: min-content;
+    }
   }
 
   &.underlined {
     border-top: 1px solid #d9d9d9;
-  }
-
-  @media screen and (max-width: 1440px) {
-    top: 160px;
-  }
-
-  @media screen and (max-width: 1024px) {
-    top: 156px;
   }
 
   @media screen and (max-width: 744px) {

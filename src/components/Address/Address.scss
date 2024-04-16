@@ -1,5 +1,18 @@
 .address {
-  padding: 140px 100px 500px;
+  padding: 130px 100px 500px;
+
+  @media screen and (max-width: 1440px) {
+    padding: 160px 80px 500px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 156px 60px 500px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 70px 16px 500px;
+    min-height: calc(100vh - 234px);
+  }
 
   &__title {
     font-size: 34px;
@@ -7,15 +20,38 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
   }
 
   &__form {
     width: 690px;
     animation: fadeIn 0.3s ease-in;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 
   &__data {
     margin-bottom: 50px;
+
+    @media screen and (max-width: 744px) {
+      margin-bottom: 40px;
+    }
+  }
+
+  & .form__properties {
+    margin-bottom: 30px;
+
+    @media screen and (max-width: 744px) {
+      margin-bottom: 10px;
+    }
   }
 
   &__btn {

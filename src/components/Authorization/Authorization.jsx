@@ -288,17 +288,6 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       : `${t('userWithEmail')} ${email} ${t(areCredentialsValid.split(email)[1].trim())}`}
                   </p>
                 )}
-                <p
-                  className={
-                    !isFormValid &&
-                    ((!isLogin && (!name || !surname || !email || !mobile || !password || !passwordConf)) ||
-                      (isLogin && (!email || !password)))
-                      ? 'auth__note'
-                      : 'hidden'
-                  }
-                >
-                  {t('fillInAllFieldsMessage')}
-                </p>
                 <span className={showPassword ? 'hidden' : 'form__eye'} onClick={() => setShowPassword(true)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
@@ -361,6 +350,17 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                 </span>
               </div>
             </div>
+            <p
+              className={
+                !isFormValid &&
+                ((!isLogin && (!name || !surname || !email || !mobile || !password || !passwordConf)) ||
+                  (isLogin && (!email || !password)))
+                  ? 'auth__note auth__fill'
+                  : 'hidden'
+              }
+            >
+              {t('fillInAllFieldsMessage')}
+            </p>
             {loading ? (
               <div className="spinner spinner_small"></div>
             ) : (

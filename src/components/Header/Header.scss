@@ -12,14 +12,17 @@
 
   @media screen and (max-width: 1440px) {
     padding: 60px 80px;
+    height: 160px;
   }
 
   @media screen and (max-width: 1024px) {
     padding: 60px;
+    height: 156px;
   }
 
   @media screen and (max-width: 744px) {
     padding: 20px 16px;
+    height: 70px;
   }
 
   &.flex-end {
@@ -119,6 +122,19 @@
   margin-right: 40px;
   cursor: pointer;
   position: relative;
+  padding-top: 4px;
+
+  @media screen and (max-width: 744px) {
+    margin-right: 22px;
+    padding-top: 3px;
+  }
+
+  &__sign {
+    @media screen and (max-width: 744px) {
+      width: 24px;
+      height: 24px;
+    }
+  }
 
   &__counter {
     color: #fff;

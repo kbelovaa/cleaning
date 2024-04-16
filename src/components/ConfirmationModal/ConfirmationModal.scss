@@ -13,16 +13,18 @@
   @media screen and (max-width: 1440px) {
     padding: 100px;
     width: 824px;
-    margin: 100px 0;
+    margin: 100px 100px;
   }
 
   @media screen and (max-width: 1024px) {
     padding: 100px 60px;
     width: 624px;
+    margin: 60px 60px 100px;
   }
 
   @media screen and (max-width: 744px) {
     width: 100%;
+    margin: 16px 16px 100px;
   }
 
   &__close {
@@ -38,6 +40,13 @@
     @media screen and (max-width: 1024px) {
       top: 50px;
       right: 60px;
+    }
+
+    @media screen and (max-width: 744px) {
+      top: 20px;
+      right: 20px;
+      width: 24px;
+      height: 24px;
     }
   }
 

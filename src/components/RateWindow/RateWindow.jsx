@@ -70,13 +70,13 @@ const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
           className="rate__close"
           onClick={closeRateWindow}
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
+          width="30"
+          height="30"
+          viewBox="0 0 30 30"
           fill="none"
         >
-          <path d="M23.5425 23.5424L8.45758 8.45746" stroke="#268664" strokeLinecap="round" />
-          <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
+          <path d="M22.071 22.0712L7.92886 7.92905" stroke="#268664" strokeLinecap="round" />
+          <path d="M22.0711 7.92905L7.929 22.0712" stroke="#268664" strokeLinecap="round" />
         </svg>
         <h3 className="rate__title">{t('howHappy')}</h3>
         <div className="rate__stars">

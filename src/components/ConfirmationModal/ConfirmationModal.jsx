@@ -93,13 +93,13 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
           className="confirmation__close"
           onClick={handleCloseConfirmation}
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
-          viewBox="0 0 32 32"
+          width="30"
+          height="30"
+          viewBox="0 0 30 30"
           fill="none"
         >
-          <path d="M23.5425 23.5424L8.45758 8.45746" stroke="#268664" strokeLinecap="round" />
-          <path d="M23.5424 8.45746L8.45747 23.5424" stroke="#268664" strokeLinecap="round" />
+          <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
+          <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
         </svg>
         <svg
           className={

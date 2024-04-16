@@ -182,7 +182,7 @@ i18n.use(initReactI18next).init({
         weHaveSentReceipt: 'We have sent a Receipt to your email',
         youAreLoggedIn: 'You are logged in',
         iUnderstandAndAccept: 'I understand and accept',
-        theCancellationPolicy: 'The Cancellation Policy',
+        theCancellationPolicy: 'The\u00A0Cancellation\u00A0Policy*',
         edit: 'Edit',
         pay: 'Pay',
         weStriveToReplyWithin15Minutes: 'We strive to reply within 15 minutes between 06:00 and 00:00',
@@ -275,7 +275,8 @@ i18n.use(initReactI18next).init({
         ok: 'Ok',
         whatIsSdl:
           'SDL is a new cleaning service where booking is as fast and simple as reserving an Uber. Our user-friendly website and mobile app enable customers to request cleaning services, even on short notice, with just a few clicks.',
-        timeIsInvaluable: 'Time is invaluable, spend it where it truly matters - while we take care of the cleaning',
+        timeIsInvaluable:
+          'Time is invaluable, spend it where it truly matters\u00A0- while we take care of the cleaning',
         wellMainrainedHome:
           'A well-maintained home preserves value, presents better, and offers a more pleasant living environment.',
         weDeliverCare:
@@ -553,7 +554,7 @@ i18n.use(initReactI18next).init({
         weHaveSentReceipt: 'Hemos enviado un recibo a tu correo electrónico',
         youAreLoggedIn: 'Has iniciado sesión',
         iUnderstandAndAccept: 'Entiendo y acepto',
-        theCancellationPolicy: 'la Política de Cancelación',
+        theCancellationPolicy: 'La\u00A0Política\u00A0de\u00A0Cancelación*',
         edit: 'Editar',
         pay: 'Pagar',
         weStriveToReplyWithin15Minutes:

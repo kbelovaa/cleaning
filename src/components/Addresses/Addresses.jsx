@@ -98,7 +98,7 @@ const Addresses = () => {
               <p className="addresses__no-data">{t('noSavedAddresses')}</p>
             ) : (
               <div className="addresses__wrap">
-                <p className="adresses__text">{t('chooseDefaultAddress')}</p>
+                <p className="addresses__text">{t('chooseDefaultAddress')}</p>
                 <div className="addresses__list">
                   {defaultAddress._id &&
                     [defaultAddress, ...addresses.filter((address) => address._id !== defaultAddress._id)].map(
@@ -130,41 +130,39 @@ const Addresses = () => {
                               {`${address.address} ${address.secondAddress} ${address.postalCode} ${address.city} ${address.province}`}
                             </span>
                           </div>
-                          <div className="form__buttons">
-                            <div className="form__action-btn" onClick={(e) => handleEditAddress(e, address._id)}>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  clipRule="evenodd"
-                                  d="M9.99968 3.33333C10.7361 2.59695 11.93 2.59695 12.6663 3.33333V3.33333C13.4027 4.06971 13.4027 5.26362 12.6663 6L5.91879 12.7475C5.54372 13.1226 5.03501 13.3333 4.50458 13.3333L2.66634 13.3333L2.66634 11.4951C2.66634 10.9647 2.87705 10.456 3.25213 10.0809L9.99968 3.33333Z"
-                                  stroke="#268664"
-                                />
-                                <path d="M9.33301 4L11.9997 6.66667" stroke="#268664" />
-                              </svg>
-                            </div>
-                            <div className="form__action-btn" onClick={(e) => handleDeleteAddress(e, address)}>
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 16 16"
-                                fill="none"
-                              >
-                                <path d="M12.6663 4.00065H3.33301" stroke="#268664" strokeLinecap="round" />
-                                <path d="M9.33366 3.33268H6.66699" stroke="#268664" strokeLinecap="round" />
-                                <path
-                                  d="M4 6.66602V13.9993H12C12 13.3327 12 6.66602 12 6.66602"
-                                  stroke="#268664"
-                                  strokeLinecap="round"
-                                />
-                              </svg>
-                            </div>
+                          <div className="form__action-btn" onClick={(e) => handleEditAddress(e, address._id)}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M9.99968 3.33333C10.7361 2.59695 11.93 2.59695 12.6663 3.33333V3.33333C13.4027 4.06971 13.4027 5.26362 12.6663 6L5.91879 12.7475C5.54372 13.1226 5.03501 13.3333 4.50458 13.3333L2.66634 13.3333L2.66634 11.4951C2.66634 10.9647 2.87705 10.456 3.25213 10.0809L9.99968 3.33333Z"
+                                stroke="#268664"
+                              />
+                              <path d="M9.33301 4L11.9997 6.66667" stroke="#268664" />
+                            </svg>
+                          </div>
+                          <div className="form__action-btn" onClick={(e) => handleDeleteAddress(e, address)}>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                            >
+                              <path d="M12.6663 4.00065H3.33301" stroke="#268664" strokeLinecap="round" />
+                              <path d="M9.33366 3.33268H6.66699" stroke="#268664" strokeLinecap="round" />
+                              <path
+                                d="M4 6.66602V13.9993H12C12 13.3327 12 6.66602 12 6.66602"
+                                stroke="#268664"
+                                strokeLinecap="round"
+                              />
+                            </svg>
                           </div>
                         </div>
                       ),

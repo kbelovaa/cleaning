@@ -24,6 +24,8 @@ const Header = ({ loading, socket }) => {
   const [archiveNotifications, setArchiveNotifications] = useState([]);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [notificationsLoading, setNotificationsLoading] = useState(true);
+  const [breakPoint1, setBreakPoint1] = useState();
+  const [breakPoint2, setBreakPoint2] = useState();
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -73,6 +75,38 @@ const Header = ({ loading, socket }) => {
   }, [notifications]);
 
   useEffect(() => {
+    const handleResize = () => {
+      const { width } = window.screen;
+
+      switch (true) {
+        case width <= 744:
+          setBreakPoint1(130);
+          setBreakPoint2(220);
+          break;
+        case width <= 1024:
+          setBreakPoint1(175);
+          setBreakPoint2(320);
+          break;
+        case width <= 1440:
+          setBreakPoint1(195);
+          setBreakPoint2(340);
+          break;
+        default:
+          setBreakPoint1(170);
+          setBreakPoint2(360);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     if (isBook || isMain) {
       setShowSdl(false);
     } else {
@@ -83,11 +117,11 @@ const Header = ({ loading, socket }) => {
       const { scrollY } = window;
       let color = '';
       if (isBook) {
-        if (scrollY > 360) {
+        if (scrollY > breakPoint2) {
           color = 'white';
           setShowSdl(true);
         } else if (scrollY > 0) {
-          if (scrollY > 170) {
+          if (scrollY > breakPoint1) {
             setShowSdl(true);
           } else {
             setShowSdl(false);
@@ -105,7 +139,7 @@ const Header = ({ loading, socket }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [pathname]);
+  }, [pathname, breakPoint1, breakPoint2]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {

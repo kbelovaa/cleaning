@@ -7,8 +7,7 @@
   margin: 0 5px 5px 0;
 
   @media screen and (max-width: 1440px) {
-    width: 429px;
-    margin: 0 6px 6px 0;
+    width: calc((100% - 5px) / 2);
   }
 
   @media screen and (max-width: 1024px) {
@@ -26,7 +25,11 @@
     margin-right: 0;
 
     @media screen and (max-width: 1440px) {
-      margin-right: 6px;
+      margin-right: 5px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      margin-right: 0;
     }
   }
 

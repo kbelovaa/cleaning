@@ -103,39 +103,28 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        {isAuth ? (
-          <Route path="/" element={<Header loading={loading} socket={socket} />}>
-            <Route index element={<Main />} />
-            <Route path="booking" element={<Booking loading={loading} />} />
-            <Route path="booking/edit/*" element={<Booking loading={loading} />} />
-            <Route path="summary" element={<Summary />} />
-            <Route path="confirmation" element={<Summary />} />
-            <Route path="personal-info" element={<PersonalInfo />} />
-            <Route path="address/new" element={<Address />} />
-            <Route path="address/new/booking" element={<Address />} />
-            <Route path="address/edit/:addressId" element={<Address />} />
-            <Route path="addresses" element={<Addresses />} />
-            <Route path="orders" element={<Orders />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="settings/change-password" element={<Password />} />
-            <Route path="schedule/:subscriptionId" element={<Schedule />} />
-            <Route path="receipt/:orderId" element={<Receipt />} />
-            <Route path="invoice-receipt/:orderId" element={<Receipt />} />
-            <Route path="contact-us" element={<ContactUs loading={loading} />} />
-            <Route path="info-price" element={<Services />} />
-            <Route path="faq" element={<Faq />} />
-            <Route path="cancellation-policy" element={<CancellationPolicy />} />
-          </Route>
-        ) : (
-          <Route path="/" element={<Header loading={loading} socket={socket} />}>
-            <Route index element={<Main />} />
-            <Route path="booking" element={<Booking loading={loading} />} />
-            <Route path="contact-us" element={<ContactUs loading={loading} />} />
-            <Route path="info-price" element={<Services />} />
-            <Route path="faq" element={<Faq />} />
-            <Route path="cancellation-policy" element={<CancellationPolicy />} />
-          </Route>
-        )}
+        <Route path="/" element={<Header loading={loading} socket={socket} />}>
+          <Route index element={<Main />} />
+          <Route path="booking" element={<Booking loading={loading} />} />
+          <Route path="booking/edit/*" element={<Booking loading={loading} />} />
+          <Route path="summary" element={<Summary />} />
+          <Route path="confirmation" element={<Summary />} />
+          <Route path="personal-info" element={<PersonalInfo />} />
+          <Route path="address/new" element={<Address />} />
+          <Route path="address/new/booking" element={<Address />} />
+          <Route path="address/edit/:addressId" element={<Address />} />
+          <Route path="addresses" element={<Addresses />} />
+          <Route path="orders" element={<Orders />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="settings/change-password" element={<Password />} />
+          <Route path="schedule/:subscriptionId" element={<Schedule />} />
+          <Route path="receipt/:orderId" element={<Receipt />} />
+          <Route path="invoice-receipt/:orderId" element={<Receipt />} />
+          <Route path="contact-us" element={<ContactUs loading={loading} />} />
+          <Route path="info-price" element={<Services />} />
+          <Route path="faq" element={<Faq />} />
+          <Route path="cancellation-policy" element={<CancellationPolicy />} />
+        </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

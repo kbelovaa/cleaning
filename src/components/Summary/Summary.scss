@@ -1,5 +1,17 @@
 .total-summary {
-  padding: 140px 100px 400px 100px;
+  padding: 130px 100px 400px;
+
+  @media screen and (max-width: 1440px) {
+    padding: 160px 80px 400px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 156px 60px 400px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 70px 16px 200px;
+  }
 
   &__title {
     margin-bottom: 40px;
@@ -7,6 +19,17 @@
     font-weight: 400;
     line-height: 100%;
     letter-spacing: 1.2px;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 34px;
+      letter-spacing: 0.68px;
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+    }
   }
 
   &__line {
@@ -19,10 +42,21 @@
     position: relative;
     margin-bottom: 10px;
 
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      font-weight: 300;
+      letter-spacing: 0.36px;
+    }
+
     .total-summary__data > &:nth-of-type(5),
     &.underlined {
       padding-bottom: 100px;
       margin-bottom: 100px;
+
+      @media screen and (max-width: 744px) {
+        padding-bottom: 60px;
+        margin-bottom: 60px;
+      }
     }
 
     .total-summary__data > &:nth-of-type(6),
@@ -31,6 +65,11 @@
       font-weight: 600;
       letter-spacing: 0.48px;
       margin-bottom: 20px;
+
+      @media screen and (max-width: 744px) {
+        font-size: 18px;
+        letter-spacing: 0.36px;
+      }
     }
 
     .total-summary__data > &:last-of-type {
@@ -41,6 +80,11 @@
       font-size: 24px;
       font-weight: 600;
       letter-spacing: 0.48px;
+
+      @media screen and (max-width: 744px) {
+        font-size: 18px;
+        letter-spacing: 0.36px;
+      }
     }
 
     .total-summary__extras > & {
@@ -49,6 +93,10 @@
 
       &.edit {
         margin-left: 34px;
+
+        @media screen and (max-width: 744px) {
+          margin-left: 25px;
+        }
       }
     }
 
@@ -122,10 +170,19 @@
     display: flex;
     position: relative;
     transition: all 0.3s ease;
+    margin-right: 10px;
 
     &.edit {
       margin-left: 34px;
+
+      @media screen and (max-width: 744px) {
+        margin-left: 25px;
+      }
     }
+  }
+
+  &__value {
+    text-align: right;
   }
 
   &__tick {
@@ -135,25 +192,45 @@
   &__edit {
     width: 24px;
     height: 24px;
+    margin-right: 10px;
+
+    @media screen and (max-width: 744px) {
+      width: 18px;
+      height: 18px;
+      margin-right: 7px;
+    }
 
     .total-summary__btn & {
       position: static;
       opacity: 1;
     }
 
+    & path {
+      transition: all 0.3s ease;
+    }
+
     &-wrap {
-      margin: 1px 10px 0 0;
+      margin-top: 1px;
       position: absolute;
       left: 0;
       opacity: 0;
       transition: all 0.3s ease;
       pointer-events: none;
+      margin-right: 10px;
+
+      @media screen and (max-width: 744px) {
+        margin-top: 2px;
+      }
 
       .edit & {
         opacity: 1;
         left: -34px;
         cursor: pointer;
         pointer-events: auto;
+
+        @media screen and (max-width: 744px) {
+          left: -25px;
+        }
       }
 
       &::after {
@@ -167,6 +244,13 @@
         position: absolute;
         top: -8px;
         left: -8px;
+
+        @media screen and (max-width: 744px) {
+          width: 30px;
+          height: 30px;
+          top: -6px;
+          left: -6px;
+        }
       }
 
       &:hover::after {
@@ -201,6 +285,10 @@
 
     &.edit {
       margin-left: 34px;
+
+      @media screen and (max-width: 744px) {
+        margin-left: 25px;
+      }
     }
   }
 
@@ -214,8 +302,17 @@
     margin-top: 20px;
     display: flex;
 
+    @media screen and (max-width: 744px) {
+      font-size: 16px;
+      letter-spacing: 0.36px;
+    }
+
     &.edit {
       margin-left: 34px;
+
+      @media screen and (max-width: 744px) {
+        margin-left: 25px;
+      }
     }
   }
 
@@ -226,6 +323,11 @@
     &.edit::after {
       left: -34px;
       width: calc(100% + 34px);
+
+      @media screen and (max-width: 744px) {
+        left: -25px;
+        width: calc(100% + 25px);
+      }
     }
   }
 
@@ -257,16 +359,42 @@
     line-height: normal;
     letter-spacing: 0.8px;
     cursor: pointer;
+
+    @media screen and (max-width: 744px) {
+      &.link {
+        font-size: 14px;
+        letter-spacing: 0.7px;
+      }
+    }
   }
 
   &__buttons {
     display: flex;
     justify-content: center;
+
+    @media screen and (max-width: 340px) {
+      flex-direction: column;
+    }
   }
 
   &__btn {
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: 744px) {
+      display: inline-block;
+      max-width: 174px;
+      width: calc((100% - 10px) / 2);
+
+      &.btn {
+        padding: 16px 40px;
+      }
+    }
+
+    @media screen and (max-width: 340px) {
+      width: 100%;
+      max-width: 100%;
+    }
 
     &.edit {
       margin-top: 80px;
@@ -274,14 +402,15 @@
 
     &:first-of-type {
       margin-right: 20px;
-    }
-  }
 
-  &__edit {
-    margin-right: 10px;
+      @media screen and (max-width: 744px) {
+        margin-right: 10px;
+      }
 
-    & path {
-      transition: all 0.3s ease;
+      @media screen and (max-width: 340px) {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
     }
   }
 
@@ -292,6 +421,11 @@
     letter-spacing: 0.32px;
     text-align: center;
     margin-top: 20px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 14px;
+      letter-spacing: 0.3px;
+    }
   }
 
   &__tariff {

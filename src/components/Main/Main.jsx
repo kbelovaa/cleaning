@@ -1,17 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cleaningImg from '../../images/cleaning.png';
 import cleaningImg1440 from '../../images/cleaning-1440.png';
 import cleaningImg1024 from '../../images/cleaning-1024.png';
 import cleaningImg390 from '../../images/cleaning-390.png';
-import stageImg from '../../images/stage.png';
+import stageImg1440 from '../../images/stageImg1440.png';
+import stageImg1024 from '../../images/stageImg1024.png';
+import stageImg744 from '../../images/stageImg744.png';
+import stageImg390 from '../../images/stageImg390.png';
 import './Main.scss';
 
 const Main = () => {
+  const [stageImg, setStageImg] = useState(stageImg1440);
+  const [windowWidth, setWindowWidth] = useState();
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const { width } = window.screen;
+      setWindowWidth(width);
+
+      switch (true) {
+        case width <= 566:
+          setStageImg(stageImg390);
+          break;
+        case width <= 1024:
+          setStageImg(stageImg744);
+          break;
+        case width <= 1440:
+          setStageImg(stageImg1024);
+          break;
+        default:
+          setStageImg(stageImg1440);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="main">
@@ -81,8 +115,8 @@ const Main = () => {
                 <div className="system__stage-info">
                   <h3 className="system__stage-subtitle">{t('request')}</h3>
                   <p className="system__stage-text">
-                    {t('requestCleaning')}
-                    <br />
+                    {`${t('requestCleaning')} `}
+                    {windowWidth > 1024 && <br />}
                     {t('withClicks')}
                   </p>
                 </div>

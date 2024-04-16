@@ -127,6 +127,10 @@
 
   &__date {
     margin-bottom: 3px;
+
+    @media screen and (max-width: 1440px) {
+      margin-bottom: 2px;
+    }
   }
 
   &__time,
@@ -136,6 +140,10 @@
     font-size: 10px;
     font-weight: 300;
     line-height: 100%;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 8px;
+    }
   }
 
   &__price {

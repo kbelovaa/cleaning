@@ -1,6 +1,19 @@
 .addresses {
-  padding: 140px 100px 500px;
+  padding: 130px 100px 500px;
   min-height: calc(100vh - 200px);
+
+  @media screen and (max-width: 1440px) {
+    padding: 160px 80px 500px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 156px 60px 500px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 70px 16px 500px;
+    min-height: calc(100vh - 234px);
+  }
 
   &__title {
     font-size: 34px;
@@ -8,6 +21,13 @@
     line-height: 100%;
     letter-spacing: 0.68px;
     margin-bottom: 30px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
   }
 
   &__container {
@@ -25,6 +45,10 @@
 
   &__wrap {
     width: 690px;
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
   }
 
   &__text {
@@ -34,20 +58,28 @@
     line-height: 130%;
     letter-spacing: 0.4px;
     margin-bottom: 30px;
-  }
 
-  &__list {
-    margin-top: 30px;
+    @media screen and (max-width: 744px) {
+      margin-bottom: 40px;
+    }
   }
 
   & .form__radio {
     min-height: 76px;
   }
 
+  & .form__radio {
+    height: min-content;
+  }
+
   & .form__radio-value {
     height: 100%;
     align-items: center;
-    width: calc(100% - 45px);
+    width: calc(100% - 34px);
+  }
+
+  & .form__radio-checked {
+    min-width: 24px;
   }
 
   & .form__radio-checked.checked path {
@@ -59,6 +91,16 @@
     margin-top: 30px;
     display: flex;
     align-items: center;
+
+    @media screen and (max-width: 744px) {
+      &.btn {
+        max-width: 268px;
+        width: 100%;
+        padding: 16px 0;
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 
   &__edit {
@@ -68,20 +110,20 @@
 }
 
 .form {
-  &__buttons {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10px;
-    height: 40px;
-    justify-content: space-between;
-    align-self: flex-end;
-  }
-
   &__action-btn {
-    position: relative;
-    width: 16px;
+    position: absolute;
     height: 16px;
+    width: 16px;
     z-index: 1;
+    right: 20px;
+
+    &:nth-last-of-type(2) {
+      top: 18px;
+    }
+
+    &:last-of-type {
+      bottom: 18px;
+    }
 
     &::after {
       display: block;

@@ -32,6 +32,8 @@ const Summary = () => {
 
   const { t } = useTranslation();
 
+  const navigate = useNavigate();
+
   const { pathname } = useLocation();
   const isConfirmation = pathname.startsWith('/confirmation');
 
@@ -121,8 +123,6 @@ const Summary = () => {
       getLastSubscription();
     }
   }, [user, pathname]);
-
-  const navigate = useNavigate();
 
   const formOrder = async () => {
     const orderObject = {
@@ -262,15 +262,15 @@ const Summary = () => {
                 : cleaning.repeat === 'Custom schedule'
                 ? cleaning.customSchedule[0].total.toFixed(2)
                 : Number(
-                  cleaning.subscriptionPrices[
-                    cleaning.dates.indexOf(
-                      cleaning.dates.filter((date) => {
-                        const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
-                        return !datesToRemove.includes(date);
-                      })[0],
-                    )
-                  ].total.toFixed(2),
-                ),
+                    cleaning.subscriptionPrices[
+                      cleaning.dates.indexOf(
+                        cleaning.dates.filter((date) => {
+                          const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+                          return !datesToRemove.includes(date);
+                        })[0],
+                      )
+                    ].total.toFixed(2),
+                  ),
           });
           clearStore();
           await stripe.redirectToCheckout({
@@ -280,6 +280,7 @@ const Summary = () => {
           clearStore();
           setLoading(false);
           setIsConfirmationOpen(true);
+          navigate('/confirmation');
         }
       }
     } else {
@@ -771,7 +772,6 @@ const Summary = () => {
                       <NavLink to="/cancellation-policy" className="checkbox__link">
                         {t('theCancellationPolicy')}
                       </NavLink>
-                      *
                     </label>
                   </div>
                   <span

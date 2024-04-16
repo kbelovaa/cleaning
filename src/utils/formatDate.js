@@ -128,5 +128,5 @@ export {
   filterTimes,
   checkIsSameDate,
   isTimeLessThanFiltered,
-  checkIsDateValid
+  checkIsDateValid,
 };

@@ -4,14 +4,14 @@
 }
 
 .general {
-  padding: 0px 0px 368px 100px;
+  padding: 0px 0px 337px 100px;
   display: flex;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
 
   @media screen and (max-width: 1440px) {
-    padding-bottom: 183px;
+    padding-bottom: 184px;
   }
 
   @media screen and (max-width: 1024px) {
@@ -276,7 +276,7 @@
   }
 
   @media screen and (max-width: 744px) {
-    padding: 0 16px 100px;
+    padding: 0 16px 95px;
   }
 
   &__title {
@@ -291,7 +291,6 @@
     @media screen and (max-width: 1440px) {
       font-size: 60px;
       letter-spacing: 1.2px;
-      text-align: left;
     }
 
     @media screen and (max-width: 744px) {
@@ -299,7 +298,7 @@
       letter-spacing: 0.96px;
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 390px) {
       font-size: 42px;
       letter-spacing: 0.9px;
     }
@@ -308,11 +307,31 @@
   &__stage {
     position: relative;
     width: 887px;
-    height: 205px;
+    min-height: 205px;
     margin: -20px auto 0;
+
+    @media screen and (max-width: 1440px) {
+      width: 876px;
+      min-height: 217px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 534px;
+      min-height: 133px;
+      margin-top: -10px;
+    }
+
+    @media screen and (max-width: 566px) {
+      max-width: 358px;
+      min-height: 77px;
+      width: 100%;
+      margin-bottom: 5px;
+    }
 
     &-background {
       position: absolute;
+      width: 100%;
+      height: 100%;
     }
 
     &-number {
@@ -326,12 +345,42 @@
       line-height: 70%;
       top: 66px;
       left: 50px;
+
+      @media screen and (max-width: 1440px) {
+        top: 74px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        font-size: 30px;
+        letter-spacing: 0.9px;
+        top: 44px;
+        left: 31px;
+      }
+
+      @media screen and (max-width: 566px) {
+        font-size: 20px;
+        letter-spacing: 0.6px;
+        top: 24px;
+        left: 6.15%;
+      }
     }
 
     &-info {
-      position: absolute;
-      top: 37px;
-      left: 266px;
+      padding: 37px 0 0 266px;
+      position: relative;
+      z-index: 1;
+
+      @media screen and (max-width: 1440px) {
+        padding: 45px 0 0 251px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        padding: 20px 21px 47px 140px;
+      }
+
+      @media screen and (max-width: 566px) {
+        padding: 12px 4.75% 23px 25.14%;
+      }
     }
 
     &-subtitle {
@@ -342,6 +391,23 @@
       letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 14px;
+
+      @media screen and (max-width: 1440px) {
+        font-size: 34px;
+        letter-spacing: 3.4px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        font-size: 26px;
+        letter-spacing: 2.6px;
+        margin-bottom: 7px;
+      }
+
+      @media screen and (max-width: 566px) {
+        font-size: 18px;
+        letter-spacing: 1.8px;
+        margin-bottom: 4px;
+      }
     }
 
     &-text {
@@ -350,6 +416,14 @@
       font-size: 24px;
       font-weight: 300;
       line-height: 120%;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 18px;
+      }
+
+      @media screen and (max-width: 566px) {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -387,7 +461,7 @@
       letter-spacing: 0.96px;
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 390px) {
       font-size: 42px;
       letter-spacing: 0.9px;
     }
@@ -517,7 +591,7 @@
       letter-spacing: 1.44px;
     }
 
-    @media screen and (max-width: 380px) {
+    @media screen and (max-width: 390px) {
       font-size: 42px;
       letter-spacing: 0.9px;
     }
@@ -552,6 +626,10 @@
   display: flex;
   justify-content: center;
 
+  @media screen and (max-width: 744px) {
+    flex-direction: column;
+  }
+
   &__block {
     min-width: 248px;
     height: 130px;
@@ -564,6 +642,21 @@
 
     &:last-of-type {
       margin-right: 0;
+
+      @media screen and (max-width: 744px) {
+        margin-bottom: 0;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      min-width: 205px;
+      padding: 30px 20px;
+      margin-right: 5px;
+    }
+
+    @media screen and (max-width: 744px) {
+      width: 100%;
+      margin: 0 0 5px;
     }
   }
 
@@ -573,6 +666,7 @@
     line-height: 100%;
     letter-spacing: 1.2px;
     margin-bottom: 10px;
+    text-align: center;
   }
 
   &__text {
