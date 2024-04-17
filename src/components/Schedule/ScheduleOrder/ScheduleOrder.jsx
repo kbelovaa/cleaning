@@ -119,9 +119,13 @@ const ScheduleOrder = ({ order, isCompleted }) => {
                 />
               </svg>
             )}
-            {order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid' ? t('paid') : t('total')}
-            <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-              {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
+            <span className="total-summary__status">
+              {order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid'
+                ? `${t('paid')}${` (${getDateFromDateObject(order.paymentDate)})`}`
+                : t('total')}
+              <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
+              </span>
             </span>
           </span>
           <span className="order-card__value">{`€${roundPrice(order.orderPriceId.totalSum)}`}</span>

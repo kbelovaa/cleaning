@@ -33,6 +33,10 @@
   align-items: center;
   height: 100%;
 
+  &__value {
+    margin-right: 10px;
+  }
+
   &__name {
     line-height: 100%;
     letter-spacing: 0.36px;

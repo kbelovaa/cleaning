@@ -177,10 +177,12 @@ const Receipt = () => {
                         strokeLinejoin="round"
                       />
                     </svg>
-                    {t('paid')}
-                    {!isInvoiceReceipt && ` (${getDateFromDateObject(order.paymentDate)})`}
-                    <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-                      {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
+                    <span className="total-summary__status">
+                      {t('paid')}
+                      {!isInvoiceReceipt && ` (${getDateFromDateObject(order.paymentDate)})`}
+                      <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                        {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
+                      </span>
                     </span>
                   </span>
                   <span className="total-summary__value">{`€${roundPrice(order.orderPriceId.totalSum)}`}</span>

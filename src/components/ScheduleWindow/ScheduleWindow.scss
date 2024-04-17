@@ -23,7 +23,7 @@
 
   @media screen and (max-width: 744px) {
     padding: 50px 3px 20px 20px;
-    width: 358px;
+    width: calc(100% - 32px);
   }
 
   &__close {
@@ -103,15 +103,30 @@
     position: absolute;
     bottom: 2px;
 
+    @media screen and (max-width: 1024px) {
+      margin-left: 6px;
+      bottom: 1px;
+    }
+
     &.link {
       font-size: 14px;
       font-weight: 600;
       line-height: 130%;
       letter-spacing: 0.28px;
 
+      @media screen and (max-width: 1024px) {
+        font-size: 12px;
+        letter-spacing: 0.24px;
+      }
+
       &::after {
         width: calc(100% - 12px);
         right: 6px;
+
+        @media screen and (max-width: 1024px) {
+          width: calc(100% - 10px);
+          right: 4px;
+        }
       }
     }
   }

@@ -152,9 +152,13 @@ const Schedule = () => {
                         />
                       </svg>
                     )}
-                    {activeOrders[0].paymentStatus === 'Sum is reserved' ? t('paid') : t('total')}
-                    <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
-                      {`(${t('tariff')} ${activeOrders[0].orderPriceId.tariffNumber})`}
+                    <span className="total-summary__status">
+                      {activeOrders[0].paymentStatus === 'Sum is reserved'
+                        ? `${t('paid')}${` (${getDateFromDateObject(activeOrders[0].paymentReservationDate)})`}`
+                        : t('total')}
+                      <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
+                        {`(${t('tariff')} ${activeOrders[0].orderPriceId.tariffNumber})`}
+                      </span>
                     </span>
                   </span>
                   <span className="cleaning__value">{`€${roundPrice(activeOrders[0].orderPriceId.totalSum)}`}</span>

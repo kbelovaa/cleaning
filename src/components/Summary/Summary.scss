@@ -123,6 +123,16 @@
     line-height: 130%;
     letter-spacing: 0.6px;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 1024px) {
+      font-size: 28px;
+      letter-spacing: 0.56px;
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 20px;
+      letter-spacing: 0.4px;
+    }
   }
 
   &__link {
@@ -136,6 +146,11 @@
     margin-top: 50px;
     transition: all 0.3s ease;
 
+    @media screen and (max-width: 744px) {
+      font-size: 16px;
+      margin-top: 30px;
+    }
+
     &::after {
       display: block;
       content: '';
@@ -145,6 +160,10 @@
       position: absolute;
       bottom: 0;
       transition: all 0.3s ease;
+
+      @media screen and (max-width: 744px) {
+        height: 1px;
+      }
     }
 
     &:hover {
@@ -187,6 +206,18 @@
 
   &__tick {
     margin-right: 10px;
+  }
+
+  &__status {
+    @media screen and (max-width: 420px) {
+      .subscription__past-orders & {
+        width: 200px;
+      }
+    }
+
+    @media screen and (max-width: 380px) {
+      width: 140px;
+    }
   }
 
   &__edit {
@@ -244,6 +275,14 @@
         position: absolute;
         top: -8px;
         left: -8px;
+
+        .cleaning & {
+          top: -6px;
+
+          @media screen and (max-width: 744px) {
+            top: -2px;
+          }
+        }
 
         @media screen and (max-width: 744px) {
           width: 30px;
@@ -432,15 +471,47 @@
     margin-left: 8px;
     padding-top: 5px;
 
+    @media screen and (max-width: 1024px) {
+      margin-left: 6px;
+    }
+
+    @media screen and (max-width: 420px) {
+      .subscription__past-orders & {
+        margin-left: 0;
+      }
+    }
+
+    @media screen and (max-width: 380px) {
+      .subscription-wrap &,
+      .receipt & {
+        margin-left: 0;
+      }
+    }
+
     &.link {
       font-size: 14px;
       font-weight: 600;
       line-height: 130%;
       letter-spacing: 0.28px;
+      bottom: 1px;
+
+      @media screen and (max-width: 1024px) {
+        font-size: 12px;
+        letter-spacing: 0.24px;
+
+        .subscription-wrap & {
+          bottom: 0;
+        }
+      }
 
       &::after {
         width: calc(100% - 12px);
         right: 6px;
+
+        @media screen and (max-width: 1024px) {
+          width: calc(100% - 10px);
+          right: 4px;
+        }
       }
     }
   }
