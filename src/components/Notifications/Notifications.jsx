@@ -33,9 +33,27 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
   }, [newNotifications]);
 
   const resizeNotifications = (scrollRef, contentRef, setContentHeight, notifications) => {
+    const { width } = window.screen;
+
+    let outSpaceHeight;
+
+    switch (true) {
+      case width <= 744:
+        outSpaceHeight = 133;
+        break;
+      case width <= 1024:
+        outSpaceHeight = 157;
+        break;
+      case width <= 1440:
+        outSpaceHeight = 177;
+        break;
+      default:
+        outSpaceHeight = 197;
+    }
+
     if (contentRef.current && scrollRef.current !== null && notifications.length > 0) {
       const contentHeight = contentRef.current.offsetHeight;
-      const maxScrollHeight = window.innerHeight - 197;
+      const maxScrollHeight = window.innerHeight - outSpaceHeight;
 
       if (contentHeight > maxScrollHeight) {
         setContentHeight(maxScrollHeight);

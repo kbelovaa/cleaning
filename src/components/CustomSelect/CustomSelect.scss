@@ -99,6 +99,10 @@
       line-height: 24px;
       letter-spacing: 0.5px;
       transition: all 0.3s ease;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 
       .form__time & {
         font-size: 20px;
