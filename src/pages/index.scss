@@ -99,3 +99,19 @@ input[type='checkbox'] {
 input::placeholder {
   color: #d8d8d8;
 }
+
+@media not all and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) {
+    input[type="password"] {
+      font-size: 6px;
+      letter-spacing: 4px;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  input[type="password"] {
+    font-size: 6px;
+    letter-spacing: 4px;
+  }
+}
