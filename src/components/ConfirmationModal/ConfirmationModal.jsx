@@ -89,18 +89,12 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
   return (
     <div className={`modal ${isOpen ? 'active' : ''}`}>
       <div className="confirmation" ref={modalRef}>
-        <svg
-          className="confirmation__close"
-          onClick={handleCloseConfirmation}
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-        >
-          <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
-          <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
-        </svg>
+        <div className="confirmation__close" onClick={handleCloseConfirmation}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
+            <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
+          </svg>
+        </div>
         <svg
           className={
             isPersonalInfo || isPassword || isReceipt || (isInvoiceReceipt && !isInvoice) ? 'confirmation__tick' : ''

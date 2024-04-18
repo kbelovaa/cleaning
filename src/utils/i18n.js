@@ -372,6 +372,8 @@ i18n.use(initReactI18next).init({
         pleaseAllow15Min: 'Please allow 15 min for confirmation',
         address1Placeholder: 'Streetname and number',
         address2Placeholder: 'Complex, building, apt. nr',
+        downloadMobile: 'Download the mobile app\u00A0- for access anywhere, anytime!',
+        scanQr: 'Scan this with your camera',
       },
     },
     es: {
@@ -750,6 +752,8 @@ i18n.use(initReactI18next).init({
         pleaseAllow15Min: 'Por favor, permita 15 minutos para la confirmación',
         address1Placeholder: 'Calle y número',
         address2Placeholder: 'Complejo, edificio, número de apartamento',
+        downloadMobile: '¡Descarga la aplicación móvil para acceder en cualquier lugar y en cualquier momento!',
+        scanQr: 'Escanea esto con tu cámara',
       },
     },
   },

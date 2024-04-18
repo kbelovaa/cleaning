@@ -9,6 +9,9 @@ import stageImg1440 from '../../images/stageImg1440.png';
 import stageImg1024 from '../../images/stageImg1024.png';
 import stageImg744 from '../../images/stageImg744.png';
 import stageImg390 from '../../images/stageImg390.png';
+import qrCode from '../../images/qr-code.png';
+import appleIcon from '../../images/apple.png';
+import googlePlayIcon from '../../images/google-play.png';
 import './Main.scss';
 
 const Main = () => {
@@ -232,6 +235,23 @@ const Main = () => {
             <div className="reviews__block">
               <h5 className="reviews__subtitle">{t('paySecure')}</h5>
               <span className="reviews__text">{t('withStripe')}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="mobile-section">
+        <div className="container">
+          <div className="mobile">
+            <h3 className="mobile__title">{t('downloadMobile')}</h3>
+            <img className="mobile__qr" src={qrCode} alt="QR code" />
+            <p className="mobile__text">{t('scanQr')}</p>
+            <div className="mobile__social">
+              <img src={appleIcon} alt="Apple" className="mobile__icon" />
+              <span className="mobile__label">App Store</span>
+            </div>
+            <div className="mobile__social">
+              <img src={googlePlayIcon} alt="Google Play" className="mobile__icon" />
+              <span className="mobile__label">Google Play</span>
             </div>
           </div>
         </div>

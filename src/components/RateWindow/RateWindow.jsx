@@ -66,18 +66,12 @@ const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
   return (
     <div className={`modal ${isOpen ? 'active' : ''}`}>
       <div className="rate" ref={modalRef}>
-        <svg
-          className="rate__close"
-          onClick={closeRateWindow}
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-        >
-          <path d="M22.071 22.0712L7.92886 7.92905" stroke="#268664" strokeLinecap="round" />
-          <path d="M22.0711 7.92905L7.929 22.0712" stroke="#268664" strokeLinecap="round" />
-        </svg>
+        <div className="rate__close" onClick={closeRateWindow}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M22.071 22.0712L7.92886 7.92905" stroke="#268664" strokeLinecap="round" />
+            <path d="M22.0711 7.92905L7.929 22.0712" stroke="#268664" strokeLinecap="round" />
+          </svg>
+        </div>
         <h3 className="rate__title">{t('howHappy')}</h3>
         <div className="rate__stars">
           {Array.from({ length: 5 }).map((_, index) => (

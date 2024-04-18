@@ -85,18 +85,12 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
   return (
     <div className={`modal ${isOpen ? 'active' : ''}`}>
       <div className="burger-menu" ref={modalRef}>
-        <svg
-          className="burger-menu__close"
-          onClick={() => setIsOpen(false)}
-          xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-        >
-          <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
-          <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
-        </svg>
+        <div className="burger-menu__close" onClick={() => setIsOpen(false)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
+            <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
+          </svg>
+        </div>
         <ul className="burger-menu__list">
           {!isAuth && (
             <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(false)}>

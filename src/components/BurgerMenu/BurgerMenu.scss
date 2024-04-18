@@ -27,9 +27,40 @@
 
   &__close {
     position: absolute;
-    top: 100px;
+    top: 70px;
     right: 100px;
     cursor: pointer;
+
+    &::after {
+      display: block;
+      content: '';
+      background: transparent;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      position: absolute;
+      top: -5px;
+      left: -5px;
+
+      @media screen and (max-width: 744px) {
+        width: 30px;
+        height: 30px;
+        top: -3px;
+        left: -3px;
+      }
+    }
+
+    &:hover::after {
+      background: rgba(38, 134, 100, 0.07);
+    }
+
+    &:active::after,
+    &:focus::after,
+    &:focus-visible::after,
+    &:focus-within::after {
+      background: rgba(38, 134, 100, 0.16);
+    }
 
     @media screen and (max-width: 1440px) {
       top: 60px;
@@ -41,18 +72,21 @@
     }
 
     @media screen and (max-width: 744px) {
-      height: 24px;
-      width: 24px;
       top: 20px;
       right: 20px;
+
+      & svg {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 
   &__list > li {
-    margin-top: 40px;
+    margin-bottom: 40px;
 
-    &:first-of-type {
-      margin-top: 0;
+    &:last-of-type {
+      margin-bottom: 0;
     }
   }
 
@@ -78,7 +112,6 @@
       display: none;
 
       @media screen and (max-width: 744px) {
-        margin-top: 40px;
         display: block;
       }
     }

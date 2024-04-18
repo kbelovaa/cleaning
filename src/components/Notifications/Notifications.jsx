@@ -142,18 +142,12 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
     <>
       <div className={`modal ${isOpen ? 'active' : ''}`}>
         <div className="notifications" ref={modalRef}>
-          <svg
-            className="notifications__close"
-            onClick={handleCloseNotifications}
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            viewBox="0 0 30 30"
-            fill="none"
-          >
-            <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
-            <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
-          </svg>
+          <div className="notifications__close" onClick={handleCloseNotifications}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <path d="M22.0708 22.0709L7.92862 7.92881" stroke="#268664" strokeLinecap="round" />
+              <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
+            </svg>
+          </div>
           <div className="notifications__panel">
             <h3 className="notifications__title">{t('notifications')}</h3>
             <div className="notifications__tabs">
