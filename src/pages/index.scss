@@ -103,7 +103,7 @@ input::placeholder {
 @media not all and (min-resolution:.001dpcm) {
   @supports (-webkit-appearance:none) {
     input[type="password"] {
-      font-family: sans-serif;
+      font-family: Verdana;
       letter-spacing: 0.125em;
     }
   }
@@ -111,7 +111,7 @@ input::placeholder {
 
 @-moz-document url-prefix() {
   input[type="password"] {
-    font-family: sans-serif;
+    font-family: Verdana;
     letter-spacing: 0.125em;
   }
 }
