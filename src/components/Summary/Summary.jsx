@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { defaultState } from '../../store/reducers/cleaningReducer';
 import { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon } from '../../utils/formatDate';
-import { createOrder, getSubscriptions } from '../../http/orderAPI';
+import { getSubscriptions, saveOrder } from '../../http/orderAPI';
 import { createCheckoutSession } from '../../http/paymentAPI';
 import { roundPrice } from '../../utils/calculatePrice';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
@@ -28,7 +28,9 @@ const Summary = () => {
   const [isScheduleOpen, setIsScheduleOpen] = useState(false);
   const [cleaning, setCleaning] = useState(cleaningState);
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [isAwaiting, setIsAwaiting] = useState(true);
 
   const { t } = useTranslation();
 
@@ -37,19 +39,54 @@ const Summary = () => {
   const { pathname } = useLocation();
   const isConfirmation = pathname.startsWith('/confirmation');
 
+  const clearStore = () => {
+    dispatch(setCleaningAction(defaultState));
+    sessionStorage.removeItem('cleaning');
+  };
+
   useEffect(() => {
+    if (!isConfirmation) {
+      setPageLoading(false);
+    }
+
     if (!cleaningState.address1 && sessionStorage.getItem('cleaning')) {
       const cleaning = JSON.parse(sessionStorage.getItem('cleaning'));
       dispatch(setCleaningAction(cleaning));
       setCleaning(cleaning);
-    }
-
-    if (isConfirmation) {
-      setIsConfirmationOpen(true);
+      setPageLoading(false);
     }
   }, []);
 
   useEffect(() => {
+    const date =
+      cleaning.repeat === 'One-time'
+        ? cleaning.date
+        : cleaning.repeat === 'Custom schedule'
+        ? cleaning.customSchedule[0].date
+        : cleaning.dates.filter((date) => {
+            const datesToRemove = cleaning.excludedDates.map((elem) => elem.date);
+            return !datesToRemove.includes(date);
+          })[0];
+    const time = cleaning.repeat === 'Custom schedule' ? cleaning.customSchedule[0].time : cleaning.time;
+
+    if (defineIsCleaningSoon(date, time)) {
+      setIsAwaiting(true);
+    } else {
+      setIsAwaiting(false);
+    }
+  }, [cleaning]);
+
+  useEffect(() => {
+    if (isConfirmation && !pageLoading) {
+      setIsConfirmationOpen(true);
+    }
+  }, [pathname, pageLoading]);
+
+  useEffect(() => {
+    if (isConfirmation) {
+      clearStore();
+    }
+
     const getLastSubscription = async () => {
       const subscriptions = await getSubscriptions(user.id);
       const lastSubscription = subscriptions[subscriptions.length - 1];
@@ -117,6 +154,7 @@ const Summary = () => {
       }
 
       setCleaning(formattedOrder);
+      setPageLoading(false);
     };
 
     if (isConfirmation && user.id) {
@@ -192,6 +230,7 @@ const Summary = () => {
         orderObject.address.bedrooms = Number(cleaning.bedroomsNum.split(' ')[0]);
         orderObject.address.bathrooms = Number(cleaning.bathroomsNum.split(' ')[0]);
         orderObject.address.kitchens = Number(cleaning.kitchensNum.split(' ')[0]);
+        orderObject.address.isSaved = cleaning.saving;
       }
 
       return order;
@@ -206,16 +245,11 @@ const Summary = () => {
         : [];
     }
 
-    const result = await createOrder(orderObject);
+    const result = await saveOrder(user.id, JSON.stringify(orderObject));
     return result;
   };
 
-  const clearStore = () => {
-    dispatch(setCleaningAction(defaultState));
-    sessionStorage.removeItem('cleaning');
-  };
-
-  const handlepolicyAcceptingChange = () => {
+  const handlePolicyAcceptingChange = () => {
     setPolicyAccepting((state) => !state);
     setShowNotification(false);
   };
@@ -251,7 +285,7 @@ const Summary = () => {
         if (defineIsCleaningSoon(date, time)) {
           const stripe = await loadStripe(process.env.REACT_APP_STRIPE_KEY);
           const response = await createCheckoutSession({
-            orderId: result.data.firstOrderId,
+            userId: user.id,
             date,
             time,
             cleaning: cleaning.selectedCleaning.type,
@@ -272,14 +306,11 @@ const Summary = () => {
                     ].total.toFixed(2),
                   ),
           });
-          clearStore();
           await stripe.redirectToCheckout({
             sessionId: response.id,
           });
         } else {
-          clearStore();
           setLoading(false);
-          setIsConfirmationOpen(true);
           navigate('/confirmation');
         }
       }
@@ -293,7 +324,7 @@ const Summary = () => {
       <div className="container">
         <div className="total-summary">
           <h1 className="total-summary__title">{isConfirmation ? t('confirmation') : t('summary')}</h1>
-          {!cleaning.address1 ? (
+          {pageLoading ? (
             <div className="spinner"></div>
           ) : (
             <>
@@ -752,7 +783,7 @@ const Summary = () => {
               ) : (
                 <>
                   <div className={editMode || isConfirmation ? 'hidden' : 'checkbox'}>
-                    <input id="save" type="checkbox" checked={policyAccepting} onChange={handlepolicyAcceptingChange} />
+                    <input id="save" type="checkbox" checked={policyAccepting} onChange={handlePolicyAcceptingChange} />
                     <div
                       className={`checkbox__tick ${showNotification ? 'invalid' : ''}`}
                       onClick={() => setPolicyAccepting((state) => !state)}
@@ -842,7 +873,7 @@ const Summary = () => {
         speedSum={cleaning.speedSum}
         ivaPercent={pricing.orderTaxPercent}
       />
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} isAwaiting={isAwaiting} />
     </>
   );
 };

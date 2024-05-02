@@ -10,7 +10,7 @@ import CustomSelect from '../CustomSelect/CustomSelect';
 import './Address.scss';
 
 const Address = () => {
-  const user = useSelector((state) => state.user);
+  const userId = useSelector((state) => state.user.id);
   const addresses = useSelector((state) => state.user.addresses);
 
   const [apartmentSize, setApartmentSize] = useState('');
@@ -41,14 +41,14 @@ const Address = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const addresses = await getAddresses(user.id);
+      const addresses = await getAddresses(userId);
       dispatch(setAddressesAction(addresses));
     };
 
-    if (addresses.length === 0 && user.id) {
+    if (addresses.length === 0 && userId) {
       getData();
     }
-  }, [user]);
+  }, [userId]);
 
   useEffect(() => {
     const getAddressData = async () => {
@@ -89,6 +89,11 @@ const Address = () => {
     }
   };
 
+  const handleWheel = (event) => {
+    event.target.blur();
+    event.preventDefault();
+  };
+
   const checkIsFormValid = () => {
     if (apartmentSize && address1 && postalCode && city && province) {
       return true;
@@ -120,7 +125,7 @@ const Address = () => {
         );
       } else {
         result = await createAddress(
-          user.id,
+          userId,
           address1,
           address2,
           postalCode,
@@ -193,6 +198,7 @@ const Address = () => {
                   <input
                     id="code"
                     type="number"
+                    onWheel={handleWheel}
                     className={`input form__address ${!postalCode ? 'invalid-field' : ''}`}
                     value={postalCode}
                     onChange={(e) => setPostalCode(e.target.value)}

@@ -36,9 +36,9 @@ export const getSubscription = async (subscriptionId) => {
   }
 };
 
-export const createOrder = async (orderObject) => {
+export const saveOrder = async (userId, temporaryOrderJson) => {
   try {
-    const data = await $host.post('api/order/create_order', orderObject);
+    const data = await $host.post('api/order/save_order', { userId, temporaryOrderJson });
     return data;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {

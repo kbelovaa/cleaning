@@ -374,6 +374,7 @@ i18n.use(initReactI18next).init({
         address2Placeholder: 'Complex, building, apt. nr',
         downloadMobile: 'Download the mobile app\u00A0- for access anywhere, anytime!',
         scanQr: 'Scan this with your camera',
+        yourServiceIsBooked: 'Your requested service is booked.',
       },
     },
     es: {
@@ -754,6 +755,7 @@ i18n.use(initReactI18next).init({
         address2Placeholder: 'Complejo, edificio, número de apartamento',
         downloadMobile: '¡Descarga la aplicación móvil para acceder en cualquier lugar y en cualquier momento!',
         scanQr: 'Escanea esto con tu cámara',
+        yourServiceIsBooked: 'Tu servicio solicitado está reservado.',
       },
     },
   },

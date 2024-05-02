@@ -7,7 +7,7 @@ import { createKnowingWay } from '../../http/profileAPI';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import './ConfirmationModal.scss';
 
-const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isInvoice }) => {
+const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isInvoice, isAwaiting }) => {
   const user = useSelector((state) => state.user);
 
   const [knowingWay, setKnowingWay] = useState('');
@@ -21,7 +21,6 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
   const isContactUs = pathname.startsWith('/contact-us');
   const isPersonalInfo = pathname.startsWith('/personal-info');
   const isPassword = pathname.startsWith('/settings/change-password');
-  const isSummary = pathname.startsWith('/summary');
   const isConfirmation = pathname.startsWith('/confirmation');
   const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
 
@@ -34,7 +33,6 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
       !isContactUs &&
       !isReceipt &&
       !isPersonalInfo &&
-      !isSummary &&
       !isConfirmation &&
       !isInvoiceReceipt
     ) {
@@ -51,16 +49,11 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
       navigate('/settings');
     }
 
-    if (isSummary) {
-      navigate('/');
-    }
-
     if (
       !isPersonalInfo &&
       !isContactUs &&
       !isPassword &&
       !isReceipt &&
-      !isSummary &&
       !isConfirmation &&
       !isInvoiceReceipt
     ) {
@@ -116,10 +109,10 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         >
           {isContactUs
             ? t('thankYouMessage')
-            : isSummary
-            ? t('booked')
-            : isConfirmation || (isInvoiceReceipt && isInvoice)
+            : (isConfirmation && isAwaiting) || (isInvoiceReceipt && isInvoice)
             ? t('awaitingConfirmation')
+            : isConfirmation && !isAwaiting
+            ? t('booked')
             : t('signUpSuccess')}
         </h3>
         <p className="confirmation__text">
@@ -133,15 +126,15 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
             ? t('changesSaved')
             : isPassword
             ? t('passwordChanged')
-            : isSummary
-            ? t('paymentInstructions')
-            : isConfirmation || (isInvoiceReceipt && isInvoice)
+            : (isConfirmation && isAwaiting) || (isInvoiceReceipt && isInvoice)
             ? t('weAreLookingForCleaner')
+            : isConfirmation && !isAwaiting
+            ? t('yourServiceIsBooked')
             : t('confirmationEmailSent')}
         </p>
         <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>{t('verifyNewEmail')}</p>
         <p className={isConfirmation || (isInvoiceReceipt && isInvoice) ? 'confirmation__text' : 'hidden'}>
-          {t('pleaseAllow15Min')}
+          {isAwaiting ? t('pleaseAllow15Min') : t('paymentInstructions')}
         </p>
         <span
           className={
@@ -158,7 +151,6 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
             !isReceipt &&
             !isPersonalInfo &&
             !isPassword &&
-            !isSummary &&
             !isConfirmation &&
             !isInvoiceReceipt
               ? 'confirmation__knowing-way'

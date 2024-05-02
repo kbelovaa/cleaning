@@ -975,6 +975,11 @@ const Booking = ({ loading }) => {
     tariffNumber,
   ]);
 
+  const handleWheel = (event) => {
+    event.target.blur();
+    event.preventDefault();
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -1736,6 +1741,7 @@ const Booking = ({ loading }) => {
                           <input
                             id="code"
                             type="number"
+                            onWheel={handleWheel}
                             className={`input form__address ${!postalCode ? 'invalid-field' : ''}`}
                             value={postalCode}
                             onChange={(e) => setPostalCode(e.target.value)}
