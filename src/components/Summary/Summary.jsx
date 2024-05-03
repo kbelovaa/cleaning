@@ -6,7 +6,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { setCleaningAction } from '../../store/actions/cleaningActions';
 import { defaultState } from '../../store/reducers/cleaningReducer';
 import { formatDate, getDateFromDateObject, createDateObject, defineIsCleaningSoon } from '../../utils/formatDate';
-import { getSubscriptions, saveOrder } from '../../http/orderAPI';
+import { createOrder, getSubscriptions, saveOrder } from '../../http/orderAPI';
 import { createCheckoutSession } from '../../http/paymentAPI';
 import { roundPrice } from '../../utils/calculatePrice';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
@@ -310,6 +310,7 @@ const Summary = () => {
             sessionId: response.id,
           });
         } else {
+          await createOrder(JSON.parse(result.data.temporaryOrderJson));
           setLoading(false);
           navigate('/confirmation');
         }

@@ -48,3 +48,16 @@ export const saveOrder = async (userId, temporaryOrderJson) => {
     return { error: 'Unexpected error' };
   }
 };
+
+export const createOrder = async (orderObj) => {
+  try {
+    const data = await $host.post('api/order/create_order', orderObj);
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};
