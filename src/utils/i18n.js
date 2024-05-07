@@ -184,6 +184,7 @@ i18n.use(initReactI18next).init({
         iUnderstandAndAccept: 'I understand and accept',
         theCancellationPolicy: 'The\u00A0Cancellation\u00A0Policy*',
         edit: 'Edit',
+        cancel: 'Cancel',
         pay: 'Pay',
         weStriveToReplyWithin15Minutes: 'We strive to reply within 15 minutes between 06:00 and 00:00',
         confirmation: 'Confirmation',
@@ -559,6 +560,7 @@ i18n.use(initReactI18next).init({
         iUnderstandAndAccept: 'Entiendo y acepto',
         theCancellationPolicy: 'La\u00A0Política\u00A0de\u00A0Cancelación*',
         edit: 'Editar',
+        cancel: 'Cancelar',
         pay: 'Pagar',
         weStriveToReplyWithin15Minutes:
           'Nos esforzamos por responder dentro de los 15 minutos entre las 06:00 y las 00:00',
