@@ -81,7 +81,7 @@ const Summary = () => {
       setIsConfirmationOpen(true);
     }
   }, [pathname, pageLoading]);
-
+ 
   useEffect(() => {
     if (isConfirmation) {
       clearStore();
