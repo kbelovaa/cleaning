@@ -15,10 +15,10 @@ const Address = () => {
 
   const [apartmentSize, setApartmentSize] = useState('');
   const [isApartmentSizeValid, setIsApartmentSizeValid] = useState(true);
-  const [livingRoomsNum, setLivingRoomsNum] = useState(livingRooms[0]);
-  const [bedroomsNum, setBedroomsNum] = useState(bedrooms[0]);
-  const [bathroomsNum, setBathroomsNum] = useState(bathrooms[0]);
-  const [kitchensNum, setKitchensNum] = useState(kitchens[0]);
+  const [livingRoomsNum, setLivingRoomsNum] = useState(livingRooms[1]);
+  const [bedroomsNum, setBedroomsNum] = useState(bedrooms[1]);
+  const [bathroomsNum, setBathroomsNum] = useState(bathrooms[1]);
+  const [kitchensNum, setKitchensNum] = useState(kitchens[1]);
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
   const [postalCode, setPostalCode] = useState('');

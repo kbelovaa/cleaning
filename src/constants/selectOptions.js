@@ -14,9 +14,9 @@ const months = [
 ];
 
 const createOpions = (option) =>
-  Array(12)
+  Array(13)
     .fill()
-    .map((_, i) => `${i + 1} ${i === 0 ? option : `${option}s`}`);
+    .map((_, i) => `${i} ${i === 1 ? option : `${option}s`}`);
 
 const livingRooms = createOpions('living room');
 const bedrooms = createOpions('bedroom');
