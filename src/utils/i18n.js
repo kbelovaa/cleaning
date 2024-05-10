@@ -86,7 +86,7 @@ i18n.use(initReactI18next).init({
         fastCleanDescription:
           "For a faster clean, select '2x' to reduce a 6-hour clean to 3 hours with two cleaners, or '3x' to reduce it to 2 hours with three cleaners. Subject to availability.",
         recurring: 'Recurring',
-        recurringDescription: 'Here you can schedule regular cleaning',
+        recurringDescription: 'Here you can schedule regular cleaning.',
         howOften: 'How often?',
         'One-time': 'One-time',
         Weekly: 'Weekly',
@@ -465,7 +465,7 @@ i18n.use(initReactI18next).init({
         fastCleanDescription:
           "Para una limpieza más rápida, selecciona '2x' para reducir una limpieza de 6 horas a 3 horas con dos limpiadores, o '3x' para reducirla a 2 horas con tres limpiadores. Sujeto a disponibilidad.",
         recurring: 'Recurrente',
-        recurringDescription: 'Aquí puedes programar limpiezas regulares',
+        recurringDescription: 'Aquí puedes programar limpiezas regulares.',
         howOften: '¿Con qué frecuencia?',
         'One-time': 'Una vez',
         Weekly: 'Semanal',

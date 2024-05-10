@@ -1102,6 +1102,7 @@ const Booking = ({ loading }) => {
                       <span className="link form__link" onClick={() => navigate('/info-price')}>
                         {t('here')}
                       </span>
+                      .
                     </p>
                     <div className="form__radios">
                       {cleaningPricing.length !== 0 &&
