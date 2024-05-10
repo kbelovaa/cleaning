@@ -49,16 +49,13 @@ const calculateCleaningTypePrice = (
 
   const sizePrice = cleaningPrice * coeff + apartmentSize * pricePerSqm;
 
-  const roomsPrice = roomsPrices.reduce(
-    (currentPrice, price, currentIndex) => {
-      if (Number(getRoomsNumber(roomsNumber[currentIndex])) === 0) {
-        return currentPrice;
-      }
+  const roomsPrice = roomsPrices.reduce((currentPrice, price, currentIndex) => {
+    if (Number(getRoomsNumber(roomsNumber[currentIndex])) === 0) {
+      return currentPrice;
+    }
 
-      return currentPrice + price * (getRoomsNumber(roomsNumber[currentIndex]) - 1);
-    },
-    0,
-  );
+    return currentPrice + price * (getRoomsNumber(roomsNumber[currentIndex]) - 1);
+  }, 0);
 
   return Math.round(sizePrice + roomsPrice);
 };

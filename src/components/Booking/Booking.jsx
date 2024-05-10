@@ -1072,6 +1072,24 @@ const Booking = ({ loading }) => {
                           />
                         </div>
                       </div>
+                      <div className="form__input-wrap instructions" ref={instructionsRef}>
+                        <label htmlFor="instructions" className="form__label">
+                          {t('instructions')}
+                        </label>
+                        <p className="form__text">{t('instructionsText')}</p>
+                        <textarea
+                          id="instructions"
+                          ref={instructionsTextareaRef}
+                          rows="1"
+                          className="input form__instructions"
+                          value={instructions}
+                          onChange={(e) => setInstructions(e.target.value)}
+                          onInput={(e) => {
+                            e.target.style.height = 'auto';
+                            e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                          }}
+                        ></textarea>
+                      </div>
                     </div>
                   ) : (
                     <div className="form__section">
@@ -1089,6 +1107,24 @@ const Booking = ({ loading }) => {
                         <span className="form__new-address-text" onClick={() => navigate('/address/new/booking')}>
                           {t('newAddress')}
                         </span>
+                      </div>
+                      <div className="form__input-wrap instructions" ref={instructionsRef}>
+                        <label htmlFor="instructions" className="form__label">
+                          {t('instructions')}
+                        </label>
+                        <p className="form__text">{t('instructionsText')}</p>
+                        <textarea
+                          id="instructions"
+                          ref={instructionsTextareaRef}
+                          rows="1"
+                          className="input form__instructions"
+                          value={instructions}
+                          onChange={(e) => setInstructions(e.target.value)}
+                          onInput={(e) => {
+                            e.target.style.height = 'auto';
+                            e.target.style.height = `${e.target.scrollHeight + 2}px`;
+                          }}
+                        ></textarea>
                       </div>
                     </div>
                   )}
@@ -1772,23 +1808,6 @@ const Booking = ({ loading }) => {
                           value={province}
                           onChange={(e) => setProvince(e.target.value)}
                         />
-                      </div>
-                      <div className="form__input-wrap" ref={instructionsRef}>
-                        <label htmlFor="instructions" className="form__label">
-                          {t('specialInstructions')}
-                        </label>
-                        <textarea
-                          id="instructions"
-                          ref={instructionsTextareaRef}
-                          rows="1"
-                          className="input form__instructions"
-                          value={instructions}
-                          onChange={(e) => setInstructions(e.target.value)}
-                          onInput={(e) => {
-                            e.target.style.height = 'auto';
-                            e.target.style.height = `${e.target.scrollHeight + 2}px`;
-                          }}
-                        ></textarea>
                       </div>
                       <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
                         {t('fillInAllFieldsMessage')}

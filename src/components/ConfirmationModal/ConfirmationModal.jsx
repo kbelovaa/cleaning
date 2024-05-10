@@ -28,14 +28,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
 
   const handleCloseConfirmation = () => {
     // добавить отправку письма
-    if (
-      knowingWay &&
-      !isContactUs &&
-      !isReceipt &&
-      !isPersonalInfo &&
-      !isConfirmation &&
-      !isInvoiceReceipt
-    ) {
+    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo && !isConfirmation && !isInvoiceReceipt) {
       createKnowingWay(user.id, knowingWay);
     }
     setIsOpen(false);
@@ -49,14 +42,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
       navigate('/settings');
     }
 
-    if (
-      !isPersonalInfo &&
-      !isContactUs &&
-      !isPassword &&
-      !isReceipt &&
-      !isConfirmation &&
-      !isInvoiceReceipt
-    ) {
+    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt && !isConfirmation && !isInvoiceReceipt) {
       setEmail('');
     }
   };
@@ -147,12 +133,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         </span>
         <div
           className={
-            !isContactUs &&
-            !isReceipt &&
-            !isPersonalInfo &&
-            !isPassword &&
-            !isConfirmation &&
-            !isInvoiceReceipt
+            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isConfirmation && !isInvoiceReceipt
               ? 'confirmation__knowing-way'
               : 'hidden'
           }

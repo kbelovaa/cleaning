@@ -100,9 +100,9 @@ input::placeholder {
   color: #d8d8d8;
 }
 
-@media not all and (min-resolution:.001dpcm) {
-  @supports (-webkit-appearance:none) {
-    input[type="password"] {
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    input[type='password'] {
       font-family: Verdana;
       letter-spacing: 0.125em;
     }
@@ -110,7 +110,7 @@ input::placeholder {
 }
 
 @-moz-document url-prefix() {
-  input[type="password"] {
+  input[type='password'] {
     font-family: Verdana;
     letter-spacing: 0.125em;
   }

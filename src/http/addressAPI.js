@@ -61,7 +61,7 @@ export const createAddress = async (
       bedrooms,
       bathrooms,
       kitchens,
-      isSaved: true
+      isSaved: true,
     });
     return data;
   } catch (error) {

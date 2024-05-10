@@ -53,9 +53,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
             >
               <path d="M6 10L12 16L18 10" stroke="#000000" strokeLinecap="round" />
             </svg>
-            <h3 className="order-card__type">
-              {t(order.serviceType.type)}
-            </h3>
+            <h3 className="order-card__type">{t(order.serviceType.type)}</h3>
           </div>
           <div className="order-card__price">
             {isExpanded && (
@@ -67,9 +65,24 @@ const ScheduleOrder = ({ order, isCompleted }) => {
               <div className="order-card__actions">
                 <div className="ellipsis" onClick={() => setIsActionWindowOpen((state) => !state)}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#268664"/>
-                    <path fillRule="evenodd" clipRule="evenodd" d="M6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12C5 12.5523 5.44772 13 6 13Z" stroke="#268664"/>
-                    <path fillRule="evenodd" clipRule="evenodd" d="M18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12C17 12.5523 17.4477 13 18 13Z" stroke="#268664"/>
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z"
+                      stroke="#268664"
+                    />
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M6 13C6.55228 13 7 12.5523 7 12C7 11.4477 6.55228 11 6 11C5.44772 11 5 11.4477 5 12C5 12.5523 5.44772 13 6 13Z"
+                      stroke="#268664"
+                    />
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M18 13C18.5523 13 19 12.5523 19 12C19 11.4477 18.5523 11 18 11C17.4477 11 17 11.4477 17 12C17 12.5523 17.4477 13 18 13Z"
+                      stroke="#268664"
+                    />
                   </svg>
                 </div>
                 <div ref={windowRef} className="order-card__actions-window">
@@ -81,10 +94,17 @@ const ScheduleOrder = ({ order, isCompleted }) => {
                   </span>
                   <span className="order-card__action">
                     <div className="total-summary__edit-wrap">
-                      <svg className='total-summary__edit' xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M19 6H5" stroke="#268664" strokeLinecap="round"/>
-                        <path d="M14 5H10" stroke="#268664" stroke-Linecap="round"/>
-                        <path d="M6 10V21H18C18 20 18 10 18 10" stroke="#268664" strokeLinecap="round"/>
+                      <svg
+                        className="total-summary__edit"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path d="M19 6H5" stroke="#268664" strokeLinecap="round" />
+                        <path d="M14 5H10" stroke="#268664" stroke-Linecap="round" />
+                        <path d="M6 10V21H18C18 20 18 10 18 10" stroke="#268664" strokeLinecap="round" />
                       </svg>
                     </div>
                     {t('cancel')}
