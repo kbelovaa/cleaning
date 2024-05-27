@@ -1,0 +1,43 @@
+.legals {
+  padding: 130px 100px 340px;
+
+  @media screen and (max-width: 1440px) {
+    padding: 160px 80px 50px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 156px 60px 50px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 70px 16px 30px;
+  }
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    margin-bottom: 50px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      font-weight: 300;
+      letter-spacing: 0.6px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__text {
+    color: #3A3A3A;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.44px;
+    margin-bottom: 10px;
+
+    &-block {
+      margin-bottom: 60px;
+    }
+  }
+}

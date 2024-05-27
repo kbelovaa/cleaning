@@ -1815,23 +1815,6 @@ const Booking = ({ loading }) => {
                     </div>
                   ) : (
                     <div className="form__section">
-                      <div className="form__input-wrap" ref={instructionsRef}>
-                        <label htmlFor="instructions" className="form__label">
-                          {t('specialInstructions')}
-                        </label>
-                        <textarea
-                          id="instructions"
-                          ref={instructionsTextareaRef}
-                          rows="1"
-                          className="input form__instructions"
-                          value={instructions}
-                          onChange={(e) => setInstructions(e.target.value)}
-                          onInput={(e) => {
-                            e.target.style.height = 'auto';
-                            e.target.style.height = `${e.target.scrollHeight + 2}px`;
-                          }}
-                        ></textarea>
-                      </div>
                       <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
                         {t('fillInAllFieldsMessage')}
                       </p>

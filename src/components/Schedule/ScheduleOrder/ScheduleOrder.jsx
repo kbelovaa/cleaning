@@ -11,31 +11,41 @@ const ScheduleOrder = ({ order, isCompleted }) => {
   const [isActionWindowOpen, setIsActionWindowOpen] = useState(false);
 
   const windowRef = useRef();
+  const ellipsisRef = useRef();
 
   const navigate = useNavigate();
 
   const { t } = useTranslation();
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (windowRef.current && !windowRef.current.contains(e.target)) {
-  //       setIsActionWindowOpen(false);
-  //     }
-  //   };
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (windowRef.current && !windowRef.current.contains(e.target) && ellipsisRef.current && !ellipsisRef.current.contains(e.target)) {
+        setIsActionWindowOpen(false);
+      }
+    };
 
-  //   if (isActionWindowOpen) {
-  //     document.addEventListener('mousedown', handleClickOutside);
-  //   } else {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   }
+    if (isActionWindowOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
 
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, [isActionWindowOpen]);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isActionWindowOpen]);
 
   const handleToggle = () => {
     setIsExpanded((state) => !state);
+  };
+
+  const handleEllipsisClick = (e) => {
+    e.stopPropagation();
+    setIsActionWindowOpen((state) => !state);
+  };
+
+  const handleActionsClick = (e) => {
+    e.stopPropagation();
   };
 
   return (
@@ -63,7 +73,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
             )}
             {!isCompleted && (
               <div className="order-card__actions">
-                <div className="ellipsis" onClick={() => setIsActionWindowOpen((state) => !state)}>
+                <div className="ellipsis" ref={ellipsisRef} onClick={handleEllipsisClick}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
                       fillRule="evenodd"
@@ -85,31 +95,33 @@ const ScheduleOrder = ({ order, isCompleted }) => {
                     />
                   </svg>
                 </div>
-                <div ref={windowRef} className="order-card__actions-window">
-                  <span className="order-card__action">
-                    <div className="total-summary__edit-wrap">
-                      <img className="total-summary__edit" src={edit} alt="Edit" />
-                    </div>
-                    {t('edit')}
-                  </span>
-                  <span className="order-card__action">
-                    <div className="total-summary__edit-wrap">
-                      <svg
-                        className="total-summary__edit"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <path d="M19 6H5" stroke="#268664" strokeLinecap="round" />
-                        <path d="M14 5H10" stroke="#268664" stroke-Linecap="round" />
-                        <path d="M6 10V21H18C18 20 18 10 18 10" stroke="#268664" strokeLinecap="round" />
-                      </svg>
-                    </div>
-                    {t('cancel')}
-                  </span>
-                </div>
+                {isActionWindowOpen && (
+                  <div ref={windowRef} className="order-card__actions-window" onClick={handleActionsClick}>
+                    <span className="order-card__action">
+                      <div className="total-summary__edit-wrap">
+                        <img className="total-summary__edit" src={edit} alt="Edit" />
+                      </div>
+                      {t('edit')}
+                    </span>
+                    <span className="order-card__action">
+                      <div className="total-summary__edit-wrap">
+                        <svg
+                          className="total-summary__edit"
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <path d="M19 6H5" stroke="#268664" strokeLinecap="round" />
+                          <path d="M14 5H10" stroke="#268664" strokeLinecap="round" />
+                          <path d="M6 10V21H18C18 20 18 10 18 10" stroke="#268664" strokeLinecap="round" />
+                        </svg>
+                      </div>
+                      {t('cancel')}
+                    </span>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -188,7 +200,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
             )}
             <span className="total-summary__status">
               {order.paymentStatus === 'Sum is reserved' || order.paymentStatus === 'Paid'
-                ? `${t('paid')}${` (${getDateFromDateObject(order.paymentDate)})`}`
+                ? `${t('paid')}${` (${getDateFromDateObject(order.paymentReservationDate)})`}`
                 : t('total')}
               <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
                 {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}

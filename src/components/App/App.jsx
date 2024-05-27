@@ -31,6 +31,10 @@ import Settings from '../Settings/Settings';
 import Password from '../Password/Password';
 import Schedule from '../Schedule/Schedule';
 import Receipt from '../Receipt/Receipt';
+import Cookies from '../Cookies/Cookies';
+import LegalNotice from '../LegalNotice/LegalNotice';
+import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
+import TermsOfUse from '../TermsOfUse/TermsOfUse';
 import '../../utils/i18n';
 import './App.scss';
 
@@ -124,6 +128,10 @@ const App = () => {
           <Route path="info-price" element={<Services />} />
           <Route path="faq" element={<Faq />} />
           <Route path="cancellation-policy" element={<CancellationPolicy />} />
+          <Route path="cookies" element={<Cookies />} />
+          <Route path="legal-notice" element={<LegalNotice />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="terms-of-use" element={<TermsOfUse />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

@@ -16,22 +16,22 @@ const Footer = () => {
           <p className="footer__text">{t('copyright')}</p>
           <ul className="footer__links">
             <li>
-              <a href="#" className="link footer__link">
+              <a href="/terms-of-use" className="link footer__link">
                 {t('termsOfUse')}
               </a>
             </li>
             <li>
-              <a href="#" className="link footer__link">
+              <a href="/cookies" className="link footer__link">
                 {t('cookies')}
               </a>
             </li>
             <li>
-              <a href="#" className="link footer__link">
+              <a href="/privacy-policy" className="link footer__link">
                 {t('privacyPolicy')}
               </a>
             </li>
             <li>
-              <a href="#" className="link footer__link">
+              <a href="/legal-notice" className="link footer__link">
                 {t('legalNotice')}
               </a>
             </li>

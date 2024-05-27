@@ -167,6 +167,7 @@
       width: 188px;
       position: absolute;
       right: 0;
+      animation: fadeIn 0.3s ease-in;
 
       @media screen and (max-width: 744px) {
         width: 140px;
