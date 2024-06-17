@@ -48,7 +48,8 @@ module.exports = {
     new Dotenv({ systemvars: true }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: path.resolve(__dirname, 'public/robots.txt'), to: '' }
+        { from: path.resolve(__dirname, 'public/robots.txt'), to: '' },
+        { from: path.resolve(__dirname, 'public/sitemap.xml'), to: '' }
       ]
     }),
   ],
