@@ -239,7 +239,7 @@ const Main = () => {
           </div>
         </div>
       </section>
-      <section className="mobile-section">
+      {/* <section className="mobile-section">
         <div className="container">
           <div className="mobile">
             <h3 className="mobile__title">{t('downloadMobile')}</h3>
@@ -255,7 +255,7 @@ const Main = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

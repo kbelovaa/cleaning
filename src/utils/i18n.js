@@ -280,7 +280,7 @@ i18n.use(initReactI18next).init({
         weWillReplyToEmail: 'We will reply to your email',
         ok: 'Ok',
         whatIsSdl:
-          'SDL is a new cleaning service where booking is as fast and simple as reserving an Uber. Our user-friendly website and mobile app enable customers to request cleaning services, even on short notice, with just a few clicks.',
+          'SDL is a new on-demand home cleaning service available 24/7 in and around Marbella where booking is as fast and easy as reserving an Uber. Our user-friendly website and mobile app enable customers to request cleaning services, even on short notice, with just a few clicks.',
         timeIsInvaluable:
           'Time is invaluable, spend it where it truly matters\u00A0- while we take care of the cleaning',
         wellMainrainedHome:
@@ -729,7 +729,7 @@ i18n.use(initReactI18next).init({
         weWillReplyToEmail: 'Responderemos a tu correo electrónico',
         ok: 'Ok',
         whatIsSdl:
-          'SDL es un nuevo servicio de limpieza donde reservar es tan rápido y sencillo como solicitar un Uber. Nuestro pagina web y aplicación móvil fáciles de usar permiten a los clientes solicitar servicios de limpieza, incluso con poco tiempo de aviso, con solo unos clics.',
+          'SDL es un nuevo servicio de limpieza del hogar a demanda disponible 24/7 en Marbella y sus alrededores, donde reservar es tan rápido y fácil como pedir un Uber. Nuestro sitio web y aplicación móvil, fáciles de usar, permiten a los clientes solicitar servicios de limpieza, incluso con poca antelación, con solo unos pocos clics.',
         timeIsInvaluable:
           'El tiempo es incalculable, gástelo donde realmente importa, mientras nosotros nos encargamos de la limpieza.',
         wellMainrainedHome:
