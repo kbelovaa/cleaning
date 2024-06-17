@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/pages/index.jsx',
@@ -45,5 +46,10 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new Dotenv({ systemvars: true }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: path.resolve(__dirname, 'public/robots.txt'), to: '' }
+      ]
+    }),
   ],
 };

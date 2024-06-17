@@ -13,8 +13,8 @@ import {
 } from 'date-fns';
 import { times, weekdays } from '../../constants/selectOptions';
 import { roundPrice } from '../../utils/calculatePrice';
-import './Calendar.scss';
 import { isTimeLessThanFiltered, checkIsSameDate, filterTimes } from '../../utils/formatDate';
+import './Calendar.scss';
 
 const Calendar = ({
   currentDate,
