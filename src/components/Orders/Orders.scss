@@ -155,9 +155,21 @@
     line-height: 130%;
     letter-spacing: 0.6px;
 
-    @media screen and (max-width: 744px) {
+    &_small {
+      display: none;
       font-size: 18px;
+      font-weight: 600;
+      line-height: 130%;
       letter-spacing: 0.54px;
+      white-space: nowrap;
+
+      @media screen and (max-width: 744px) {
+        display: block;
+      }
+    }
+
+    @media screen and (max-width: 744px) {
+      display: none;
     }
   }
 

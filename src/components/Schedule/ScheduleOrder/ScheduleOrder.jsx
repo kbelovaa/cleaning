@@ -73,7 +73,7 @@ const ScheduleOrder = ({ order, isCompleted }) => {
             )}
             {!isCompleted && (
               <div className="order-card__actions">
-                <div className="ellipsis" ref={ellipsisRef} onClick={handleEllipsisClick}>
+                <div className="ellipsis hidden" ref={ellipsisRef} onClick={handleEllipsisClick}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path
                       fillRule="evenodd"

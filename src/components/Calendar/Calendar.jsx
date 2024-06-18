@@ -10,7 +10,10 @@ import {
   addDays,
   parse,
   isSameMonth,
+  compareAsc,
+  parseISO,
 } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 import { times, weekdays } from '../../constants/selectOptions';
 import { roundPrice } from '../../utils/calculatePrice';
 import { isTimeLessThanFiltered, checkIsSameDate, filterTimes } from '../../utils/formatDate';
@@ -76,7 +79,26 @@ const Calendar = ({
     return calendarDays;
   };
 
+  const compareTime = () => {
+    const timeZone = 'Europe/Madrid';
+
+    const now = new Date();
+    const zonedNow = formatInTimeZone(now, timeZone, 'yyyy-MM-dd\'T\'HH:mm:ssXXX');
+
+    const compareTimeStr = `${format(now, 'yyyy-MM-dd')}T23:30:00`;
+    const compareTime = parseISO(compareTimeStr);
+    const zonedCompareTime = formatInTimeZone(compareTime, timeZone, 'yyyy-MM-dd\'T\'HH:mm:ssXXX');
+
+    const result = compareAsc(new Date(zonedNow), new Date(zonedCompareTime));
+
+    return result;
+  };
+
   const handleDayClick = (day) => {
+    if (isToday(day) && compareTime() === 1) {
+      return;
+    }
+
     if (day >= new Date().setHours(0, 0, 0, 0)) {
       if (repeat === 'One-time') {
         setDate(format(day, 'dd.MM.yyyy'));
@@ -184,8 +206,10 @@ const Calendar = ({
 
   const getDayClassName = (day) => {
     let className = '';
-
-    if (
+    console.log(day)
+    if (isToday(day) && compareTime() === 1) {
+      className += 'calendar__day_before';
+    } else if (
       day >= new Date().setHours(0, 0, 0, 0) &&
       (repeat === 'One-time' ||
         (repeat === 'Custom schedule' &&

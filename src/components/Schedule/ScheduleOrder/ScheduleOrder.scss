@@ -51,9 +51,9 @@
     display: flex;
     align-items: center;
 
-    &-sum {
-      margin-right: 10px;
-    }
+    // &-sum {
+    //   margin-right: 10px;
+    // }
   }
 
   &__short {
@@ -93,7 +93,7 @@
       max-height 0.4s ease,
       opacity 0.4s ease;
     opacity: 0;
-    width: calc(100% - 34px);
+    // width: calc(100% - 34px);
 
     .order-card.expanded & {
       max-height: 1000px;

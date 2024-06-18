@@ -217,6 +217,8 @@
 
     @media screen and (max-width: 380px) {
       width: 140px;
+      display: flex;
+      flex-direction: column;
     }
   }
 
