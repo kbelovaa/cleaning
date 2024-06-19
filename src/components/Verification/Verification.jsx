@@ -24,7 +24,11 @@ const Verification = () => {
     verifyEmail();
   }, [token]);
 
-  return <div></div>;
+  return (
+    <div>
+      
+    </div>
+  );
 };
 
 export default Verification;
