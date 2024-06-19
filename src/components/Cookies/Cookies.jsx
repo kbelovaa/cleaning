@@ -6,7 +6,7 @@ const Cookies = () => {
   const { t } = useTranslation();
 
   return (
-    <div className='container'>
+    <div className="container">
       <div className="legals">
         <h2 className="legals__title">{t('cookiePolicy')}</h2>
         <div className="legals__text-block">
@@ -105,7 +105,14 @@ const Cookies = () => {
         <div className="legals__text-block">
           <p className="legals__text">{t('cookie60')}</p>
           <p className="legals__text">{t('cookie61')}</p>
-          <p className="legals__text">FIRST LUXURY REALTY MARBELLA SL<br />Carretera de Cadiz, km 176 Centro de Negocios Oasis, local 9<br />Marbella, Málaga 29602<br />{t('cookie62')}</p>
+          <p className="legals__text">
+            FIRST LUXURY REALTY MARBELLA SL
+            <br />
+            Carretera de Cadiz, km 176 Centro de Negocios Oasis, local 9<br />
+            Marbella, Málaga 29602
+            <br />
+            {t('cookie62')}
+          </p>
         </div>
         <div className="legals__text-block">
           <p className="legals__text">{t('cookie63')}</p>

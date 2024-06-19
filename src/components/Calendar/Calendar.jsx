@@ -83,13 +83,14 @@ const Calendar = ({
     const timeZone = 'Europe/Madrid';
 
     const now = new Date();
-    const zonedNow = formatInTimeZone(now, timeZone, 'yyyy-MM-dd\'T\'HH:mm:ssXXX');
 
-    const compareTimeStr = `${format(now, 'yyyy-MM-dd')}T23:30:00`;
+    const zonedNowStr = formatInTimeZone(now, timeZone, "yyyy-MM-dd'T'HH:mm:ssXXX");
+    const nowTime = parseISO(zonedNowStr);
+
+    const compareTimeStr = formatInTimeZone(now, timeZone, "yyyy-MM-dd'T'23:30:ssXXX");
     const compareTime = parseISO(compareTimeStr);
-    const zonedCompareTime = formatInTimeZone(compareTime, timeZone, 'yyyy-MM-dd\'T\'HH:mm:ssXXX');
 
-    const result = compareAsc(new Date(zonedNow), new Date(zonedCompareTime));
+    const result = compareAsc(nowTime, compareTime);
 
     return result;
   };
@@ -206,7 +207,7 @@ const Calendar = ({
 
   const getDayClassName = (day) => {
     let className = '';
-    console.log(day)
+
     if (isToday(day) && compareTime() === 1) {
       className += 'calendar__day_before';
     } else if (

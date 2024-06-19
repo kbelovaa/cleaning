@@ -1,4 +1,5 @@
-import { isBefore, isSameDay, parse, startOfDay } from 'date-fns';
+import { parseISO, compareAsc, isBefore, isSameDay, parse, startOfDay } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 import format from 'date-fns/format';
 
 const formatDate = (dateString) => {
@@ -61,15 +62,20 @@ const defineIsCleaningSoon = (date, time) => {
 };
 
 const filterTimes = (times) => {
+  const timeZone = 'Europe/Madrid';
+
   const now = new Date();
 
-  const isLaterThanNow = (timeStr) => {
-    const [hours, minutes] = timeStr.split(':');
-    const timeToCompare = new Date();
-    timeToCompare.setHours(parseInt(hours, 10));
-    timeToCompare.setMinutes(parseInt(minutes, 10));
+  const zonedNowStr = formatInTimeZone(now, timeZone, "yyyy-MM-dd'T'HH:mm:ssXXX");
+  const nowTime = parseISO(zonedNowStr);
 
-    return timeToCompare > now;
+  const isLaterThanNow = (timeStr) => {
+    const compareTimeStr = formatInTimeZone(now, timeZone, `yyyy-MM-dd'T'${timeStr}:ssXXX`);
+    const compareTime = parseISO(compareTimeStr);
+
+    const result = compareAsc(compareTime, nowTime);
+
+    return result === 1;
   };
 
   const filteredTimes = times.filter(isLaterThanNow);

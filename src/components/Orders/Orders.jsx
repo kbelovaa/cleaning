@@ -115,8 +115,12 @@ const Orders = () => {
                                 {order.subscriptionType === 'One-time'
                                   ? t(order.orders[0].serviceType.type)
                                   : order.subscriptionType === 'Custom schedule'
-                                  ? `${t('custom')}, ${getDateFromDateObject(order.startDate)} - ${getDateFromDateObject(order.lastDate)}`
-                                  : `${t(order.subscriptionType)}, ${getDateFromDateObject(order.startDate)} - ${getDateFromDateObject(order.lastDate)}`}
+                                  ? `${t('custom')}, ${getDateFromDateObject(
+                                      order.startDate,
+                                    )} - ${getDateFromDateObject(order.lastDate)}`
+                                  : `${t(order.subscriptionType)}, ${getDateFromDateObject(
+                                      order.startDate,
+                                    )} - ${getDateFromDateObject(order.lastDate)}`}
                               </h3>
                               <h3 className="order__type_small">
                                 {order.subscriptionType === 'One-time'
@@ -132,8 +136,12 @@ const Orders = () => {
                             {order.subscriptionType !== 'One-time' && (
                               <h3 className="order__type_small">
                                 {order.subscriptionType === 'Custom schedule'
-                                  ? `${getDateFromDateObject(order.startDate)} - ${getDateFromDateObject(order.lastDate)}`
-                                  : `${getDateFromDateObject(order.startDate)} - ${getDateFromDateObject(order.lastDate)}`}
+                                  ? `${getDateFromDateObject(order.startDate)} - ${getDateFromDateObject(
+                                      order.lastDate,
+                                    )}`
+                                  : `${getDateFromDateObject(order.startDate)} - ${getDateFromDateObject(
+                                      order.lastDate,
+                                    )}`}
                               </h3>
                             )}
                             <p className="order__address">

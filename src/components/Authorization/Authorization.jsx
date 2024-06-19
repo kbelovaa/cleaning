@@ -195,6 +195,15 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
             </svg>
           </div>
           <h2 className="auth__title">{isLogin ? t('logIn') : t('signUp')}</h2>
+          {isLogin ? (
+            <p className="auth__note auth__note_account">
+              {t('iDontHaveAccount')} <a onClick={() => switchAuth(false)}>{t('signUp')}</a>
+            </p>
+          ) : (
+            <p className="auth__note auth__note_account">
+              {t('iHaveAccount')} <a onClick={() => switchAuth(true)}>{t('logIn')}</a>
+            </p>
+          )}
           <form className={`form auth-form ${isFormValid ? 'valid' : 'invalid'}`} onSubmit={handleFormSubmit}>
             <div className="form__fields">
               <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
@@ -370,15 +379,6 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               <img src={googleImg} alt="Google" className="auth__social" />
               <img src={appleImg} alt="Apple" className="auth__social" />
             </div>
-            {isLogin ? (
-              <p className="auth__note auth__note_account">
-                {t('iDontHaveAccount')} <a onClick={() => switchAuth(false)}>{t('signUp')}</a>
-              </p>
-            ) : (
-              <p className="auth__note auth__note_account">
-                {t('iHaveAccount')} <a onClick={() => switchAuth(true)}>{t('logIn')}</a>
-              </p>
-            )}
           </div>
         </div>
       </div>

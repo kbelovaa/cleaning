@@ -52,3 +52,16 @@ export const logOut = async () => {
     return { error: 'Unexpected error' };
   }
 };
+
+export const verifyEmail = async (token) => {
+  try {
+    const { data } = await $host.get(`api/auth/verify-email/${token}`);
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};

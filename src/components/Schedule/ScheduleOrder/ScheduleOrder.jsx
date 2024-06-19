@@ -19,7 +19,12 @@ const ScheduleOrder = ({ order, isCompleted }) => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (windowRef.current && !windowRef.current.contains(e.target) && ellipsisRef.current && !ellipsisRef.current.contains(e.target)) {
+      if (
+        windowRef.current &&
+        !windowRef.current.contains(e.target) &&
+        ellipsisRef.current &&
+        !ellipsisRef.current.contains(e.target)
+      ) {
         setIsActionWindowOpen(false);
       }
     };

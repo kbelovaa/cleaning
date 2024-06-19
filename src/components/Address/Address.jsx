@@ -267,7 +267,6 @@ const Address = () => {
                   className={`input ${addressId ? 'disabled' : !apartmentSize ? 'invalid-field' : ''}`}
                   value={apartmentSize}
                   onChange={(e) => handleApartmentSizeChange(e.target.value)}
-                  disabled={addressId}
                 />
                 <p className={isApartmentSizeValid ? 'hidden' : 'auth__note'}>
                   {t('apartmentSizeMessage')}

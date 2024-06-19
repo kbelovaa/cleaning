@@ -383,19 +383,28 @@ i18n.use(initReactI18next).init({
         yourServiceIsBooked: 'Your requested service is booked.',
         cookiePolicy: 'Cookie policy',
         cookie1: 'Last updated 15 April 2024',
-        cookie2: 'This Cookie Policy explains how FIRST LUXURY REALTY MARBELLA SL ("Company," "we," "us," and "our") uses cookies and similar technologies to recognize you when you visit our website at  https://www.sdl24.es ("Website"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.',
-        cookie3: 'In some cases we may use cookies to collect personal information, or that becomes personal information if we combine it with other information.',
+        cookie2:
+          'This Cookie Policy explains how FIRST LUXURY REALTY MARBELLA SL ("Company," "we," "us," and "our") uses cookies and similar technologies to recognize you when you visit our website at  https://www.sdl24.es ("Website"). It explains what these technologies are and why we use them, as well as your rights to control our use of them.',
+        cookie3:
+          'In some cases we may use cookies to collect personal information, or that becomes personal information if we combine it with other information.',
         cookie4: 'What are cookies?',
-        cookie5: 'Cookies are small data files that are placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners in order to make their websites work, or to work more efficiently, as well as to provide reporting information.',
-        cookie6: 'Cookies set by the website owner (in this case, FIRST LUXURY REALTY MARBELLA SL) are called "first-party cookies." Cookies set by parties other than the website owner are called "third-party cookies." Third-party cookies enable third-party features or functionality to be provided on or through the website (e.g., advertising, interactive content, and analytics). The parties that set these third-party cookies can recognize your computer both when it visits the website in question and also when it visits certain other websites.',
+        cookie5:
+          'Cookies are small data files that are placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners in order to make their websites work, or to work more efficiently, as well as to provide reporting information.',
+        cookie6:
+          'Cookies set by the website owner (in this case, FIRST LUXURY REALTY MARBELLA SL) are called "first-party cookies." Cookies set by parties other than the website owner are called "third-party cookies." Third-party cookies enable third-party features or functionality to be provided on or through the website (e.g., advertising, interactive content, and analytics). The parties that set these third-party cookies can recognize your computer both when it visits the website in question and also when it visits certain other websites.',
         cookie7: 'Why do we use cookies?',
-        cookie8: 'We use first- and third-party cookies for several reasons. Some cookies are required for technical reasons in order for our Website to operate, and we refer to these as "essential" or "strictly necessary" cookies. Other cookies also enable us to track and target the interests of our users to enhance the experience on our Online Properties. Third parties serve cookies through our Website for advertising, analytics, and other purposes. This is described in more detail below.',
+        cookie8:
+          'We use first- and third-party cookies for several reasons. Some cookies are required for technical reasons in order for our Website to operate, and we refer to these as "essential" or "strictly necessary" cookies. Other cookies also enable us to track and target the interests of our users to enhance the experience on our Online Properties. Third parties serve cookies through our Website for advertising, analytics, and other purposes. This is described in more detail below.',
         cookie9: 'How can I control cookies?',
-        cookie10: 'You have the right to decide whether to accept or reject cookies. You can exercise your cookie rights by setting your preferences in the Cookie Consent Manager. The Cookie Consent Manager allows you to select which categories of cookies you accept or reject. Essential cookies cannot be rejected as they are strictly necessary to provide you with services.',
-        cookie11: 'The Cookie Consent Manager can be found in the notification banner and on our website. If you choose to reject cookies, you may still use our website though your access to some functionality and areas of our website may be restricted. You may also set or amend your web browser controls to accept or refuse cookies.',
-        cookie12: 'The specific types of first- and third-party cookies served through our Website and the purposes they perform are described in the table below (please note that the specific cookies served may vary depending on the specific Online Properties you visit):',
+        cookie10:
+          'You have the right to decide whether to accept or reject cookies. You can exercise your cookie rights by setting your preferences in the Cookie Consent Manager. The Cookie Consent Manager allows you to select which categories of cookies you accept or reject. Essential cookies cannot be rejected as they are strictly necessary to provide you with services.',
+        cookie11:
+          'The Cookie Consent Manager can be found in the notification banner and on our website. If you choose to reject cookies, you may still use our website though your access to some functionality and areas of our website may be restricted. You may also set or amend your web browser controls to accept or refuse cookies.',
+        cookie12:
+          'The specific types of first- and third-party cookies served through our Website and the purposes they perform are described in the table below (please note that the specific cookies served may vary depending on the specific Online Properties you visit):',
         cookie13: 'Essential website cookies:',
-        cookie14: 'These cookies are strictly necessary to provide you with services available through our Website and to use some of its features, such as access to secure areas.',
+        cookie14:
+          'These cookies are strictly necessary to provide you with services available through our Website and to use some of its features, such as access to secure areas.',
         cookie15: 'Name:	__stripe_mid',
         cookie16: 'Purpose:	Fraud prevention and detection',
         cookie17: 'Provider:	.www.sdl24.es',
@@ -415,7 +424,8 @@ i18n.use(initReactI18next).init({
         cookie31: 'Type:	http_cookie',
         cookie32: 'Expires in:	30 minutes',
         cookie33: 'Unclassified cookies:',
-        cookie34: 'These are cookies that have not yet been categorized. We are in the process of classifying these cookies with the help of their providers.',
+        cookie34:
+          'These are cookies that have not yet been categorized. We are in the process of classifying these cookies with the help of their providers.',
         cookie35: 'Name:	connect.sid',
         cookie36: 'Provider:	api.sdl24.es',
         cookie37: 'Type:	server_cookie',
@@ -425,24 +435,33 @@ i18n.use(initReactI18next).init({
         cookie41: 'Type:	html_session_storage',
         cookie42: 'Expires in:	session',
         cookie43: 'How can I control cookies on my browser?',
-        cookie44: "As the means by which you can refuse cookies through your web browser controls vary from browser to browser, you should visit your browser's help menu for more information. The following is information about how to manage cookies on the most popular browsers:",
-        cookie45: 'In addition, most advertising networks offer you a way to opt out of targeted advertising. If you would like to find out more information, please visit:',
+        cookie44:
+          "As the means by which you can refuse cookies through your web browser controls vary from browser to browser, you should visit your browser's help menu for more information. The following is information about how to manage cookies on the most popular browsers:",
+        cookie45:
+          'In addition, most advertising networks offer you a way to opt out of targeted advertising. If you would like to find out more information, please visit:',
         cookie46: 'Digital Advertising Alliance',
         cookie47: 'Digital Advertising Alliance of Canada',
         cookie48: 'European Interactive Digital Advertising Alliance',
         cookie49: 'What about other tracking technologies, like web beacons?',
-        cookie50: 'Cookies are not the only way to recognize or track visitors to a website. We may use other, similar technologies from time to time, like web beacons (sometimes called "tracking pixels" or "clear gifs"). These are tiny graphics files that contain a unique identifier that enables us to recognize when someone has visited our Website or opened an email including them. This allows us, for example, to monitor the traffic patterns of users from one page within a website to another, to deliver or communicate with cookies, to understand whether you have come to the website from an online advertisement displayed on a third-party website, to improve site performance, and to measure the success of email marketing campaigns. In many instances, these technologies are reliant on cookies to function properly, and so declining cookies will impair their functioning.',
+        cookie50:
+          'Cookies are not the only way to recognize or track visitors to a website. We may use other, similar technologies from time to time, like web beacons (sometimes called "tracking pixels" or "clear gifs"). These are tiny graphics files that contain a unique identifier that enables us to recognize when someone has visited our Website or opened an email including them. This allows us, for example, to monitor the traffic patterns of users from one page within a website to another, to deliver or communicate with cookies, to understand whether you have come to the website from an online advertisement displayed on a third-party website, to improve site performance, and to measure the success of email marketing campaigns. In many instances, these technologies are reliant on cookies to function properly, and so declining cookies will impair their functioning.',
         cookie51: 'Do you use Flash cookies or Local Shared Objects?',
-        cookie52: 'Websites may also use so-called "Flash Cookies" (also known as Local Shared Objects or "LSOs") to, among other things, collect and store information about your use of our services, fraud prevention, and for other site operations.',
-        cookie53: 'If you do not want Flash Cookies stored on your computer, you can adjust the settings of your Flash player to block Flash Cookies storage using the tools contained in the Website Storage Settings Panel. You can also control Flash Cookies by going to the Global Storage Settings Panel and following the instructions (which may include instructions that explain, for example, how to delete existing Flash Cookies (referred to "information" on the Macromedia site), how to prevent Flash LSOs from being placed on your computer without your being asked, and (for Flash Player 8 and later) how to block Flash Cookies that are not being delivered by the operator of the page you are on at the time).',
-        cookie54: 'Please note that setting the Flash Player to restrict or limit acceptance of Flash Cookies may reduce or impede the functionality of some Flash applications, including, potentially, Flash applications used in connection with our services or online content.',
+        cookie52:
+          'Websites may also use so-called "Flash Cookies" (also known as Local Shared Objects or "LSOs") to, among other things, collect and store information about your use of our services, fraud prevention, and for other site operations.',
+        cookie53:
+          'If you do not want Flash Cookies stored on your computer, you can adjust the settings of your Flash player to block Flash Cookies storage using the tools contained in the Website Storage Settings Panel. You can also control Flash Cookies by going to the Global Storage Settings Panel and following the instructions (which may include instructions that explain, for example, how to delete existing Flash Cookies (referred to "information" on the Macromedia site), how to prevent Flash LSOs from being placed on your computer without your being asked, and (for Flash Player 8 and later) how to block Flash Cookies that are not being delivered by the operator of the page you are on at the time).',
+        cookie54:
+          'Please note that setting the Flash Player to restrict or limit acceptance of Flash Cookies may reduce or impede the functionality of some Flash applications, including, potentially, Flash applications used in connection with our services or online content.',
         cookie55: 'Do you serve targeted advertising?',
-        cookie56: 'Third parties may serve cookies on your computer or mobile device to serve advertising through our Website. These companies may use information about your visits to this and other websites in order to provide relevant advertisements about goods and services that you may be interested in. They may also employ technology that is used to measure the effectiveness of advertisements. They can accomplish this by using cookies or web beacons to collect information about your visits to this and other sites in order to provide relevant advertisements about goods and services of potential interest to you. The information collected through this process does not enable us or them to identify your name, contact details, or other details that directly identify you unless you choose to provide these.',
+        cookie56:
+          'Third parties may serve cookies on your computer or mobile device to serve advertising through our Website. These companies may use information about your visits to this and other websites in order to provide relevant advertisements about goods and services that you may be interested in. They may also employ technology that is used to measure the effectiveness of advertisements. They can accomplish this by using cookies or web beacons to collect information about your visits to this and other sites in order to provide relevant advertisements about goods and services of potential interest to you. The information collected through this process does not enable us or them to identify your name, contact details, or other details that directly identify you unless you choose to provide these.',
         cookie57: 'How often will you update this Cookie Policy?',
-        cookie58: 'We may update this Cookie Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal, or regulatory reasons. Please therefore revisit this Cookie Policy regularly to stay informed about our use of cookies and related technologies.',
+        cookie58:
+          'We may update this Cookie Policy from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal, or regulatory reasons. Please therefore revisit this Cookie Policy regularly to stay informed about our use of cookies and related technologies.',
         cookie59: 'The date at the top of this Cookie Policy indicates when it was last updated.',
         cookie60: 'Where can I get further information?',
-        cookie61: 'If you have any questions about our use of cookies or other technologies, please email us at info@sdl24.es or by post to:',
+        cookie61:
+          'If you have any questions about our use of cookies or other technologies, please email us at info@sdl24.es or by post to:',
         cookie62: 'Spain',
         cookie63: "This cookie policy was created using Termly's Cookie Consent Manager.",
       },
@@ -835,19 +854,28 @@ i18n.use(initReactI18next).init({
         yourServiceIsBooked: 'Tu servicio solicitado está reservado.',
         cookiePolicy: 'Política de cookies',
         cookie1: 'Última actualización: 15 de abril de 2024',
-        cookie2: 'Esta Política de cookies explica cómo FIRST LUXURY REALTY MARBELLA SL ("Empresa", "nosotros", "nos" y "nuestro") utiliza cookies y tecnologías similares para reconocerle cuando visita nuestro sitio web en https://www.sdl24.es ("Sitio web"). Explica qué son estas tecnologías y por qué las usamos, así como sus derechos para controlar nuestro uso de ellas.',
-        cookie3: 'En algunos casos, podemos utilizar cookies para recopilar información personal, o que se convierte en información personal si la combinamos con otra información.',
+        cookie2:
+          'Esta Política de cookies explica cómo FIRST LUXURY REALTY MARBELLA SL ("Empresa", "nosotros", "nos" y "nuestro") utiliza cookies y tecnologías similares para reconocerle cuando visita nuestro sitio web en https://www.sdl24.es ("Sitio web"). Explica qué son estas tecnologías y por qué las usamos, así como sus derechos para controlar nuestro uso de ellas.',
+        cookie3:
+          'En algunos casos, podemos utilizar cookies para recopilar información personal, o que se convierte en información personal si la combinamos con otra información.',
         cookie4: '¿Qué son las cookies?',
-        cookie5: 'Las cookies son pequeños archivos de datos que se colocan en su ordenador o dispositivo móvil cuando visita un sitio web. Las cookies son ampliamente utilizadas por los propietarios de sitios web para hacer que sus sitios web funcionen, o para que funcionen de manera más eficiente, así como para proporcionar información de informes.',
-        cookie6: 'Las cookies establecidas por el titular del sitio web (en este caso, FIRST LUXURY REALTY MARBELLA SL) se denominan "cookies propias". Las cookies establecidas por terceros que no sean el propietario del sitio web se denominan "cookies de terceros". Las cookies de terceros permiten que se proporcionen características o funcionalidades de terceros en o a través del sitio web (por ejemplo, publicidad, contenido interactivo y análisis). Las partes que establecen estas cookies de terceros pueden reconocer su ordenador tanto cuando visita el sitio web en cuestión como cuando visita otros sitios web.',
+        cookie5:
+          'Las cookies son pequeños archivos de datos que se colocan en su ordenador o dispositivo móvil cuando visita un sitio web. Las cookies son ampliamente utilizadas por los propietarios de sitios web para hacer que sus sitios web funcionen, o para que funcionen de manera más eficiente, así como para proporcionar información de informes.',
+        cookie6:
+          'Las cookies establecidas por el titular del sitio web (en este caso, FIRST LUXURY REALTY MARBELLA SL) se denominan "cookies propias". Las cookies establecidas por terceros que no sean el propietario del sitio web se denominan "cookies de terceros". Las cookies de terceros permiten que se proporcionen características o funcionalidades de terceros en o a través del sitio web (por ejemplo, publicidad, contenido interactivo y análisis). Las partes que establecen estas cookies de terceros pueden reconocer su ordenador tanto cuando visita el sitio web en cuestión como cuando visita otros sitios web.',
         cookie7: '¿Por qué utilizamos cookies?',
-        cookie8: 'Utilizamos cookies propias y de terceros por varios motivos. Algunas cookies son necesarias por razones técnicas para que nuestro sitio web funcione, y nos referimos a ellas como cookies "esenciales" o "estrictamente necesarias". Otras cookies también nos permiten rastrear y orientar los intereses de nuestros usuarios para mejorar la experiencia en nuestras Propiedades en línea. Los terceros sirven cookies a través de nuestro sitio web con fines publicitarios, analíticos y de otro tipo. Esto se describe con más detalle a continuación.',
+        cookie8:
+          'Utilizamos cookies propias y de terceros por varios motivos. Algunas cookies son necesarias por razones técnicas para que nuestro sitio web funcione, y nos referimos a ellas como cookies "esenciales" o "estrictamente necesarias". Otras cookies también nos permiten rastrear y orientar los intereses de nuestros usuarios para mejorar la experiencia en nuestras Propiedades en línea. Los terceros sirven cookies a través de nuestro sitio web con fines publicitarios, analíticos y de otro tipo. Esto se describe con más detalle a continuación.',
         cookie9: '¿Cómo puedo controlar las cookies?',
-        cookie10: 'Tiene derecho a decidir si acepta o rechaza las cookies. Puede ejercer sus derechos de cookies configurando sus preferencias en el Administrador de consentimiento de cookies. El Administrador de consentimiento de cookies le permite seleccionar qué categorías de cookies acepta o rechaza. Las cookies esenciales no pueden ser rechazadas, ya que son estrictamente necesarias para proporcionarle servicios.',
-        cookie11: 'El Administrador de consentimiento de cookies se puede encontrar en el banner de notificación y en nuestro sitio web. Si decide rechazar las cookies, puede seguir utilizando nuestro sitio web, aunque su acceso a algunas funciones y áreas de nuestro sitio web puede estar restringido. También puede configurar o modificar los controles de su navegador web para aceptar o rechazar las cookies.',
-        cookie12: 'Los tipos específicos de cookies propias y de terceros que se sirven a través de nuestro sitio web y los fines que realizan se describen en la siguiente tabla (tenga en cuenta que las cookies específicas que se sirven pueden variar según las propiedades en línea específicas que visite):',
+        cookie10:
+          'Tiene derecho a decidir si acepta o rechaza las cookies. Puede ejercer sus derechos de cookies configurando sus preferencias en el Administrador de consentimiento de cookies. El Administrador de consentimiento de cookies le permite seleccionar qué categorías de cookies acepta o rechaza. Las cookies esenciales no pueden ser rechazadas, ya que son estrictamente necesarias para proporcionarle servicios.',
+        cookie11:
+          'El Administrador de consentimiento de cookies se puede encontrar en el banner de notificación y en nuestro sitio web. Si decide rechazar las cookies, puede seguir utilizando nuestro sitio web, aunque su acceso a algunas funciones y áreas de nuestro sitio web puede estar restringido. También puede configurar o modificar los controles de su navegador web para aceptar o rechazar las cookies.',
+        cookie12:
+          'Los tipos específicos de cookies propias y de terceros que se sirven a través de nuestro sitio web y los fines que realizan se describen en la siguiente tabla (tenga en cuenta que las cookies específicas que se sirven pueden variar según las propiedades en línea específicas que visite):',
         cookie13: 'Cookies esenciales del sitio web:',
-        cookie14: 'Estas cookies son estrictamente necesarias para proporcionarle servicios disponibles a través de nuestro Sitio web y para utilizar algunas de sus funciones, como el acceso a áreas seguras.',
+        cookie14:
+          'Estas cookies son estrictamente necesarias para proporcionarle servicios disponibles a través de nuestro Sitio web y para utilizar algunas de sus funciones, como el acceso a áreas seguras.',
         cookie15: 'Nombre: __stripe_mid',
         cookie16: 'Propósito: Prevención y detección de fraudes',
         cookie17: 'Proveedor: .www.sdl24.es',
@@ -867,7 +895,8 @@ i18n.use(initReactI18next).init({
         cookie31: 'Tipo: http_cookie',
         cookie32: 'Caduca en: 30 minutos',
         cookie33: 'Cookies no clasificadas:',
-        cookie34: 'Estas son cookies que aún no han sido categorizadas. Estamos en proceso de clasificar estas cookies con la ayuda de sus proveedores.',
+        cookie34:
+          'Estas son cookies que aún no han sido categorizadas. Estamos en proceso de clasificar estas cookies con la ayuda de sus proveedores.',
         cookie35: 'Nombre: connect.sid',
         cookie36: 'Proveedor: api.sdl24.es',
         cookie37: 'Tipo: server_cookie',
@@ -877,26 +906,37 @@ i18n.use(initReactI18next).init({
         cookie41: 'Tipo: html_session_storage',
         cookie42: 'Caduca en: sesión',
         cookie43: '¿Cómo puedo controlar las cookies en mi navegador?',
-        cookie44: 'Dado que los medios por los que puede rechazar las cookies a través de los controles de su navegador web varían de un navegador a otro, debe visitar el menú de ayuda de su navegador para obtener más información. La siguiente es información sobre cómo administrar las cookies en los navegadores más populares:',
-        cookie45: 'Además, la mayoría de las redes publicitarias le ofrecen una forma de optar por no recibir publicidad dirigida. Si desea obtener más información, visite:',
+        cookie44:
+          'Dado que los medios por los que puede rechazar las cookies a través de los controles de su navegador web varían de un navegador a otro, debe visitar el menú de ayuda de su navegador para obtener más información. La siguiente es información sobre cómo administrar las cookies en los navegadores más populares:',
+        cookie45:
+          'Además, la mayoría de las redes publicitarias le ofrecen una forma de optar por no recibir publicidad dirigida. Si desea obtener más información, visite:',
         cookie46: 'Alianza de Publicidad Digital',
         cookie47: 'Alianza de Publicidad Digital de Canadá',
         cookie48: 'Alianza Europea de Publicidad Digital Interactiva',
         cookie49: '¿Qué pasa con otras tecnologías de seguimiento, como las balizas web?',
-        cookie50: 'Las cookies no son la única forma de reconocer o rastrear a los visitantes de un sitio web. Es posible que utilicemos otras tecnologías similares de vez en cuando, como balizas web (a veces llamadas "píxeles de seguimiento" o "gifs transparentes"). Se trata de pequeños archivos gráficos que contienen un identificador único que nos permite reconocer cuándo alguien ha visitado nuestro sitio web o ha abierto un correo electrónico que lo incluye. Esto nos permite, por ejemplo, monitorear los patrones de tráfico de los usuarios de una página dentro de un sitio web a otra, entregar o comunicarnos con cookies, comprender si ha llegado al sitio web desde un anuncio en línea que se muestra en un sitio web de terceros, mejorar el rendimiento del sitio y medir el éxito de las campañas de marketing por correo electrónico. En muchos casos, estas tecnologías dependen de las cookies para funcionar correctamente, por lo que rechazar las cookies perjudicará su funcionamiento.',
+        cookie50:
+          'Las cookies no son la única forma de reconocer o rastrear a los visitantes de un sitio web. Es posible que utilicemos otras tecnologías similares de vez en cuando, como balizas web (a veces llamadas "píxeles de seguimiento" o "gifs transparentes"). Se trata de pequeños archivos gráficos que contienen un identificador único que nos permite reconocer cuándo alguien ha visitado nuestro sitio web o ha abierto un correo electrónico que lo incluye. Esto nos permite, por ejemplo, monitorear los patrones de tráfico de los usuarios de una página dentro de un sitio web a otra, entregar o comunicarnos con cookies, comprender si ha llegado al sitio web desde un anuncio en línea que se muestra en un sitio web de terceros, mejorar el rendimiento del sitio y medir el éxito de las campañas de marketing por correo electrónico. En muchos casos, estas tecnologías dependen de las cookies para funcionar correctamente, por lo que rechazar las cookies perjudicará su funcionamiento.',
         cookie51: '¿Utiliza cookies Flash u objetos locales compartidos?',
-        cookie52: 'Los sitios web también pueden utilizar las llamadas "cookies Flash" (también conocidas como objetos locales compartidos o "LSO") para, entre otras cosas, recopilar y almacenar información sobre su uso de nuestros servicios, prevención de fraudes y para otras operaciones del sitio.',
-        cookie53: 'Si no desea que las cookies Flash se almacenen en su ordenador, puede ajustar la configuración de su reproductor Flash para bloquear el almacenamiento de cookies Flash utilizando las herramientas contenidas en el Panel de configuración de almacenamiento del sitio web. También puede controlar las cookies de Flash yendo al Panel de configuración de almacenamiento global y siguiendo las instrucciones (que pueden incluir instrucciones que explican, por ejemplo, cómo eliminar las cookies de Flash existentes (a las que se hace referencia a "información" en el sitio de Macromedia), cómo evitar que se coloquen LSO de Flash en su computadora sin que se lo pidan, y (para Flash Player 8 y versiones posteriores) cómo bloquear las cookies de Flash que no están siendo entregadas por el operador de la página en la que se encuentra en ese momento).',
-        cookie54: 'Tenga en cuenta que configurar Flash Player para restringir o limitar la aceptación de cookies Flash puede reducir o impedir la funcionalidad de algunas aplicaciones Flash, incluidas, potencialmente, las aplicaciones Flash utilizadas en relación con nuestros servicios o contenido en línea.',
+        cookie52:
+          'Los sitios web también pueden utilizar las llamadas "cookies Flash" (también conocidas como objetos locales compartidos o "LSO") para, entre otras cosas, recopilar y almacenar información sobre su uso de nuestros servicios, prevención de fraudes y para otras operaciones del sitio.',
+        cookie53:
+          'Si no desea que las cookies Flash se almacenen en su ordenador, puede ajustar la configuración de su reproductor Flash para bloquear el almacenamiento de cookies Flash utilizando las herramientas contenidas en el Panel de configuración de almacenamiento del sitio web. También puede controlar las cookies de Flash yendo al Panel de configuración de almacenamiento global y siguiendo las instrucciones (que pueden incluir instrucciones que explican, por ejemplo, cómo eliminar las cookies de Flash existentes (a las que se hace referencia a "información" en el sitio de Macromedia), cómo evitar que se coloquen LSO de Flash en su computadora sin que se lo pidan, y (para Flash Player 8 y versiones posteriores) cómo bloquear las cookies de Flash que no están siendo entregadas por el operador de la página en la que se encuentra en ese momento).',
+        cookie54:
+          'Tenga en cuenta que configurar Flash Player para restringir o limitar la aceptación de cookies Flash puede reducir o impedir la funcionalidad de algunas aplicaciones Flash, incluidas, potencialmente, las aplicaciones Flash utilizadas en relación con nuestros servicios o contenido en línea.',
         cookie55: '¿Ofrecen publicidad dirigida?',
-        cookie56: 'Los terceros pueden colocar cookies en su computadora o dispositivo móvil para publicar publicidad a través de nuestro sitio web. Estas empresas pueden utilizar información sobre sus visitas a este y otros sitios web para proporcionar anuncios relevantes sobre bienes y servicios que puedan interesarle. También pueden emplear tecnología que se utiliza para medir la eficacia de los anuncios. Pueden lograr esto mediante el uso de cookies o balizas web para recopilar información sobre sus visitas a este y otros sitios con el fin de proporcionar anuncios relevantes sobre bienes y servicios de posible interés para usted. La información recopilada a través de este proceso no nos permite a nosotros ni a ellos identificar su nombre, datos de contacto u otros detalles que lo identifiquen directamente, a menos que elija proporcionarlos.',
+        cookie56:
+          'Los terceros pueden colocar cookies en su computadora o dispositivo móvil para publicar publicidad a través de nuestro sitio web. Estas empresas pueden utilizar información sobre sus visitas a este y otros sitios web para proporcionar anuncios relevantes sobre bienes y servicios que puedan interesarle. También pueden emplear tecnología que se utiliza para medir la eficacia de los anuncios. Pueden lograr esto mediante el uso de cookies o balizas web para recopilar información sobre sus visitas a este y otros sitios con el fin de proporcionar anuncios relevantes sobre bienes y servicios de posible interés para usted. La información recopilada a través de este proceso no nos permite a nosotros ni a ellos identificar su nombre, datos de contacto u otros detalles que lo identifiquen directamente, a menos que elija proporcionarlos.',
         cookie57: '¿Con qué frecuencia actualizará esta Política de cookies?',
-        cookie58: 'Es posible que actualicemos esta Política de cookies de vez en cuando para reflejar, por ejemplo, los cambios en las cookies que utilizamos o por otras razones operativas, legales o reglamentarias. Por lo tanto, revise esta Política de cookies con regularidad para mantenerse informado sobre nuestro uso de cookies y tecnologías relacionadas.',
-        cookie59: 'La fecha que aparece en la parte superior de esta Política de cookies indica cuándo se actualizó por última vez.',
+        cookie58:
+          'Es posible que actualicemos esta Política de cookies de vez en cuando para reflejar, por ejemplo, los cambios en las cookies que utilizamos o por otras razones operativas, legales o reglamentarias. Por lo tanto, revise esta Política de cookies con regularidad para mantenerse informado sobre nuestro uso de cookies y tecnologías relacionadas.',
+        cookie59:
+          'La fecha que aparece en la parte superior de esta Política de cookies indica cuándo se actualizó por última vez.',
         cookie60: '¿Dónde puedo obtener más información?',
-        cookie61: 'Si tiene alguna pregunta sobre nuestro uso de cookies u otras tecnologías, envíenos un correo electrónico a info@sdl24.es o por correo postal a:',
+        cookie61:
+          'Si tiene alguna pregunta sobre nuestro uso de cookies u otras tecnologías, envíenos un correo electrónico a info@sdl24.es o por correo postal a:',
         cookie62: 'España',
-        cookie63: 'Esta política de cookies se creó utilizando el Administrador de consentimiento de cookies de Termly.',
+        cookie63:
+          'Esta política de cookies se creó utilizando el Administrador de consentimiento de cookies de Termly.',
       },
     },
   },

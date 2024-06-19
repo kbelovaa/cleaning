@@ -237,8 +237,17 @@ const Main = () => {
               <span className="reviews__text">{t('withStripe')}</span>
             </div>
           </div>
-          <div class="trustpilot-widget" data-locale="en-US" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="6671478562cbe355c286fafb" data-style-height="52px" data-style-width="100%">
-            <a href="https://www.trustpilot.com/review/sdl24.es" target="_blank" rel="noopener">Trustpilot</a>
+          <div
+            class="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="56278e9abfbbba0bdcd568bc"
+            data-businessunit-id="6671478562cbe355c286fafb"
+            data-style-height="52px"
+            data-style-width="100%"
+          >
+            <a href="https://www.trustpilot.com/review/sdl24.es" target="_blank" rel="noopener">
+              Trustpilot
+            </a>
           </div>
         </div>
       </section>
