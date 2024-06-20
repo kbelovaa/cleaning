@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cleaningImg from '../../images/cleaning.png';
 import cleaningImg1440 from '../../images/cleaning-1440.png';
@@ -14,12 +14,14 @@ import appleIcon from '../../images/apple.png';
 import googlePlayIcon from '../../images/google-play.png';
 import './Main.scss';
 
-const Main = () => {
+const Main = ({ password }) => {
   const [stageImg, setStageImg] = useState(stageImg1440);
   const [windowWidth, setWindowWidth] = useState();
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+
+  const setIsAuthorizationOpen = useOutletContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,6 +51,12 @@ const Main = () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (password) {
+      setIsAuthorizationOpen(true);
+    }
+  }, [password]);
 
   return (
     <div className="main">

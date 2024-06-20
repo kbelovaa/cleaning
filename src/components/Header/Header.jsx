@@ -31,7 +31,7 @@ const Header = ({ loading, socket }) => {
   const { pathname } = useLocation();
 
   const isBook = pathname.startsWith('/booking');
-  const isMain = pathname === '/';
+  const isMain = pathname === '/' || pathname.startsWith('/password');
 
   const { t, i18n } = useTranslation();
   const { language } = i18n;

@@ -11,22 +11,23 @@ const Verification = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const verifyEmail = async () => {
-      const response = await verifyEmail(token);
+    const checkEmail = async () => {
+      const response = await verifyEmail(token.replace(/~/g, '.'));
 
       if (response.status === 200) {
-        navigate();
+        // navigate('/booking/password');
+        setMessage(response.data.message);
       } else {
         setMessage(response.data.message);
       }
     };
 
-    verifyEmail();
+    checkEmail();
   }, [token]);
 
   return (
     <div>
-      
+      {message}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
-import { signIn, signUp } from '../../http/authAPI';
+import { checkEmail, signIn, signUp } from '../../http/authAPI';
 import googleImg from '../../images/google.png';
 import appleImg from '../../images/apple.png';
 import PhoneField from '../PhoneField/PhoneField';
@@ -27,7 +27,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
   const [loading, setLoading] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showPasswordConf, setShowPasswordConf] = useState(false);
+  // const [showPasswordConf, setShowPasswordConf] = useState(false);
 
   const modalRef = useRef(null);
 
@@ -69,8 +69,8 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setIsMobileValid(true);
     setPassword('');
     setIsPasswordValid(false);
-    setPasswordConf('');
-    setIsPasswordConfValid(true);
+    // setPasswordConf('');
+    // setIsPasswordConfValid(true);
     setAreCredentialsValid('');
     setIsFormValid(true);
   };
@@ -105,21 +105,22 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       email &&
       isEmailValid &&
       mobile &&
-      isMobileValid &&
-      password &&
-      isPasswordValid &&
-      passwordConf &&
-      isPasswordConfValid
+      isMobileValid
+      // password &&
+      // isPasswordValid &&
+      // passwordConf &&
+      // isPasswordConfValid
     ) {
       setLoading(true);
-      const result = await signUp(name, surname, email.toLowerCase(), mobile, password);
+      const result = await checkEmail(name, surname, email.toLowerCase(), mobile);
+      console.log(result)
       if (result.message && result.error) {
         setIsEmailUnique(result.message);
         setIsFormValid(false);
         setLoading(false);
       } else {
         setLoading(false);
-        handleAuth(result);
+        // handleAuth(result);
         setIsConfirmationOpen(true);
       }
     } else {
@@ -147,12 +148,12 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     setIsPasswordConfValid(isPasswordConfValid);
   };
 
-  const handlePasswordConfChange = (passwordConf) => {
-    setPasswordConf(passwordConf);
+  // const handlePasswordConfChange = (passwordConf) => {
+  //   setPasswordConf(passwordConf);
 
-    const isPasswordConfValid = passwordConf === '' || passwordConf === password;
-    setIsPasswordConfValid(isPasswordConfValid);
-  };
+  //   const isPasswordConfValid = passwordConf === '' || passwordConf === password;
+  //   setIsPasswordConfValid(isPasswordConfValid);
+  // };
 
   const checkIsFormValid = () => {
     if (isLogin) {
@@ -165,11 +166,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       email &&
       isEmailValid &&
       mobile &&
-      isMobileValid &&
-      password &&
-      isPasswordValid &&
-      passwordConf &&
-      isPasswordConfValid
+      isMobileValid
+      // password &&
+      // isPasswordValid &&
+      // passwordConf &&
+      // isPasswordConfValid
     ) {
       return true;
     }
@@ -266,57 +267,59 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   setIsMobileValid={setIsMobileValid}
                 />
               </div>
-              <div className="form__field-wrap">
-                <label htmlFor="auth-password" className="form__label">
-                  {t('password')}
-                </label>
-                <input
-                  id="auth-password"
-                  type={showPassword ? 'text' : 'password'}
-                  className={`input ${
-                    !password || (!isLogin && !isPasswordValid) || areCredentialsValid === 'Incorrect password'
-                      ? 'invalid-field'
-                      : ''
-                  }`}
-                  value={password}
-                  onChange={(e) => handlePasswordChange(e.target.value)}
-                  autoComplete="off"
-                />
-                <p className={isLogin ? 'hidden' : isPasswordValid ? 'hidden' : 'auth__note'}>
-                  {t('passwordRequirements')}
-                </p>
-                {areCredentialsValid && (
-                  <p className={!isLogin ? 'hidden' : 'auth__note'}>
-                    {areCredentialsValid === 'Incorrect password'
-                      ? t('incorrectPassword')
-                      : `${t('userWithEmail')} ${email} ${t(areCredentialsValid.split(email)[1].trim())}`}
+              {isLogin && (
+                <div className="form__field-wrap">
+                  <label htmlFor="auth-password" className="form__label">
+                    {t('password')}
+                  </label>
+                  <input
+                    id="auth-password"
+                    type={showPassword ? 'text' : 'password'}
+                    className={`input ${
+                      !password || (!isLogin && !isPasswordValid) || areCredentialsValid === 'Incorrect password'
+                        ? 'invalid-field'
+                        : ''
+                    }`}
+                    value={password}
+                    onChange={(e) => handlePasswordChange(e.target.value)}
+                    autoComplete="off"
+                  />
+                  <p className={isLogin ? 'hidden' : isPasswordValid ? 'hidden' : 'auth__note'}>
+                    {t('passwordRequirements')}
                   </p>
-                )}
-                <span className={showPassword ? 'hidden' : 'form__eye'} onClick={() => setShowPassword(true)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"
-                      stroke="#3A3A3A"
-                      strokeOpacity="0.5"
-                      strokeLinecap="round"
-                    />
-                    <circle cx="12" cy="12" r="3" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
-                    <path d="M3 21L20 4" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
-                  </svg>
-                </span>
-                <span className={showPassword ? 'form__eye' : 'hidden'} onClick={() => setShowPassword(false)}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path
-                      d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"
-                      stroke="#3A3A3A"
-                      strokeOpacity="0.5"
-                      strokeLinecap="round"
-                    />
-                    <circle cx="12" cy="12" r="3" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
-                  </svg>
-                </span>
-              </div>
-              <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
+                  {areCredentialsValid && (
+                    <p className={!isLogin ? 'hidden' : 'auth__note'}>
+                      {areCredentialsValid === 'Incorrect password'
+                        ? t('incorrectPassword')
+                        : `${t('userWithEmail')} ${email} ${t(areCredentialsValid.split(email)[1].trim())}`}
+                    </p>
+                  )}
+                  <span className={showPassword ? 'hidden' : 'form__eye'} onClick={() => setShowPassword(true)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"
+                        stroke="#3A3A3A"
+                        strokeOpacity="0.5"
+                        strokeLinecap="round"
+                      />
+                      <circle cx="12" cy="12" r="3" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
+                      <path d="M3 21L20 4" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                  <span className={showPassword ? 'form__eye' : 'hidden'} onClick={() => setShowPassword(false)}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <path
+                        d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"
+                        stroke="#3A3A3A"
+                        strokeOpacity="0.5"
+                        strokeLinecap="round"
+                      />
+                      <circle cx="12" cy="12" r="3" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </div>
+              )}
+              {/* <div className={isLogin ? 'hidden' : 'form__field-wrap'}>
                 <label htmlFor="auth-passwordconf" className="form__label">
                   {t('confPassword')}
                 </label>
@@ -352,12 +355,12 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     <circle cx="12" cy="12" r="3" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
                   </svg>
                 </span>
-              </div>
+              </div> */}
             </div>
             <p
               className={
                 !isFormValid &&
-                ((!isLogin && (!name || !surname || !email || !mobile || !password || !passwordConf)) ||
+                ((!isLogin && (!name || !surname || !email || !mobile)) ||
                   (isLogin && (!email || !password)))
                   ? 'auth__note auth__fill'
                   : 'hidden'
@@ -373,13 +376,13 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
               </button>
             )}
           </form>
-          <div className="auth__details">
+          {/* <div className="auth__details">
             <p className="auth__note auth__note_socials">{isLogin ? t('orLogInVia') : t('orSignUpVia')}</p>
             <div className="auth__socials">
               <img src={googleImg} alt="Google" className="auth__social" />
               <img src={appleImg} alt="Apple" className="auth__social" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <ConfirmationModal

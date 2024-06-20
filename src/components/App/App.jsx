@@ -35,6 +35,7 @@ import Cookies from '../Cookies/Cookies';
 import LegalNotice from '../LegalNotice/LegalNotice';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import TermsOfUse from '../TermsOfUse/TermsOfUse';
+import Verification from '../Verification/Verification';
 import '../../utils/i18n';
 import './App.scss';
 
@@ -109,6 +110,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Header loading={loading} socket={socket} />}>
           <Route index element={<Main />} />
+          <Route path="verification/:token" element={<Verification />} />
+          <Route path="password" element={<Main password={true} />} />
           <Route path="booking" element={<Booking loading={loading} />} />
           <Route path="booking/edit/*" element={<Booking loading={loading} />} />
           <Route path="summary" element={<Summary />} />
