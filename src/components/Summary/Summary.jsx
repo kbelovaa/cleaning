@@ -251,7 +251,7 @@ const Summary = () => {
 
   const handlePolicyAcceptingChange = () => {
     setPolicyAccepting((state) => !state);
-    setShowNotification(false);
+    setShowNotification((state) => !state);
   };
 
   const handleEditClick = () => {
@@ -787,7 +787,7 @@ const Summary = () => {
                     <input id="save" type="checkbox" checked={policyAccepting} onChange={handlePolicyAcceptingChange} />
                     <div
                       className={`checkbox__tick ${showNotification ? 'invalid' : ''}`}
-                      onClick={() => setPolicyAccepting((state) => !state)}
+                      onClick={handlePolicyAcceptingChange}
                     >
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                         <path

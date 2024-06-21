@@ -31,7 +31,8 @@ const Header = ({ loading, socket }) => {
   const { pathname } = useLocation();
 
   const isBook = pathname.startsWith('/booking');
-  const isMain = pathname === '/' || pathname.startsWith('/password');
+  const isMain = pathname === '/';
+  const isVerification = pathname.startsWith('/verification');
 
   const { t, i18n } = useTranslation();
   const { language } = i18n;
@@ -184,7 +185,7 @@ const Header = ({ loading, socket }) => {
               Sdl
             </span>
             <nav className={`header__menu ${loading ? '' : 'visible'}`}>
-              <ul className="header__auth">
+              <ul className={isVerification ? 'hidden' : 'header__auth'}>
                 <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   {t('signUp')}
                 </li>
@@ -220,7 +221,7 @@ const Header = ({ loading, socket }) => {
                   </div>
                 </div>
               </div>
-              <div className={isAuth ? 'bell' : 'hidden'} onClick={() => setIsNotificationsOpen(true)}>
+              <div className={isAuth && !isVerification ? 'bell' : 'hidden'} onClick={() => setIsNotificationsOpen(true)}>
                 <svg
                   className="bell__sign"
                   xmlns="http://www.w3.org/2000/svg"
@@ -242,7 +243,7 @@ const Header = ({ loading, socket }) => {
                   {newNotifications.length > 99 ? '99+' : newNotifications.length}
                 </span>
               </div>
-              <div className="burger" onClick={() => setIsBurgerMenuOpen(true)}>
+              <div className={isVerification ? 'hidden' : 'burger'} onClick={() => setIsBurgerMenuOpen(true)}>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>
@@ -252,7 +253,7 @@ const Header = ({ loading, socket }) => {
         </div>
       </header>
       <Outlet context={setIsAuthorizationOpen} />
-      <Footer />
+      {!isVerification && <Footer />}
       <Authorization
         isOpen={isAuthorizationOpen}
         setIsOpen={setIsAuthorizationOpen}

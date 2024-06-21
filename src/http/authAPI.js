@@ -53,9 +53,9 @@ export const logOut = async () => {
   }
 };
 
-export const checkEmail = async (name, surname, email, mobile, role = 'client') => {
+export const checkEmail = async (name, surname, email, mobile, role = 'client', device = 'web') => {
   try {
-    const { data } = await $host.post('api/auth/check_email', { name, surname, email, mobile, role });
+    const { data } = await $host.post('api/auth/check_email', { name, surname, email, mobile, role, device });
     return data;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
@@ -69,6 +69,19 @@ export const checkEmail = async (name, surname, email, mobile, role = 'client') 
 export const verifyEmail = async (token) => {
   try {
     const result = await $host.get(`api/auth/verify-email/${token}`);
+    return result;
+  } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      return { message: error.response.data.message };
+    }
+
+    return { error: 'Unexpected error' };
+  }
+};
+
+export const getUnverifiedUser = async (userId) => {
+  try {
+    const result = await $host.get(`api/auth/get_unverified_user/${userId}`);
     return result;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {

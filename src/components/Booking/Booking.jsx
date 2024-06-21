@@ -128,10 +128,6 @@ const Booking = ({ loading }) => {
 
   const { t } = useTranslation();
 
-  const handleResize = () => {
-    setWindowWidth(window.innerWidth);
-  };
-
   useEffect(() => {
     if (!cleaning.address1 && sessionStorage.getItem('cleaning')) {
       const cleaning = JSON.parse(sessionStorage.getItem('cleaning'));
@@ -250,6 +246,10 @@ const Booking = ({ loading }) => {
       setSelectedCleaning(cleaningTypes[0]);
     }
   }, [cleaningTypes]);
+
+  const handleResize = () => {
+    setWindowWidth(window.innerWidth);
+  };
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);

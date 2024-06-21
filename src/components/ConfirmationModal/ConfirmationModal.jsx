@@ -23,13 +23,17 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
   const isPassword = pathname.startsWith('/settings/change-password');
   const isConfirmation = pathname.startsWith('/confirmation');
   const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
+  const isKnowingWay = pathname.startsWith('/password');
 
   const navigate = useNavigate();
 
   const handleCloseConfirmation = () => {
     // добавить отправку письма
-    if (knowingWay && !isContactUs && !isReceipt && !isPersonalInfo && !isConfirmation && !isInvoiceReceipt) {
-      createKnowingWay(user.id, knowingWay);
+    if (isKnowingWay) {
+      if (knowingWay) {
+        createKnowingWay(user.id, knowingWay);
+      }
+      navigate('/booking');
     }
     setIsOpen(false);
     setKnowingWay('');
@@ -99,9 +103,9 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
             ? t('awaitingConfirmation')
             : isConfirmation && !isAwaiting
             ? t('booked')
-            : t('signUpSuccess')}
+            : t('signUp')}
         </h3>
-        <p className="confirmation__text">
+        <p className={isKnowingWay ? 'hidden' : 'confirmation__text'}>
           {isReceipt || (isInvoiceReceipt && !isInvoice)
             ? t('weHaveSentReceipt')
             : isContactUs
@@ -124,20 +128,14 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         </p>
         <span
           className={
-            (isPersonalInfo && isNewEmail) || isContactUs || isReceipt || (isInvoiceReceipt && !isInvoice)
+            ((isPersonalInfo && isNewEmail) || isContactUs || isReceipt || (isInvoiceReceipt && !isInvoice)) || (!isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isConfirmation && !isInvoiceReceipt)
               ? 'confirmation__email'
               : 'hidden'
           }
         >
           {email}
         </span>
-        <div
-          className={
-            !isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isConfirmation && !isInvoiceReceipt
-              ? 'confirmation__knowing-way'
-              : 'hidden'
-          }
-        >
+        <div className={isKnowingWay ? 'confirmation__knowing-way' : 'hidden'}>
           <span className="form__label">{t('howDidYouHearAboutUs')}</span>
           <CustomSelect
             options={knowingWays}

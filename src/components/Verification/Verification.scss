@@ -1,0 +1,46 @@
+.verification {
+  height: 100vh;
+  padding-top: 250px;
+  text-align: center;
+
+  @media screen and (max-width: 1440px) {
+    padding-top: 360px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding-top: 356px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 200px 16px 0;
+  }
+
+  &__tick {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 100%;
+    letter-spacing: 0.68px;
+    margin-bottom: 20px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 22px;
+      letter-spacing: 0.44px;
+    }
+  }
+
+  &__text {
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.52px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 16px;
+      letter-spacing: 0.32px;
+    }
+  }
+}

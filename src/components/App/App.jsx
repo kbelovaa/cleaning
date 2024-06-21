@@ -110,8 +110,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Header loading={loading} socket={socket} />}>
           <Route index element={<Main />} />
-          <Route path="verification/:token" element={<Verification />} />
-          <Route path="password" element={<Main password={true} />} />
+          <Route path="verification" element={<Verification />} />
+          <Route path="password/:unverifiedUserId" element={<Main password={true} />} />
           <Route path="booking" element={<Booking loading={loading} />} />
           <Route path="booking/edit/*" element={<Booking loading={loading} />} />
           <Route path="summary" element={<Summary />} />
