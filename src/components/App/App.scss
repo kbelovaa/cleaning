@@ -211,6 +211,19 @@
   transition: all 0.3s ease;
   cursor: pointer;
 
+  .legals & {
+    font-size: 22px;
+    letter-spacing: 0.44px;
+
+    &::after {
+      display: none;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   &::after {
     display: block;
     content: '';

@@ -326,7 +326,7 @@ const Booking = ({ loading }) => {
     if (currentRef && !loading && !addressesLoading) {
       const element = currentRef.current;
       const header = document.getElementById('header');
-      const y = element.getBoundingClientRect().top - header.clientHeight * 1.5;
+      const y = element.getBoundingClientRect().top + window.scrollY - header.clientHeight;
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   }, [loading, addressesLoading]);

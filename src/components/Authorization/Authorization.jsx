@@ -139,7 +139,13 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
     } else if (isPassword) {
       if (password && isPasswordValid && passwordConf && isPasswordConfValid) {
         setLoading(true);
-        const result = await signUp(unverifiedUser.name, unverifiedUser.surname, unverifiedUser.email.toLowerCase(), unverifiedUser.mobile, password);
+        const result = await signUp(
+          unverifiedUser.name,
+          unverifiedUser.surname,
+          unverifiedUser.email.toLowerCase(),
+          unverifiedUser.mobile,
+          password,
+        );
         if (result.message && result.error) {
           setIsEmailUnique(result.message);
           setIsFormValid(false);
@@ -153,15 +159,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       } else {
         setIsFormValid(false);
       }
-    } else if (
-      name &&
-      surname &&
-      email &&
-      isEmailValid &&
-      mobile &&
-      isMobileValid &&
-      agreement
-    ) {
+    } else if (name && surname && email && isEmailValid && mobile && isMobileValid && agreement) {
       setLoading(true);
       const result = await checkEmail(name, surname, email.toLowerCase(), mobile);
       if (result.message && result.error) {
@@ -217,15 +215,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
       if (password && isPasswordValid && passwordConf && isPasswordConfValid) {
         return true;
       }
-    } else if (
-      name &&
-      surname &&
-      email &&
-      isEmailValid &&
-      mobile &&
-      isMobileValid &&
-      agreement
-    ) {
+    } else if (name && surname && email && isEmailValid && mobile && isMobileValid && agreement) {
       return true;
     }
 
@@ -316,7 +306,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                     onChange={(e) => handleEmailChange(e.target.value)}
                     autoComplete="off"
                   />
-                  <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
+                  <p className={isLogin ? 'hidden' : isEmailValid ? 'hidden' : 'auth__note'}>
+                    {t('validEmailMessage')}
+                  </p>
                   {isEmailUnique && (
                     <p className="auth__note">{`${t('userWithEmail')} ${email} ${t(
                       isEmailUnique.split(email)[1].trim(),
@@ -408,7 +400,10 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                       <path d="M3 21L20 4" stroke="#3A3A3A" strokeOpacity="0.5" strokeLinecap="round" />
                     </svg>
                   </span>
-                  <span className={showPasswordConf ? 'form__eye' : 'hidden'} onClick={() => setShowPasswordConf(false)}>
+                  <span
+                    className={showPasswordConf ? 'form__eye' : 'hidden'}
+                    onClick={() => setShowPasswordConf(false)}
+                  >
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                       <path
                         d="M22 12C22 12 19 18 12 18C5 18 2 12 2 12C2 12 5 6 12 6C19 6 22 12 22 12Z"
@@ -421,13 +416,11 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   </span>
                 </div>
                 <div className={isLogin ? 'hidden' : 'checkbox'}>
-                  <input
-                    id="agreement"
-                    type="checkbox"
-                    checked={agreement}
-                    onChange={handleAgreementChange}
-                  />
-                  <div className={`checkbox__tick ${showNotification ? 'invalid' : ''}`} onClick={handleAgreementChange}>
+                  <input id="agreement" type="checkbox" checked={agreement} onChange={handleAgreementChange} />
+                  <div
+                    className={`checkbox__tick ${showNotification ? 'invalid' : ''}`}
+                    onClick={handleAgreementChange}
+                  >
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15" fill="none">
                       <path
                         d="M11.6667 3.96484L5.25 10.3815L2.33333 7.46484"
@@ -459,8 +452,7 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   !isFormValid &&
                   ((!isLogin && (!name || !surname || !email || !mobile)) ||
                     (isLogin && !isPassword && (!email || !password)) ||
-                    (isPassword && (!password || !passwordConf))
-                  )
+                    (isPassword && (!password || !passwordConf)))
                     ? 'auth__note auth__fill'
                     : 'hidden'
                 }

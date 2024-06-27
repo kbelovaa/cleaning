@@ -66,12 +66,6 @@ const App = () => {
       }
 
       setLoading(false);
-
-      // const url = await createAccount();
-      // window.location.href = url.redirectUrl
-      // const payout = await createPayout();
-
-      // await createAccount();
     };
 
     getUser();

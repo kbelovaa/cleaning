@@ -128,7 +128,11 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         </p>
         <span
           className={
-            ((isPersonalInfo && isNewEmail) || isContactUs || isReceipt || (isInvoiceReceipt && !isInvoice)) || (!isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isConfirmation && !isInvoiceReceipt)
+            (isPersonalInfo && isNewEmail) ||
+            isContactUs ||
+            isReceipt ||
+            (isInvoiceReceipt && !isInvoice) ||
+            (!isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isConfirmation && !isInvoiceReceipt)
               ? 'confirmation__email'
               : 'hidden'
           }

@@ -1,5 +1,6 @@
 .legals {
   padding: 130px 100px 340px;
+  min-height: calc(100vh - 200px);
 
   @media screen and (max-width: 1440px) {
     padding: 160px 80px 50px;
@@ -11,6 +12,7 @@
 
   @media screen and (max-width: 744px) {
     padding: 70px 16px 30px;
+    min-height: calc(100vh - 234px);
   }
 
   &__title {
@@ -36,8 +38,32 @@
     letter-spacing: 0.44px;
     margin-bottom: 10px;
 
+    &.legals__subtitle {
+      font-weight: 600;
+    }
+
     &-block {
       margin-bottom: 60px;
+    }
+  }
+
+  &__item {
+    color: #2329d6;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+
+    &::after {
+      display: block;
+      content: '';
+      background: #2329d6;
+      width: 100%;
+      height: 1px;
+      border-radius: 2px;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      transition: all 0.3s ease;
     }
   }
 }

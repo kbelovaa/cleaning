@@ -221,7 +221,10 @@ const Header = ({ loading, socket }) => {
                   </div>
                 </div>
               </div>
-              <div className={isAuth && !isVerification ? 'bell' : 'hidden'} onClick={() => setIsNotificationsOpen(true)}>
+              <div
+                className={isAuth && !isVerification ? 'bell' : 'hidden'}
+                onClick={() => setIsNotificationsOpen(true)}
+              >
                 <svg
                   className="bell__sign"
                   xmlns="http://www.w3.org/2000/svg"
