@@ -131,6 +131,19 @@
     line-height: normal;
     margin-top: 5px;
     animation: fadeIn 0.3s ease-in;
+    transition: all 0.3s ease-out;
+
+    &.fill {
+      margin-bottom: 30px;
+    }
+
+    &.visible {
+      margin-top: 20px;
+    }
+
+    &.invisible {
+      opacity: 0;
+    }
 
     &_socials {
       letter-spacing: 0.8px;

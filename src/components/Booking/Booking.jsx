@@ -1370,7 +1370,7 @@ const Booking = ({ loading }) => {
                       setIsAutoUpdate={setIsAutoUpdate}
                     />
                   </div>
-                  <div className="form__section">
+                  <div className={`form__section ${addresses.length > 0 ? 'not-underlined' : ''}`}>
                     <h3 className="form__title" ref={dateTimeRef}>
                       {t('when')}
                     </h3>
@@ -1809,16 +1809,18 @@ const Booking = ({ loading }) => {
                           onChange={(e) => setProvince(e.target.value)}
                         />
                       </div>
-                      <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
-                        {t('fillInAllFieldsMessage')}
-                      </p>
+                      {windowWidth > 744 && (
+                        <p className={`auth__note visible ${!isFormValid ? '' : 'invisible'}`}>
+                          {t('fillInAllFieldsMessage')}
+                        </p>
+                      )}
                     </div>
+                  ) : windowWidth > 744 ? (
+                    <p className={`auth__note visible fill ${!isFormValid ? '' : 'invisible'}`}>
+                      {t('fillInAllFieldsMessage')}
+                    </p>
                   ) : (
-                    <div className="form__section">
-                      <p className={!isFormValid && windowWidth > 744 ? 'auth__note' : 'hidden'}>
-                        {t('fillInAllFieldsMessage')}
-                      </p>
-                    </div>
+                    <></>
                   )}
                   {addresses.length === 0 && (
                     <div className="checkbox">

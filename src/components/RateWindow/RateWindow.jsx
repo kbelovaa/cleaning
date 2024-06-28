@@ -5,6 +5,7 @@ import './RateWindow.scss';
 
 const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
   const [rate, setRate] = useState(0);
+  const [feedback, setFeedback] = useState('');
   const [isHoveredIndex, setIsHoveredIndex] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -15,6 +16,7 @@ const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
   const closeRateWindow = () => {
     setIsOpen(false);
     setRate(0);
+    setFeedback('');
     setIsHoveredIndex(0);
   };
 
@@ -47,7 +49,7 @@ const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
   const handleRating = async () => {
     if (rate) {
       setLoading(true);
-      const result = await rateCleaning(jobId, rate);
+      const result = await rateCleaning(jobId, rate, feedback);
       if (result.status === 201) {
         setNotifications((notifications) =>
           notifications.map((elem) => {
@@ -89,6 +91,22 @@ const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
               onMouseOut={handleMouseOut}
             ></div>
           ))}
+        </div>
+        <div className="form__input-wrap rate__feedback">
+          <label htmlFor="feedback" className="form__label">
+            {t('feedback')}
+          </label>
+          <textarea
+            id="feedback"
+            rows="3"
+            className="input form__instructions"
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            onInput={(e) => {
+              e.target.style.height = 'auto';
+              e.target.style.height = `${e.target.scrollHeight + 2}px`;
+            }}
+          ></textarea>
         </div>
         {loading ? (
           <div className="spinner spinner_small"></div>

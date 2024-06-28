@@ -26,9 +26,9 @@ export const markReadNotifications = async (userId) => {
   }
 };
 
-export const rateCleaning = async (jobId, rate) => {
+export const rateCleaning = async (jobId, rate, feedback) => {
   try {
-    const data = await $host.post('api/rate/create_rate', { rate, jobId });
+    const data = await $host.post('api/rate/create_rate', { rate, jobId, feedback });
     return data;
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
