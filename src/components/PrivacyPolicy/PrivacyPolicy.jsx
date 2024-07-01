@@ -79,11 +79,23 @@ const PrivacyPolicy = () => {
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('privacyPolicy138')}</p>
           <p className="legals__text">{t('privacyPolicy36')}</p>
-          <p className="legals__text">{t('privacyPolicy37')}</p>
-          <p className="legals__text">{t('privacyPolicy38')}</p>
-          <p className="legals__text">{t('privacyPolicy39')}</p>
-          <p className="legals__text">{t('privacyPolicy40')}</p>
-          <p className="legals__text">·       {t('privacyPolicy139')}</p>
+          <ul>
+            <li>
+              <p className="legals__text">{t('privacyPolicy37')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy38')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy39')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy40')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy139')}</p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('privacyPolicy139')}</p>
@@ -95,8 +107,14 @@ const PrivacyPolicy = () => {
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('privacyPolicy45')}</p>
           <p className="legals__text">{t('privacyPolicy46')}</p>
-          <p className="legals__text">·       Google</p>
-          <p className="legals__text">·       Apple</p>
+          <ul>
+            <li>
+              <p className="legals__text">Google</p>
+            </li>
+            <li>
+              <p className="legals__text">Apple</p>
+            </li>
+          </ul>
           <p className="legals__text">{t('privacyPolicy47')}</p>
           <p className="legals__text">{t('privacyPolicy48')}</p>
         </div>
@@ -216,11 +234,23 @@ const PrivacyPolicy = () => {
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('privacyPolicy114')}</p>
           <p className="legals__text">{t('privacyPolicy115')}</p>
-          <p className="legals__text">{t('privacyPolicy116')}</p>
-          <p className="legals__text">{t('privacyPolicy117')}</p>
-          <p className="legals__text">{t('privacyPolicy118')}</p>
-          <p className="legals__text">{t('privacyPolicy119')}</p>
-          <p className="legals__text">{t('privacyPolicy120')}</p>
+          <ul>
+            <li>
+              <p className="legals__text">{t('privacyPolicy116')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy117')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy118')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy119')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('privacyPolicy120')}</p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('privacyPolicy121')}</p>
@@ -245,14 +275,19 @@ const PrivacyPolicy = () => {
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('privacyPolicy133')}</p>
           <p className="legals__text">{t('privacyPolicy134')}</p>
-          <p className="legals__text">
-            {t('privacyPolicy135')}: info@sdl24.es
-            <br />
-            {t('privacyPolicy136')}:{' '}
-            <a className="link" href="/contact-us">
-              https://www.sdl24.es/contact-us
-            </a>
-          </p>
+          <ul>
+            <li>
+              <p className="legals__text">{t('privacyPolicy135')}: info@sdl24.es</p>
+            </li>
+            <li>
+              <p className="legals__text">
+                {t('privacyPolicy136')}:{' '}
+                <a className="link" href="/contact-us">
+                  https://www.sdl24.es/contact-us
+                </a>
+              </p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

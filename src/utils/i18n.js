@@ -535,10 +535,10 @@ i18n.use(initReactI18next).init({
         privacyPolicy35: 'Types of Data Collected',
         privacyPolicy36:
           'While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:',
-        privacyPolicy37: '·       Email address',
-        privacyPolicy38: '·       First name and last name',
-        privacyPolicy39: '·       Phone number',
-        privacyPolicy40: '·       Address, State, Province, ZIP/Postal code, City',
+        privacyPolicy37: 'Email address',
+        privacyPolicy38: 'First name and last name',
+        privacyPolicy39: 'Phone number',
+        privacyPolicy40: 'Address, State, Province, ZIP/Postal code, City',
         privacyPolicy41: 'Usage Data is collected automatically when using the Service.',
         privacyPolicy42:
           "Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.",
@@ -649,11 +649,11 @@ i18n.use(initReactI18next).init({
         privacyPolicy114: 'Other legal requirements',
         privacyPolicy115:
           'The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:',
-        privacyPolicy116: '·       Comply with a legal obligation',
-        privacyPolicy117: '·       Protect and defend the rights or property of the Company',
-        privacyPolicy118: '·       Prevent or investigate possible wrongdoing in connection with the Service',
-        privacyPolicy119: '·       Protect the personal safety of Users of the Service or the public',
-        privacyPolicy120: '·       Protect against legal liability',
+        privacyPolicy116: 'Comply with a legal obligation',
+        privacyPolicy117: 'Protect and defend the rights or property of the Company',
+        privacyPolicy118: 'Prevent or investigate possible wrongdoing in connection with the Service',
+        privacyPolicy119: 'Protect the personal safety of Users of the Service or the public',
+        privacyPolicy120: 'Protect against legal liability',
         privacyPolicy121: 'Security of Your Personal Data',
         privacyPolicy122:
           'The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.',
@@ -676,8 +676,8 @@ i18n.use(initReactI18next).init({
           'You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.',
         privacyPolicy133: 'Contact Us',
         privacyPolicy134: 'If you have any questions about this Privacy Policy, You can contact us:',
-        privacyPolicy135: '·       By email',
-        privacyPolicy136: '·       By visiting this page on our website',
+        privacyPolicy135: 'By email',
+        privacyPolicy136: 'By visiting this page on our website',
         privacyPolicy137: 'We use both Session and Persistent Cookies for the purposes set out below:',
         privacyPolicy138: 'Personal Data',
         privacyPolicy139: 'Usage Data',
@@ -732,11 +732,11 @@ i18n.use(initReactI18next).init({
         termsOfUse40:
           'The Content and Marks are provided in or through the Services "AS IS" for your personal, non-commercial use only.',
         termsOfUse41: 'Your use of our Services',
-        termsOfUse42: 'Subject to your compliance with these Legal Terms, including the "',
-        termsOfUse43: '" section below, we grant you a non-exclusive, non-transferable, revocable license to:',
-        termsOfUse44: '·       access the Services;',
+        termsOfUse42: 'Subject to your compliance with these Legal Terms, including the ',
+        termsOfUse43: ' section below, we grant you a non-exclusive, non-transferable, revocable license to:',
+        termsOfUse44: 'access the Services;',
         termsOfUse45:
-          '·       download or print a copy of any portion of the Content to which you have properly gained access.',
+          'download or print a copy of any portion of the Content to which you have properly gained access.',
         termsOfUse46: 'Solely for your personal, non-commercial use',
         termsOfUse47:
           'Except as set out in this section or elsewhere in our Legal Terms, no part of the Services and no Content or Marks may be copied, reproduced, aggregated, republished, uploaded, posted, publicly displayed, encoded, translated, transmitted, distributed, sold, licensed, or otherwise exploited for any commercial purpose whatsoever, without our express prior written permission.',
@@ -746,22 +746,22 @@ i18n.use(initReactI18next).init({
         termsOfUse50:
           'Any breach of these Intellectual Property Rights will constitute a material breach of our Legal Terms and your right to use our Services will terminate immediately.',
         termsOfUse51: 'Your submissions',
-        termsOfUse52: 'Please review this section and the "',
+        termsOfUse52: 'Please review this section and the ',
         termsOfUse53:
-          '" section carefully prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or upload any content through the Services.',
+          ' section carefully prior to using our Services to understand the (a) rights you give us and (b) obligations you have when you post or upload any content through the Services.',
         termsOfUse54: 'Submissions:',
         termsOfUse55:
           'By directly sending us any question, comment, suggestion, idea, feedback, or other information about the Services ("Submissions"), you agree to assign to us all intellectual property rights in such Submission. You agree that we shall own this Submission and be entitled to its unrestricted use and dissemination for any lawful purpose, commercial or otherwise, without acknowledgment or compensation to you.',
         termsOfUse56: 'You are responsible for what you post or upload:',
         termsOfUse57: 'By sending us Submissions through any part of the Services you:',
-        termsOfUse58: '·       confirm that you have read and agree with our "',
+        termsOfUse58: 'confirm that you have read and agree with our ',
         termsOfUse59:
-          '" and will not post, send, publish, upload, or transmit through the Services any Submission that is illegal, harassing, hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, threatening to any person or group, sexually explicit, false, inaccurate, deceitful, or misleading;',
+          ' and will not post, send, publish, upload, or transmit through the Services any Submission that is illegal, harassing, hateful, harmful, defamatory, obscene, bullying, abusive, discriminatory, threatening to any person or group, sexually explicit, false, inaccurate, deceitful, or misleading;',
         termsOfUse60:
-          '·       to the extent permissible by applicable law, waive any and all moral rights to any such Submission;',
+          'to the extent permissible by applicable law, waive any and all moral rights to any such Submission;',
         termsOfUse61:
-          '·       warrant that any such Submission are original to you or that you have the necessary rights and licenses to submit such Submissions and that you have full authority to grant us the above-mentioned rights in relation to your Submissions;',
-        termsOfUse62: '·       warrant and represent that your Submissions do not constitute confidential information.',
+          'warrant that any such Submission are original to you or that you have the necessary rights and licenses to submit such Submissions and that you have full authority to grant us the above-mentioned rights in relation to your Submissions;',
+        termsOfUse62: 'warrant and represent that your Submissions do not constitute confidential information.',
         termsOfUse63:
           'You are solely responsible for your Submissions and you expressly agree to reimburse us for any and all losses that we may suffer because of your breach of (a) this section, (b) any third party’s intellectual property rights, or (c) applicable law.',
         termsOfUse64:
@@ -782,67 +782,66 @@ i18n.use(initReactI18next).init({
           'You may not access or use the Services for any purpose other than that for which we make the Services available. The Services may not be used in connection with any commercial endeavors except those that are specifically endorsed or approved by us.',
         termsOfUse73: 'As a user of the Services, you agree not to:',
         termsOfUse74:
-          '·       Systematically retrieve data or other content from the Services to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.',
+          'Systematically retrieve data or other content from the Services to create or compile, directly or indirectly, a collection, compilation, database, or directory without written permission from us.',
         termsOfUse75:
-          '·       Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.',
+          'Trick, defraud, or mislead us and other users, especially in any attempt to learn sensitive account information such as user passwords.',
         termsOfUse76:
-          '·       Circumvent, disable, or otherwise interfere with security-related features of the Services, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the Services and/or the Content contained therein.',
-        termsOfUse77: '·       Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Services.',
+          'Circumvent, disable, or otherwise interfere with security-related features of the Services, including features that prevent or restrict the use or copying of any Content or enforce limitations on the use of the Services and/or the Content contained therein.',
+        termsOfUse77: 'Disparage, tarnish, or otherwise harm, in our opinion, us and/or the Services.',
         termsOfUse78:
-          '·       Use any information obtained from the Services in order to harass, abuse, or harm another person.',
-        termsOfUse79:
-          '·       Make improper use of our support services or submit false reports of abuse or misconduct.',
-        termsOfUse80: '·       Use the Services in a manner inconsistent with any applicable laws or regulations.',
-        termsOfUse81: '·       Engage in unauthorized framing of or linking to the Services.',
+          'Use any information obtained from the Services in order to harass, abuse, or harm another person.',
+        termsOfUse79: 'Make improper use of our support services or submit false reports of abuse or misconduct.',
+        termsOfUse80: 'Use the Services in a manner inconsistent with any applicable laws or regulations.',
+        termsOfUse81: 'Engage in unauthorized framing of or linking to the Services.',
         termsOfUse82:
-          '·       Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party’s uninterrupted use and enjoyment of the Services or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Services.',
+          'Upload or transmit (or attempt to upload or to transmit) viruses, Trojan horses, or other material, including excessive use of capital letters and spamming (continuous posting of repetitive text), that interferes with any party’s uninterrupted use and enjoyment of the Services or modifies, impairs, disrupts, alters, or interferes with the use, features, functions, operation, or maintenance of the Services.',
         termsOfUse83:
-          '·       Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.',
-        termsOfUse84: '·       Delete the copyright or other proprietary rights notice from any Content.',
-        termsOfUse85: '·       Attempt to impersonate another user or person or use the username of another user.',
+          'Engage in any automated use of the system, such as using scripts to send comments or messages, or using any data mining, robots, or similar data gathering and extraction tools.',
+        termsOfUse84: 'Delete the copyright or other proprietary rights notice from any Content.',
+        termsOfUse85: 'Attempt to impersonate another user or person or use the username of another user.',
         termsOfUse86:
-          '·       Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats ("gifs"), 1×1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as "spyware" or "passive collection mechanisms" or "pcms").',
+          'Upload or transmit (or attempt to upload or to transmit) any material that acts as a passive or active information collection or transmission mechanism, including without limitation, clear graphics interchange formats ("gifs"), 1×1 pixels, web bugs, cookies, or other similar devices (sometimes referred to as "spyware" or "passive collection mechanisms" or "pcms").',
         termsOfUse87:
-          '·       Interfere with, disrupt, or create an undue burden on the Services or the networks or services connected to the Services.',
+          'Interfere with, disrupt, or create an undue burden on the Services or the networks or services connected to the Services.',
         termsOfUse88:
-          '·       Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Services to you.',
+          'Harass, annoy, intimidate, or threaten any of our employees or agents engaged in providing any portion of the Services to you.',
         termsOfUse89:
-          '·       Attempt to bypass any measures of the Services designed to prevent or restrict access to the Services, or any portion of the Services.',
+          'Attempt to bypass any measures of the Services designed to prevent or restrict access to the Services, or any portion of the Services.',
         termsOfUse90:
-          "·       Copy or adapt the Services' software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.",
+          "Copy or adapt the Services' software, including but not limited to Flash, PHP, HTML, JavaScript, or other code.",
         termsOfUse91:
-          '·       Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Services.',
+          'Except as permitted by applicable law, decipher, decompile, disassemble, or reverse engineer any of the software comprising or in any way making up a part of the Services.',
         termsOfUse92:
-          '·       Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Services, or use or launch any unauthorized script or other software.',
-        termsOfUse93: '·       Use a buying agent or purchasing agent to make purchases on the Services.',
+          'Except as may be the result of standard search engine or Internet browser usage, use, launch, develop, or distribute any automated system, including without limitation, any spider, robot, cheat utility, scraper, or offline reader that accesses the Services, or use or launch any unauthorized script or other software.',
+        termsOfUse93: 'Use a buying agent or purchasing agent to make purchases on the Services.',
         termsOfUse94:
-          '·       Make any unauthorized use of the Services, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.',
+          'Make any unauthorized use of the Services, including collecting usernames and/or email addresses of users by electronic or other means for the purpose of sending unsolicited email, or creating user accounts by automated means or under false pretenses.',
         termsOfUse95:
-          '·       Use the Services as part of any effort to compete with us or otherwise use the Services and/or the Content for any revenue-generating endeavor or commercial enterprise.',
-        termsOfUse96: '·       Sell or otherwise transfer your profile.',
+          'Use the Services as part of any effort to compete with us or otherwise use the Services and/or the Content for any revenue-generating endeavor or commercial enterprise.',
+        termsOfUse96: 'Sell or otherwise transfer your profile.',
         termsOfUse97: `The Services does not offer users to submit or post content. We may provide you with the opportunity to create, submit, post, display, transmit, perform, publish, distribute, or broadcast content and materials to us or on the Services, including but not limited to text, writings, video, audio, photographs, graphics, comments, suggestions, or personal information or other material (collectively, "Contributions"). Contributions may be viewable by other users of the Services and through third-party websites. As such, any Contributions you transmit may be treated in accordance with the Services' Privacy Policy. When you create or make available any Contributions, you thereby represent and warrant that:`,
         termsOfUse98:
-          '·       The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.',
+          'The creation, distribution, transmission, public display, or performance, and the accessing, downloading, or copying of your Contributions do not and will not infringe the proprietary rights, including but not limited to the copyright, patent, trademark, trade secret, or moral rights of any third party.',
         termsOfUse99:
-          '·       You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Services, and other users of the Services to use your Contributions in any manner contemplated by the Services and these Legal Terms.',
+          'You are the creator and owner of or have the necessary licenses, rights, consents, releases, and permissions to use and to authorize us, the Services, and other users of the Services to use your Contributions in any manner contemplated by the Services and these Legal Terms.',
         termsOfUse100:
-          '·       You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Services and these Legal Terms.',
-        termsOfUse101: '·       Your Contributions are not false, inaccurate, or misleading.',
+          'You have the written consent, release, and/or permission of each and every identifiable individual person in your Contributions to use the name or likeness of each and every such identifiable individual person to enable inclusion and use of your Contributions in any manner contemplated by the Services and these Legal Terms.',
+        termsOfUse101: 'Your Contributions are not false, inaccurate, or misleading.',
         termsOfUse102:
-          '·       Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.',
+          'Your Contributions are not unsolicited or unauthorized advertising, promotional materials, pyramid schemes, chain letters, spam, mass mailings, or other forms of solicitation.',
         termsOfUse103:
-          '·       Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).',
-        termsOfUse104: '·       Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.',
+          'Your Contributions are not obscene, lewd, lascivious, filthy, violent, harassing, libelous, slanderous, or otherwise objectionable (as determined by us).',
+        termsOfUse104: 'Your Contributions do not ridicule, mock, disparage, intimidate, or abuse anyone.',
         termsOfUse105:
-          '·       Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.',
-        termsOfUse106: '·       Your Contributions do not violate any applicable law, regulation, or rule.',
-        termsOfUse107: '·       Your Contributions do not violate the privacy or publicity rights of any third party.',
+          'Your Contributions are not used to harass or threaten (in the legal sense of those terms) any other person and to promote violence against a specific person or class of people.',
+        termsOfUse106: 'Your Contributions do not violate any applicable law, regulation, or rule.',
+        termsOfUse107: 'Your Contributions do not violate the privacy or publicity rights of any third party.',
         termsOfUse108:
-          '·       Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.',
+          'Your Contributions do not violate any applicable law concerning child pornography, or otherwise intended to protect the health or well-being of minors.',
         termsOfUse109:
-          '·       Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.',
+          'Your Contributions do not include any offensive comments that are connected to race, national origin, gender, sexual preference, or physical handicap.',
         termsOfUse110:
-          '·       Your Contributions do not otherwise violate, or link to material that violates, any provision of these Legal Terms, or any applicable law or regulation.',
+          'Your Contributions do not otherwise violate, or link to material that violates, any provision of these Legal Terms, or any applicable law or regulation.',
         termsOfUse111:
           'Any use of the Services in violation of the foregoing violates these Legal Terms and may result in, among other things, termination or suspension of your rights to use the Services.',
         termsOfUse112:
@@ -900,6 +899,11 @@ i18n.use(initReactI18next).init({
           'In order to resolve a complaint regarding the Services or to receive further information regarding use of the Services, please contact us at:',
         termsOfUse141:
           'By using the Services, you agree to be bound by our Privacy Policy, which is incorporated into these Legal Terms. Please be advised the Services are hosted in Spain and United Kingdom. If you access the Services from any other region of the world with laws or other requirements governing personal data collection, use, or disclosure that differ from applicable laws in Spain and United Kingdom, then through your continued use of the Services, you are transferring your data to Spain and United Kingdom, and you expressly consent to have your data transferred to and processed in Spain and United Kingdom.',
+        wantToWorkWithUs: 'Want to work with us?',
+        weAreLookingForCleaners: 'We are looking for dedicated cleaners to join our growing team!',
+        sdlServiceDescription:
+          'SDL is a new, on-demand, 24/7 home cleaning service operating in and around Marbella. Working with us, you will have the flexibility to set your own work hours and radius, adjust your availability in real-time, and receive payment instantly after completing each job. We offer high earning potential through expedited cleanings, non-standard hours, and referrals. SDL is fully compliant, insured, and contributes to social security.',
+        seeDetails: 'See details',
       },
     },
     es: {
@@ -1447,10 +1451,10 @@ i18n.use(initReactI18next).init({
         privacyPolicy35: 'Tipos de datos recopilados',
         privacyPolicy36:
           'Mientras utiliza nuestro servicio, es posible que le pidamos que nos proporcione cierta información de identificación personal que puede utilizarse para ponerse en contacto con usted o identificarle. La información de identificación personal puede incluir, entre otros:',
-        privacyPolicy37: '·       Dirección de correo electrónico',
-        privacyPolicy38: '·       Nombre y apellidos',
-        privacyPolicy39: '·       Número de teléfono',
-        privacyPolicy40: '·       Dirección, Estado, Provincia, Código Postal, Ciudad',
+        privacyPolicy37: 'Dirección de correo electrónico',
+        privacyPolicy38: 'Nombre y apellidos',
+        privacyPolicy39: 'Número de teléfono',
+        privacyPolicy40: 'Dirección, Estado, Provincia, Código Postal, Ciudad',
         privacyPolicy41: 'Los Datos de uso se recopilan automáticamente cuando se utiliza el Servicio.',
         privacyPolicy42:
           'Los Datos de uso pueden incluir información como la dirección de Protocolo de Internet de su dispositivo (por ejemplo, la dirección IP), el tipo de navegador, la versión del navegador, las páginas de nuestro Servicio que visita, la hora y la fecha de su visita, el tiempo que pasa en esas páginas, identificadores únicos del dispositivo y otros datos de diagnóstico.',
@@ -1563,11 +1567,11 @@ i18n.use(initReactI18next).init({
         privacyPolicy114: 'Otros requisitos legales',
         privacyPolicy115:
           'La Compañía puede divulgar sus datos personales en la creencia de buena fe de que dicha acción es necesaria para:',
-        privacyPolicy116: '·       Cumplir con una obligación legal',
-        privacyPolicy117: '·       Proteger y defender los derechos o la propiedad de la Empresa',
-        privacyPolicy118: '·       Prevenir o investigar posibles irregularidades en relación con el Servicio',
-        privacyPolicy119: '·       Proteger la seguridad personal de los Usuarios del Servicio o del público',
-        privacyPolicy120: '·       Protéjase contra la responsabilidad legal',
+        privacyPolicy116: 'Cumplir con una obligación legal',
+        privacyPolicy117: 'Proteger y defender los derechos o la propiedad de la Empresa',
+        privacyPolicy118: 'Prevenir o investigar posibles irregularidades en relación con el Servicio',
+        privacyPolicy119: 'Proteger la seguridad personal de los Usuarios del Servicio o del público',
+        privacyPolicy120: 'Protéjase contra la responsabilidad legal',
         privacyPolicy121: 'Seguridad de sus datos personales',
         privacyPolicy122:
           'La seguridad de sus datos personales es importante para nosotros, pero recuerde que ningún método de transmisión a través de Internet o método de almacenamiento electrónico es 100% seguro. Si bien nos esforzamos por utilizar medios comercialmente aceptables para proteger sus datos personales, no podemos garantizar su seguridad absoluta.',
@@ -1591,8 +1595,8 @@ i18n.use(initReactI18next).init({
         privacyPolicy133: 'Contáctenos',
         privacyPolicy134:
           'Si tiene alguna pregunta sobre esta Política de Privacidad, puede ponerse en contacto con nosotros:',
-        privacyPolicy135: '·       Por correo electrónico',
-        privacyPolicy136: '·       Visitando esta página de nuestro sitio web',
+        privacyPolicy135: 'Por correo electrónico',
+        privacyPolicy136: 'Visitando esta página de nuestro sitio web',
         privacyPolicy137: 'Utilizamos cookies de sesión y persistentes para los fines que se indican a continuación:',
         privacyPolicy138: 'Datos personales',
         privacyPolicy139: 'Datos de uso',
@@ -1649,9 +1653,9 @@ i18n.use(initReactI18next).init({
         termsOfUse41: 'Su uso de nuestros Servicios',
         termsOfUse42: 'Sujeto a su cumplimiento de estos Términos legales, incluida la sección "',
         termsOfUse43: '" a continuación, le otorgamos una licencia no exclusiva, intransferible y revocable para:',
-        termsOfUse44: '·       acceder a los Servicios;',
+        termsOfUse44: 'acceder a los Servicios;',
         termsOfUse45:
-          '·       descargar o imprimir una copia de cualquier parte del Contenido a la que haya obtenido acceso correctamente.',
+          'descargar o imprimir una copia de cualquier parte del Contenido a la que haya obtenido acceso correctamente.',
         termsOfUse46: 'Únicamente para su uso personal y no comercial',
         termsOfUse47:
           'A excepción de lo establecido en esta sección o en cualquier otra parte de nuestros Términos legales, ninguna parte de los Servicios y ningún Contenido o Marcas pueden copiarse, reproducirse, agregarse, volver a publicarse, cargarse, publicarse, mostrarse públicamente, codificarse, traducirse, transmitirse, distribuirse, venderse, licenciarse o explotarse de otro modo para ningún propósito comercial, sin nuestro permiso previo expreso por escrito.',
@@ -1670,14 +1674,14 @@ i18n.use(initReactI18next).init({
           'Al enviarnos directamente cualquier pregunta, comentario, sugerencia, idea, retroalimentación u otra información sobre los Servicios ("Envíos"), usted acepta cedernos todos los derechos de propiedad intelectual sobre dicho Envío. Usted acepta que seremos propietarios de este Envío y tendremos derecho a su uso y difusión sin restricciones para cualquier propósito legal, comercial o de otro tipo, sin reconocimiento ni compensación para usted.',
         termsOfUse56: 'Usted es responsable de lo que publica o carga:',
         termsOfUse57: 'Al enviarnos Envíos a través de cualquier parte de los Servicios, usted:',
-        termsOfUse58: '·       confirme que ha leído y está de acuerdo con nuestras "',
+        termsOfUse58: 'confirme que ha leído y está de acuerdo con nuestras "',
         termsOfUse59:
           '" y que no publicará, enviará, publicará, cargará o transmitirá a través de los Servicios ningún Envío que sea ilegal, acosador, odioso, dañino, difamatorio, obsceno, intimidatorio, abusivo, discriminatorio, amenazante para cualquier persona o grupo, sexualmente explícito, falso, inexacto, engañoso o engañoso;',
         termsOfUse60:
-          '·       en la medida en que lo permita la ley aplicable, renuncia a todos y cada uno de los derechos morales sobre dicha Presentación;',
+          'en la medida en que lo permita la ley aplicable, renuncia a todos y cada uno de los derechos morales sobre dicha Presentación;',
         termsOfUse61:
-          '·       garantiza que dichos Envíos son originales de usted o que tiene los derechos y licencias necesarios para enviar dichos Envíos y que tiene plena autoridad para otorgarnos los derechos mencionados anteriormente en relación con sus Envíos;',
-        termsOfUse62: '·       garantiza y declara que sus Envíos no constituyen información confidencial.',
+          'garantiza que dichos Envíos son originales de usted o que tiene los derechos y licencias necesarios para enviar dichos Envíos y que tiene plena autoridad para otorgarnos los derechos mencionados anteriormente en relación con sus Envíos;',
+        termsOfUse62: 'garantiza y declara que sus Envíos no constituyen información confidencial.',
         termsOfUse63:
           'Usted es el único responsable de sus Envíos y acepta expresamente reembolsarnos todas y cada una de las pérdidas que podamos sufrir debido a su incumplimiento de (a) esta sección, (b) los derechos de propiedad intelectual de terceros o (c) la ley aplicable.',
         termsOfUse64:
@@ -1699,74 +1703,69 @@ i18n.use(initReactI18next).init({
           'No puede acceder ni utilizar los Servicios para ningún otro propósito que no sea aquel para el que ponemos a disposición los Servicios. Los Servicios no se pueden utilizar en relación con ningún esfuerzo comercial, excepto aquellos que estén específicamente respaldados o aprobados por nosotros.',
         termsOfUse73: 'Como usuario de los Servicios, usted se compromete a no:',
         termsOfUse74:
-          '·       Recuperar sistemáticamente datos u otro contenido de los Servicios para crear o compilar, directa o indirectamente, una colección, compilación, base de datos o directorio sin nuestro permiso por escrito.',
+          'Recuperar sistemáticamente datos u otro contenido de los Servicios para crear o compilar, directa o indirectamente, una colección, compilación, base de datos o directorio sin nuestro permiso por escrito.',
         termsOfUse75:
-          '·       Engañarnos, defraudarnos o engañarnos a nosotros y a otros usuarios, especialmente en cualquier intento de obtener información confidencial de la cuenta, como las contraseñas de los usuarios.',
+          'Engañarnos, defraudarnos o engañarnos a nosotros y a otros usuarios, especialmente en cualquier intento de obtener información confidencial de la cuenta, como las contraseñas de los usuarios.',
         termsOfUse76:
-          '·       Eludir, deshabilitar o interferir de otro modo con las funciones relacionadas con la seguridad de los Servicios, incluidas las funciones que impiden o restringen el uso o la copia de cualquier Contenido o imponen limitaciones en el uso de los Servicios y/o el Contenido incluido en ellos.',
-        termsOfUse77:
-          '·       Menospreciar, empañar o dañar de otro modo, en nuestra opinión, a nosotros y/o a los Servicios.',
+          'Eludir, deshabilitar o interferir de otro modo con las funciones relacionadas con la seguridad de los Servicios, incluidas las funciones que impiden o restringen el uso o la copia de cualquier Contenido o imponen limitaciones en el uso de los Servicios y/o el Contenido incluido en ellos.',
+        termsOfUse77: 'Menospreciar, empañar o dañar de otro modo, en nuestra opinión, a nosotros y/o a los Servicios.',
         termsOfUse78:
-          '·       Usar cualquier información obtenida de los Servicios para acosar, abusar o dañar a otra persona.',
+          'Usar cualquier información obtenida de los Servicios para acosar, abusar o dañar a otra persona.',
         termsOfUse79:
-          '·       Hacer un uso indebido de nuestros servicios de soporte o enviar informes falsos de abuso o mala conducta.',
-        termsOfUse80: '·       Usar los Servicios de una manera inconsistente con las leyes o regulaciones aplicables.',
-        termsOfUse81: '·       Participar en el encuadre o enlace no autorizado a los Servicios.',
+          'Hacer un uso indebido de nuestros servicios de soporte o enviar informes falsos de abuso o mala conducta.',
+        termsOfUse80: 'Usar los Servicios de una manera inconsistente con las leyes o regulaciones aplicables.',
+        termsOfUse81: 'Participar en el encuadre o enlace no autorizado a los Servicios.',
         termsOfUse82:
-          '·       Cargar o transmitir (o intentar cargar o transmitir) virus, troyanos u otro material, incluido el uso excesivo de letras mayúsculas y spam (publicación continua de texto repetitivo), que interfiera con el uso y disfrute ininterrumpido de los Servicios por parte de cualquier parte o modifique, perjudique, interrumpa, altere o interfiera con el uso, las características, las funciones, la operación o el mantenimiento de los Servicios.',
+          'Cargar o transmitir (o intentar cargar o transmitir) virus, troyanos u otro material, incluido el uso excesivo de letras mayúsculas y spam (publicación continua de texto repetitivo), que interfiera con el uso y disfrute ininterrumpido de los Servicios por parte de cualquier parte o modifique, perjudique, interrumpa, altere o interfiera con el uso, las características, las funciones, la operación o el mantenimiento de los Servicios.',
         termsOfUse83:
-          '·       Participar en cualquier uso automatizado del sistema, como el uso de scripts para enviar comentarios o mensajes, o el uso de minería de datos, robots o herramientas similares de recopilación y extracción de datos.',
-        termsOfUse84:
-          '·       Eliminar el aviso de derechos de autor u otros derechos de propiedad de cualquier Contenido.',
+          'Participar en cualquier uso automatizado del sistema, como el uso de scripts para enviar comentarios o mensajes, o el uso de minería de datos, robots o herramientas similares de recopilación y extracción de datos.',
+        termsOfUse84: 'Eliminar el aviso de derechos de autor u otros derechos de propiedad de cualquier Contenido.',
         termsOfUse85:
-          '·       Intentar hacerse pasar por otro usuario o persona o utilizar el nombre de usuario de otro usuario.',
+          'Intentar hacerse pasar por otro usuario o persona o utilizar el nombre de usuario de otro usuario.',
         termsOfUse86:
-          '·       Cargar o transmitir (o intentar cargar o transmitir) cualquier material que actúe como un mecanismo pasivo o activo de recopilación o transmisión de información, incluidos, entre otros, formatos de intercambio de gráficos claros ("gifs"), píxeles 1×1, web bugs, cookies u otros dispositivos similares (a veces denominados "spyware" o "mecanismos de recopilación pasiva" o "pcms").',
+          'Cargar o transmitir (o intentar cargar o transmitir) cualquier material que actúe como un mecanismo pasivo o activo de recopilación o transmisión de información, incluidos, entre otros, formatos de intercambio de gráficos claros ("gifs"), píxeles 1×1, web bugs, cookies u otros dispositivos similares (a veces denominados "spyware" o "mecanismos de recopilación pasiva" o "pcms").',
         termsOfUse87:
-          '·       Interferir, interrumpir o crear una carga indebida en los Servicios o en las redes o servicios conectados a los Servicios.',
+          'Interferir, interrumpir o crear una carga indebida en los Servicios o en las redes o servicios conectados a los Servicios.',
         termsOfUse88:
-          '·       Acosar, molestar, intimidar o amenazar a cualquiera de nuestros empleados o agentes que participen en la prestación de cualquier parte de los Servicios.',
+          'Acosar, molestar, intimidar o amenazar a cualquiera de nuestros empleados o agentes que participen en la prestación de cualquier parte de los Servicios.',
         termsOfUse89:
-          '·       Intentar eludir cualquier medida de los Servicios diseñada para impedir o restringir el acceso a los Servicios, o a cualquier parte de los Servicios.',
+          'Intentar eludir cualquier medida de los Servicios diseñada para impedir o restringir el acceso a los Servicios, o a cualquier parte de los Servicios.',
         termsOfUse90:
-          '·       Copiar o adaptar el software de los Servicios, incluidos, entre otros, Flash, PHP, HTML, JavaScript u otro código.',
+          'Copiar o adaptar el software de los Servicios, incluidos, entre otros, Flash, PHP, HTML, JavaScript u otro código.',
         termsOfUse91:
-          '·       Salvo que lo permita la ley aplicable, descifrar, descompilar, desensamblar o aplicar ingeniería inversa a cualquier software que comprenda o forme parte de los Servicios.',
+          'Salvo que lo permita la ley aplicable, descifrar, descompilar, desensamblar o aplicar ingeniería inversa a cualquier software que comprenda o forme parte de los Servicios.',
         termsOfUse92:
-          '·       Excepto en la medida en que sea el resultado del uso estándar de motores de búsqueda o navegadores de Internet, usar, iniciar, desarrollar o distribuir cualquier sistema automatizado, incluidos, entre otros, cualquier araña, robot, utilidad de trampas, raspador o lector fuera de línea que acceda a los Servicios, o usar o iniciar cualquier script u otro software no autorizado.',
-        termsOfUse93:
-          '·       Utilizar un agente de compras o un agente de compras para realizar compras en los Servicios.',
+          'Excepto en la medida en que sea el resultado del uso estándar de motores de búsqueda o navegadores de Internet, usar, iniciar, desarrollar o distribuir cualquier sistema automatizado, incluidos, entre otros, cualquier araña, robot, utilidad de trampas, raspador o lector fuera de línea que acceda a los Servicios, o usar o iniciar cualquier script u otro software no autorizado.',
+        termsOfUse93: 'Utilizar un agente de compras o un agente de compras para realizar compras en los Servicios.',
         termsOfUse94:
-          '·       Hacer cualquier uso no autorizado de los Servicios, incluida la recopilación de nombres de usuario y/o direcciones de correo electrónico de los usuarios por medios electrónicos o de otro tipo con el fin de enviar correos electrónicos no solicitados o crear cuentas de usuario por medios automatizados o bajo falsos pretextos.',
+          'Hacer cualquier uso no autorizado de los Servicios, incluida la recopilación de nombres de usuario y/o direcciones de correo electrónico de los usuarios por medios electrónicos o de otro tipo con el fin de enviar correos electrónicos no solicitados o crear cuentas de usuario por medios automatizados o bajo falsos pretextos.',
         termsOfUse95:
-          '·       Utilizar los Servicios como parte de cualquier esfuerzo para competir con nosotros o utilizar los Servicios y/o el Contenido para cualquier esfuerzo de generación de ingresos o empresa comercial.',
-        termsOfUse96: '·       Vender o transferir su perfil.',
+          'Utilizar los Servicios como parte de cualquier esfuerzo para competir con nosotros o utilizar los Servicios y/o el Contenido para cualquier esfuerzo de generación de ingresos o empresa comercial.',
+        termsOfUse96: 'Vender o transferir su perfil.',
         termsOfUse97:
           'Los Servicios no ofrecen a los usuarios enviar o publicar contenido. Podemos brindarle la oportunidad de crear, enviar, publicar, mostrar, transmitir, realizar, publicar, distribuir o difundir contenido y materiales para nosotros o en los Servicios, incluidos, entre otros, texto, escritos, video, audio, fotografías, gráficos, comentarios, sugerencias o información personal u otro material (colectivamente, "Contribuciones"). Las contribuciones pueden ser vistas por otros usuarios de los Servicios y a través de sitios web de terceros. Como tal, cualquier Contribución que transmita puede ser tratada de acuerdo con la Política de Privacidad de los Servicios. Cuando creas o pones a disposición cualquier Contribuciones, declaras y garantizas que:',
         termsOfUse98:
-          '·       La creación, distribución, transmisión, exhibición pública o ejecución, y el acceso, descarga o copia de sus Contribuciones no infringen ni infringirán los derechos de propiedad, incluidos, entre otros, los derechos de autor, patentes, marcas comerciales, secretos comerciales o derechos morales de terceros.',
+          'La creación, distribución, transmisión, exhibición pública o ejecución, y el acceso, descarga o copia de sus Contribuciones no infringen ni infringirán los derechos de propiedad, incluidos, entre otros, los derechos de autor, patentes, marcas comerciales, secretos comerciales o derechos morales de terceros.',
         termsOfUse99:
-          '·       Usted es el creador y propietario o tiene las licencias, derechos, consentimientos, liberaciones y permisos necesarios para usar y autorizarnos a nosotros, a los Servicios y a otros usuarios de los Servicios a usar sus Contribuciones de cualquier manera contemplada por los Servicios y estos Términos Legales.',
+          'Usted es el creador y propietario o tiene las licencias, derechos, consentimientos, liberaciones y permisos necesarios para usar y autorizarnos a nosotros, a los Servicios y a otros usuarios de los Servicios a usar sus Contribuciones de cualquier manera contemplada por los Servicios y estos Términos Legales.',
         termsOfUse100:
-          '·       Usted cuenta con el consentimiento, la liberación y/o el permiso por escrito de todas y cada una de las personas individuales identificables en sus Contribuciones para utilizar el nombre o la imagen de todas y cada una de esas personas individuales identificables para permitir la inclusión y el uso de sus Contribuciones de cualquier manera contemplada por los Servicios y estos Términos Legales.',
-        termsOfUse101: '·       Sus Contribuciones no son falsas, inexactas o engañosas.',
+          'Usted cuenta con el consentimiento, la liberación y/o el permiso por escrito de todas y cada una de las personas individuales identificables en sus Contribuciones para utilizar el nombre o la imagen de todas y cada una de esas personas individuales identificables para permitir la inclusión y el uso de sus Contribuciones de cualquier manera contemplada por los Servicios y estos Términos Legales.',
+        termsOfUse101: 'Sus Contribuciones no son falsas, inexactas o engañosas.',
         termsOfUse102:
-          '·       Sus Contribuciones no son publicidad no solicitada o no autorizada, materiales promocionales, esquemas piramidales, cartas en cadena, spam, correos masivos u otras formas de solicitud.',
+          'Sus Contribuciones no son publicidad no solicitada o no autorizada, materiales promocionales, esquemas piramidales, cartas en cadena, spam, correos masivos u otras formas de solicitud.',
         termsOfUse103:
-          '·       Sus Contribuciones no son obscenas, lascivas, lascivas, sucias, violentas, acosadoras, difamatorias, calumniosas o de otro modo objetables (según lo determinemos nosotros).',
-        termsOfUse104:
-          '·       Sus Contribuciones no ridiculizan, se burlan, menosprecian, intimidan o abusan de nadie.',
+          'Sus Contribuciones no son obscenas, lascivas, lascivas, sucias, violentas, acosadoras, difamatorias, calumniosas o de otro modo objetables (según lo determinemos nosotros).',
+        termsOfUse104: 'Sus Contribuciones no ridiculizan, se burlan, menosprecian, intimidan o abusan de nadie.',
         termsOfUse105:
-          '·       Sus Contribuciones no se utilizan para acosar o amenazar (en el sentido legal de esos términos) a ninguna otra persona y para promover la violencia contra una persona o clase específica de personas.',
-        termsOfUse106: '·       Sus Contribuciones no violan ninguna ley, reglamento o norma aplicable.',
-        termsOfUse107:
-          '·       Sus Contribuciones no violan los derechos de privacidad o publicidad de ningún tercero.',
+          'Sus Contribuciones no se utilizan para acosar o amenazar (en el sentido legal de esos términos) a ninguna otra persona y para promover la violencia contra una persona o clase específica de personas.',
+        termsOfUse106: 'Sus Contribuciones no violan ninguna ley, reglamento o norma aplicable.',
+        termsOfUse107: 'Sus Contribuciones no violan los derechos de privacidad o publicidad de ningún tercero.',
         termsOfUse108:
-          '·       Sus Contribuciones no violan ninguna ley aplicable con respecto a la pornografía infantil, ni tienen la intención de proteger la salud o el bienestar de los menores.',
+          'Sus Contribuciones no violan ninguna ley aplicable con respecto a la pornografía infantil, ni tienen la intención de proteger la salud o el bienestar de los menores.',
         termsOfUse109:
-          '·       Sus Contribuciones no incluyen ningún comentario ofensivo relacionado con la raza, el origen nacional, el género, la preferencia sexual o la discapacidad física.',
+          'Sus Contribuciones no incluyen ningún comentario ofensivo relacionado con la raza, el origen nacional, el género, la preferencia sexual o la discapacidad física.',
         termsOfUse110:
-          '·       Sus Contribuciones no violan de ninguna otra manera, ni se vinculan a material que viole, ninguna disposición de estos Términos Legales, ni ninguna ley o reglamento aplicable.',
+          'Sus Contribuciones no violan de ninguna otra manera, ni se vinculan a material que viole, ninguna disposición de estos Términos Legales, ni ninguna ley o reglamento aplicable.',
         termsOfUse111:
           'Cualquier uso de los Servicios que infrinja lo anterior infringe estos Términos legales y puede dar lugar, entre otras cosas, a la rescisión o suspensión de sus derechos de uso de los Servicios.',
         termsOfUse112:
@@ -1825,6 +1824,11 @@ i18n.use(initReactI18next).init({
           'Para resolver una queja relacionada con los Servicios o para recibir más información sobre el uso de los Servicios, póngase en contacto con nosotros en:',
         termsOfUse141:
           'Al utilizar los Servicios, usted acepta estar sujeto a nuestra Política de privacidad, que se incorpora a estos Términos legales. Tenga en cuenta que los Servicios están alojados en España y el Reino Unido. Si accede a los Servicios desde cualquier otra región del mundo con leyes u otros requisitos que rigen la recopilación, el uso o la divulgación de datos personales que difieren de las leyes aplicables en España y el Reino Unido, entonces, a través de su uso continuado de los Servicios, está transfiriendo sus datos a España y Reino Unido, y acepta expresamente que sus datos se transfieran y procesen en España y Reino Unido.',
+        wantToWorkWithUs: '¿Quieres trabajar con nosotros?',
+        weAreLookingForCleaners: '¡Estamos buscando limpiadores dedicados para unirse a nuestro equipo en crecimiento!',
+        sdlServiceDescription:
+          'SDL es un nuevo servicio de limpieza a domicilio bajo demanda, disponible las 24 horas del día, los 7 días de la semana, que opera en Marbella y sus alrededores. Trabajando con nosotros, tendrás la flexibilidad de establecer tus propios horarios y radio de trabajo, ajustar tu disponibilidad en tiempo real y recibir el pago instantáneamente después de completar cada trabajo. Ofrecemos un alto potencial de ganancias a través de limpiezas rápidas, horas no estándar y referencias. SDL cumple totalmente con la normativa, está asegurado y contribuye a la seguridad social.',
+        seeDetails: 'Ver detalles',
       },
     },
   },

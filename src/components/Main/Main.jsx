@@ -67,7 +67,7 @@ const Main = ({ password }) => {
               <h1 className="general__title">Sdl</h1>
               <h3 className="general__subtitle">Servicio de limpieza</h3>
               <div className="general__text">{t('whatIsSdl')}</div>
-              <button className="btn general__btn main__btn" onClick={() => navigate('/booking')}>
+              <a className="btn general__btn main__btn" href="/booking">
                 {t('bookNow')}
                 <svg
                   className="btn__arrow"
@@ -80,7 +80,7 @@ const Main = ({ password }) => {
                   <path d="M3 12.5L21 12.5" stroke="white" strokeLinecap="round" />
                   <path d="M15 18.5L21 12.5L15 6.5" stroke="white" strokeLinecap="round" />
                 </svg>
-              </button>
+              </a>
             </div>
             <img className="general__img" src={cleaningImg} alt="Cleaning" />
             <img className="general__img_1440" src={cleaningImg1440} alt="Cleaning" />
@@ -98,7 +98,7 @@ const Main = ({ password }) => {
               <br />
               {t('weDeliverCare')}
             </p>
-            <button className="btn main__btn" onClick={() => navigate('/booking')}>
+            <a className="btn main__btn" href="/booking">
               {t('bookNow')}
               <svg
                 className="btn__arrow"
@@ -111,7 +111,7 @@ const Main = ({ password }) => {
                 <path d="M3 12.5L21 12.5" stroke="white" strokeLinecap="round" />
                 <path d="M15 18.5L21 12.5L15 6.5" stroke="white" strokeLinecap="round" />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -191,7 +191,7 @@ const Main = ({ password }) => {
           <div className="start">
             <h2 className="start__title">{t('start')}</h2>
             <p className="start__text">{t('hereYouCanCustomizeOrder')}</p>
-            <button className="btn main__btn start__btn" onClick={() => navigate('/booking')}>
+            <a className="btn main__btn start__btn" href="/booking">
               {t('bookNow')}
               <svg
                 className="btn__arrow"
@@ -204,7 +204,7 @@ const Main = ({ password }) => {
                 <path d="M3 12.5L21 12.5" stroke="white" strokeLinecap="round" />
                 <path d="M15 18.5L21 12.5L15 6.5" stroke="white" strokeLinecap="round" />
               </svg>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -273,6 +273,29 @@ const Main = ({ password }) => {
               <img src={googlePlayIcon} alt="Google Play" className="mobile__icon" />
               <span className="mobile__label">Google Play</span>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="cleaners-section">
+        <div className="container">
+          <div className="cleaners">
+            <h2 className="cleaners__title">{t('wantToWorkWithUs')}</h2>
+            <p className="cleaners__text">{t('weAreLookingForCleaners')}</p>
+            <p className="cleaners__text">{t('sdlServiceDescription')}</p>
+            <a className="btn main__btn cleaners__btn" href="https://jobs.sdl24.es">
+              {t('seeDetails')}
+              <svg
+                className="btn__arrow"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="25"
+                viewBox="0 0 24 25"
+                fill="none"
+              >
+                <path d="M3 12.5L21 12.5" stroke="white" strokeLinecap="round" />
+                <path d="M15 18.5L21 12.5L15 6.5" stroke="white" strokeLinecap="round" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>

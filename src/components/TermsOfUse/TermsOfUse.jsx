@@ -213,12 +213,18 @@ const TermsOfUse = () => {
           <p className="legals__text">
             {t('termsOfUse42')}
             <span className="legals__item" onClick={() => setCurrentRefIndex(6)}>
-              {t('termsOfUse17')}
+              "{t('termsOfUse17')}"
             </span>
             {t('termsOfUse43')}
           </p>
-          <p className="legals__text">{t('termsOfUse44')}</p>
-          <p className="legals__text">{t('termsOfUse45')}</p>
+          <ul>
+            <li>
+              <p className="legals__text">{t('termsOfUse44')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse45')}</p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('termsOfUse46')}</p>
@@ -232,7 +238,7 @@ const TermsOfUse = () => {
           <p className="legals__text">
             {t('termsOfUse52')}
             <span className="legals__item" onClick={() => setCurrentRefIndex(6)}>
-              {t('termsOfUse17')}
+              "{t('termsOfUse17')}"
             </span>
             {t('termsOfUse53')}
           </p>
@@ -246,16 +252,26 @@ const TermsOfUse = () => {
           <p className="legals__text">
             <span className="legals__text legals__subtitle">{t('termsOfUse56')}</span> {t('termsOfUse57')}
           </p>
-          <p className="legals__text">
-            {t('termsOfUse58')}
-            <span className="legals__item" onClick={() => setCurrentRefIndex(6)}>
-              {t('termsOfUse17')}
-            </span>
-            {t('termsOfUse59')}
-          </p>
-          <p className="legals__text">{t('termsOfUse60')}</p>
-          <p className="legals__text">{t('termsOfUse61')}</p>
-          <p className="legals__text">{t('termsOfUse62')}</p>
+          <ul>
+            <li>
+              <p className="legals__text">
+                {t('termsOfUse58')}
+                <span className="legals__item" onClick={() => setCurrentRefIndex(6)}>
+                  "{t('termsOfUse17')}"
+                </span>
+                {t('termsOfUse59')}
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse60')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse61')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse62')}</p>
+            </li>
+          </ul>
           <p className="legals__text">{t('termsOfUse63')}</p>
         </div>
         <div className="legals__text-block">
@@ -282,9 +298,17 @@ const TermsOfUse = () => {
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('termsOfUse67')}</p>
-          <p className="legals__text">·       Stripe</p>
-          <p className="legals__text">·       Visa</p>
-          <p className="legals__text">·       Mastercard</p>
+          <ul>
+            <li>
+              <p className="legals__text">Stripe</p>
+            </li>
+            <li>
+              <p className="legals__text">Visa</p>
+            </li>
+            <li>
+              <p className="legals__text">Mastercard</p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text">{t('termsOfUse68')}</p>
@@ -313,29 +337,77 @@ const TermsOfUse = () => {
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('termsOfUse73')}</p>
-          <p className="legals__text">{t('termsOfUse74')}</p>
-          <p className="legals__text">{t('termsOfUse75')}</p>
-          <p className="legals__text">{t('termsOfUse76')}</p>
-          <p className="legals__text">{t('termsOfUse77')}</p>
-          <p className="legals__text">{t('termsOfUse78')}</p>
-          <p className="legals__text">{t('termsOfUse79')}</p>
-          <p className="legals__text">{t('termsOfUse80')}</p>
-          <p className="legals__text">{t('termsOfUse81')}</p>
-          <p className="legals__text">{t('termsOfUse82')}</p>
-          <p className="legals__text">{t('termsOfUse83')}</p>
-          <p className="legals__text">{t('termsOfUse84')}</p>
-          <p className="legals__text">{t('termsOfUse85')}</p>
-          <p className="legals__text">{t('termsOfUse86')}</p>
-          <p className="legals__text">{t('termsOfUse87')}</p>
-          <p className="legals__text">{t('termsOfUse88')}</p>
-          <p className="legals__text">{t('termsOfUse89')}</p>
-          <p className="legals__text">{t('termsOfUse90')}</p>
-          <p className="legals__text">{t('termsOfUse91')}</p>
-          <p className="legals__text">{t('termsOfUse92')}</p>
-          <p className="legals__text">{t('termsOfUse93')}</p>
-          <p className="legals__text">{t('termsOfUse94')}</p>
-          <p className="legals__text">{t('termsOfUse95')}</p>
-          <p className="legals__text">{t('termsOfUse96')}</p>
+          <ul>
+            <li>
+              <p className="legals__text">{t('termsOfUse74')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse75')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse76')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse77')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse78')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse79')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse80')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse81')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse82')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse83')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse84')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse85')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse86')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse87')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse88')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse89')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse90')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse91')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse92')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse93')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse94')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse95')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse96')}</p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle" ref={blocksRefs[7]}>
@@ -344,19 +416,47 @@ const TermsOfUse = () => {
         </div>
         <div className="legals__text-block">
           <p className="legals__text">{t('termsOfUse97')}</p>
-          <p className="legals__text">{t('termsOfUse98')}</p>
-          <p className="legals__text">{t('termsOfUse99')}</p>
-          <p className="legals__text">{t('termsOfUse100')}</p>
-          <p className="legals__text">{t('termsOfUse101')}</p>
-          <p className="legals__text">{t('termsOfUse102')}</p>
-          <p className="legals__text">{t('termsOfUse103')}</p>
-          <p className="legals__text">{t('termsOfUse104')}</p>
-          <p className="legals__text">{t('termsOfUse105')}</p>
-          <p className="legals__text">{t('termsOfUse106')}</p>
-          <p className="legals__text">{t('termsOfUse107')}</p>
-          <p className="legals__text">{t('termsOfUse108')}</p>
-          <p className="legals__text">{t('termsOfUse109')}</p>
-          <p className="legals__text">{t('termsOfUse110')}</p>
+          <ul>
+            <li>
+              <p className="legals__text">{t('termsOfUse98')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse99')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse100')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse101')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse102')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse103')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse104')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse105')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse106')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse107')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse108')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse109')}</p>
+            </li>
+            <li>
+              <p className="legals__text">{t('termsOfUse110')}</p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text">{t('termsOfUse111')}</p>

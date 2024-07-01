@@ -91,72 +91,88 @@ const Cookies = () => {
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('cookie43')}</p>
           <p className="legals__text">{t('cookie44')}</p>
-          <p className="legals__text">
-            ·      {' '}
-            <a className="link" href="https://support.google.com/chrome/answer/95647#zippy=%2Callow-or-block-cookies">
-              Chrome
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a
-              className="link"
-              href="https://support.microsoft.com/en-us/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d"
-            >
-              Internet Explorer
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a
-              className="link"
-              href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop?redirectslug=enable-and-disable-cookies-website-preferences&redirectlocale=en-US"
-            >
-              Firefox
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a className="link" href="https://support.apple.com/en-ie/guide/safari/sfri11471/mac">
-              Safari
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a
-              className="link"
-              href="https://support.microsoft.com/en-us/windows/microsoft-edge-browsing-data-and-privacy-bb8174ba-9d73-dcf2-9b4a-c582b4e640dd"
-            >
-              Edge
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a className="link" href="https://help.opera.com/en/latest/web-preferences/">
-              Opera
-            </a>
-          </p>
+          <ul>
+            <li>
+              <p className="legals__text">
+                <a
+                  className="link"
+                  href="https://support.google.com/chrome/answer/95647#zippy=%2Callow-or-block-cookies"
+                >
+                  Chrome
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a
+                  className="link"
+                  href="https://support.microsoft.com/en-us/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d"
+                >
+                  Internet Explorer
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a
+                  className="link"
+                  href="https://support.mozilla.org/en-US/kb/enhanced-tracking-protection-firefox-desktop?redirectslug=enable-and-disable-cookies-website-preferences&redirectlocale=en-US"
+                >
+                  Firefox
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a className="link" href="https://support.apple.com/en-ie/guide/safari/sfri11471/mac">
+                  Safari
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a
+                  className="link"
+                  href="https://support.microsoft.com/en-us/windows/microsoft-edge-browsing-data-and-privacy-bb8174ba-9d73-dcf2-9b4a-c582b4e640dd"
+                >
+                  Edge
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a className="link" href="https://help.opera.com/en/latest/web-preferences/">
+                  Opera
+                </a>
+              </p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text">{t('cookie45')}</p>
-          <p className="legals__text">
-            ·      {' '}
-            <a className="link" href="http://www.aboutads.info/choices/">
-              {t('cookie46')}
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a className="link" href="https://youradchoices.ca/">
-              {t('cookie47')}
-            </a>
-          </p>
-          <p className="legals__text">
-            ·      {' '}
-            <a className="link" href="http://www.youronlinechoices.com/">
-              {t('cookie48')}
-            </a>
-          </p>
+          <ul>
+            <li>
+              <p className="legals__text">
+                <a className="link" href="http://www.aboutads.info/choices/">
+                  {t('cookie46')}
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a className="link" href="https://youradchoices.ca/">
+                  {t('cookie47')}
+                </a>
+              </p>
+            </li>
+            <li>
+              <p className="legals__text">
+                <a className="link" href="http://www.youronlinechoices.com/">
+                  {t('cookie48')}
+                </a>
+              </p>
+            </li>
+          </ul>
         </div>
         <div className="legals__text-block">
           <p className="legals__text legals__subtitle">{t('cookie49')}</p>
