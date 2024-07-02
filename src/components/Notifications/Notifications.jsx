@@ -186,7 +186,9 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
                               <h4 className="notifications__subtitle">
                                 <svg
                                   className={
-                                    elem.title === 'Cleaning completed' || elem.title === 'Request confirmed'
+                                    elem.title === 'Cleaning completed' ||
+                                    elem.title === 'Request confirmed' ||
+                                    elem.title === 'Cleaning started'
                                       ? 'notifications__tick'
                                       : 'hidden'
                                   }
@@ -206,11 +208,19 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
                               </h4>
                               <span className="notifications__time">{formatDate(elem.creationDate)}</span>
                             </div>
-                            <div className="notifications__description">
-                              {`${t(date[0])}, ${date[1]}, ${t(date[2]).slice(0, 3)} ${elem.cleaningTime}`}
+                            <div
+                              className={elem.title === 'Cleaning reminder' ? 'hidden' : 'notifications__description'}
+                            >
+                              {`${t(date[0])}, ${date[1]} ${t(date[2]).slice(0, 3)}, ${elem.cleaningTime}`}
                             </div>
                             {elem.description && (
-                              <div className="notifications__description">{t(elem.description)}</div>
+                              <div className="notifications__description">
+                                {elem.title === 'Cleaning reminder'
+                                  ? `${t(elem.description)} ${t(date[0])}, ${date[1]} ${t(date[2]).slice(0, 3)}, ${
+                                      elem.cleaningTime
+                                    }`
+                                  : t(elem.description)}
+                              </div>
                             )}
                             <span
                               className={
@@ -250,7 +260,9 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
                               <h4 className="notifications__subtitle">
                                 <svg
                                   className={
-                                    elem.title === 'Cleaning completed' || elem.title === 'Request confirmed'
+                                    elem.title === 'Cleaning completed' ||
+                                    elem.title === 'Request confirmed' ||
+                                    elem.title === 'Cleaning started'
                                       ? 'notifications__tick'
                                       : 'hidden'
                                   }
@@ -270,11 +282,19 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
                               </h4>
                               <span className="notifications__time">{formatDate(elem.creationDate)}</span>
                             </div>
-                            <div className="notifications__description">
-                              {`${t(date[0])}, ${date[1]}, ${t(date[2]).slice(0, 3)} ${elem.cleaningTime}`}
+                            <div
+                              className={elem.title === 'Cleaning reminder' ? 'hidden' : 'notifications__description'}
+                            >
+                              {`${t(date[0])}, ${date[1]} ${t(date[2]).slice(0, 3)}, ${elem.cleaningTime}`}
                             </div>
                             {elem.description && (
-                              <div className="notifications__description">{t(elem.description)}</div>
+                              <div className="notifications__description">
+                                {elem.title === 'Cleaning reminder'
+                                  ? `${t(elem.description)} ${t(date[0])}, ${date[1]} ${t(date[2]).slice(0, 3)}, ${
+                                      elem.cleaningTime
+                                    }`
+                                  : t(elem.description)}
+                              </div>
                             )}
                             <span
                               className={
@@ -300,6 +320,7 @@ const Notifications = ({ isOpen, setIsOpen, newNotifications, archiveNotificatio
         setIsOpen={setIsRateWindowOpen}
         jobId={ratedJobId}
         setNotifications={setNotifications}
+        handleCloseNotifications={handleCloseNotifications}
       />
     </>
   );

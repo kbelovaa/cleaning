@@ -904,6 +904,16 @@ i18n.use(initReactI18next).init({
         sdlServiceDescription:
           'SDL is a new, on-demand, 24/7 home cleaning service operating in and around Marbella. Working with us, you will have the flexibility to set your own work hours and radius, adjust your availability in real-time, and receive payment instantly after completing each job. We offer high earning potential through expedited cleanings, non-standard hours, and referrals. SDL is fully compliant, insured, and contributes to social security.',
         seeDetails: 'See details',
+        'Payment reminder': 'Payment reminder',
+        'Cleaning reminder': 'Cleaning reminder',
+        'You have a scheduled service for': 'You have a scheduled service for',
+        'Cleaning started': 'Cleaning started',
+        'Your scheduled cleaning has started.': 'Your scheduled cleaning has started',
+        'In order to proceed with your scheduled service we kindly request that payment be made 48 hours in advance. Kindly see invoice sent to your email.':
+          'In order to proceed with your scheduled service we kindly request that payment be made 48 hours in advance. Kindly see invoice sent to your email.',
+        'Cleaning cancelled': 'Cleaning cancelled',
+        'We regret to inform you that your scheduled cleaning has been cancelled. Rest assured, we are working to find another cleaner and will update you shortly.':
+          'We regret to inform you that your scheduled cleaning has been cancelled. Rest assured, we are working to find another cleaner and will update you shortly.',
       },
     },
     es: {
@@ -1829,6 +1839,16 @@ i18n.use(initReactI18next).init({
         sdlServiceDescription:
           'SDL es un nuevo servicio de limpieza a domicilio bajo demanda, disponible las 24 horas del día, los 7 días de la semana, que opera en Marbella y sus alrededores. Trabajando con nosotros, tendrás la flexibilidad de establecer tus propios horarios y radio de trabajo, ajustar tu disponibilidad en tiempo real y recibir el pago instantáneamente después de completar cada trabajo. Ofrecemos un alto potencial de ganancias a través de limpiezas rápidas, horas no estándar y referencias. SDL cumple totalmente con la normativa, está asegurado y contribuye a la seguridad social.',
         seeDetails: 'Ver detalles',
+        'Payment reminder': 'Recordatorio de pago',
+        'Cleaning reminder': 'Recordatorio de limpieza',
+        'You have a scheduled service for': 'Tiene un servicio programado para',
+        'Cleaning started': 'Limpieza iniciada',
+        'Your scheduled cleaning has started.': 'Su limpieza programada ha comenzado',
+        'In order to proceed with your scheduled service we kindly request that payment be made 48 hours in advance. Kindly see invoice sent to your email.':
+          'Para proceder con su servicio programado, solicitamos amablemente que el pago se realice 48 horas antes. Por favor, consulte la factura enviada a su correo electrónico.',
+        'Cleaning cancelled': 'Limpieza cancelada',
+        'We regret to inform you that your scheduled cleaning has been cancelled. Rest assured, we are working to find another cleaner and will update you shortly.':
+          'Lamentamos informarle que su limpieza programada ha sido cancelada. Tenga la seguridad de que estamos trabajando para encontrar otro limpiador y le actualizaremos en breve.',
       },
     },
   },

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { rateCleaning } from '../../http/notificationsAPI';
 import './RateWindow.scss';
 
-const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
+const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications, handleCloseNotifications }) => {
   const [rate, setRate] = useState(0);
   const [feedback, setFeedback] = useState('');
   const [isHoveredIndex, setIsHoveredIndex] = useState(0);
@@ -18,6 +18,7 @@ const RateWindow = ({ isOpen, setIsOpen, jobId, setNotifications }) => {
     setRate(0);
     setFeedback('');
     setIsHoveredIndex(0);
+    handleCloseNotifications();
   };
 
   useEffect(() => {
