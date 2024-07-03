@@ -50,6 +50,8 @@ const weekdays = [
   { name: 'Sunday', index: 0 },
 ];
 
+const languages = ['English', 'Spanish', 'Swedish', 'Danish', 'Norwegian', 'Dutch', 'German', 'Russian'];
+
 export {
   months,
   livingRooms,
@@ -62,4 +64,5 @@ export {
   times,
   knowingWays,
   weekdays,
+  languages,
 };

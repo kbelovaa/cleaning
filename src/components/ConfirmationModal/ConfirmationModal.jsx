@@ -7,7 +7,7 @@ import { createKnowingWay } from '../../http/profileAPI';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import './ConfirmationModal.scss';
 
-const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isInvoice, isAwaiting }) => {
+const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isInvoice, isAwaiting, contactWay }) => {
   const user = useSelector((state) => state.user);
 
   const [knowingWay, setKnowingWay] = useState('');
@@ -108,8 +108,14 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         <p className={isKnowingWay ? 'hidden' : 'confirmation__text'}>
           {isReceipt || (isInvoiceReceipt && !isInvoice)
             ? t('weHaveSentReceipt')
-            : isContactUs
-            ? t('weWillReplyToEmail')
+            : isContactUs && contactWay === 'Email'
+            ? t('weWillContactYouEmail')
+            : isContactUs && contactWay === 'Phone call'
+            ? t('weWillContactYouPhone')
+            : isContactUs && contactWay === 'WhatsApp'
+            ? t('weWillContactYouWhatsApp')
+            : isContactUs && contactWay === 'Viber'
+            ? t('weWillContactYouViber')
             : isPersonalInfo && !isNewEmail
             ? t('personalInfoSaved')
             : isPersonalInfo && isNewEmail
@@ -129,7 +135,6 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         <span
           className={
             (isPersonalInfo && isNewEmail) ||
-            isContactUs ||
             isReceipt ||
             (isInvoiceReceipt && !isInvoice) ||
             (!isContactUs && !isReceipt && !isPersonalInfo && !isPassword && !isConfirmation && !isInvoiceReceipt)

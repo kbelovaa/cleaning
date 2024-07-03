@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { languages } from '../../constants/selectOptions';
+import PhoneField from '../PhoneField/PhoneField';
+import CustomSelect from '../CustomSelect/CustomSelect';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 import './ContactUs.scss';
 
@@ -10,6 +13,10 @@ const ContactUs = ({ loading }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(true);
+  const [mobile, setMobile] = useState('');
+  const [isMobileValid, setIsMobileValid] = useState(true);
+  const [contactForm, setContactForm] = useState('');
+  const [language, setLanguage] = useState('English');
   const [text, setText] = useState('');
   const [isFormValid, setIsFormValid] = useState(true);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
@@ -24,6 +31,18 @@ const ContactUs = ({ loading }) => {
     }
   }, [user]);
 
+  useEffect(() => {
+    if (contactForm === 'Email' && email === '') {
+      setContactForm('');
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if ((contactForm === 'Phone call' || contactForm === 'WhatsApp' || contactForm === 'Viber') && mobile === '') {
+      setContactForm('');
+    }
+  }, [mobile]);
+
   const handleEmailChange = (email) => {
     setEmail(email);
 
@@ -31,12 +50,26 @@ const ContactUs = ({ loading }) => {
     setIsEmailValid(isEmailValid);
   };
 
+  const handleContactFormChange = (contactForm) => {
+    if (!user.isAuth && ((contactForm === 'Email' && !email) || (contactForm !== 'Email' && !mobile))) {
+      return;
+    }
+
+    setContactForm(contactForm);
+  };
+
   const checkIsFormValid = () => {
     if (user.isAuth) {
-      if (text) {
+      if (contactForm) {
         return true;
       }
-    } else if (name && email && isEmailValid && text) {
+    } else if (
+      name &&
+      ((contactForm === 'Email' && email && isEmailValid) ||
+        ((contactForm === 'Phone call' || contactForm === 'WhatsApp' || contactForm === 'Viber') &&
+          mobile &&
+          isMobileValid))
+    ) {
       return true;
     }
 
@@ -46,16 +79,7 @@ const ContactUs = ({ loading }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    if (user.isAuth) {
-      if (text) {
-        setRequestLoading(true);
-        // отправить запрос
-        setRequestLoading(false);
-        setIsConfirmationOpen(true);
-      } else {
-        setIsFormValid(false);
-      }
-    } else if (name && email && isEmailValid && text) {
+    if (checkIsFormValid()) {
       setRequestLoading(true);
       // отправить запрос
       setRequestLoading(false);
@@ -92,11 +116,61 @@ const ContactUs = ({ loading }) => {
               <input
                 id="email"
                 type="email"
-                className={`input ${!email || !isEmailValid ? 'invalid-field' : ''}`}
+                className={`input ${mobile === '' && (!email || !isEmailValid) ? 'invalid-field' : ''}`}
                 value={email}
                 onChange={(e) => handleEmailChange(e.target.value)}
               />
               <p className={isEmailValid ? 'hidden' : 'auth__note'}>{t('validEmailMessage')}</p>
+            </div>
+            <div className={user.isAuth ? 'hidden' : 'form__input-wrap'}>
+              <PhoneField
+                mobile={mobile}
+                setMobile={setMobile}
+                isMobileValid={isMobileValid}
+                setIsMobileValid={setIsMobileValid}
+                isOptional={contactForm === 'Email' && email !== ''}
+              />
+            </div>
+            <div className="form__input-wrap form__input-wrap_contact">
+              <span className="form__label">{t('selectContactForm')}</span>
+              <div className={`form__contact-options ${contactForm === '' ? 'empty' : ''}`}>
+                <span
+                  className={`form__contact-option ${
+                    !user.isAuth && !email ? 'disabled' : contactForm === 'Email' ? 'checked' : ''
+                  }`}
+                  onClick={() => handleContactFormChange('Email')}
+                >
+                  {t('email')}
+                </span>
+                <span
+                  className={`form__contact-option ${
+                    !user.isAuth && !mobile ? 'disabled' : contactForm === 'Phone call' ? 'checked' : ''
+                  }`}
+                  onClick={() => handleContactFormChange('Phone call')}
+                >
+                  {t('phoneCall')}
+                </span>
+                <span
+                  className={`form__contact-option ${
+                    !user.isAuth && !mobile ? 'disabled' : contactForm === 'WhatsApp' ? 'checked' : ''
+                  }`}
+                  onClick={() => handleContactFormChange('WhatsApp')}
+                >
+                  WhatsApp
+                </span>
+                <span
+                  className={`form__contact-option ${
+                    !user.isAuth && !mobile ? 'disabled' : contactForm === 'Viber' ? 'checked' : ''
+                  }`}
+                  onClick={() => handleContactFormChange('Viber')}
+                >
+                  Viber
+                </span>
+              </div>
+            </div>
+            <div className="form__input-wrap form__input-wrap_language">
+              <span className="form__label">{t('language')}</span>
+              <CustomSelect options={languages} selectedOption={language} setSelectedOption={setLanguage} />
             </div>
             <div className="form__input-wrap">
               <label htmlFor="text" className="form__label">
@@ -105,7 +179,7 @@ const ContactUs = ({ loading }) => {
               <textarea
                 id="text"
                 rows="1"
-                className={`input form__message ${!text ? 'invalid-field' : ''}`}
+                className="input form__message"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 onInput={(e) => {
@@ -115,7 +189,14 @@ const ContactUs = ({ loading }) => {
               ></textarea>
               <p
                 className={
-                  (!isFormValid && !user.isAuth && (!name || !email || !text)) || (!isFormValid && user.isAuth && !text)
+                  (!isFormValid &&
+                    !user.isAuth &&
+                    (!name ||
+                      !contactForm ||
+                      (contactForm === 'Email' && !email) ||
+                      ((contactForm === 'Phone call' || contactForm === 'WhatsApp' || contactForm === 'Viber') &&
+                        !mobile))) ||
+                  (!isFormValid && user.isAuth && !contactForm)
                     ? 'auth__note'
                     : 'hidden'
                 }
@@ -131,7 +212,7 @@ const ContactUs = ({ loading }) => {
           </form>
         )}
       </div>
-      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} email={email} />
+      <ConfirmationModal isOpen={isConfirmationOpen} setIsOpen={setIsConfirmationOpen} contactWay={contactForm} />
     </div>
   );
 };
