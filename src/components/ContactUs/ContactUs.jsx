@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { languages } from '../../constants/selectOptions';
+import saveContactRequest from '../../http/contactAPI';
 import PhoneField from '../PhoneField/PhoneField';
 import CustomSelect from '../CustomSelect/CustomSelect';
 import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
@@ -76,16 +77,29 @@ const ContactUs = ({ loading }) => {
     return false;
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
+    let result;
 
-    if (checkIsFormValid()) {
+    if (user.isAuth) {
+      if (checkIsFormValid()) {
+        setRequestLoading(true);
+        result = await saveContactRequest(user.name, user.email, user.mobile, contactForm, language, text);
+      } else {
+        setIsFormValid(false);
+        return;
+      }
+    } else if (checkIsFormValid()) {
       setRequestLoading(true);
-      // отправить запрос
-      setRequestLoading(false);
-      setIsConfirmationOpen(true);
+      result = await saveContactRequest(name, email, mobile, contactForm, language, text);
     } else {
       setIsFormValid(false);
+      return;
+    }
+
+    if (result.status === 201) {
+      setRequestLoading(false);
+      setIsConfirmationOpen(true);
     }
   };
 
