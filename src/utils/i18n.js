@@ -1889,7 +1889,6 @@ i18n.use(initReactI18next).init({
         feedback3: 'Me encantó lo rápido y fácil que fue reservar una limpieza. Los limpiadores fueron muy profesionales; hicieron una limpieza profunda y se ve increíble. Trabajo sobresaliente. ¡Muy recomendable!',
         feedback4: '¡Servicio fantástico! Llegaron a tiempo, fueron muy profesionales e hicieron un trabajo excelente de limpieza. Estamos muy satisfechos y definitivamente los usaremos de nuevo.',
         feedback5: 'He probado varios servicios de limpieza, pero este es, con diferencia, el mejor. Son minuciosos, confiables y muy amables. ¡Mi lugar nunca se ha visto mejor!',
-
       },
     },
   },
