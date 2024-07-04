@@ -12,6 +12,7 @@ import stageImg390 from '../../images/stageImg390.png';
 import qrCode from '../../images/qr-code.png';
 import appleIcon from '../../images/apple.png';
 import googlePlayIcon from '../../images/google-play.png';
+import Feedback from '../Feedback/Feedback';
 import './Main.scss';
 
 const Main = ({ password }) => {
@@ -211,41 +212,44 @@ const Main = ({ password }) => {
       <section className="reviews-section">
         <div className="container">
           <div className="reviews">
-            <div className="reviews__block">
-              <h5 className="reviews__subtitle">{t('happyUsers')}</h5>
-              <span className="reviews__text">{'250+'}</span>
-            </div>
-            <div className="reviews__block">
-              <h5 className="reviews__subtitle">{t('service')}</h5>
-              <div className="reviews__stars">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <svg
-                    key={index}
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M11.9996 17.8441L6.18281 20.9021L7.29371 14.4251L2.58786 9.838L9.09119 8.89301L11.9996 3L14.9079 8.89301L21.4113 9.838L16.7054 14.4251L17.8163 20.9021L11.9996 17.8441Z"
-                      fill="#268664"
-                      stroke="#268664"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ))}
+            <h2 className="start__title">{t('testimonials')}</h2>
+            <div className="reviews__blocks">
+              <div className="reviews__block">
+                <h5 className="reviews__subtitle">{t('happyUsers')}</h5>
+                <span className="reviews__text">{'97+'}</span>
+              </div>
+              <div className="reviews__block">
+                <h5 className="reviews__subtitle">{t('service')}</h5>
+                <div className="reviews__stars">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <svg
+                      key={index}
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M11.9996 17.8441L6.18281 20.9021L7.29371 14.4251L2.58786 9.838L9.09119 8.89301L11.9996 3L14.9079 8.89301L21.4113 9.838L16.7054 14.4251L17.8163 20.9021L11.9996 17.8441Z"
+                        fill="#268664"
+                        stroke="#268664"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ))}
+                </div>
+              </div>
+              <div className="reviews__block">
+                <h5 className="reviews__subtitle">{t('paySecure')}</h5>
+                <span className="reviews__text">{t('withStripe')}</span>
               </div>
             </div>
-            <div className="reviews__block">
-              <h5 className="reviews__subtitle">{t('paySecure')}</h5>
-              <span className="reviews__text">{t('withStripe')}</span>
-            </div>
           </div>
-          <div
+          {/* <div
             class="trustpilot-widget"
             data-locale="en-US"
             data-template-id="56278e9abfbbba0bdcd568bc"
@@ -256,8 +260,9 @@ const Main = ({ password }) => {
             <a href="https://www.trustpilot.com/review/sdl24.es" target="_blank" rel="noopener">
               Trustpilot
             </a>
-          </div>
+          </div> */}
         </div>
+        <Feedback />
       </section>
       <section className="mobile-section">
         <div className="container">

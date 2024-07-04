@@ -1,0 +1,137 @@
+.feedback {
+  padding: 60px 0 240px;
+
+  &__wrap {
+    display: flex;
+    align-items: flex-start;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    -ms-overflow-style: none;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media screen and (max-width: 744px) {
+      scroll-snap-type: x mandatory;
+    }
+  }
+
+  &__card {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 2px;
+    background: rgba(38, 134, 100, 0.12);
+    margin-right: 20px;
+
+    @media screen and (max-width: 744px) {
+      scroll-snap-align: center;
+    }
+
+    @media screen and (max-width: 323px) {
+      width: calc(100% - 32px);
+    }
+
+    &:first-of-type {
+      margin-left: calc((100% - 1440px) / 2 + 100px);
+
+      @media screen and (max-width: 1440px) {
+        margin-left: calc((100% - 1024px) / 2 + 100px);
+      }
+
+      @media screen and (max-width: 1024px) {
+        margin-left: calc((100% - 744px) / 2 + 60px);
+      }
+
+      @media screen and (max-width: 744px) {
+        margin-left: 16px;
+      }
+    }
+
+    &:last-of-type {
+      margin-right: calc((100% - 1440px) / 2 + 100px);
+
+      @media screen and (max-width: 1440px) {
+        margin-right: calc((100% - 1024px) / 2 + 100px);
+      }
+
+      @media screen and (max-width: 1024px) {
+        margin-right: calc((100% - 744px) / 2 + 60px);
+      }
+
+      @media screen and (max-width: 744px) {
+        margin-right: 16px;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+  }
+
+  &__star {
+    margin-right: 2px;
+  }
+
+  &__text {
+    color: #000;
+    font-family: 'Helvetica', sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 130%;
+    margin-top: 16px;
+  }
+
+  &__indicator {
+    display: flex;
+    width: 69px;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto 0;
+
+    @media screen and (max-width: 1024px) {
+      width: 50px;
+    }
+  }
+
+  &__dot {
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background: rgba(38, 134, 100, 0.12);
+
+    @media screen and (max-width: 1024px) {
+      width: 6px;
+      height: 6px;
+    }
+
+    &_1 {
+      background: #268664;
+    }
+
+    &_4 {
+      width: 8px;
+      height: 8px;
+
+      @media screen and (max-width: 1024px) {
+        width: 4px;
+        height: 4px;
+      }
+    }
+
+    &_5 {
+      width: 5px;
+      height: 5px;
+
+      @media screen and (max-width: 1024px) {
+        width: 2px;
+        height: 2px;
+      }
+    }
+  }
+}

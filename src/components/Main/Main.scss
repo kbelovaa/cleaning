@@ -451,7 +451,7 @@
   }
 
   &__title {
-    color: #225341;
+    color: #000;
     font-size: 60px;
     font-weight: 600;
     line-height: 100%;
@@ -645,18 +645,22 @@
 }
 
 .reviews {
-  padding: 200px 0;
+  padding: 240px 0 0;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
-  @media screen and (max-width: 744px) {
-    flex-direction: column;
+  &__blocks {
+    display: flex;
+
+    @media screen and (max-width: 744px) {
+      flex-direction: column;
+    }
   }
 
   &__block {
     min-width: 248px;
     height: 130px;
-    background: rgba(38, 134, 100, 0.02);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -679,7 +683,7 @@
 
     @media screen and (max-width: 744px) {
       width: 100%;
-      margin: 0 0 5px;
+      margin: 0 0 10px;
     }
   }
 
@@ -799,12 +803,25 @@
 .cleaners {
   padding: 240px 100px;
 
+  @media screen and (max-width: 1024px) {
+    padding: 240px 60px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 240px 16px;
+  }
+
   &__title {
     color: #000;
     font-size: 60px;
     font-weight: 600;
     line-height: 110%;
     letter-spacing: 1.8px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 30px;
+      letter-spacing: 0.9px;
+    }
   }
 
   &__text {
@@ -814,6 +831,11 @@
     line-height: 130%;
     letter-spacing: 1.2px;
     margin-top: 20px;
+
+    @media screen and (max-width: 744px) {
+      font-size: 18px;
+      letter-spacing: 0.9px;
+    }
   }
 
   &__btn {

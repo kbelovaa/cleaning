@@ -52,6 +52,12 @@
   font-weight: 500;
 }
 
+@font-face {
+  font-family: 'Helvetica';
+  src: url('../fonts/helvetica-light.woff') format('woff');
+  font-weight: 300;
+}
+
 * {
   margin: 0;
   padding: 0;
