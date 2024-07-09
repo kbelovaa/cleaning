@@ -137,9 +137,8 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section how-it-works">
-          <h2 className="section__title">{t('howItWorks')}</h2>
-          <p className="section__text">{t('howItWorksText1')}</p>
-          <p className="section__text">{t('howItWorksText2')}</p>
+          <h2 className="section__title">{t('theFlow')}</h2>
+          <p className="section__text">{t('theFlowText')}</p>
           <div className="how-it-works__images">
             {language === 'en' ? (
               <img className="how-it-works__img img" src={img4} alt="Requests list" />
@@ -217,7 +216,6 @@ const Instructions = () => {
           <h2 className="section__title">{t('workingHours')}</h2>
           <p className="section__text">{t('workingHoursText1')}</p>
           <p className="section__text">{t('workingHoursText2')}</p>
-          <p className="section__text">{t('workingHoursText3')}</p>
           <div className="hours__images">
             <div className="hours__img-wrap">
               {language === 'en' ? (
@@ -289,6 +287,7 @@ const Instructions = () => {
           <p className="section__text">{t('workingRadiusText1')}</p>
           <p className="section__text">{t('workingRadiusText2')}</p>
           <p className="section__text">{t('workingRadiusText3')}</p>
+          <p className="section__text">{t('workingRadiusText4')}</p>
           <div className="radius__images">
             <div className="radius__img-wrap">
               {language === 'en' ? (
@@ -361,6 +360,7 @@ const Instructions = () => {
           <p className="section__text">{t('statusText2')}</p>
           <p className="section__text">{t('statusText3')}</p>
           <p className="section__text">{t('statusText4')}</p>
+          <p className="section__text">{t('statusText5')}</p>
           <div className="status__images">
             <div className="status__img-wrap">
               {language === 'en' ? (
@@ -505,7 +505,6 @@ const Instructions = () => {
           <p className="section__text">{t('uspText3')}</p>
           <p className="section__text">{t('uspText4')}</p>
           <p className="section__text">{t('uspText5')}</p>
-          <p className="section__text">{t('uspText6')}</p>
         </section>
         <section className="section customer">
           <h2 className="section__title">{t('targetCustomer')}</h2>
