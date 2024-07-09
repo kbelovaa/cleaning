@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { setIsAuthAction, setUserAction } from '../../store/actions/userActions';
 import {
   setActiveOrdersAction,
@@ -27,6 +27,9 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+
+  const { pathname } = useLocation();
+  const isWork = pathname.startsWith('/work');
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -91,23 +94,80 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
             <path d="M22.0714 7.92881L7.92925 22.0709" stroke="#268664" strokeLinecap="round" />
           </svg>
         </div>
-        <ul className="burger-menu__list">
-          {!isAuth && (
-            <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(false)}>
-              {t('signUp')}
-            </li>
-          )}
-          {!isAuth && (
-            <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(true)}>
-              {t('logIn')}
-            </li>
-          )}
-          {isAuth && (
+        {isWork ? (
+          <ul className="burger-menu__list">
             <li>
-              <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>
-                <span className="burger-menu__link">{t('profile')}</span>
+              <NavLink className="burger-menu__link" to="/work" end onClick={closeBurgerMenu}>
+                {t('main')}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className="burger-menu__link" to="/work/instructions" onClick={closeBurgerMenu}>
+                {t('instructions')}
+              </NavLink>
+            </li>
+          </ul>
+        ) : (
+          <ul className="burger-menu__list">
+            {!isAuth && (
+              <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(false)}>
+                {t('signUp')}
+              </li>
+            )}
+            {!isAuth && (
+              <li className="burger-menu__link burger-menu__link-auth" onClick={() => handleAuthModalOpen(true)}>
+                {t('logIn')}
+              </li>
+            )}
+            {isAuth && (
+              <li>
+                <div className="burger-menu__item" onClick={() => setIsProfileExpanded((state) => !state)}>
+                  <span className="burger-menu__link">{t('profile')}</span>
+                  <svg
+                    className={`arrow ${isProfileExpanded ? 'rotated' : ''}`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path d="M6 10L12 16L18 10" stroke="black" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <ul className={`burger-menu__sublist ${isProfileExpanded ? 'expanded' : ''}`}>
+                  <li>
+                    <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}>
+                      {t('personalInfo')}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}>
+                      {t('addresses')}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}>
+                      {t('orders')}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}>
+                      {t('settings')}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <span className="burger-menu__sublink" onClick={handleLogOut}>
+                      {t('logOut')}
+                    </span>
+                  </li>
+                </ul>
+              </li>
+            )}
+            <li>
+              <div className="burger-menu__item" onClick={() => setIsInfoExpanded((state) => !state)}>
+                <span className="burger-menu__link">{t('info')}</span>
                 <svg
-                  className={`arrow ${isProfileExpanded ? 'rotated' : ''}`}
+                  className={`arrow ${isInfoExpanded ? 'rotated' : ''}`}
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -117,78 +177,36 @@ const BurgerMenu = ({ isOpen, setIsOpen, setIsLoginOpen, setIsAuthorizationOpen 
                   <path d="M6 10L12 16L18 10" stroke="black" strokeLinecap="round" />
                 </svg>
               </div>
-              <ul className={`burger-menu__sublist ${isProfileExpanded ? 'expanded' : ''}`}>
+              <ul className={`burger-menu__sublist ${isInfoExpanded ? 'expanded' : ''}`}>
                 <li>
-                  <NavLink className="burger-menu__sublink" to="/personal-info" onClick={closeBurgerMenu}>
-                    {t('personalInfo')}
+                  <NavLink className="burger-menu__sublink" to="/info-price" onClick={closeBurgerMenu}>
+                    {t('services')}
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="burger-menu__sublink" to="/addresses" onClick={closeBurgerMenu}>
-                    {t('addresses')}
+                  <NavLink className="burger-menu__sublink" to="/cancellation-policy" onClick={closeBurgerMenu}>
+                    {t('cancellationPolicy')}
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="burger-menu__sublink" to="/orders" onClick={closeBurgerMenu}>
-                    {t('orders')}
+                  <NavLink className="burger-menu__sublink" to="/faq" onClick={closeBurgerMenu}>
+                    {t('faq')}
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink className="burger-menu__sublink" to="/settings" onClick={closeBurgerMenu}>
-                    {t('settings')}
+                  <NavLink className="burger-menu__sublink" to="/contact-us" onClick={closeBurgerMenu}>
+                    {t('contactUs')}
                   </NavLink>
-                </li>
-                <li>
-                  <span className="burger-menu__sublink" onClick={handleLogOut}>
-                    {t('logOut')}
-                  </span>
                 </li>
               </ul>
             </li>
-          )}
-          <li>
-            <div className="burger-menu__item" onClick={() => setIsInfoExpanded((state) => !state)}>
-              <span className="burger-menu__link">{t('info')}</span>
-              <svg
-                className={`arrow ${isInfoExpanded ? 'rotated' : ''}`}
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path d="M6 10L12 16L18 10" stroke="black" strokeLinecap="round" />
-              </svg>
-            </div>
-            <ul className={`burger-menu__sublist ${isInfoExpanded ? 'expanded' : ''}`}>
-              <li>
-                <NavLink className="burger-menu__sublink" to="/info-price" onClick={closeBurgerMenu}>
-                  {t('services')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="burger-menu__sublink" to="/cancellation-policy" onClick={closeBurgerMenu}>
-                  {t('cancellationPolicy')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="burger-menu__sublink" to="/faq" onClick={closeBurgerMenu}>
-                  {t('faq')}
-                </NavLink>
-              </li>
-              <li>
-                <NavLink className="burger-menu__sublink" to="/contact-us" onClick={closeBurgerMenu}>
-                  {t('contactUs')}
-                </NavLink>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <NavLink className="burger-menu__link" to="/booking" onClick={closeBurgerMenu}>
-              {t('bookNow')}
-            </NavLink>
-          </li>
-        </ul>
+            <li>
+              <NavLink className="burger-menu__link" to="/booking" onClick={closeBurgerMenu}>
+                {t('bookNow')}
+              </NavLink>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );

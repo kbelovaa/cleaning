@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useOutletContext } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import cleaningImg from '../../images/cleaning.png';
 import cleaningImg1440 from '../../images/cleaning-1440.png';
@@ -18,7 +18,6 @@ import './Main.scss';
 const Main = ({ password }) => {
   const [stageImg, setStageImg] = useState(stageImg1440);
   const [windowWidth, setWindowWidth] = useState();
-  const navigate = useNavigate();
 
   const { t } = useTranslation();
 

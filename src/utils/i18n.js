@@ -145,7 +145,7 @@ i18n.use(initReactI18next).init({
         subtotal: 'Subtotal',
         iva: 'IVA',
         total: 'Total',
-        copyright: 'Copyright © 2024 SDL - Servicio de limpieza. All rights reserved',
+        copyright: 'Copyright © 2024 SDL. All rights reserved',
         termsOfUse: 'Terms of Use',
         cookies: 'Cookies',
         privacyPolicy: 'Privacy Policy',
@@ -929,11 +929,134 @@ i18n.use(initReactI18next).init({
         German: 'German',
         Russian: 'Russian',
         testimonials: 'Testimonials',
-        feedback1: 'Absolutely fantastic service! The team was punctual, professional, and left my home spotless. Five starts!',
-        feedback2: 'This is the best cleaning service I have ever used. They were thorough, efficient, and very friendly. My home looks spotless. Highly recommend!',
-        feedback3: 'I loved how fast and easy it was to book a cleaning. The cleaners were very professional; they did a deep clean, and it looks amazing. Outstanding job. Highly recommend!',
-        feedback4: 'Fantastic service! They were on time, very professional, and did a superb job cleaning. We are very satisfied and will definitely use them again.',
-        feedback5: "I've tried several cleaning services, but this one is by far the best. They are thorough, reliable, and very friendly. My place has never looked better!",
+        feedback1:
+          'Absolutely fantastic service! The team was punctual, professional, and left my home spotless. Five starts!',
+        feedback2:
+          'This is the best cleaning service I have ever used. They were thorough, efficient, and very friendly. My home looks spotless. Highly recommend!',
+        feedback3:
+          'I loved how fast and easy it was to book a cleaning. The cleaners were very professional; they did a deep clean, and it looks amazing. Outstanding job. Highly recommend!',
+        feedback4:
+          'Fantastic service! They were on time, very professional, and did a superb job cleaning. We are very satisfied and will definitely use them again.',
+        feedback5:
+          "I've tried several cleaning services, but this one is by far the best. They are thorough, reliable, and very friendly. My place has never looked better!",
+        booking: 'Book cleaning',
+        workWithUs: 'Work with us',
+        affiliateProgram: 'Affiliate program',
+        introText:
+          'SDL is a new on-demand cleaning service where you can set your own schedule and work radius. As part of our team, you will be equipped with our user-friendly mobile app, where you will receive cleaning requests in your radius. And when you accept the job, all details will be sent through the mobile app, with instant payment after completing the job.',
+        welcome: 'Would you like to work with us?',
+        about:
+          'With SDL you have the freedom to work according to your preferences by setting your own work hours and radius, and make easy changes on the go. The process is made easy – accept requests and manage your work through the intuitive mobile app. In addition, there is great potential for additional earnings: Non-standard: receive an extra 50%-100% on expedited cleanings and up to 400% during off-peak hours, including early mornings, late nights, and holidays. Referrals: By referring a new client, you will receive a 10% share of their bookings for an entire year. Conversions: When a client decides to schedule regular cleanings after your initial service, you will have the option to take on that recurring job.',
+        join: 'Join',
+        howSystemWorks: 'How the system works',
+        notification: 'Notification',
+        notificationDescription: 'Receive notifications of requests that match your working hours and radius',
+        accept: 'Acceptance',
+        acceptDescription: ' Accept the job, and all details will be sent through the mobile app',
+        instantPayments: 'Instant payment',
+        instantPaymentsDescription: 'Receive instant payment after each completed job',
+        whyJoinUs: 'Why join us',
+        flexible: 'Flexible',
+        flexibleDescription: 'Set your work hours and radius to suit personal preferences',
+        technology: 'Technology',
+        technologyDescription: 'Accept requests and manage work through the intuitive mobile app',
+        payment: 'Payment',
+        paymentDescription: 'Receive instant payment after completing each job',
+        potential: 'Potential',
+        potentialDescription: 'Earn extra through non-standard hours, referrals, and converting customers',
+        complianceAndSecurity: 'Compliance and Security',
+        complianceAndSecurityDescription: 'All with full compliance, insurance and social security',
+        joinUs: 'Join our waiting list now',
+        textOptional: 'Text (optional)',
+        joinWaitingList: 'Join the waiting list',
+        secureSpot: 'Secure your spot on the waiting list by answering these simple questions',
+        surveyQuestion1: 'Do you like the idea of setting your own work schedule and radius for cleaning jobs?',
+        'Yes, very much': 'Yes, very much',
+        Yes: 'Yes',
+        No: 'No',
+        surveyQuestion2: 'How comfortable are you with using a mobile app to receive and manage cleaning',
+        'Very comfortable': 'Very comfortable',
+        'Somewhat comfortable': 'Somewhat comfortable',
+        'Not comfortable': 'Not comfortable',
+        surveyQuestion3: 'How many hours would you be interested in working per week?',
+        'Less than 10 hours': 'Less than 10 hours',
+        '10-20 hours': '10-20 hours',
+        '20-30 hours': '20-30 hours',
+        '30+ hours': '30+ hours',
+        surveyQuestion4: 'How important is receiving payment right after completing each cleaning job to you?',
+        'Very important': 'Very important',
+        Important: 'Important',
+        'Not important': 'Not important',
+        surveyQuestion5:
+          'Are you interested in working off-peak hours (early mornings, late nights, and holidays) for additional income?',
+        Maybe: 'Maybe',
+        youAreInWaitingList: 'You are now on the waitlist',
+        infoWillBySent: 'Information will be sent by email',
+        main: 'Main',
+        system: 'The system',
+        systemText:
+          'The system consists of a mobile app for cleaners, a website and mobile app for customers, and an admin panel.',
+        mobileWeb: 'Mobile+Web Customer',
+        mobileCleaner: 'Mobile Cleaner',
+        admin: 'Admin panel',
+        howItWorks: 'How it works',
+        howItWorksText1:
+          "A client requests cleaning for a specific date and time via the website or mobile app. This request is sent to the mobile app of all cleaners who have the request's address within their working radius.",
+        howItWorksText2:
+          'The first cleaner to accept the job is assigned, and all details are sent through the app. When a cleaner starts a job, a checklist for progress tracking appears.',
+        mobileApp: 'Mobile app cleaner',
+        mobileAppText:
+          'The intuitive mobile app lets cleaners set their work hours and radius to suit personal preferences, accept requests, manage workloads, and streamline operations and after completing each job receive instant payment.',
+        menuBar: 'Menu bar',
+        menuBarText1: 'There are four menu icons in the app: request, schedule, notifications and profile.',
+        menuBarText2:
+          'Which will we explore in detail, however before using the app for the first time, you need to activate your profile in the system by setting your working hours and working radius.',
+        workingHours: 'Working hours',
+        workingHoursText1:
+          'Here, you set the working hours for the current week and by pressing the pencil icon it allows you to adjust your working hours for each day. You can set multiple time intervals for work each day.',
+        workingHoursText2:
+          "For example, you may choose to work in the morning and late afternoon, with hours set from 10:00 to 12:00 and 15:15 to 18:00 respectively. We recommend reviewing and editing your weekly calendar every Sunday to ensure it aligns with your preferences. You can also copy the previous week's calendar for faster setup.",
+        workingHoursText3:
+          'You can change your working hours at any time or day. If your plans change and you need to make adjustments simply delete those hours by selecting the pencil icon and pressing the delete button. Remember to double-check your changes before leaving the working hours section.',
+        workingRadius: 'Working radius',
+        workingRadiusText1: 'Go to: Profile -> Working Radius',
+        workingRadiusText2:
+          'Next you set your working radius. It is a circle from your home, extending a distance from the centre in all directions. Think of it as a circle with you in the middle where the outer circle represents the maximum distance you are willing to travel to a job. Initially, we suggest leaving it wide to learn where most jobs are coming from, which may be slightly beyond your initial radius. After entering the kilometres, press save.',
+        workingRadiusText3:
+          'With these steps completed, you are now active and will receive requests that matches your working hours and radius.',
+        status: 'Status',
+        statusText1:
+          'Your profile icon will display a small coloured circle indicating your current status: green, orange, or red.',
+        statusText2: 'Green: You are within your working hours.',
+        statusText3: 'Orange: You are doing a job.',
+        statusText4: 'Red: You are outside of your working hours.',
+        requestText:
+          'The first icon on the left shows requests that match your working hours and radius. A new request will be indicated by a small circle on the icon. When you press it, you will see each request listed, where you can click to view the details and the location on the map. Upon accepting a request (and being the first to do so), all information is sent to the next icon on the right\u00A0- Schedule.',
+        scheduleText:
+          'Under schedule, you can see all your upcoming jobs and there is also a calendar view with a highlight on the days that you have accepted jobs on. If you have multiple jobs, they will be listed as line items where you can press each one to see the details and the expected salary.',
+        notificationsText:
+          'Under the notification icon, you will see a list of individual notifications you have received. A new notification will be indicated by a small circle on the icon. Some notifications will have a hyperlink that will lead you directly to the relevant page. For instance, if you receive a notification reminding you to set your working hours, you will see a small green line labelled "Set Working Hours." Clicking on this link will take you to the place for setting your working hours within your profile settings.',
+        bonuses: 'Bonuses',
+        bonusesText1:
+          'There are three ways to earn extra: non-standard hours, referrals, and customer conversion to regular.',
+        bonusesText2:
+          'Non-standard hours: Cleaners receive an extra 20% on expedited cleanings and up to 200% during off-peak hours, including early mornings, late nights, and holidays.',
+        bonusesText3:
+          'Referrals: By referring a new client, cleaners receive a 10% share of their bookings for an entire year.',
+        bonusesText4:
+          'Conversion to regular: When a new client decides to schedule regular cleanings, the cleaner who performed the last job is given the option to continue with the regular assignment. This serves as an incentive for delivering exceptional service, transforming a one-time job into recurring earnings.',
+        usp: 'USP (unique selling proposition)',
+        uspText1:
+          'In home cleaning, where services may not vary significantly, our USP (unique selling proposition) will be centred around convenience:',
+        uspText2: '-      Availability 24/7',
+        uspText3: '-      Swift booking and confirmation',
+        uspText4: '-      Fast service delivery',
+        uspText5: '-      Compliance with local laws',
+        uspText6:
+          'In launching SDL, the product (the service itself) holds paramount importance. The success and sustainability of our business depend on delivering an exceptional service. Without a consistent service that exceeds client expectations, retaining clients becomes challenging, and the overall business model unsustainable. Therefore, prioritizing and ensuring the quality and reliability of the service is the cornerstone for scaling our company. The best advertising is a satisfied client.',
+        targetCustomer: 'Target customer',
+        targetCustomerText:
+          'The primary clients we target are international second- or holiday home owners and real estate agents catering to this demographic. We specifically focus on those who genuinely understand and value our unique selling proposition (USP) and appreciate the availability, quality, and reliability of the service we provide. These clients are not highly price-sensitive and place significant importance on convenience. If we fulfil our promise of excellence, they are likely to become valuable ambassadors for us.',
       },
     },
     es: {
@@ -1079,7 +1202,7 @@ i18n.use(initReactI18next).init({
         subtotal: 'Subtotal',
         iva: 'IVA',
         total: 'Total',
-        copyright: 'Copyright © 2024 SDL - Servicio de limpieza. Todos los derechos reservados',
+        copyright: 'Copyright © 2024 SDL. Todos los derechos reservados',
         termsOfUse: 'Términos de uso',
         cookies: 'Cookies',
         privacyPolicy: 'Política de privacidad',
@@ -1884,11 +2007,137 @@ i18n.use(initReactI18next).init({
         German: 'Alemán',
         Russian: 'Ruso',
         testimonials: 'Testimonios',
-        feedback1: '¡Un servicio absolutamente fantástico! El equipo fue puntual, profesional y dejó mi casa impecable. ¡Cinco estrellas!',
-        feedback2: 'Este es el mejor servicio de limpieza que he utilizado. Fueron minuciosos, eficientes y muy amables. Mi casa se ve impecable. ¡Muy recomendable!',
-        feedback3: 'Me encantó lo rápido y fácil que fue reservar una limpieza. Los limpiadores fueron muy profesionales; hicieron una limpieza profunda y se ve increíble. Trabajo sobresaliente. ¡Muy recomendable!',
-        feedback4: '¡Servicio fantástico! Llegaron a tiempo, fueron muy profesionales e hicieron un trabajo excelente de limpieza. Estamos muy satisfechos y definitivamente los usaremos de nuevo.',
-        feedback5: 'He probado varios servicios de limpieza, pero este es, con diferencia, el mejor. Son minuciosos, confiables y muy amables. ¡Mi lugar nunca se ha visto mejor!',
+        feedback1:
+          '¡Un servicio absolutamente fantástico! El equipo fue puntual, profesional y dejó mi casa impecable. ¡Cinco estrellas!',
+        feedback2:
+          'Este es el mejor servicio de limpieza que he utilizado. Fueron minuciosos, eficientes y muy amables. Mi casa se ve impecable. ¡Muy recomendable!',
+        feedback3:
+          'Me encantó lo rápido y fácil que fue reservar una limpieza. Los limpiadores fueron muy profesionales; hicieron una limpieza profunda y se ve increíble. Trabajo sobresaliente. ¡Muy recomendable!',
+        feedback4:
+          '¡Servicio fantástico! Llegaron a tiempo, fueron muy profesionales e hicieron un trabajo excelente de limpieza. Estamos muy satisfechos y definitivamente los usaremos de nuevo.',
+        feedback5:
+          'He probado varios servicios de limpieza, pero este es, con diferencia, el mejor. Son minuciosos, confiables y muy amables. ¡Mi lugar nunca se ha visto mejor!',
+        booking: 'Reservar limpiezag',
+        workWithUs: 'Trabaja con nosotros',
+        affiliateProgram: 'Programa de afiliados',
+        introText:
+          'SDL es un nuevo servicio de limpieza a demanda donde puedes establecer tu propio horario y radio de trabajo. Como parte de nuestro equipo, contarás con nuestra aplicación móvil fácil de usar, donde recibirás solicitudes de limpieza dentro de tu radio. Y cuando aceptes el trabajo, todos los detalles se enviarán a través de la aplicación móvil, con pago instantáneo después de completar el trabajo.',
+        welcome: '¿Te gustaría trabajar con nosotros?',
+        about:
+          'Con SDL tienes la libertad de trabajar según tus preferencias estableciendo tus propios horarios y radio de trabajo, y realizar cambios sencillos sobre la marcha. El proceso es sencillo: acepte solicitudes y administre su trabajo a través de la intuitiva aplicación móvil. Además, existe un gran potencial para obtener ingresos adicionales: No estándar: reciba entre un 50% y un 100% adicional en limpiezas aceleradas y hasta un 400% durante las horas de menor actividad, incluidas las primeras horas de la mañana, las últimas horas de la noche y los días festivos. Referencias: al recomendar a un nuevo cliente, recibirá una participación del 10 % de sus reservas durante todo un año. Conversiones: cuando un cliente decide programar limpiezas periódicas después de su servicio inicial, usted tendrá la opción de asumir ese trabajo recurrente.',
+        join: 'Únete',
+        howSystemWorks: 'cómo funciona el sistema',
+        notification: 'Notificación',
+        notificationDescription: 'Reciba notificaciones de solicitudes que coincidan con su horario y radio de trabajo',
+        accept: 'Aceptación',
+        acceptDescription: 'Acepte el trabajo y todos los detalles se enviarán a través de la aplicación móvil',
+        instantPayments: 'Pago instantáneo',
+        instantPaymentsDescription: 'Reciba un pago instantáneo después de cada trabajo completado',
+        whyJoinUs: '¿Por qué unirte a nosotros?',
+        flexible: 'Flexible',
+        flexibleDescription: 'Establezca su horario de trabajo y su radio según sus preferencias personales',
+        technology: 'Tecnología',
+        technologyDescription: 'Acepte solicitudes y administre el trabajo a través de la intuitiva aplicación móvil',
+        payment: 'Pago',
+        paymentDescription: 'Reciba un pago instantáneo después de completar cada trabajo',
+        potential: 'Potencial',
+        potentialDescription: 'Gane más a través de horarios no estándar, referencias y clientes convertidos',
+        complianceAndSecurity: 'Cumplimiento y Seguridad',
+        complianceAndSecurityDescription: 'Todo con pleno cumplimiento, seguros y seguridad social',
+        joinUs: 'Únete a nuestra lista de espera ahora',
+        textOptional: 'Texto (opcional)',
+        joinWaitingList: 'Únete a la lista de espera',
+        secureSpot: 'Asegura tu lugar en la lista de espera respondiendo estas simples preguntas',
+        surveyQuestion1:
+          '¿Te gusta la idea de establecer tu propio horario de trabajo y radio para trabajos de limpieza?',
+        'Yes, very much': 'Sí, mucho',
+        Yes: 'Sí',
+        No: 'No',
+        surveyQuestion2:
+          '¿Qué tan cómodo te sientes usando una aplicación móvil para recibir y gestionar trabajos de limpieza?',
+        'Very comfortable': 'Muy cómodo',
+        'Somewhat comfortable': 'Algo cómodo',
+        'Not comfortable': 'No cómodo',
+        surveyQuestion3: '¿Cuántas horas estarías interesado en trabajar por semana?',
+        'Less than 10 hours': 'Menos de 10 horas',
+        '10-20 hours': '10-20 horas',
+        '20-30 hours': '20-30 horas',
+        '30+ hours': '30+ horas',
+        surveyQuestion4:
+          '¿Qué tan importante es para ti recibir el pago inmediatamente después de completar cada trabajo de limpieza?',
+        'Very important': 'Muy importante',
+        Important: 'Importante',
+        'Not important': 'No es importante',
+        surveyQuestion5:
+          '¿Estás interesado en trabajar en horas fuera de pico (mañanas tempranas, noches tardías y días festivos) para obtener ingresos adicionales?',
+        Maybe: 'Tal vez',
+        youAreInWaitingList: 'Ahora estás en la lista de espera',
+        infoWillBySent: 'La información se enviará por correo electrónico',
+        main: 'Principal',
+        system: 'El sistema',
+        systemText:
+          'El sistema consta de una aplicación móvil para limpiadores, un sitio web y una aplicación móvil para clientes, y un panel de administración.',
+        mobileWeb: 'Móvil+Web Cliente',
+        mobileCleaner: 'Móvil Limpiadora',
+        admin: 'Panel de administrador',
+        howItWorks: 'Cómo funciona',
+        howItWorksText1:
+          'Un cliente solicita una limpieza para una fecha y hora específicas a través del sitio web o la aplicación móvil. Esta solicitud se envía a la aplicación móvil de todos los limpiadores que tengan la dirección de la solicitud dentro de su radio de trabajo.',
+        howItWorksText2:
+          'Se asigna al primer limpiador que acepta el trabajo y todos los detalles se envían a través de la aplicación. Cuando un limpiador comienza un trabajo, aparece una lista de verificación para el seguimiento del progreso.',
+        mobileApp: 'Limpiador de aplicaciones móviles',
+        mobileAppText:
+          'La intuitiva aplicación móvil permite a los limpiadores establecer sus horas y radio de trabajo para adaptarlos a sus preferencias personales, aceptar solicitudes, administrar cargas de trabajo y agilizar las operaciones y, después de completar cada trabajo, recibir un pago instantáneo.',
+        menuBar: 'Barra de menús',
+        menuBarText1: 'Hay cuatro íconos de menú en la aplicación: solicitud, programación, notificaciones y perfil.',
+        menuBarText2:
+          'Lo exploraremos en detalle; sin embargo, antes de usar la aplicación por primera vez, debe activar su perfil en el sistema configurando su horario de trabajo y su radio de trabajo.',
+        workingHours: 'Horas Laborales',
+        workingHoursText1:
+          'Aquí, usted configura las horas de trabajo para la semana actual y al presionar el ícono de lápiz le permite ajustar sus horas de trabajo para cada día. Puede establecer varios intervalos de tiempo para trabajar cada día.',
+        workingHoursText2:
+          'Por ejemplo, puedes optar por trabajar por la mañana y por la tarde, con un horario establecido de 10:00 a 12:00 y de 15:15 a 18:00 respectivamente. Recomendamos revisar y editar su calendario semanal todos los domingos para asegurarse de que se ajuste a sus preferencias. También puedes copiar el calendario de la semana anterior para una configuración más rápida.',
+        workingHoursText3:
+          'Puedes cambiar tu horario laboral en cualquier momento o día. Si sus planes cambian y necesita hacer ajustes, simplemente elimine esas horas seleccionando el ícono de lápiz y presionando el botón Eliminar. Recuerde verificar sus cambios antes de salir de la sección de horas de trabajo.',
+        workingRadius: 'Radio de trabajo',
+        workingRadiusText1: 'Vaya a: Perfil -> Radio de trabajo',
+        workingRadiusText2:
+          'A continuación establece su radio de trabajo. Es un círculo desde tu casa, que se extiende desde el centro en todas direcciones. Piense en ello como un círculo con usted en el medio, donde el círculo exterior representa la distancia máxima que está dispuesto a viajar para llegar a un trabajo. Inicialmente, sugerimos dejarlo amplio para saber de dónde provienen la mayoría de los trabajos, que pueden estar ligeramente más allá de su radio inicial. Después de introducir los kilómetros, pulsa guardar.',
+        workingRadiusText3:
+          'Una vez completados estos pasos, ahora está activo y recibirá solicitudes que coincidan con su horario y radio de trabajo.',
+        status: 'Estado',
+        statusText1:
+          'El ícono de su perfil mostrará un pequeño círculo de color que indica su estado actual: verde, naranja o rojo.',
+        statusText2: 'Verde: Estás dentro de tu horario laboral.',
+        statusText3: 'Naranja: Estás haciendo un trabajo.',
+        statusText4: 'Rojo: Estás fuera de tu horario laboral.',
+        requestText:
+          'El primer ícono a la izquierda muestra solicitudes que coinciden con su horario y radio de trabajo. Una nueva solicitud se indicará con un pequeño círculo en el icono. Cuando lo presione, verá cada solicitud en la lista, donde puede hacer clic para ver los detalles y la ubicación en el mapa. Al aceptar una solicitud (y ser el primero en hacerlo), toda la información se envía al siguiente ícono a la derecha: Programar.',
+        scheduleText:
+          'En Programación, puede ver todos sus próximos trabajos y también hay una vista de calendario con un resaltado de los días en los que aceptó trabajos. Si tiene varios trabajos, se enumerarán como líneas de pedido donde podrá presionar cada uno para ver los detalles y el salario esperado.',
+        notificationsText:
+          'Debajo del ícono de notificación, verá una lista de notificaciones individuales que ha recibido. Una nueva notificación se indicará con un pequeño círculo en el icono. Algunas notificaciones tendrán un hipervínculo que lo llevará directamente a la página correspondiente. Por ejemplo, si recibe una notificación que le recuerda que debe establecer su horario de trabajo, verá una pequeña línea verde con la etiqueta "Establecer horario de trabajo". Al hacer clic en este enlace, accederá al lugar para configurar su horario de trabajo dentro de la configuración de su perfil.',
+        bonuses: 'Bonificaciones',
+        bonusesText1:
+          'Hay tres formas de ganar dinero extra: horas no estándar, referencias y conversión de clientes a clientes regulares.',
+        bonusesText2:
+          'Horario no estándar: los limpiadores reciben un 20 % adicional en limpiezas aceleradas y hasta un 200 % durante las horas de menor actividad, incluidas las primeras horas de la mañana, las últimas horas de la noche y los días festivos.',
+        bonusesText3:
+          'Referencias: al recomendar a un nuevo cliente, los limpiadores reciben una participación del 10% de sus reservas durante todo un año.',
+        bonusesText4:
+          'Conversión a limpieza regular: cuando un nuevo cliente decide programar limpiezas regulares, el limpiador que realizó el último trabajo tiene la opción de continuar con la tarea regular. Esto sirve como incentivo para brindar un servicio excepcional, transformando un trabajo único en ingresos recurrentes.',
+        usp: 'PVU (propuesta de venta única)',
+        uspText1:
+          'En la limpieza del hogar, donde los servicios pueden no variar significativamente, nuestra PVU (propuesta de venta única) se centrará en la conveniencia:',
+        uspText2: '-      Disponibilidad 24 horas al día, 7 días a la semana',
+        uspText3: '-      Reserva y confirmación rápidas',
+        uspText4: '-      Entrega de servicios rápida',
+        uspText5: '-      Cumplimiento de las leyes locales',
+        uspText6:
+          'Al lanzar SDL, el producto (el servicio en sí) tiene una importancia primordial. El éxito y la sostenibilidad de nuestro negocio dependen de brindar un servicio excepcional. Sin un servicio consistente que supere las expectativas del cliente, retenerlos se vuelve un desafío y el modelo de negocio general insostenible. Por ello, priorizar y asegurar la calidad y confiabilidad del servicio es la piedra angular para escalar nuestra empresa. La mejor publicidad es un cliente satisfecho.',
+        targetCustomer: 'Cliente objetivo',
+        targetCustomerText:
+          'Los principales clientes a los que nos dirigimos son propietarios internacionales de segundas viviendas o viviendas de vacaciones y agentes inmobiliarios que atienden a este grupo demográfico. Nos centramos específicamente en aquellos que realmente entienden y valoran nuestra propuesta de venta única (PVU) y aprecian la disponibilidad, calidad y confiabilidad del servicio que brindamos. Estos clientes no son muy sensibles al precio y dan mucha importancia a la comodidad. Si cumplimos nuestra promesa de excelencia, es probable que se conviertan en valiosos embajadores para nosotros.',
       },
     },
   },

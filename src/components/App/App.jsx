@@ -36,6 +36,10 @@ import LegalNotice from '../LegalNotice/LegalNotice';
 import PrivacyPolicy from '../PrivacyPolicy/PrivacyPolicy';
 import TermsOfUse from '../TermsOfUse/TermsOfUse';
 import Verification from '../Verification/Verification';
+import CleanerPresentation from '../CleanerPresentation/CleanerPresentation';
+import Survey from '../Survey/Survey';
+import Instructions from '../Instructions/Instructions';
+import Affiliates from '../Affiliates/Affiliates';
 import '../../utils/i18n';
 import './App.scss';
 
@@ -129,6 +133,10 @@ const App = () => {
           <Route path="legal-notice" element={<LegalNotice />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
           <Route path="terms-of-use" element={<TermsOfUse />} />
+          <Route path="work" element={<CleanerPresentation />} />
+          <Route path="work/survey" element={<Survey />} />
+          <Route path="work/instructions" element={<Instructions />} />
+          <Route path="affiliate-program" element={<Affiliates />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

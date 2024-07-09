@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { getNotifications } from '../../http/notificationsAPI';
 import Footer from '../Footer/Footer';
 import Authorization from '../Authorization/Authorization';
@@ -18,6 +18,8 @@ const Header = ({ loading, socket }) => {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [headerColor, setHeaderColor] = useState('');
   const [showSdl, setShowSdl] = useState(false);
+  const [isNavOpened, setIsNavOpened] = useState(false);
+  const [currentLink, setCurrentLink] = useState('booking');
   const [isLanguageOpened, setIsLanguageOpened] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [newNotifications, setNewNotifications] = useState([]);
@@ -32,6 +34,9 @@ const Header = ({ loading, socket }) => {
 
   const isBook = pathname.startsWith('/booking');
   const isMain = pathname === '/';
+  const isWork = pathname.startsWith('/work');
+  const isInstructions = pathname.startsWith('/work/instructions');
+  const isAffiliates = pathname.startsWith('/affiliate-program');
   const isVerification = pathname.startsWith('/verification');
 
   const { t, i18n } = useTranslation();
@@ -39,6 +44,17 @@ const Header = ({ loading, socket }) => {
   const availableLanguages = Object.keys(i18n.options.resources);
 
   const lngRef = useRef(null);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    if (isMain) {
+      setCurrentLink('booking');
+    } else if (isWork) {
+      setCurrentLink('workWithUs');
+    } else if (isAffiliates) {
+      setCurrentLink('affiliateProgram');
+    }
+  }, [pathname]);
 
   useEffect(() => {
     const getData = async () => {
@@ -108,7 +124,7 @@ const Header = ({ loading, socket }) => {
   }, []);
 
   useEffect(() => {
-    if (isBook || isMain) {
+    if (isBook || isMain || isWork) {
       setShowSdl(false);
     } else {
       setShowSdl(true);
@@ -117,7 +133,9 @@ const Header = ({ loading, socket }) => {
     const handleScroll = () => {
       const { scrollY } = window;
       let color = '';
-      if (isBook) {
+      if (isInstructions) {
+        color = 'green';
+      } else if (isBook) {
         if (scrollY > breakPoint2) {
           color = 'white';
           setShowSdl(true);
@@ -129,7 +147,7 @@ const Header = ({ loading, socket }) => {
           }
           color = 'green';
         }
-      } else if (scrollY > 0 && !isMain) {
+      } else if (scrollY > 0) {
         color = 'white';
       }
       setHeaderColor(color);
@@ -160,8 +178,30 @@ const Header = ({ loading, socket }) => {
     };
   }, [isLanguageOpened]);
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsNavOpened(false);
+      }
+    };
+
+    if (isNavOpened) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isNavOpened]);
+
   const openLanguages = () => {
     setIsLanguageOpened((state) => !state);
+  };
+
+  const openNav = () => {
+    setIsNavOpened((state) => !state);
   };
 
   const changeLanguage = (lng) => {
@@ -178,14 +218,73 @@ const Header = ({ loading, socket }) => {
 
   return (
     <div className="content">
-      <header id="header" className={`header-section ${headerColor} ${isMain ? 'main' : ''}`}>
+      <header id="header" className={`header-section ${headerColor}`}>
         <div className="container">
           <div className={`header ${isAuth ? 'isauth' : ''}`}>
-            <span className={`header__label ${showSdl ? '' : 'header__label_hidden'}`} onClick={() => navigate('/')}>
-              Sdl
-            </span>
+            {isMain || isWork ? (
+              <nav className="header__nav">
+                <ul className="header__nav-menu">
+                  <li>
+                    <NavLink className="header__nav-item" to="/">
+                      {t('booking')}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="header__nav-item" to="/work">
+                      {t('workWithUs')}
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="header__nav-item" to="/affiliate-program">
+                      {t('affiliateProgram')}
+                    </NavLink>
+                  </li>
+                </ul>
+                <div className="header__nav-wrap">
+                  <div className={`header__nav-list ${isNavOpened ? 'opened' : ''}`} ref={navRef}>
+                    <div className="header__nav-selected" onClick={openNav}>
+                      <span className="header__nav-value">{t(currentLink)}</span>
+                      <svg
+                        className="header__nav-arrow"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M2.5372 5.12488C2.23623 5.44141 2.23623 5.9383 2.5372 6.25482L8 12L13.4628 6.25482C13.7638 5.9383 13.7638 5.44141 13.4628 5.12488C13.1396 4.78498 12.5977 4.78498 12.2745 5.12488L8 9.62029L3.72554 5.12488C3.40235 4.78498 2.8604 4.78498 2.5372 5.12488Z"
+                          fill="black"
+                        />
+                      </svg>
+                    </div>
+                    <div className="header__nav-variants">
+                      <NavLink className="header__nav-value" to="/" onClick={() => setCurrentLink('booking')}>
+                        {t('booking')}
+                      </NavLink>
+                      <NavLink className="header__nav-value" to="/work" onClick={() => setCurrentLink('workWithUs')}>
+                        {t('workWithUs')}
+                      </NavLink>
+                      <NavLink
+                        className="header__nav-value"
+                        to="/affiliate-program"
+                        onClick={() => setCurrentLink('affiliateProgram')}
+                      >
+                        {t('affiliateProgram')}
+                      </NavLink>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            ) : (
+              <span className={`header__label ${showSdl ? '' : 'header__label_hidden'}`} onClick={() => navigate('/')}>
+                Sdl
+              </span>
+            )}
             <nav className={`header__menu ${loading ? '' : 'visible'}`}>
-              <ul className={isVerification ? 'hidden' : 'header__auth'}>
+              <ul className={isVerification || isWork ? 'hidden' : 'header__auth'}>
                 <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   {t('signUp')}
                 </li>
@@ -195,24 +294,14 @@ const Header = ({ loading, socket }) => {
               </ul>
               <div className="language-wrap">
                 <div className={`language ${isLanguageOpened ? 'opened' : ''}`} ref={lngRef}>
-                  <div className="language__selected" onClick={openLanguages}>
-                    <span className="language__value">{language}</span>
-                    <svg
-                      className="language__arrow"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                    >
-                      <path d="M6 9L12 15L18 9" stroke="#B0B0B0" strokeLinecap="round" />
-                    </svg>
-                  </div>
+                  <span className="language__value" onClick={openLanguages}>
+                    {language}
+                  </span>
                   <div className="language__variants">
                     {availableLanguages.map((elem, index) => (
                       <span
                         key={index}
-                        className={`language__value ${elem !== language ? 'not-selected' : ''}`}
+                        className={`language__value ${elem === language ? 'selected' : ''}`}
                         onClick={() => changeLanguage(elem)}
                       >
                         {elem}

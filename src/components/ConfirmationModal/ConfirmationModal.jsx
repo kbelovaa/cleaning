@@ -24,6 +24,7 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
   const isConfirmation = pathname.startsWith('/confirmation');
   const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
   const isKnowingWay = pathname.startsWith('/password');
+  const isSurvey = pathname.startsWith('/work/survey');
 
   const navigate = useNavigate();
 
@@ -46,7 +47,20 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
       navigate('/settings');
     }
 
-    if (!isPersonalInfo && !isContactUs && !isPassword && !isReceipt && !isConfirmation && !isInvoiceReceipt) {
+    if (isSurvey) {
+      sessionStorage.removeItem('survey');
+      navigate('/work');
+    }
+
+    if (
+      !isSurvey &&
+      !isPersonalInfo &&
+      !isContactUs &&
+      !isPassword &&
+      !isReceipt &&
+      !isConfirmation &&
+      !isInvoiceReceipt
+    ) {
       setEmail('');
     }
   };
@@ -80,7 +94,9 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
         </div>
         <svg
           className={
-            isPersonalInfo || isPassword || isReceipt || (isInvoiceReceipt && !isInvoice) ? 'confirmation__tick' : ''
+            isSurvey || isPersonalInfo || isPassword || isReceipt || (isInvoiceReceipt && !isInvoice)
+              ? 'confirmation__tick'
+              : ''
           }
           xmlns="http://www.w3.org/2000/svg"
           width="30"
@@ -103,6 +119,8 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
             ? t('awaitingConfirmation')
             : isConfirmation && !isAwaiting
             ? t('booked')
+            : isSurvey
+            ? t('youAreInWaitingList')
             : t('signUp')}
         </h3>
         <p className={isKnowingWay ? 'hidden' : 'confirmation__text'}>
@@ -126,6 +144,8 @@ const ConfirmationModal = ({ isOpen, setIsOpen, email, setEmail, isNewEmail, isI
             ? t('weAreLookingForCleaner')
             : isConfirmation && !isAwaiting
             ? t('yourServiceIsBooked')
+            : isSurvey
+            ? t('infoWillBySent')
             : t('confirmationEmailSent')}
         </p>
         <p className={isPersonalInfo && isNewEmail ? 'confirmation__text' : 'hidden'}>{t('verifyNewEmail')}</p>

@@ -6,11 +6,17 @@ import './Footer.scss';
 const Footer = () => {
   const { pathname } = useLocation();
   const isMain = pathname === '/';
+  const isWork = pathname.startsWith('/work');
+  const isInstructions = pathname.startsWith('/work/instructions');
 
   const { t } = useTranslation();
 
   return (
-    <footer className={`footer-section ${isMain ? 'white' : ''}`}>
+    <footer
+      className={`footer-section ${isMain || (isWork && !isInstructions) ? 'white' : ''} ${
+        isInstructions ? 'green' : ''
+      }`}
+    >
       <div className="container">
         <div className="footer">
           <p className="footer__text">{t('copyright')}</p>

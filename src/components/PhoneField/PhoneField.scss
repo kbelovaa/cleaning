@@ -39,16 +39,28 @@
   }
 
   & .flag-dropdown {
-    background-color: #fff;
+    background-color: transparent;
     border: 1px solid #e8e7e7;
     border-right: none;
     padding: 5px;
     transition: all 0.3s ease;
 
+    &.open {
+      background-color: transparent;
+
+      & .selected-flag {
+        background-color: transparent;
+      }
+    }
+
     .invalid &.invalid-field {
       border: 1px solid #a51f1f;
       border-right: none;
     }
+  }
+
+  & .selected-flag:hover {
+    background-color: transparent;
   }
 
   & .country-list {
