@@ -35,7 +35,6 @@ const Header = ({ loading, socket }) => {
   const isBook = pathname.startsWith('/booking');
   const isMain = pathname === '/';
   const isWork = pathname.startsWith('/work');
-  const isInstructions = pathname.startsWith('/work/instructions');
   const isAffiliates = pathname.startsWith('/affiliate-program');
   const isVerification = pathname.startsWith('/verification');
 
@@ -133,9 +132,7 @@ const Header = ({ loading, socket }) => {
     const handleScroll = () => {
       const { scrollY } = window;
       let color = '';
-      if (isInstructions) {
-        color = 'green';
-      } else if (isBook) {
+      if (isBook) {
         if (scrollY > breakPoint2) {
           color = 'white';
           setShowSdl(true);

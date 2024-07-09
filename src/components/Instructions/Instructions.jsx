@@ -69,8 +69,53 @@ const Instructions = () => {
   return (
     <div className="main instructions">
       <div className="container">
+        <h1 className="main-title">{t('intro')}</h1>
+        <section className="section work">
+          <h2 className="section__title">{t('wantToWorkWithUs')}</h2>
+          <p className="section__text">{t('workWithUsText1')}</p>
+          <p className="section__text">{t('workWithUsText2')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('whoWeAreLookingFor')}</h2>
+          <p className="section__text">{t('weAreLookingForText1')}</p>
+          <p className="section__text">{t('weAreLookingForText2')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('salary')}</h2>
+          <p className="section__text">{t('salaryText')}</p>
+        </section>
+        <h1 className="main-title">{t('onboarding')}</h1>
+        <section className="section work">
+          <h2 className="section__title">{t('interview')}</h2>
+          <p className="section__text">{t('interviewText')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('training')}</h2>
+          <p className="section__text">{t('trainingText')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('levels')}</h2>
+          <p className="section__text">{t('levelsText1')}</p>
+          <p className="section__text">{t('levelsText2')}</p>
+          <p className="section__text">{t('levelsText3')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('contract')}</h2>
+          <p className="section__text">{t('contractText')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('tech')}</h2>
+          <p className="section__text">{t('techText')}</p>
+        </section>
+        <section className="section work">
+          <h2 className="section__title">{t('app')}</h2>
+          <p className="section__text">{t('appText1')}</p>
+          <p className="section__text">{t('appText2')}</p>
+          <p className="section__text">{t('appText3')}</p>
+        </section>
+        <h1 className="main-title">{t('howItWorks')}</h1>
         <section className="section system">
-          <h1 className="section__title">{t('system')}</h1>
+          <h2 className="section__title">{t('system')}</h2>
           <p className="section__text">{t('systemText')}</p>
           <div className="system__images">
             <div className="system__img-wrap">
@@ -92,7 +137,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section how-it-works">
-          <h1 className="section__title">{t('howItWorks')}</h1>
+          <h2 className="section__title">{t('howItWorks')}</h2>
           <p className="section__text">{t('howItWorksText1')}</p>
           <p className="section__text">{t('howItWorksText2')}</p>
           <div className="how-it-works__images">
@@ -109,7 +154,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section app">
-          <h1 className="section__title">{t('mobileApp')}</h1>
+          <h2 className="section__title">{t('mobileApp')}</h2>
           <p className="section__text">{t('mobileAppText')}</p>
           <div className="app__images">
             {language === 'en' ? (
@@ -125,7 +170,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section menu">
-          <h1 className="section__title">{t('menuBar')}</h1>
+          <h2 className="section__title">{t('menuBar')}</h2>
           <p className="section__text">{t('menuBarText1')}</p>
           <p className="section__text">{t('menuBarText2')}</p>
           <div className="menu__images">
@@ -169,7 +214,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section hours">
-          <h1 className="section__title">{t('workingHours')}</h1>
+          <h2 className="section__title">{t('workingHours')}</h2>
           <p className="section__text">{t('workingHoursText1')}</p>
           <p className="section__text">{t('workingHoursText2')}</p>
           <p className="section__text">{t('workingHoursText3')}</p>
@@ -240,7 +285,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section radius">
-          <h1 className="section__title">{t('workingRadius')}</h1>
+          <h2 className="section__title">{t('workingRadius')}</h2>
           <p className="section__text">{t('workingRadiusText1')}</p>
           <p className="section__text">{t('workingRadiusText2')}</p>
           <p className="section__text">{t('workingRadiusText3')}</p>
@@ -311,7 +356,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section status">
-          <h1 className="section__title">{t('status')}</h1>
+          <h2 className="section__title">{t('status')}</h2>
           <p className="section__text">{t('statusText1')}</p>
           <p className="section__text">{t('statusText2')}</p>
           <p className="section__text">{t('statusText3')}</p>
@@ -344,7 +389,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section request">
-          <h1 className="section__title">{t('request')}</h1>
+          <h2 className="section__title">{t('request')}</h2>
           <p className="section__text">{t('requestText')}</p>
           <div className="request__images">
             {language === 'en' ? (
@@ -360,7 +405,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section schedule-block">
-          <h1 className="section__title">{t('schedule')}</h1>
+          <h2 className="section__title">{t('schedule')}</h2>
           <p className="section__text">{t('scheduleText')}</p>
           <div className="schedule-block__images">
             <div className="schedule-block__img-wrap">
@@ -403,7 +448,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section notifications-block">
-          <h1 className="section__title">{t('notifications')}</h1>
+          <h2 className="section__title">{t('notifications')}</h2>
           <p className="section__text">{t('notificationsText')}</p>
           <div className="notifications-block__images">
             <div className="notifications-block__img-wrap">
@@ -446,7 +491,7 @@ const Instructions = () => {
           </div>
         </section>
         <section className="section bonuses">
-          <h1 className="section__title">{t('bonuses')}</h1>
+          <h2 className="section__title">{t('bonuses')}</h2>
           <p className="section__text">{t('bonusesText1')}</p>
           <p className="section__text">{t('bonusesText2')}</p>
           <p className="section__text">{t('bonusesText3')}</p>
@@ -454,7 +499,7 @@ const Instructions = () => {
           <img className="bonuses__img" src={img23} alt="Percent" />
         </section>
         <section className="section usp">
-          <h1 className="section__title">{t('usp')}</h1>
+          <h2 className="section__title">{t('usp')}</h2>
           <p className="section__text">{t('uspText1')}</p>
           <p className="section__text">{t('uspText2')}</p>
           <p className="section__text">{t('uspText3')}</p>
@@ -463,7 +508,7 @@ const Instructions = () => {
           <p className="section__text">{t('uspText6')}</p>
         </section>
         <section className="section customer">
-          <h1 className="section__title">{t('targetCustomer')}</h1>
+          <h2 className="section__title">{t('targetCustomer')}</h2>
           <p className="section__text">{t('targetCustomerText')}</p>
         </section>
       </div>

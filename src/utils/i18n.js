@@ -1057,6 +1057,43 @@ i18n.use(initReactI18next).init({
         targetCustomer: 'Target customer',
         targetCustomerText:
           'The primary clients we target are international second- or holiday home owners and real estate agents catering to this demographic. We specifically focus on those who genuinely understand and value our unique selling proposition (USP) and appreciate the availability, quality, and reliability of the service we provide. These clients are not highly price-sensitive and place significant importance on convenience. If we fulfil our promise of excellence, they are likely to become valuable ambassadors for us.',
+        intro: 'Intro',
+        workWithUsText1: 'We are looking for dedicated cleaners to join our growing team!',
+        workWithUsText2:
+          'SDL is a new, on-demand, 24/7 home cleaning service operating in and around Marbella. Working with us, you will have the flexibility to set your own work hours and radius, adjust your availability in real-time, and receive payment instantly after completing each job. We offer high earning potential through expedited cleanings, non-standard hours, and referrals. SDL is fully compliant, insured, and contributes to social security.',
+        whoWeAreLookingFor: 'Who we are looking for',
+        weAreLookingForText1:
+          'We are looking for dedicated and detail-oriented individuals to join our cleaning team. While previous cleaning experience is preferred, we welcome anyone eager to learn and provide high-quality service. You must have a keen eye for detail to ensure every job meets our high standards. Reliability is crucial, as we need dependable and punctual individuals who can manage their schedules effectively. A friendly and professional attitude towards clients is essential for building long-term relationships.',
+        weAreLookingForText2:
+          'This role requires stamina, as it involves performing cleaning tasks that may include lifting, bending, and being on your feet for extended periods. Candidates should be comfortable using an iPhone or Android smartphone. Additionally, you must have reliable means of transportation or access to public transportation within your chosen work radius. If you meet these qualifications and are ready to contribute to our team, we encourage you to apply.',
+        salary: 'Salary',
+        salaryText:
+          'SDL operate 24/7, with client costs varying depending on the time of day—increasing during non-standard hours, weekends, and public holidays. The hourly rate for cleaners adjusts accordingly, starting at €14 per hour and can be up to €50 per hour during non-standard hours.',
+        onboarding: 'Onboarding',
+        interview: 'Interview',
+        interviewText:
+          'The interview is designed to gain an understanding of your experience, availability, and other relevant details. We will introduce you to our company and our vision. You will receive an invitation via email and WhatsApp.',
+        training: 'Training',
+        trainingText:
+          'Following the interview, we will schedule a training session to familiarize you with our methods, materials, and techniques. This session will include demonstrations of our processes and hands-on practices.',
+        levels: 'Levels',
+        levelsText1:
+          'Next you will do a real job alongside a senior, who will ensure you understand and follow our methods while assessing your skill level.',
+        levelsText2:
+          'We categorize employees as junior, mid, and senior based on technique rather than tenure. Initially, everyone begins at the junior level. Once the senior determines that you meet our standards, you will advance to mid-level or senior.',
+        levelsText3:
+          'A mid-level cleaner performs jobs independently, but a senior reviews their initial work to ensure standards are met. After successfully completing several jobs and receiving multiple 5-star ratings, a mid-level cleaner advances to senior and may take on additional responsibilities within the company.',
+        contract: 'Contract',
+        contractText:
+          'After this job, we will write a work contract which will be flexible. We use a standard contract that requires a minimum availability of 2 hours per month, complying with legal standards.',
+        tech: 'Tech',
+        techText: 'After signing the work contract we will provide a demonstration of our mobile app and system.',
+        app: 'App',
+        appText1:
+          'To download the app, search for "SDL Cleaner" in the App Store (for iPhone) or Google Play (for Android). Once you have downloaded the app, we will provide you with login credentials to access it.',
+        appText2:
+          'Below, you will find an overview of our platform and how the system works. We recommend that you familiarize yourself with this to get a baseline understanding of what we do.',
+        appText3: 'We look forward to welcoming you to our team.',
       },
     },
     es: {
