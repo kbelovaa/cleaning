@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import img0 from '../../images/instructions/img0.png';
 import img1 from '../../images/instructions/img1.png';
+import img1es from '../../images/instructions/img1_es.png';
 import img2 from '../../images/instructions/img2.png';
+import img2es from '../../images/instructions/img2_es.png';
 import img3 from '../../images/instructions/img3.png';
+import img3es from '../../images/instructions/img3_es.png';
 import img4 from '../../images/instructions/img4.png';
 import img4es from '../../images/instructions/img4_es.png';
 import img5 from '../../images/instructions/img5.png';
@@ -46,23 +48,6 @@ import img23 from '../../images/instructions/img23.png';
 import './Instructions.scss';
 
 const Instructions = () => {
-  const [windowWidth, setWindowWidth] = useState();
-
-  useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      setWindowWidth(width);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   const { t, i18n } = useTranslation();
   const { language } = i18n;
 
@@ -119,19 +104,27 @@ const Instructions = () => {
           <p className="section__text">{t('systemText')}</p>
           <div className="system__images">
             <div className="system__img-wrap">
-              {windowWidth <= 1440 ? (
-                <img className="system__img_1" src={img0} alt="Mobile+Web Customer" />
-              ) : (
+              {language === 'en' ? (
                 <img className="system__img_1" src={img1} alt="Mobile+Web Customer" />
+              ) : (
+                <img className="system__img_1" src={img1es} alt="Mobile+Web Customer" />
               )}
               <span className="system__img-label">{t('mobileWeb')}</span>
             </div>
             <div className="system__img-wrap">
-              <img className="system__img_2" src={img2} alt="Mobile Cleaner " />
+              {language === 'en' ? (
+                <img className="system__img_2" src={img2} alt="Mobile Cleaner " />
+              ) : (
+                <img className="system__img_2" src={img2es} alt="Mobile Cleaner " />
+              )}
               <span className="system__img-label">{t('mobileCleaner')}</span>
             </div>
             <div className="system__img-wrap">
-              <img className="system__img_3" src={img3} alt="Admin panel" />
+              {language === 'en' ? (
+                <img className="system__img_3" src={img3} alt="Admin panel" />
+              ) : (
+                <img className="system__img_3" src={img3es} alt="Admin panel" />
+              )}
               <span className="system__img-label">{t('admin')}</span>
             </div>
           </div>
