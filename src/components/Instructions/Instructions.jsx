@@ -501,9 +501,13 @@ const Instructions = () => {
         <section className="section usp">
           <h2 className="section__title">{t('usp')}</h2>
           <p className="section__text">{t('uspText1')}</p>
-          <p className="section__text">{t('uspText2')}</p>
-          <p className="section__text">{t('uspText3')}</p>
-          <p className="section__text">{t('uspText4')}</p>
+          <p className="section__text">
+            {t('uspText2')}
+            <br />
+            {t('uspText3')}
+            <br />
+            {t('uspText4')}
+          </p>
           <p className="section__text">{t('uspText5')}</p>
         </section>
         <section className="section customer">
