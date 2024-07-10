@@ -1,12 +1,34 @@
 .survey {
   padding: 140px 100px 50px;
 
+  @media screen and (max-width: 1440px) {
+    padding: 120px 80px 50px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 100px 60px 50px;
+  }
+
+  @media screen and (max-width: 744px) {
+    padding: 60px 16px 40px;
+  }
+
   &__title {
     font-size: 60px;
     font-weight: 600;
     line-height: 110%;
     letter-spacing: 1.8px;
-    margin: 10px 0;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: 1440px) {
+      font-size: 46px;
+      letter-spacing: 1.38px;
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 36px;
+      letter-spacing: 1.08px;
+    }
   }
 
   &__note {
@@ -15,6 +37,15 @@
     line-height: 130%;
     letter-spacing: 1.3px;
     margin-bottom: 60px;
+
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 40px;
+    }
+
+    @media screen and (max-width: 744px) {
+      font-size: 24px;
+      letter-spacing: 1.2px;
+    }
   }
 
   &__question {
@@ -27,6 +58,16 @@
       line-height: 130%;
       letter-spacing: 1.5px;
       margin-bottom: 20px;
+
+      @media screen and (max-width: 1440px) {
+        font-size: 24px;
+        letter-spacing: 1.2px;
+      }
+
+      @media screen and (max-width: 744px) {
+        font-size: 22px;
+        letter-spacing: 1.1px;
+      }
     }
   }
 
@@ -41,6 +82,11 @@
     position: relative;
     max-width: max-content;
     cursor: pointer;
+
+    @media screen and (max-width: 744px) {
+      font-size: 22px;
+      letter-spacing: 1.1px;
+    }
 
     &::after {
       display: block;
@@ -86,69 +132,72 @@
       fill: transparent;
     }
   }
-
-  &__btn {
-    margin: 40px 0 0 100px;
-  }
 }
 
 .survey__wrap .form {
   &__fields {
-    display: flex;
-    flex-wrap: wrap;
     width: 870px;
-    padding: 0 100px;
-
-    &-wrap {
-      padding: 100px 0;
-      background: #f4f9f7;
-      margin-bottom: 300px;
-    }
+    padding: 100px 100px 40px;
+    margin: 0;
 
     @media screen and (max-width: 1440px) {
-      width: 476px;
-      margin: 35px 0;
+      width: 830px;
+      padding: 100px 80px 40px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      padding: 100px 60px 40px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding: 80px 16px 40px;
+    }
+
+    &-wrap {
+      background: #f4f9f7;
+      margin-bottom: 300px;
+      padding-bottom: 100px;
+
+      @media screen and (max-width: 1440px) {
+        margin-bottom: 200px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        margin-bottom: 180px;
+      }
+
+      @media screen and (max-width: 744px) {
+        margin-bottom: 80px;
+        padding-bottom: 80px;
+      }
     }
   }
 
   &__field-wrap {
-    width: calc((100% - 10px) / 2);
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
-    position: relative;
-
-    @media screen and (max-width: 1440px) {
-      width: calc((100% - 7px) / 2);
-      margin-bottom: 7px;
+    &:last-of-type {
+      width: 100%;
     }
 
     &:nth-of-type(2n) {
       margin-left: 10px;
 
-      @media screen and (max-width: 1440px) {
-        margin-left: 7px;
+      @media screen and (max-width: 744px) {
+        margin-left: 0;
       }
     }
 
-    &:last-of-type {
+    @media screen and (max-width: 1024px) {
+      width: calc((100% - 10px) / 2);
+    }
+
+    @media screen and (max-width: 744px) {
       width: 100%;
     }
   }
 
   &__label {
-    font-size: 18px;
-    font-weight: 300;
-    line-height: 130%;
-    letter-spacing: 0.36px;
-    display: inline-block;
-    margin-bottom: 5px;
-
-    @media screen and (max-width: 1440px) {
-      font-size: 12px;
-      letter-spacing: 0.24px;
-      margin-bottom: 3px;
-    }
+    color: #000;
   }
 
   &__note {
@@ -157,23 +206,26 @@
     line-height: normal;
     margin-top: 5px;
     animation: fadeIn 0.3s ease-in;
-
-    @media screen and (max-width: 1440px) {
-      font-size: 11px;
-      margin-top: 3px;
-    }
-  }
-
-  &__message {
-    resize: none;
-    min-height: 112px;
-
-    @media screen and (max-width: 1440px) {
-      min-height: 80px;
-    }
   }
 }
 
 .survey__wrap .spinner_small {
+  margin-top: 0;
+}
+
+.survey__wrap .spinner_small,
+.survey__btn {
   margin-left: 100px;
+
+  @media screen and (max-width: 1440px) {
+    margin-left: 80px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    margin-left: 60px;
+  }
+
+  @media screen and (max-width: 744px) {
+    margin-left: 16px;
+  }
 }

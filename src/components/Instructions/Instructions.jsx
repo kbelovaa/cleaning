@@ -45,6 +45,10 @@ import img21es from '../../images/instructions/img21_es.png';
 import img22 from '../../images/instructions/img22.png';
 import img22es from '../../images/instructions/img22_es.png';
 import img23 from '../../images/instructions/img23.png';
+import img23es from '../../images/instructions/img23_es.png';
+import img24 from '../../images/instructions/img24.png';
+import img24es from '../../images/instructions/img24_es.png';
+import img25 from '../../images/instructions/img25.png';
 import './Instructions.scss';
 
 const Instructions = () => {
@@ -340,11 +344,14 @@ const Instructions = () => {
                 strokeLinecap="round"
               />
             </svg>
-            {language === 'en' ? (
-              <img className="img" src={img14} alt="Working radius" />
-            ) : (
-              <img className="img" src={img14es} alt="Working radius" />
-            )}
+            <div className="radius__img-wrap">
+              {language === 'en' ? (
+                <img className="img" src={img14} alt="Working radius" />
+              ) : (
+                <img className="img" src={img14es} alt="Working radius" />
+              )}
+              <div className="radius__img-border_3 border"></div>
+            </div>
           </div>
         </section>
         <section className="section status">
@@ -446,9 +453,9 @@ const Instructions = () => {
           <div className="notifications-block__images">
             <div className="notifications-block__img-wrap">
               {language === 'en' ? (
-                <img className="img" src={img22} alt="Notifications" />
+                <img className="notifications-block__img_1 img" src={img22} alt="Notifications" />
               ) : (
-                <img className="img" src={img22es} alt="Notifications" />
+                <img className="notifications-block__img_1 img" src={img22es} alt="Notifications" />
               )}
               <div className="notifications-block__img-border_1 border"></div>
             </div>
@@ -475,11 +482,40 @@ const Instructions = () => {
             </svg>
             <div className="notifications-block__img-wrap">
               {language === 'en' ? (
-                <img className="img" src={img7} alt="Notification" />
+                <img className="img" src={img23} alt="Notifications" />
               ) : (
-                <img className="img" src={img7es} alt="Notification" />
+                <img className="img" src={img23es} alt="Notifications" />
               )}
               <div className="notifications-block__img-border_2 border"></div>
+            </div>
+            <svg
+              className="notifications-block__arrow"
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="41"
+              viewBox="0 0 40 41"
+              fill="none"
+            >
+              <path
+                d="M21.667 28.8159L30.0003 20.4826L21.667 12.1493"
+                stroke="#268664"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <path
+                d="M11.667 28.8159L20.0003 20.4826L11.667 12.1493"
+                stroke="#268664"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="notifications-block__img-wrap">
+              {language === 'en' ? (
+                <img className="img" src={img24} alt="Notification" />
+              ) : (
+                <img className="img" src={img24es} alt="Notification" />
+              )}
+              <div className="notifications-block__img-border_3 border"></div>
             </div>
           </div>
         </section>
@@ -489,7 +525,7 @@ const Instructions = () => {
           <p className="section__text">{t('bonusesText2')}</p>
           <p className="section__text">{t('bonusesText3')}</p>
           <p className="section__text">{t('bonusesText4')}</p>
-          <img className="bonuses__img" src={img23} alt="Percent" />
+          <img className="bonuses__img" src={img25} alt="Percent" />
         </section>
         <section className="section usp">
           <h2 className="section__title">{t('usp')}</h2>

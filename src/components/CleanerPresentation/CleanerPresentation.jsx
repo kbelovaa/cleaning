@@ -49,7 +49,7 @@ const CleanerPresentation = () => {
           </div>
         </div>
       </section>
-      <section className="system-section">
+      {/* <section className="system-section">
         <div className="system">
           <h2 className="title system__title">{t('howSystemWorks')}</h2>
           <div className="system__stages">
@@ -82,37 +82,31 @@ const CleanerPresentation = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <section className="join-section">
         <div className="container">
           <div className="join">
             <h2 className="title">{t('whyJoinUs')}</h2>
             <div className="join__reasons">
-              <div className="join__reasons-col">
-                <div className="join__reason">
-                  <h4 className="join__subtitle">{t('flexible')}</h4>
-                  <p className="join__text">{t('flexibleDescription')}</p>
-                </div>
-                <div className="join__reason">
-                  <h4 className="join__subtitle">{t('technology')}</h4>
-                  <p className="join__text">{t('technologyDescription')}</p>
-                </div>
+              <div className="join__reason">
+                <h4 className="join__subtitle">{t('flexible')}</h4>
+                <p className="join__text">{t('flexibleDescription')}</p>
               </div>
-              <div className="join__reasons-col">
-                <div className="join__reason">
-                  <h4 className="join__subtitle">{t('payment')}</h4>
-                  <p className="join__text">{t('paymentDescription')}</p>
-                </div>
-                <div className="join__reason">
-                  <h4 className="join__subtitle">{t('potential')}</h4>
-                  <p className="join__text">{t('potentialDescription')}</p>
-                </div>
+              <div className="join__reason">
+                <h4 className="join__subtitle">{t('technology')}</h4>
+                <p className="join__text">{t('technologyDescription')}</p>
               </div>
-              <div className="join__reasons-col">
-                <div className="join__reason">
-                  <h4 className="join__subtitle">{t('complianceAndSecurity')}</h4>
-                  <p className="join__text">{t('complianceAndSecurityDescription')}</p>
-                </div>
+              <div className="join__reason">
+                <h4 className="join__subtitle">{t('payment')}</h4>
+                <p className="join__text">{t('paymentDescription')}</p>
+              </div>
+              <div className="join__reason">
+                <h4 className="join__subtitle">{t('potential')}</h4>
+                <p className="join__text">{t('potentialDescription')}</p>
+              </div>
+              <div className="join__reason">
+                <h4 className="join__subtitle">{t('complianceAndSecurity')}</h4>
+                <p className="join__text">{t('complianceAndSecurityDescription')}</p>
               </div>
             </div>
           </div>

@@ -213,6 +213,11 @@ const Header = ({ loading, socket }) => {
     setIsAuthorizationOpen(true);
   };
 
+  const handleChoosingNavLink = (link) => {
+    setCurrentLink(link);
+    setIsNavOpened(false);
+  };
+
   return (
     <div className="content">
       <header id="header" className={`header-section ${headerColor}`}>
@@ -258,16 +263,20 @@ const Header = ({ loading, socket }) => {
                       </svg>
                     </div>
                     <div className="header__nav-variants">
-                      <NavLink className="header__nav-value" to="/" onClick={() => setCurrentLink('booking')}>
+                      <NavLink className="header__nav-value" to="/" onClick={() => handleChoosingNavLink('booking')}>
                         {t('booking')}
                       </NavLink>
-                      <NavLink className="header__nav-value" to="/work" onClick={() => setCurrentLink('workWithUs')}>
+                      <NavLink
+                        className="header__nav-value"
+                        to="/work"
+                        onClick={() => handleChoosingNavLink('workWithUs')}
+                      >
                         {t('workWithUs')}
                       </NavLink>
                       <NavLink
                         className="header__nav-value"
                         to="/affiliate-program"
-                        onClick={() => setCurrentLink('affiliateProgram')}
+                        onClick={() => handleChoosingNavLink('affiliateProgram')}
                       >
                         {t('affiliateProgram')}
                       </NavLink>
