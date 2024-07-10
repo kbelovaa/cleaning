@@ -263,12 +263,24 @@
 }
 
 .cleaner .system {
-  padding: 60px 100px 160px;
+  padding: 60px 100px 170px;
   position: relative;
+
+  @media screen and (max-width: 1440px) {
+    padding: 40px 80px 170px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 40px 60px 170px;
+  }
 
   &__title {
     text-align: left;
     margin-bottom: 60px;
+
+    @media screen and (max-width: 1440px) {
+      margin-bottom: 40px;
+    }
   }
 
   & .feedback__indicator {
@@ -276,6 +288,22 @@
     position: absolute;
     right: 387px;
     top: 444px;
+    margin: 0;
+
+    @media screen and (max-width: 1440px) {
+      right: 273px;
+      top: 326px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      right: 193px;
+      top: 279px;
+    }
+  }
+
+  & .feedback__dot {
+    width: 10px;
+    height: 10px;
   }
 
   &__stages {
@@ -289,6 +317,14 @@
     &::-webkit-scrollbar {
       width: 0;
     }
+
+    @media screen and (max-width: 1440px) {
+      height: 598px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      height: 459px;
+    }
   }
 
   &__stage {
@@ -297,6 +333,16 @@
     padding: 100px 100px 0 184px;
     width: 100%;
     margin: 0;
+
+    @media screen and (max-width: 1440px) {
+      min-height: 598px;
+      padding: 89px 20px 0 110px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      min-height: 459px;
+      padding: 70px 20px 0 74px;
+    }
 
     &-title {
       position: absolute;
@@ -310,6 +356,22 @@
       letter-spacing: 2px;
       opacity: 1;
       transition: all 0.4s ease;
+
+      @media screen and (max-width: 1440px) {
+        top: 376px;
+        right: 100px;
+        width: 387px;
+        font-size: 34px;
+        letter-spacing: 1.7px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        top: 319px;
+        right: 80px;
+        width: 267px;
+        font-size: 26px;
+        letter-spacing: 1.3px;
+      }
 
       &.invisible {
         opacity: 0;
@@ -329,6 +391,20 @@
     opacity: 1;
     transition: all 0.4s ease;
 
+    @media screen and (max-width: 1440px) {
+      width: 360px;
+      margin-left: 154px;
+      margin-top: 215px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      font-size: 20px;
+      letter-spacing: 0.6px;
+      width: 267px;
+      margin-left: 104px;
+      margin-top: 159px;
+    }
+
     &.invisible {
       opacity: 0;
     }
@@ -337,6 +413,14 @@
   &__img {
     width: 247px;
 
+    @media screen and (max-width: 1440px) {
+      width: 208px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 159px;
+    }
+
     &-wrap {
       position: absolute;
       z-index: -1;
@@ -344,6 +428,18 @@
       width: 615px;
       border-radius: 35px;
       background: rgba(38, 134, 100, 0.1);
+
+      @media screen and (max-width: 1440px) {
+        height: 598px;
+        width: 427px;
+        border-radius: 30px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        height: 459px;
+        width: 307px;
+        border-radius: 20px;
+      }
     }
   }
 }
