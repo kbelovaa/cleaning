@@ -82,7 +82,7 @@
     &-wrap {
       display: none;
       position: relative;
-      height: 18px;
+      height: 17px;
       animation: fadeIn 0.3s ease-in;
 
       @media screen and (max-width: 1024px) {
@@ -94,7 +94,7 @@
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      max-height: 18px;
+      max-height: 17px;
       overflow: hidden;
       transition: max-height 0.2s;
       z-index: 2;
