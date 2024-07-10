@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import screen1En from '../../images/cleaners/screen1_en.png';
 import screen2En from '../../images/cleaners/screen2_en.png';
 import screen3En from '../../images/cleaners/screen3_en.png';
@@ -11,6 +12,39 @@ import './CleanerPresentation.scss';
 const CleanerPresentation = () => {
   const { t, i18n } = useTranslation();
   const { language } = i18n;
+
+  const containerRef = useRef(null);
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    const handleScroll = (e) => {
+      e.preventDefault();
+      const delta = Math.sign(e.deltaY);
+      const newIndex = currentItemIndex + delta;
+
+      if (newIndex >= 0 && newIndex < 3 && newIndex !== currentItemIndex) {
+        container.scrollTo({
+          top: newIndex * container.clientHeight,
+          behavior: 'smooth',
+        });
+
+        setFadeOut(true);
+        setTimeout(() => {
+          setCurrentItemIndex(newIndex);
+          setFadeOut(false);
+        }, 300);
+      }
+    };
+
+    container.addEventListener('wheel', handleScroll);
+
+    return () => {
+      container.removeEventListener('wheel', handleScroll);
+    };
+  }, [currentItemIndex]);
 
   return (
     <div className="main cleaner">
@@ -49,40 +83,108 @@ const CleanerPresentation = () => {
           </div>
         </div>
       </section>
-      {/* <section className="system-section">
-        <div className="system">
-          <h2 className="title system__title">{t('howSystemWorks')}</h2>
-          <div className="system__stages">
-            <div className="system__stage">
-              <h3 className="system__subtitle">1. {t('notification')}</h3>
-              <p className="system__text">{t('notificationDescription')}</p>
-              {language === 'en' ? (
-                <img className="system__img" src={screen1En} alt="Notification screen" />
-              ) : (
-                <img className="system__img" src={screen1Es} alt="Notification screen" />
-              )}
+      <section className="system-section">
+        <div className="container">
+          <div className="system">
+            <h2 className="title system__title">{t('howSystemWorks')}</h2>
+            <div className="feedback__indicator">
+              <div className={`feedback__dot ${currentItemIndex === 0 ? 'feedback__dot_1' : ''}`}></div>
+              <div className={`feedback__dot ${currentItemIndex === 1 ? 'feedback__dot_1' : ''}`}></div>
+              <div className={`feedback__dot ${currentItemIndex === 2 ? 'feedback__dot_1' : ''}`}></div>
             </div>
-            <div className="system__stage">
-              <h3 className="system__subtitle">2. {t('accept')}</h3>
-              <p className="system__text">{t('acceptDescription')}</p>
-              {language === 'en' ? (
-                <img className="system__img" src={screen2En} alt="Request screen" />
-              ) : (
-                <img className="system__img" src={screen2Es} alt="Request screen" />
-              )}
-            </div>
-            <div className="system__stage">
-              <h3 className="system__subtitle">3. {t('instantPayments')}</h3>
-              <p className="system__text">{t('instantPaymentsDescription')}</p>
-              {language === 'en' ? (
-                <img className="system__img" src={screen3En} alt="Payment screen" />
-              ) : (
-                <img className="system__img" src={screen3Es} alt="Payment screen" />
-              )}
+            <h3 className={`system__stage-title ${fadeOut ? 'invisible' : ''}`}>
+              {currentItemIndex === 0 ? t('notification') : currentItemIndex === 1 ? t('accept') : t('instantPayments')}
+            </h3>
+            <div className="system__img-wrap"></div>
+            <div className="system__stages" ref={containerRef}>
+              <motion.div
+                className="system__stage"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {language === 'en' ? (
+                    <img className="system__img" src={screen1En} alt="Notification screen" />
+                  ) : (
+                    <img className="system__img" src={screen1Es} alt="Notification screen" />
+                  )}
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <p className={`system__text ${fadeOut ? 'invisible' : ''}`}>{t('notificationDescription')}</p>
+                </motion.div>
+              </motion.div>
+              <motion.div
+                className="system__stage"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.5 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {language === 'en' ? (
+                    <img className="system__img" src={screen2En} alt="Request screen" />
+                  ) : (
+                    <img className="system__img" src={screen2Es} alt="Request screen" />
+                  )}
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className={`system__text ${fadeOut ? 'invisible' : ''}`}>{t('acceptDescription')}</p>
+                </motion.div>
+              </motion.div>
+              <motion.div
+                className="system__stage"
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.3 }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {language === 'en' ? (
+                    <img className="system__img" src={screen3En} alt="Payment screen" />
+                  ) : (
+                    <img className="system__img" src={screen3Es} alt="Payment screen" />
+                  )}
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className={`system__text ${fadeOut ? 'invisible' : ''}`}>{t('instantPaymentsDescription')}</p>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
       <section className="join-section">
         <div className="container">
           <div className="join">
