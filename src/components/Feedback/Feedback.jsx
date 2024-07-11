@@ -20,8 +20,13 @@ const Feedback = () => {
     };
 
     const handleWheel = (event) => {
-      event.preventDefault();
-      container.scrollLeft += event.deltaY;
+      const atLeftEdge = container.scrollLeft === 0;
+      const atRightEdge = container.scrollLeft + containerWidthVisible >= containerWidthScroll;
+
+      if ((event.deltaY < 0 && !atLeftEdge) || (event.deltaY > 0 && !atRightEdge)) {
+        event.preventDefault();
+        container.scrollLeft += event.deltaY;
+      }
     };
 
     container.addEventListener('wheel', handleWheel);
@@ -32,7 +37,7 @@ const Feedback = () => {
       container.removeEventListener('wheel', handleWheel);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [containerWidthVisible]);
 
   const handleScroll = (event) => {
     const { scrollLeft } = event.target;

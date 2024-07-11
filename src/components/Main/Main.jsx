@@ -118,7 +118,7 @@ const Main = ({ password }) => {
       <section className="system-section">
         <div className="container">
           <div className="system">
-            <h2 className="title system__title">{t('howItWorks')}</h2>
+            <h2 className="system__title">{t('howItWorks')}</h2>
             <div className="system__stages-wrap">
               <div className="system__stage">
                 <img className="system__stage-background" src={stageImg} alt="Stage" />
@@ -149,6 +149,14 @@ const Main = ({ password }) => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className="materials-section">
+        <div className="container">
+          <div className="materials">
+            <h2 className="materials__title">{t('materials')}</h2>
+            <p className="materials__text">{t('materialsText')}</p>
           </div>
         </div>
       </section>
@@ -263,7 +271,7 @@ const Main = ({ password }) => {
         </div>
         <Feedback />
       </section>
-      <section className="mobile-section">
+      {/* <section className="mobile-section">
         <div className="container">
           <div className="mobile">
             <h3 className="mobile__title">{t('downloadMobile')}</h3>
@@ -279,7 +287,7 @@ const Main = ({ password }) => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <section className="cleaners-section">
         <div className="container">
           <div className="cleaners">

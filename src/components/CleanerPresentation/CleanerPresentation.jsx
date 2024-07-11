@@ -29,8 +29,13 @@ const CleanerPresentation = () => {
         return;
       }
 
-      e.preventDefault();
       const delta = Math.sign(e.deltaY);
+
+      if ((delta === 1 && currentItemIndex === 2) || (delta === -1 && currentItemIndex === 0)) {
+        return;
+      }
+
+      e.preventDefault();
       const newIndex = currentItemIndex + delta;
 
       if (newIndex >= 0 && newIndex < 3 && newIndex !== currentItemIndex) {

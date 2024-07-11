@@ -1092,6 +1092,9 @@ i18n.use(initReactI18next).init({
         appText2:
           'Below, you will find an overview of our platform and how the system works. We recommend that you familiarize yourself with this to get a baseline understanding of what we do.',
         appText3: 'We look forward to welcoming you to our team.',
+        materials: 'Materials',
+        materialsText:
+          'We prioritize using natural cleaning supplies whenever possible, provided they effectively accomplish the required cleaning tasks to ensure a safe and eco-friendly environment. However, in cases of build-ups or particularly challenging cleaning situations, we may resort to industrial-strength solutions to achieve the desired results. Once resolved, we will revert to using our preferred natural cleaning products.',
       },
     },
     es: {
@@ -2209,6 +2212,9 @@ i18n.use(initReactI18next).init({
         appText2:
           'A continuación, encontrarás una visión general de nuestra plataforma y cómo funciona el sistema. Recomendamos que te familiarices con esto para obtener una comprensión básica de lo que hacemos.',
         appText3: 'Esperamos darte la bienvenida a nuestro equipo.',
+        materials: 'Materiales',
+        materialsText:
+          'Priorizamos el uso de suministros de limpieza naturales siempre que sea posible, siempre y cuando cumplan eficazmente con las tareas de limpieza necesarias para garantizar un entorno seguro y ecológico. Sin embargo, en casos de acumulaciones o situaciones de limpieza particularmente difíciles, podemos recurrir a soluciones de fuerza industrial para lograr los resultados deseados. Una vez resuelto, volveremos a usar nuestros productos de limpieza naturales preferidos.',
       },
     },
   },
