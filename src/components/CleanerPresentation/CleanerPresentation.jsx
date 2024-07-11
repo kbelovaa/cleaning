@@ -10,17 +10,25 @@ import screen3Es from '../../images/cleaners/screen3_es.png';
 import './CleanerPresentation.scss';
 
 const CleanerPresentation = () => {
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
+
   const { t, i18n } = useTranslation();
   const { language } = i18n;
 
   const containerRef = useRef(null);
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
-  const [fadeOut, setFadeOut] = useState(false);
+  const touchStartRef = useRef(0);
 
   useEffect(() => {
     const container = containerRef.current;
 
     const handleScroll = (e) => {
+      const isHorizontal = window.innerWidth <= 600;
+
+      if (isHorizontal) {
+        return;
+      }
+
       e.preventDefault();
       const delta = Math.sign(e.deltaY);
       const newIndex = currentItemIndex + delta;
@@ -39,12 +47,50 @@ const CleanerPresentation = () => {
       }
     };
 
+    const handleTouchStart = (e) => {
+      touchStartRef.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e) => {
+      const touchEnd = e.changedTouches[0].clientX;
+      const isHorizontal = window.innerWidth <= 600;
+      const delta = Math.sign(touchStartRef.current - touchEnd);
+      const newIndex = currentItemIndex + delta;
+
+      if (isHorizontal && newIndex >= 0 && newIndex < 3 && newIndex !== currentItemIndex) {
+        setFadeOut(true);
+        setTimeout(() => {
+          setCurrentItemIndex(newIndex);
+          setFadeOut(false);
+        }, 300);
+      }
+    };
+
     container.addEventListener('wheel', handleScroll);
+    container.addEventListener('touchstart', handleTouchStart);
+    container.addEventListener('touchmove', handleTouchMove);
 
     return () => {
       container.removeEventListener('wheel', handleScroll);
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
     };
   }, [currentItemIndex]);
+
+  const changeItem = (newIndex) => {
+    const container = containerRef.current;
+
+    container.scrollTo({
+      top: newIndex * container.clientHeight,
+      behavior: 'smooth',
+    });
+
+    setFadeOut(true);
+    setTimeout(() => {
+      setCurrentItemIndex(newIndex);
+      setFadeOut(false);
+    }, 300);
+  };
 
   return (
     <div className="main cleaner">
@@ -88,9 +134,18 @@ const CleanerPresentation = () => {
           <div className="system">
             <h2 className="title system__title">{t('howSystemWorks')}</h2>
             <div className="feedback__indicator">
-              <div className={`feedback__dot ${currentItemIndex === 0 ? 'feedback__dot_1' : ''}`}></div>
-              <div className={`feedback__dot ${currentItemIndex === 1 ? 'feedback__dot_1' : ''}`}></div>
-              <div className={`feedback__dot ${currentItemIndex === 2 ? 'feedback__dot_1' : ''}`}></div>
+              <div
+                className={`feedback__dot ${currentItemIndex === 0 ? 'feedback__dot_1' : ''}`}
+                onClick={() => changeItem(0)}
+              ></div>
+              <div
+                className={`feedback__dot ${currentItemIndex === 1 ? 'feedback__dot_1' : ''}`}
+                onClick={() => changeItem(1)}
+              ></div>
+              <div
+                className={`feedback__dot ${currentItemIndex === 2 ? 'feedback__dot_1' : ''}`}
+                onClick={() => changeItem(2)}
+              ></div>
             </div>
             <h3 className={`system__stage-title ${fadeOut ? 'invisible' : ''}`}>
               {currentItemIndex === 0 ? t('notification') : currentItemIndex === 1 ? t('accept') : t('instantPayments')}
@@ -122,6 +177,7 @@ const CleanerPresentation = () => {
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ duration: 0.5 }}
                 >
+                  <h3 className={`system__subtitle ${fadeOut ? 'invisible' : ''}`}>{t('notification')}</h3>
                   <p className={`system__text ${fadeOut ? 'invisible' : ''}`}>{t('notificationDescription')}</p>
                 </motion.div>
               </motion.div>
@@ -150,6 +206,7 @@ const CleanerPresentation = () => {
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ duration: 0.3 }}
                 >
+                  <h3 className={`system__subtitle ${fadeOut ? 'invisible' : ''}`}>{t('accept')}</h3>
                   <p className={`system__text ${fadeOut ? 'invisible' : ''}`}>{t('acceptDescription')}</p>
                 </motion.div>
               </motion.div>
@@ -178,6 +235,7 @@ const CleanerPresentation = () => {
                   exit={{ opacity: 0, y: -50 }}
                   transition={{ duration: 0.3 }}
                 >
+                  <h3 className={`system__subtitle ${fadeOut ? 'invisible' : ''}`}>{t('instantPayments')}</h3>
                   <p className={`system__text ${fadeOut ? 'invisible' : ''}`}>{t('instantPaymentsDescription')}</p>
                 </motion.div>
               </motion.div>
