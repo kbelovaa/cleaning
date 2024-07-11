@@ -58,6 +58,11 @@ const CleanerPresentation = () => {
       const newIndex = currentItemIndex + delta;
 
       if (isHorizontal && newIndex >= 0 && newIndex < 3 && newIndex !== currentItemIndex) {
+        container.scrollTo({
+          left: newIndex * container.clientWidth,
+          behavior: 'smooth',
+        });
+
         setFadeOut(true);
         setTimeout(() => {
           setCurrentItemIndex(newIndex);

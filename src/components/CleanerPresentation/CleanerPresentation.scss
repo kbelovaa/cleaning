@@ -350,7 +350,6 @@
     @media screen and (max-width: 600px) {
       flex-direction: row;
       overflow-x: scroll;
-      scroll-snap-type: x mandatory;
       height: auto;
     }
   }
@@ -377,7 +376,6 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      scroll-snap-align: start;
       min-height: auto;
       min-width: calc(100vw - 32px);
       padding: 40px 0 0;
