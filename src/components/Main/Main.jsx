@@ -294,7 +294,7 @@ const Main = ({ password }) => {
             <h2 className="cleaners__title">{t('wantToWorkWithUs')}</h2>
             <p className="cleaners__text">{t('weAreLookingForCleaners')}</p>
             <p className="cleaners__text">{t('sdlServiceDescription')}</p>
-            <a className="btn main__btn cleaners__btn" href="https://jobs.sdl24.es">
+            <a className="btn main__btn cleaners__btn" href="/work">
               {t('seeDetails')}
               <svg
                 className="btn__arrow"
