@@ -96,20 +96,20 @@ const Header = ({ loading, socket }) => {
 
       switch (true) {
         case width <= 744:
-          setBreakPoint1(130);
-          setBreakPoint2(220);
+          setBreakPoint1(140);
+          setBreakPoint2(232);
           break;
         case width <= 1024:
-          setBreakPoint1(175);
-          setBreakPoint2(320);
+          setBreakPoint1(195);
+          setBreakPoint2(342);
           break;
         case width <= 1440:
-          setBreakPoint1(195);
-          setBreakPoint2(340);
+          setBreakPoint1(210);
+          setBreakPoint2(358);
           break;
         default:
-          setBreakPoint1(170);
-          setBreakPoint2(360);
+          setBreakPoint1(175);
+          setBreakPoint2(368);
       }
     };
 

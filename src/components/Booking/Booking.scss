@@ -1,16 +1,16 @@
 .slide {
-  padding: 140px 100px 100px;
+  padding: 80px 100px 100px;
 
   @media screen and (max-width: 1440px) {
-    padding: 180px 80px 100px;
+    padding: 100px 80px 100px;
   }
 
   @media screen and (max-width: 1024px) {
-    padding: 156px 60px 100px;
+    padding: 80px 60px 100px;
   }
 
   @media screen and (max-width: 744px) {
-    padding: 60px 16px 50px;
+    padding: 50px 16px 50px;
   }
 
   &-wrap {
@@ -820,10 +820,10 @@
   transition: all 0.3s ease;
 
   &_scrollable {
-    height: calc(100vh - 130px);
+    height: calc(100vh - 62px);
     overflow-y: auto;
     position: sticky;
-    top: 130px;
+    top: 62px;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
@@ -833,14 +833,9 @@
       display: none;
     }
 
-    @media screen and (max-width: 1440px) {
-      top: 160px;
-      height: calc(100vh - 160px);
-    }
-
     @media screen and (max-width: 1024px) {
-      top: 156px;
-      height: calc(100vh - 156px);
+      top: 58px;
+      height: calc(100vh - 58px);
     }
 
     @media screen and (max-width: 744px) {

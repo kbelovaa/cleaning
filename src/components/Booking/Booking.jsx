@@ -266,11 +266,11 @@ const Booking = ({ loading }) => {
       let yBreakPoint = 0;
 
       if (windowWidth > 1440) {
-        yBreakPoint = 440;
+        yBreakPoint = 448;
       } else if (windowWidth > 1024) {
-        yBreakPoint = 400;
+        yBreakPoint = 418;
       } else if (windowWidth > 744) {
-        yBreakPoint = 380;
+        yBreakPoint = 402;
       }
 
       if (scrollY > yBreakPoint) {
