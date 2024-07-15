@@ -331,6 +331,10 @@
     height: 30px;
     margin-right: 40px;
 
+    &.single {
+      margin-right: 0;
+    }
+
     @media screen and (max-width: 744px) {
       margin-right: 20px;
     }

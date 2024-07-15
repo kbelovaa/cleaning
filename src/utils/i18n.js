@@ -994,8 +994,6 @@ i18n.use(initReactI18next).init({
         infoWillBySent: 'Information will be sent by email',
         main: 'Main',
         system: 'The system',
-        systemText:
-          'The system consists of a mobile app for cleaners, a website and mobile app for customers, and an admin panel.',
         mobileWeb: 'Mobile+Web Customer',
         mobileCleaner: 'Mobile Cleaner',
         admin: 'Admin panel',
@@ -1047,9 +1045,9 @@ i18n.use(initReactI18next).init({
         usp: 'USP (unique selling proposition)',
         uspText1:
           'In home cleaning, where services may not vary significantly, our USP (unique selling proposition) will be centred around convenience:',
-        uspText2: '-      Availability 24/7',
-        uspText3: '-      Swift booking and confirmation',
-        uspText4: '-      Compliance with local laws',
+        uspText2: 'Availability 24/7',
+        uspText3: 'Swift booking and confirmation',
+        uspText4: 'Compliance with local laws',
         uspText5:
           'In launching SDL, the product (the service itself) holds paramount importance. The success and sustainability of our business depend on delivering an exceptional service. Without a consistent service that exceeds client expectations, retaining clients becomes challenging, and the overall business model unsustainable. Therefore, prioritizing and ensuring the quality and reliability of the service is the cornerstone for scaling our company. The best advertising is a satisfied client.',
         targetCustomer: 'Target customer',
@@ -2113,8 +2111,6 @@ i18n.use(initReactI18next).init({
         infoWillBySent: 'La información se enviará por correo electrónico',
         main: 'Principal',
         system: 'El sistema',
-        systemText:
-          'El sistema consta de una aplicación móvil para limpiadores, un sitio web y una aplicación móvil para clientes, y un panel de administración.',
         mobileWeb: 'Móvil+Web Cliente',
         mobileCleaner: 'Móvil Limpiadora',
         admin: 'Panel de administrador',
@@ -2166,9 +2162,9 @@ i18n.use(initReactI18next).init({
         usp: 'PVU (propuesta de venta única)',
         uspText1:
           'En la limpieza del hogar, donde los servicios pueden no variar significativamente, nuestra PVU (propuesta de venta única) se centrará en la conveniencia:',
-        uspText2: '-      Disponibilidad 24 horas al día, 7 días a la semana',
-        uspText3: '-      Reserva y confirmación rápidas',
-        uspText4: '-      Cumplimiento de las leyes locales',
+        uspText2: 'Disponibilidad 24 horas al día, 7 días a la semana',
+        uspText3: 'Reserva y confirmación rápidas',
+        uspText4: 'Cumplimiento de las leyes locales',
         uspText5:
           'Al lanzar SDL, el producto (el servicio en sí) tiene una importancia primordial. El éxito y la sostenibilidad de nuestro negocio dependen de brindar un servicio excepcional. Sin un servicio consistente que supere las expectativas del cliente, retenerlos se vuelve un desafío y el modelo de negocio general insostenible. Por ello, priorizar y asegurar la calidad y confiabilidad del servicio es la piedra angular para escalar nuestra empresa. La mejor publicidad es un cliente satisfecho.',
         targetCustomer: 'Cliente objetivo',

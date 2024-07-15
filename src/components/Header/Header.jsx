@@ -35,6 +35,7 @@ const Header = ({ loading, socket }) => {
   const isBook = pathname.startsWith('/booking');
   const isMain = pathname === '/';
   const isWork = pathname.startsWith('/work');
+  const isInstructions = pathname.startsWith('/work/instructions');
   const isAffiliates = pathname.startsWith('/affiliate-program');
   const isVerification = pathname.startsWith('/verification');
 
@@ -220,7 +221,7 @@ const Header = ({ loading, socket }) => {
 
   return (
     <div className="content">
-      <header id="header" className={`header-section ${headerColor}`}>
+      <header id="header" className={`header-section ${isInstructions ? 'white' : headerColor}`}>
         <div className="container">
           <div className={`header ${isAuth ? 'isauth' : ''}`}>
             {isMain || isWork ? (
@@ -290,7 +291,7 @@ const Header = ({ loading, socket }) => {
               </span>
             )}
             <nav className={`header__menu ${loading ? '' : 'visible'}`}>
-              <ul className={isVerification || isWork ? 'hidden' : 'header__auth'}>
+              <ul className={isVerification || isWork || isAffiliates ? 'hidden' : 'header__auth'}>
                 <li className="header__link" onClick={() => handleAuthModalOpen(false)}>
                   {t('signUp')}
                 </li>
@@ -298,7 +299,7 @@ const Header = ({ loading, socket }) => {
                   {t('logIn')}
                 </li>
               </ul>
-              <div className="language-wrap">
+              <div className={`language-wrap ${isAffiliates ? 'single' : ''}`}>
                 <div className={`language ${isLanguageOpened ? 'opened' : ''}`} ref={lngRef}>
                   <span className="language__value" onClick={openLanguages}>
                     {language}
@@ -317,7 +318,7 @@ const Header = ({ loading, socket }) => {
                 </div>
               </div>
               <div
-                className={isAuth && !isVerification ? 'bell' : 'hidden'}
+                className={isAuth && !isVerification && !isWork && !isAffiliates ? 'bell' : 'hidden'}
                 onClick={() => setIsNotificationsOpen(true)}
               >
                 <svg
@@ -341,7 +342,10 @@ const Header = ({ loading, socket }) => {
                   {newNotifications.length > 99 ? '99+' : newNotifications.length}
                 </span>
               </div>
-              <div className={isVerification ? 'hidden' : 'burger'} onClick={() => setIsBurgerMenuOpen(true)}>
+              <div
+                className={isVerification || isAffiliates ? 'hidden' : 'burger'}
+                onClick={() => setIsBurgerMenuOpen(true)}
+              >
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>
                 <div className="burger__bar"></div>
