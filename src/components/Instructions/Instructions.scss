@@ -438,8 +438,8 @@
 
           @media screen and (max-width: 744px) {
             width: 28%;
-            height: 114%;
-            top: -12%;
+            height: 110%;
+            top: -11%;
             right: -2%;
             border-radius: 0.64vw;
           }
@@ -563,6 +563,14 @@
             right: 2.3%;
             border-radius: 0.52vw;
           }
+
+          @media screen and (max-width: 450px) {
+            top: 49%;
+          }
+
+          @media screen and (max-width: 370px) {
+            top: 48.7%;
+          }
         }
       }
     }
@@ -665,6 +673,14 @@
             right: -2.5%;
             border-radius: 0.26vw;
           }
+
+          @media screen and (max-width: 550px) {
+            top: 81.5%;
+          }
+
+          @media screen and (max-width: 360px) {
+            top: 81%;
+          }
         }
       }
     }
@@ -735,9 +751,9 @@
 
         @media screen and (max-width: 744px) {
           width: 28%;
-          height: 114%;
+          height: 110%;
           top: -11%;
-          right: -1.8%;
+          right: -2%;
           border-radius: 0.64vw;
         }
       }
@@ -775,7 +791,7 @@
           @media screen and (max-width: 744px) {
             width: 106.3%;
             height: 22.15%;
-            top: 66.46%;
+            top: 65%;
             right: -3.17%;
             border-radius: 0.35vw;
           }
@@ -805,7 +821,7 @@
           @media screen and (max-width: 744px) {
             width: 106.3%;
             height: 70.15%;
-            top: 12.46%;
+            top: 11%;
             right: -3.17%;
             border-radius: 0.35vw;
           }
@@ -864,9 +880,9 @@
 
           @media screen and (max-width: 744px) {
             width: 28%;
-            height: 114%;
+            height: 110%;
             top: -11%;
-            right: -1.8%;
+            right: -2%;
             border-radius: 0.64vw;
           }
         }
@@ -924,7 +940,7 @@
           @media screen and (max-width: 744px) {
             width: 104.67%;
             height: 6.3%;
-            top: 46.5%;
+            top: 46%;
             right: -2.55%;
             border-radius: 0.26vw;
           }
