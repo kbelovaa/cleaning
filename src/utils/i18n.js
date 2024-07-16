@@ -930,15 +930,46 @@ i18n.use(initReactI18next).init({
         Russian: 'Russian',
         testimonials: 'Testimonials',
         feedback1:
-          'Absolutely fantastic service! The team was punctual, professional, and left my home spotless. Five starts!',
+          'Absolutely fantastic service! The team was punctual, professional, and left my home spotless. Highly recommend this cleaning service in Marbella!',
         feedback2:
           'This is the best cleaning service I have ever used. They were thorough, efficient, and very friendly. My home looks spotless. Highly recommend!',
         feedback3:
           'I loved how fast and easy it was to book a cleaning. The cleaners were very professional; they did a deep clean, and it looks amazing. Outstanding job. Highly recommend!',
         feedback4:
-          'Fantastic service! They were on time, very professional, and did a superb job cleaning. We are very satisfied and will definitely use them again.',
-        feedback5:
           "I've tried several cleaning services, but this one is by far the best. They are thorough, reliable, and very friendly. My place has never looked better!",
+        feedback5:
+          'Fantastic service! They were on time, very professional, and did a great job cleaning my home. I am very satisfied and will use them again.',
+        feedback6:
+          'Outstanding job! The cleaners were efficient, polite, and very meticulous. I was especially happy with how they handled my kitchen and bathrooms. Five stars!',
+        feedback7:
+          'This company sets a new standard. Booking was seamless, the cleaner was punctual and professional, and our home now looks immaculate. The follow-up call showed they truly care about their customers. Five stars!',
+        feedback8:
+          'Exceptional service! They cleaned my apartment perfectly. The staff was very friendly and took care of everything. Will definitely book them again.',
+        feedback9:
+          'Amazing attention to detail! The cleaners were professional and took their time to ensure everything was spotless. I will definitely be a regular customer.',
+        feedback10:
+          'I never thought I’d be excited about a cleaning service, but here we are! This company needs to get credit they deserve. Booking was easy, the cleaners were friendly and professional, and my home is cleaned to a professional level. They follow up to make sure everything is perfect. Highly recommend!',
+        feedback11:
+          "I can't say enough good things about this cleaning service. They were professional, efficient, and left my home sparkling clean. Highly recommend!",
+        feedback12: 'Very satisfied with the cleaning service. Highly recommend!',
+        feedback13:
+          'I am now a regular! They were professional, efficient, and left my home cleaner than anyone we have tried before. Maria told she has 25 years’ experience from hotel cleaning so I guess that is part of the explanation. After they called to ask if everything was ok this is showing they value their customers. Super!',
+        feedback14:
+          'I normally do not write reviews, but we have had our apartment for 17 years. Our previous cleaner, who came with the apartment, was with us for all these years until her health started to deteriorate. It turned out that she did not get a proper pension due to working for years with payment in hand. She did a very good job for us all those years. We asked one of our younger neighbours who recommended this company that runs a clean operation and pays pension contributions for all their cleaners, which was very important to us. After the first cleaning, they called us to ask if there was something we wanted to improve. As the apartment was spotless, we booked a fixed time and day with them. This is a very professional service, and we cannot recommend them enough.',
+        feedback15:
+          'Loved it. After the first cleaning and understanding the level this guy’s provide we order their subscription where they hold the keys and we have had two occasions where we have invited guests for dinner and drinks and these have come in and done a superb x 2 which means they send two cleaner and do the job in half the time for what I think is a little premium on their base rate.',
+        feedback16:
+          'When I ordered the first time, I really liked how the price was in the picture on my pc an updated as I added extras, like oven clean. Very, very good. This is what happens when people who know what they are doing and integrate tech in the right way.',
+        feedback17:
+          'After extensive searching, I finally found the perfect cleaning service! The team was punctual, professional, and did an exceptional job. Their dedication to customer satisfaction was evident. I’m beyond impressed!',
+        feedback18:
+          "I can't say enough good things about this cleaning service. They were prompt, professional, and did an outstanding job. The booking process was seamless, and they checked to ensure I was happy with their work. I highly recommend them!",
+        feedback19:
+          'This company exceeded my expectations. They were prompt, professional, and left my home spotless. Their commitment to customer satisfaction was evident. Highly recommended!',
+        feedback20:
+          'This company is so, so good! The cleaners were prompt, courteous, and thorough. They transformed my chaotic apartment into a spotless haven. I appreciate their dedication to quality service and will be recommending them to all my friends.',
+        feedback21:
+          "I'm so glad I found this cleaning company! They were recommended by a friend, and they didn't disappoint. The cleaners were meticulous and left no corner untouched. They made my home look and feel very clean.",
         booking: 'Book cleaning',
         workWithUs: 'Work with us',
         affiliateProgram: 'Affiliate program',
@@ -1094,25 +1125,34 @@ i18n.use(initReactI18next).init({
         materialsText:
           'We prioritize using natural cleaning supplies whenever possible, provided they effectively accomplish the required cleaning tasks to ensure a safe and eco-friendly environment. However, in cases of build-ups or particularly challenging cleaning situations, we may resort to industrial-strength solutions to achieve the desired results. Once resolved, we will revert to using our preferred natural cleaning products.',
         priorityCleaningServices: 'Priority cleaning services',
-        priorityCleaningServicesText: 'We recognize the importance of presenting properties in pristine condition, especially for last-minute showings. SDL offers priority cleaning services 24/7, ensuring that your properties are always ready to show to potential buyers.',
+        priorityCleaningServicesText:
+          'We recognize the importance of presenting properties in pristine condition, especially for last-minute showings. SDL offers priority cleaning services 24/7, ensuring that your properties are always ready to show to potential buyers.',
         referralRewards: 'Referral rewards',
-        referralRewardsText: 'As an affiliate, you earn a 10% commission on all bookings made by clients referred to us during their first year of service. Commissions will be paid to you through Stripe for each booking made.',
+        referralRewardsText:
+          'As an affiliate, you earn a 10% commission on all bookings made by clients referred to us during their first year of service. Commissions will be paid to you through Stripe for each booking made.',
         giftCards: 'Gift cards',
-        giftCardsText: 'As an affiliate, you will have access to our exclusive gift cards at a discounted rate. Offer these to your clients as a value-added service. When you first sign up, you will have the opportunity to purchase a gift card with a value of €200 for only €50.',
+        giftCardsText:
+          'As an affiliate, you will have access to our exclusive gift cards at a discounted rate. Offer these to your clients as a value-added service. When you first sign up, you will have the opportunity to purchase a gift card with a value of €200 for only €50.',
         howToJoin: 'How to join',
-        signUpText: 'Join the program at no cost by signing up with the link at the bottom of this email. We will then send you an invite with immediate access to the referral system and exclusive offers.',
+        signUpText:
+          'Join the program at no cost by signing up with the link at the bottom of this email. We will then send you an invite with immediate access to the referral system and exclusive offers.',
         refer: 'Refer',
         referText: 'Refer clients using your unique affiliate link.',
         earn: 'Earn',
-        earnText: 'For every booking made by your referred clients within their first year of service, you will earn a 10% commission. Payments are made through Stripe, every time a client books a cleaning.',
+        earnText:
+          'For every booking made by your referred clients within their first year of service, you will earn a 10% commission. Payments are made through Stripe, every time a client books a cleaning.',
         whyPartner: 'Why partner with SDL?',
         convenience: 'Convenience',
-        convenienceText: 'The easy-to-use website and mobile app enable seamless booking of cleaning services, making it simple for you and your clients to arrange appointments at any time.',
+        convenienceText:
+          'The easy-to-use website and mobile app enable seamless booking of cleaning services, making it simple for you and your clients to arrange appointments at any time.',
         commitment: 'Commitment',
-        commitmentText: 'SDL is dedicated to delivering exceptional cleaning services using advanced techniques and equipment. Our 100% Satisfaction Guarantee reflects our unwavering commitment to quality and client satisfaction.',
+        commitmentText:
+          'SDL is dedicated to delivering exceptional cleaning services using advanced techniques and equipment. Our 100% Satisfaction Guarantee reflects our unwavering commitment to quality and client satisfaction.',
         strategicEdge: 'Strategic edge',
-        strategicEdgeText: 'By integrating SDL’s services into your real estate offerings, you provide added value to your clients and gain a competitive edge in the market with our premium cleaning solutions.',
-        affiliateText: 'For more information or to discuss the Affiliate Program in detail, please contact me directly at [Your Contact Information]. We look forward to working together with you.'
+        strategicEdgeText:
+          'By integrating SDL’s services into your real estate offerings, you provide added value to your clients and gain a competitive edge in the market with our premium cleaning solutions.',
+        affiliateText:
+          'For more information or to discuss the Affiliate Program in detail, please contact me directly at [Your Contact Information]. We look forward to working together with you.',
       },
     },
     es: {
@@ -2064,15 +2104,46 @@ i18n.use(initReactI18next).init({
         Russian: 'Ruso',
         testimonials: 'Testimonios',
         feedback1:
-          '¡Un servicio absolutamente fantástico! El equipo fue puntual, profesional y dejó mi casa impecable. ¡Cinco estrellas!',
+          '¡Servicio absolutamente fantástico! El equipo fue puntual, profesional y dejó mi casa impecable. ¡Recomiendo mucho este servicio de limpieza en Marbella!',
         feedback2:
-          'Este es el mejor servicio de limpieza que he utilizado. Fueron minuciosos, eficientes y muy amables. Mi casa se ve impecable. ¡Muy recomendable!',
+          'Este es el mejor servicio de limpieza que he utilizado. Fueron minuciosos, eficientes y muy amigables. Mi casa está impecable. ¡Muy recomendado!',
         feedback3:
-          'Me encantó lo rápido y fácil que fue reservar una limpieza. Los limpiadores fueron muy profesionales; hicieron una limpieza profunda y se ve increíble. Trabajo sobresaliente. ¡Muy recomendable!',
+          'Me encantó lo rápido y fácil que fue reservar una limpieza. Los limpiadores fueron muy profesionales; hicieron una limpieza profunda y se ve increíble. Trabajo sobresaliente. ¡Muy recomendado!',
         feedback4:
-          '¡Servicio fantástico! Llegaron a tiempo, fueron muy profesionales e hicieron un trabajo excelente de limpieza. Estamos muy satisfechos y definitivamente los usaremos de nuevo.',
+          'He probado varios servicios de limpieza, pero este es, con diferencia, el mejor. Son minuciosos, confiables y muy amigables. ¡Mi lugar nunca ha lucido mejor!',
         feedback5:
-          'He probado varios servicios de limpieza, pero este es, con diferencia, el mejor. Son minuciosos, confiables y muy amables. ¡Mi lugar nunca se ha visto mejor!',
+          '¡Servicio fantástico! Llegaron a tiempo, fueron muy profesionales e hicieron un gran trabajo limpiando mi casa. Estoy muy satisfecho y los volveré a contratar.',
+        feedback6:
+          '¡Trabajo sobresaliente! Los limpiadores fueron eficientes, educados y muy meticulosos. Estaba especialmente feliz con cómo manejaron mi cocina y baños. ¡Cinco estrellas!',
+        feedback7:
+          'Esta empresa establece un nuevo estándar. La reserva fue sencilla, el limpiador fue puntual y profesional, y nuestra casa ahora luce impecable. La llamada de seguimiento mostró que realmente se preocupan por sus clientes. ¡Cinco estrellas!',
+        feedback8:
+          '¡Servicio excepcional! Limpiaron mi apartamento perfectamente. El personal fue muy amable y se encargaron de todo. Definitivamente los volveré a contratar.',
+        feedback9:
+          '¡Increíble atención al detalle! Los limpiadores fueron profesionales y se tomaron su tiempo para asegurarse de que todo estuviera impecable. Definitivamente seré un cliente habitual.',
+        feedback10:
+          'Nunca pensé que estaría emocionado por un servicio de limpieza, ¡pero aquí estamos! Esta empresa merece el crédito que se merece. La reserva fue fácil, los limpiadores fueron amigables y profesionales, y mi casa está limpiada a un nivel profesional. Hacen seguimiento para asegurarse de que todo esté perfecto. ¡Muy recomendado!',
+        feedback11:
+          'No puedo decir suficientes cosas buenas sobre este servicio de limpieza. Fueron profesionales, eficientes y dejaron mi casa reluciente. ¡Muy recomendado!',
+        feedback12: 'Muy satisfecho con el servicio de limpieza. ¡Muy recomendado!',
+        feedback13:
+          '¡Ahora soy un cliente regular! Fueron profesionales, eficientes y dejaron mi casa más limpia que cualquier otro servicio que hayamos probado antes. María me dijo que tiene 25 años de experiencia en limpieza de hoteles, así que supongo que esa es parte de la explicación. Después llamaron para preguntar si todo estaba bien, lo que muestra que valoran a sus clientes. ¡Súper!',
+        feedback14:
+          'Normalmente no escribo reseñas, pero hemos tenido nuestro apartamento durante 17 años. Nuestra limpiadora anterior, que vino con el apartamento, estuvo con nosotros todos estos años hasta que su salud comenzó a deteriorarse. Resultó que no recibió una pensión adecuada debido a trabajar durante años con pago en mano. Hizo un muy buen trabajo para nosotros todos esos años. Preguntamos a uno de nuestros vecinos más jóvenes, quien recomendó esta empresa que lleva una operación limpia y paga contribuciones de pensión para todos sus limpiadores, lo cual era muy importante para nosotros. Después de la primera limpieza, nos llamaron para preguntar si había algo que queríamos mejorar. Como el apartamento estaba impecable, reservamos un tiempo y día fijo con ellos. Este es un servicio muy profesional y no podemos recomendarlos lo suficiente.',
+        feedback15:
+          'Me encantó. Después de la primera limpieza y entender el nivel que estos chicos proporcionan, pedimos su suscripción donde guardan las llaves y hemos tenido dos ocasiones en las que hemos invitado a invitados a cenar y a beber y ellos han venido y hecho un trabajo magnífico x 2, lo que significa que envían dos limpiadores y hacen el trabajo en la mitad del tiempo por lo que creo que es un pequeño extra sobre su tarifa base.',
+        feedback16:
+          'Cuando hice el pedido por primera vez, me gustó mucho cómo el precio estaba en la imagen en mi PC y se actualizaba a medida que agregaba extras, como la limpieza del horno. Muy, muy bueno. Esto es lo que sucede cuando las personas que saben lo que están haciendo integran la tecnología de la manera correcta.',
+        feedback17:
+          '¡Después de una búsqueda extensa, finalmente encontré el servicio de limpieza perfecto! El equipo fue puntual, profesional e hizo un trabajo excepcional. Su dedicación a la satisfacción del cliente era evidente. ¡Estoy más que impresionado!',
+        feedback18:
+          'No puedo decir suficientes cosas buenas sobre este servicio de limpieza. Fueron puntuales, profesionales y hicieron un trabajo sobresaliente. El proceso de reserva fue sencillo y verificaron para asegurarse de que estuviera satisfecho con su trabajo. ¡Los recomiendo mucho!',
+        feedback19:
+          'Esta empresa superó mis expectativas. Fueron puntuales, profesionales y dejaron mi casa impecable. Su compromiso con la satisfacción del cliente era evidente. ¡Muy recomendado!',
+        feedback20:
+          '¡Esta empresa es tan, tan buena! Los limpiadores fueron puntuales, corteses y minuciosos. Transformaron mi caótico apartamento en un refugio impecable. Aprecio su dedicación al servicio de calidad y los recomendaré a todos mis amigos.',
+        feedback21:
+          '¡Estoy tan contento de haber encontrado esta empresa de limpieza! Fueron recomendados por un amigo y no me decepcionaron. Los limpiadores fueron meticulosos y no dejaron ningún rincón sin limpiar. Hicieron que mi casa se vea y se sienta muy limpia.',
         booking: 'Reservar limpiezag',
         workWithUs: 'Trabaja con nosotros',
         affiliateProgram: 'Programa de afiliados',
@@ -2232,25 +2303,34 @@ i18n.use(initReactI18next).init({
         materialsText:
           'Priorizamos el uso de suministros de limpieza naturales siempre que sea posible, siempre y cuando cumplan eficazmente con las tareas de limpieza necesarias para garantizar un entorno seguro y ecológico. Sin embargo, en casos de acumulaciones o situaciones de limpieza particularmente difíciles, podemos recurrir a soluciones de fuerza industrial para lograr los resultados deseados. Una vez resuelto, volveremos a usar nuestros productos de limpieza naturales preferidos.',
         priorityCleaningServices: 'Servicios de limpieza prioritarios',
-        priorityCleaningServicesText: 'Reconocemos la importancia de presentar propiedades en condiciones impecables, especialmente para visitas de última hora. SDL ofrece servicios de limpieza prioritarios 24/7, asegurando que sus propiedades estén siempre listas para mostrar a posibles compradores.',
+        priorityCleaningServicesText:
+          'Reconocemos la importancia de presentar propiedades en condiciones impecables, especialmente para visitas de última hora. SDL ofrece servicios de limpieza prioritarios 24/7, asegurando que sus propiedades estén siempre listas para mostrar a posibles compradores.',
         referralRewards: 'Recompensas por referencias',
-        referralRewardsText: 'Como afiliado, usted gana una comisión del 10% en todas las reservas realizadas por clientes referidos a nosotros durante su primer año de servicio. Las comisiones se le pagarán a través de Stripe por cada reserva realizada.',
+        referralRewardsText:
+          'Como afiliado, usted gana una comisión del 10% en todas las reservas realizadas por clientes referidos a nosotros durante su primer año de servicio. Las comisiones se le pagarán a través de Stripe por cada reserva realizada.',
         giftCards: 'Tarjetas de regalo',
-        giftCardsText: 'Como afiliado, tendrá acceso a nuestras exclusivas tarjetas de regalo a una tarifa con descuento. Ofrézcalas a sus clientes como un servicio adicional. Al inscribirse por primera vez, tendrá la oportunidad de comprar una tarjeta de regalo con un valor de €200 por solo €50.',
+        giftCardsText:
+          'Como afiliado, tendrá acceso a nuestras exclusivas tarjetas de regalo a una tarifa con descuento. Ofrézcalas a sus clientes como un servicio adicional. Al inscribirse por primera vez, tendrá la oportunidad de comprar una tarjeta de regalo con un valor de €200 por solo €50.',
         howToJoin: 'Cómo unirse',
-        signUpText: 'Únase al programa sin costo registrándose con el enlace al final de este correo electrónico. Luego le enviaremos una invitación con acceso inmediato al sistema de referidos y ofertas exclusivas.',
+        signUpText:
+          'Únase al programa sin costo registrándose con el enlace al final de este correo electrónico. Luego le enviaremos una invitación con acceso inmediato al sistema de referidos y ofertas exclusivas.',
         refer: 'Referir',
         referText: 'Refiera a clientes usando su enlace de afiliado único.',
         earn: 'Ganar',
-        earnText: 'Por cada reserva realizada por sus clientes referidos dentro de su primer año de servicio, ganará una comisión del 10%. Los pagos se realizan a través de Stripe, cada vez que un cliente reserva una limpieza.',
+        earnText:
+          'Por cada reserva realizada por sus clientes referidos dentro de su primer año de servicio, ganará una comisión del 10%. Los pagos se realizan a través de Stripe, cada vez que un cliente reserva una limpieza.',
         whyPartner: '¿Por qué asociarse con SDL?',
         convenience: 'Conveniencia',
-        convenienceText: 'El sitio web y la aplicación móvil fáciles de usar permiten la reserva sin problemas de servicios de limpieza, lo que facilita a usted y a sus clientes concertar citas en cualquier momento.',
+        convenienceText:
+          'El sitio web y la aplicación móvil fáciles de usar permiten la reserva sin problemas de servicios de limpieza, lo que facilita a usted y a sus clientes concertar citas en cualquier momento.',
         commitment: 'Compromiso',
-        commitmentText: 'SDL se dedica a brindar servicios de limpieza excepcionales utilizando técnicas y equipos avanzados. Nuestra garantía de satisfacción del 100% refleja nuestro inquebrantable compromiso con la calidad y la satisfacción del cliente.',
+        commitmentText:
+          'SDL se dedica a brindar servicios de limpieza excepcionales utilizando técnicas y equipos avanzados. Nuestra garantía de satisfacción del 100% refleja nuestro inquebrantable compromiso con la calidad y la satisfacción del cliente.',
         strategicEdge: 'Ventaja estratégica',
-        strategicEdgeText: 'Al integrar los servicios de SDL en su oferta inmobiliaria, proporciona un valor añadido a sus clientes y obtiene una ventaja competitiva en el mercado con nuestras soluciones de limpieza premium.',
-        affiliateText: 'Para obtener más información o discutir el Programa de Afiliados en detalle, por favor contácteme directamente en [Su Información de Contacto]. Esperamos trabajar junto a usted.'          
+        strategicEdgeText:
+          'Al integrar los servicios de SDL en su oferta inmobiliaria, proporciona un valor añadido a sus clientes y obtiene una ventaja competitiva en el mercado con nuestras soluciones de limpieza premium.',
+        affiliateText:
+          'Para obtener más información o discutir el Programa de Afiliados en detalle, por favor contácteme directamente en [Su Información de Contacto]. Esperamos trabajar junto a usted.',
       },
     },
   },

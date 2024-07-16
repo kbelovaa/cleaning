@@ -52,14 +52,6 @@ const weekdays = [
 
 const languages = ['English', 'Spanish', 'Swedish', 'Danish', 'Norwegian', 'Dutch', 'German', 'Russian'];
 
-const feedbacks = [
-  { stars: 5, feebackKey: 'feedback1' },
-  { stars: 5, feebackKey: 'feedback2' },
-  { stars: 5, feebackKey: 'feedback3' },
-  { stars: 5, feebackKey: 'feedback4' },
-  { stars: 5, feebackKey: 'feedback5' },
-];
-
 export {
   months,
   livingRooms,
@@ -73,5 +65,4 @@ export {
   knowingWays,
   weekdays,
   languages,
-  feedbacks,
 };
