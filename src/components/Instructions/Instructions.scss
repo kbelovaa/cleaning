@@ -78,7 +78,9 @@
       }
 
       @media screen and (max-width: 744px) {
+        background: rgba(69, 201, 154, 0.6);
         right: calc((100vw - 390px) / 2 - 122px);
+        bottom: 400px;
         -webkit-filter: blur(130px);
         -moz-filter: blur(130px);
         -o-filter: blur(130px);
