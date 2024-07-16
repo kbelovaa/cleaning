@@ -63,9 +63,11 @@
       right: calc((100vw - 1440px) / 2 + 427px);
       border-radius: 50%;
       background: #45c99a;
-      filter: blur(50px);
-      -webkit-filter: blur(50px);
-      // -moz-filter: blur(250px);
+      -webkit-filter: blur(250px);
+      -moz-filter: blur(250px);
+      -o-filter: blur(250px);
+      -ms-filter: blur(250px);
+      filter: blur(250px);
 
       @media screen and (max-width: 1440px) {
         right: calc((100vw - 1024px) / 2 + 427px);
@@ -77,7 +79,11 @@
 
       @media screen and (max-width: 744px) {
         right: calc((100vw - 390px) / 2 - 122px);
-        bottom: 472px;
+        -webkit-filter: blur(150px);
+        -moz-filter: blur(250px);
+        -o-filter: blur(250px);
+        -ms-filter: blur(250px);
+        filter: blur(250px);
       }
     }
   }
