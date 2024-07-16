@@ -224,7 +224,7 @@ const Header = ({ loading, socket }) => {
       <header id="header" className={`header-section ${isInstructions ? 'white' : headerColor}`}>
         <div className="container">
           <div className={`header ${isAuth ? 'isauth' : ''}`}>
-            {isMain || isWork ? (
+            {isMain || isWork || isAffiliates ? (
               <nav className="header__nav">
                 <ul className="header__nav-menu">
                   <li>

@@ -110,11 +110,8 @@ const Instructions = () => {
             {t('intro')}
           </h2>
           <ul className="section__list">
-            <li
-              className={`instruction ${instructionsOpenedState[0] ? 'opened' : ''}`}
-              onClick={() => openInstruction(0)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[0] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(0)}>
                 <h3 className="instruction__title">{t('wantToWorkWithUs')}</h3>
                 <svg
                   className="instruction__cross"
@@ -133,11 +130,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('workWithUsText2')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[1] ? 'opened' : ''}`}
-              onClick={() => openInstruction(1)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[1] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(1)}>
                 <h3 className="instruction__title">{t('whoWeAreLookingFor')}</h3>
                 <svg
                   className="instruction__cross"
@@ -156,11 +150,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('weAreLookingForText2')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[2] ? 'opened' : ''}`}
-              onClick={() => openInstruction(2)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[2] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(2)}>
                 <h3 className="instruction__title">{t('salary')}</h3>
                 <svg
                   className="instruction__cross"
@@ -186,11 +177,8 @@ const Instructions = () => {
             {t('onboarding')}
           </h2>
           <ul className="section__list">
-            <li
-              className={`instruction ${instructionsOpenedState[3] ? 'opened' : ''}`}
-              onClick={() => openInstruction(3)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[3] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(3)}>
                 <h3 className="instruction__title">{t('interview')}</h3>
                 <svg
                   className="instruction__cross"
@@ -208,11 +196,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('interviewText')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[4] ? 'opened' : ''}`}
-              onClick={() => openInstruction(4)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[4] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(4)}>
                 <h3 className="instruction__title">{t('training')}</h3>
                 <svg
                   className="instruction__cross"
@@ -230,11 +215,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('trainingText')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[5] ? 'opened' : ''}`}
-              onClick={() => openInstruction(5)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[5] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(5)}>
                 <h3 className="instruction__title">{t('levels')}</h3>
                 <svg
                   className="instruction__cross"
@@ -254,11 +236,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('levelsText3')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[6] ? 'opened' : ''}`}
-              onClick={() => openInstruction(6)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[6] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(6)}>
                 <h3 className="instruction__title">{t('contract')}</h3>
                 <svg
                   className="instruction__cross"
@@ -276,11 +255,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('contractText')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[7] ? 'opened' : ''}`}
-              onClick={() => openInstruction(7)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[7] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(7)}>
                 <h3 className="instruction__title">{t('tech')}</h3>
                 <svg
                   className="instruction__cross"
@@ -298,11 +274,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('techText')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[8] ? 'opened' : ''}`}
-              onClick={() => openInstruction(8)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[8] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(8)}>
                 <h3 className="instruction__title">{t('app')}</h3>
                 <svg
                   className="instruction__cross"
@@ -330,11 +303,8 @@ const Instructions = () => {
             {t('howItWorks')}
           </h2>
           <ul className="section__list">
-            <li
-              className={`instruction ${instructionsOpenedState[9] ? 'opened' : ''}`}
-              onClick={() => openInstruction(9)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[9] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(9)}>
                 <h3 className="instruction__title">{t('system')}</h3>
                 <svg
                   className="instruction__cross"
@@ -377,11 +347,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[10] ? 'opened' : ''}`}
-              onClick={() => openInstruction(10)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[10] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(10)}>
                 <h3 className="instruction__title">{t('theFlow')}</h3>
                 <svg
                   className="instruction__cross"
@@ -411,11 +378,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[11] ? 'opened' : ''}`}
-              onClick={() => openInstruction(11)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[11] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(11)}>
                 <h3 className="instruction__title">{t('mobileApp')}</h3>
                 <svg
                   className="instruction__cross"
@@ -445,11 +409,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[12] ? 'opened' : ''}`}
-              onClick={() => openInstruction(12)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[12] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(12)}>
                 <h3 className="instruction__title">{t('menuBar')}</h3>
                 <svg
                   className="instruction__cross"
@@ -507,11 +468,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[13] ? 'opened' : ''}`}
-              onClick={() => openInstruction(13)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[13] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(13)}>
                 <h3 className="instruction__title">{t('workingHours')}</h3>
                 <svg
                   className="instruction__cross"
@@ -595,11 +553,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[14] ? 'opened' : ''}`}
-              onClick={() => openInstruction(14)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[14] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(14)}>
                 <h3 className="instruction__title">{t('workingRadius')}</h3>
                 <svg
                   className="instruction__cross"
@@ -688,11 +643,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[15] ? 'opened' : ''}`}
-              onClick={() => openInstruction(15)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[15] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(15)}>
                 <h3 className="instruction__title">{t('status')}</h3>
                 <svg
                   className="instruction__cross"
@@ -744,11 +696,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[16] ? 'opened' : ''}`}
-              onClick={() => openInstruction(16)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[16] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(16)}>
                 <h3 className="instruction__title">{t('request')}</h3>
                 <svg
                   className="instruction__cross"
@@ -778,11 +727,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[17] ? 'opened' : ''}`}
-              onClick={() => openInstruction(17)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[17] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(17)}>
                 <h3 className="instruction__title">{t('schedule')}</h3>
                 <svg
                   className="instruction__cross"
@@ -839,11 +785,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[18] ? 'opened' : ''}`}
-              onClick={() => openInstruction(18)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[18] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(18)}>
                 <h3 className="instruction__title">{t('notifications')}</h3>
                 <svg
                   className="instruction__cross"
@@ -929,11 +872,8 @@ const Instructions = () => {
                 </div>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[19] ? 'opened' : ''}`}
-              onClick={() => openInstruction(19)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[19] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(19)}>
                 <h3 className="instruction__title">{t('bonuses')}</h3>
                 <svg
                   className="instruction__cross"
@@ -954,11 +894,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('bonusesText4')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[20] ? 'opened' : ''}`}
-              onClick={() => openInstruction(20)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[20] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(20)}>
                 <h3 className="instruction__title">{t('usp')}</h3>
                 <svg
                   className="instruction__cross"
@@ -984,11 +921,8 @@ const Instructions = () => {
                 <p className="instruction__text">{t('uspText5')}</p>
               </div>
             </li>
-            <li
-              className={`instruction ${instructionsOpenedState[21] ? 'opened' : ''}`}
-              onClick={() => openInstruction(21)}
-            >
-              <div className="instruction__line">
+            <li className={`instruction ${instructionsOpenedState[21] ? 'opened' : ''}`}>
+              <div className="instruction__line" onClick={() => openInstruction(21)}>
                 <h3 className="instruction__title">{t('targetCustomer')}</h3>
                 <svg
                   className="instruction__cross"

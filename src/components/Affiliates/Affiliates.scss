@@ -1,0 +1,47 @@
+.affiliate {
+  margin-bottom: 80px;
+
+  &-page {
+    padding: 122px 100px 400px;
+    color: #000;
+
+    @media screen and (max-width: 1440px) {
+      padding: 122px 80px 400px;
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding: 98px 60px 300px;
+    }
+
+    @media screen and (max-width: 744px) {
+      padding: 78px 16px 200px;
+    }
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 110%;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  &__subtitle {
+    color: #000;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 110%;
+    letter-spacing: 0.84px;
+    margin-bottom: 10px;
+  }
+
+  &__text {
+    color: #000;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 130%;
+    letter-spacing: 0.66px;
+    margin-bottom: 26px;
+  }
+}
