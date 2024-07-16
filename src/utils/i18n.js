@@ -955,20 +955,18 @@ i18n.use(initReactI18next).init({
         feedback13:
           'I am now a regular! They were professional, efficient, and left my home cleaner than anyone we have tried before. Maria told she has 25 years’ experience from hotel cleaning so I guess that is part of the explanation. After they called to ask if everything was ok this is showing they value their customers. Super!',
         feedback14:
-          'I normally do not write reviews, but we have had our apartment for 17 years. Our previous cleaner, who came with the apartment, was with us for all these years until her health started to deteriorate. It turned out that she did not get a proper pension due to working for years with payment in hand. She did a very good job for us all those years. We asked one of our younger neighbours who recommended this company that runs a clean operation and pays pension contributions for all their cleaners, which was very important to us. After the first cleaning, they called us to ask if there was something we wanted to improve. As the apartment was spotless, we booked a fixed time and day with them. This is a very professional service, and we cannot recommend them enough.',
-        feedback15:
           'Loved it. After the first cleaning and understanding the level this guy’s provide we order their subscription where they hold the keys and we have had two occasions where we have invited guests for dinner and drinks and these have come in and done a superb x 2 which means they send two cleaner and do the job in half the time for what I think is a little premium on their base rate.',
-        feedback16:
+        feedback15:
           'When I ordered the first time, I really liked how the price was in the picture on my pc an updated as I added extras, like oven clean. Very, very good. This is what happens when people who know what they are doing and integrate tech in the right way.',
-        feedback17:
+        feedback16:
           'After extensive searching, I finally found the perfect cleaning service! The team was punctual, professional, and did an exceptional job. Their dedication to customer satisfaction was evident. I’m beyond impressed!',
-        feedback18:
+        feedback17:
           "I can't say enough good things about this cleaning service. They were prompt, professional, and did an outstanding job. The booking process was seamless, and they checked to ensure I was happy with their work. I highly recommend them!",
-        feedback19:
+        feedback18:
           'This company exceeded my expectations. They were prompt, professional, and left my home spotless. Their commitment to customer satisfaction was evident. Highly recommended!',
-        feedback20:
+        feedback19:
           'This company is so, so good! The cleaners were prompt, courteous, and thorough. They transformed my chaotic apartment into a spotless haven. I appreciate their dedication to quality service and will be recommending them to all my friends.',
-        feedback21:
+        feedback20:
           "I'm so glad I found this cleaning company! They were recommended by a friend, and they didn't disappoint. The cleaners were meticulous and left no corner untouched. They made my home look and feel very clean.",
         booking: 'Book cleaning',
         workWithUs: 'Work with us',
@@ -2129,20 +2127,18 @@ i18n.use(initReactI18next).init({
         feedback13:
           '¡Ahora soy un cliente regular! Fueron profesionales, eficientes y dejaron mi casa más limpia que cualquier otro servicio que hayamos probado antes. María me dijo que tiene 25 años de experiencia en limpieza de hoteles, así que supongo que esa es parte de la explicación. Después llamaron para preguntar si todo estaba bien, lo que muestra que valoran a sus clientes. ¡Súper!',
         feedback14:
-          'Normalmente no escribo reseñas, pero hemos tenido nuestro apartamento durante 17 años. Nuestra limpiadora anterior, que vino con el apartamento, estuvo con nosotros todos estos años hasta que su salud comenzó a deteriorarse. Resultó que no recibió una pensión adecuada debido a trabajar durante años con pago en mano. Hizo un muy buen trabajo para nosotros todos esos años. Preguntamos a uno de nuestros vecinos más jóvenes, quien recomendó esta empresa que lleva una operación limpia y paga contribuciones de pensión para todos sus limpiadores, lo cual era muy importante para nosotros. Después de la primera limpieza, nos llamaron para preguntar si había algo que queríamos mejorar. Como el apartamento estaba impecable, reservamos un tiempo y día fijo con ellos. Este es un servicio muy profesional y no podemos recomendarlos lo suficiente.',
-        feedback15:
           'Me encantó. Después de la primera limpieza y entender el nivel que estos chicos proporcionan, pedimos su suscripción donde guardan las llaves y hemos tenido dos ocasiones en las que hemos invitado a invitados a cenar y a beber y ellos han venido y hecho un trabajo magnífico x 2, lo que significa que envían dos limpiadores y hacen el trabajo en la mitad del tiempo por lo que creo que es un pequeño extra sobre su tarifa base.',
-        feedback16:
+        feedback15:
           'Cuando hice el pedido por primera vez, me gustó mucho cómo el precio estaba en la imagen en mi PC y se actualizaba a medida que agregaba extras, como la limpieza del horno. Muy, muy bueno. Esto es lo que sucede cuando las personas que saben lo que están haciendo integran la tecnología de la manera correcta.',
-        feedback17:
+        feedback16:
           '¡Después de una búsqueda extensa, finalmente encontré el servicio de limpieza perfecto! El equipo fue puntual, profesional e hizo un trabajo excepcional. Su dedicación a la satisfacción del cliente era evidente. ¡Estoy más que impresionado!',
-        feedback18:
+        feedback17:
           'No puedo decir suficientes cosas buenas sobre este servicio de limpieza. Fueron puntuales, profesionales y hicieron un trabajo sobresaliente. El proceso de reserva fue sencillo y verificaron para asegurarse de que estuviera satisfecho con su trabajo. ¡Los recomiendo mucho!',
-        feedback19:
+        feedback18:
           'Esta empresa superó mis expectativas. Fueron puntuales, profesionales y dejaron mi casa impecable. Su compromiso con la satisfacción del cliente era evidente. ¡Muy recomendado!',
-        feedback20:
+        feedback19:
           '¡Esta empresa es tan, tan buena! Los limpiadores fueron puntuales, corteses y minuciosos. Transformaron mi caótico apartamento en un refugio impecable. Aprecio su dedicación al servicio de calidad y los recomendaré a todos mis amigos.',
-        feedback21:
+        feedback20:
           '¡Estoy tan contento de haber encontrado esta empresa de limpieza! Fueron recomendados por un amigo y no me decepcionaron. Los limpiadores fueron meticulosos y no dejaron ningún rincón sin limpiar. Hicieron que mi casa se vea y se sienta muy limpia.',
         booking: 'Reservar limpiezag',
         workWithUs: 'Trabaja con nosotros',

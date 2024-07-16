@@ -68,7 +68,7 @@ const Feedback = () => {
   return (
     <div className="feedback">
       <div id="feedback" className="feedback__wrap" onScroll={handleScroll}>
-        {Array.from({ length: 21 }).map((_, i) => (
+        {Array.from({ length: 20 }).map((_, i) => (
           <div className="feedback__card" key={i}>
             <div className="feedback__info">
               <div className="feedback__stars">
