@@ -80,10 +80,10 @@
       @media screen and (max-width: 744px) {
         right: calc((100vw - 390px) / 2 - 122px);
         -webkit-filter: blur(150px);
-        -moz-filter: blur(250px);
-        -o-filter: blur(250px);
-        -ms-filter: blur(250px);
-        filter: blur(250px);
+        -moz-filter: blur(150px);
+        -o-filter: blur(150px);
+        -ms-filter: blur(150px);
+        filter: blur(150px);
       }
     }
   }
