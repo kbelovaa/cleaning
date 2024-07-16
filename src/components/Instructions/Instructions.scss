@@ -65,7 +65,7 @@
       background: #45c99a;
       filter: blur(250px);
       -webkit-filter: blur(250px);
-      -moz-filter: blur(250px);
+      // -moz-filter: blur(250px);
 
       @media screen and (max-width: 1440px) {
         right: calc((100vw - 1024px) / 2 + 427px);
