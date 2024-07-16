@@ -79,11 +79,11 @@
 
       @media screen and (max-width: 744px) {
         right: calc((100vw - 390px) / 2 - 122px);
-        -webkit-filter: blur(50px);
-        -moz-filter: blur(50px);
-        -o-filter: blur(50px);
-        -ms-filter: blur(50px);
-        filter: blur(50px);
+        -webkit-filter: blur(100px);
+        -moz-filter: blur(100px);
+        -o-filter: blur(100px);
+        -ms-filter: blur(100px);
+        filter: blur(100px);
       }
     }
   }
