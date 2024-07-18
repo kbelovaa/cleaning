@@ -26,6 +26,10 @@ const Receipt = () => {
   const { pathname } = useLocation();
   const isInvoiceReceipt = pathname.startsWith('/invoice-receipt');
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const confirmation = queryParams.get('confirmation');
+
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -38,7 +42,7 @@ const Receipt = () => {
       getData();
     }
 
-    if (isInvoiceReceipt) {
+    if (isInvoiceReceipt && !confirmation) {
       setIsConfirmationOpen(true);
       setIsInvoice(true);
     }
@@ -51,6 +55,8 @@ const Receipt = () => {
     setLoading(false);
     setIsConfirmationOpen(true);
   };
+
+  console.log(order);
 
   return (
     <>
@@ -161,25 +167,27 @@ const Receipt = () => {
                 </div>
                 <div className="total-summary__line">
                   <span className="total-summary__name">
-                    <svg
-                      className="total-summary__tick"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="25"
-                      viewBox="0 0 24 25"
-                      fill="none"
-                    >
-                      <path
-                        d="M20 7L9 18L4 13"
-                        stroke="#268664"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    {order.paymentStatus !== 'Not paid' && (
+                      <svg
+                        className="total-summary__tick"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="25"
+                        viewBox="0 0 24 25"
+                        fill="none"
+                      >
+                        <path
+                          d="M20 7L9 18L4 13"
+                          stroke="#268664"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
                     <span className="total-summary__status">
-                      {t('paid')}
-                      {!isInvoiceReceipt && ` (${getDateFromDateObject(order.paymentDate)})`}
+                      {order.paymentStatus === 'Not paid' ? t('total') : t('paid')}
+                      {order.paymentStatus !== 'Not paid' && ` (${getDateFromDateObject(order.paymentDate)})`}
                       <span className="link total-summary__tariff" onClick={() => navigate('/info-price')}>
                         {`(${t('tariff')} ${order.orderPriceId.tariffNumber})`}
                       </span>
@@ -191,7 +199,7 @@ const Receipt = () => {
               {loading ? (
                 <div className="spinner spinner_small"></div>
               ) : (
-                <button className="btn total-summary__btn" onClick={sendToEmail}>
+                <button className={user.isAuth ? 'btn total-summary__btn' : 'hidden'} onClick={sendToEmail}>
                   {t('sendToEmail')}
                 </button>
               )}
@@ -204,6 +212,7 @@ const Receipt = () => {
         setIsOpen={setIsConfirmationOpen}
         email={user.email}
         isInvoice={isInvoice}
+        isAwaiting={true}
       />
     </>
   );

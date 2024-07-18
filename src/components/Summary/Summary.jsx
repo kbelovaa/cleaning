@@ -801,9 +801,9 @@ const Summary = () => {
                     </div>
                     <label htmlFor="save" className="checkbox__label">
                       {`${t('iUnderstandAndAccept')} `}
-                      <NavLink to="/cancellation-policy" className="checkbox__link">
+                      <a href="/cancellation-policy" className="checkbox__link" target="_blank">
                         {t('theCancellationPolicy')}
-                      </NavLink>
+                      </a>
                     </label>
                   </div>
                   <span

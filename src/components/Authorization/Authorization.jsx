@@ -433,9 +433,9 @@ const Authorization = ({ isOpen, setIsOpen, isLogin, setIsLogin }) => {
                   </div>
                   <label htmlFor="agreement" className="checkbox__label">
                     {`${t('iAgree')} `}
-                    <NavLink to="/terms-of-use" className="checkbox__link" onClick={() => setIsOpen(false)}>
+                    <a href="/terms-of-use" className="checkbox__link" target="_blank">
                       {t('termsAndConditions')}
-                    </NavLink>
+                    </a>
                     {` ${t('setByUserAgreement')}`}
                   </label>
                 </div>
