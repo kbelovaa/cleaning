@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getOrder } from '../../http/orderAPI';
+import { getOrder, sendReceipt } from '../../http/orderAPI';
 import { setOpenedOrderAction } from '../../store/actions/ordersActions';
 import { formatDate, getDateFromDateObject } from '../../utils/formatDate';
 import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
@@ -48,15 +48,15 @@ const Receipt = () => {
     }
   }, []);
 
-  const sendToEmail = () => {
+  const sendToEmail = async () => {
     setIsInvoice(false);
     setLoading(true);
-    //отправка письма
-    setLoading(false);
-    setIsConfirmationOpen(true);
+    const result = await sendReceipt(orderId);
+    if (result.status === 200) {
+      setLoading(false);
+      setIsConfirmationOpen(true);
+    }
   };
-
-  console.log(order);
 
   return (
     <>

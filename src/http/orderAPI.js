@@ -61,3 +61,12 @@ export const createOrder = async (orderObj) => {
     return { error: 'Unexpected error' };
   }
 };
+
+export const sendReceipt = async (orderId) => {
+  try {
+    const data = await $host.get(`api/order/send_receipt/${orderId}`);
+    return data;
+  } catch (error) {
+    return { error: 'Unexpected error' };
+  }
+};

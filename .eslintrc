@@ -5,6 +5,7 @@
     "node": true
   },
   "rules" : {
+    "no-nested-ternary": "off",
     "comma-dangle": "off",
     "max-len": "off",
     "no-alert": "off",
