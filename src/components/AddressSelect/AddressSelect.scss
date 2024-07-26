@@ -21,6 +21,10 @@
     line-height: 130%;
     letter-spacing: 0.28px;
     margin-top: 2px;
+
+    .addresses & {
+      margin-left: 10px;
+    }
   }
 }
 

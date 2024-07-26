@@ -286,9 +286,9 @@ const Header = ({ loading, socket }) => {
                 </div>
               </nav>
             ) : (
-              <span className={`header__label ${showSdl ? '' : 'header__label_hidden'}`} onClick={() => navigate('/')}>
+              <NavLink className={`header__label ${showSdl ? '' : 'header__label_hidden'}`} to="/">
                 Sdl
-              </span>
+              </NavLink>
             )}
             <nav className={`header__menu ${loading ? '' : 'visible'}`}>
               <ul className={isVerification || isWork || isAffiliates ? 'hidden' : 'header__auth'}>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { setAddressesAction } from '../../store/actions/userActions';
 import { deleteAddress, getAddresses, saveDefaultAddress } from '../../http/addressAPI';
+import { bathrooms, bedrooms, kitchens, livingRooms } from '../../constants/selectOptions';
 import edit from '../../images/edit.png';
 import './Addresses.scss';
 
@@ -126,9 +127,22 @@ const Addresses = () => {
                                 fill="transparent"
                               />
                             </svg>
-                            <span className="form__radio-label">
-                              {`${address.address} ${address.secondAddress} ${address.postalCode} ${address.city} ${address.province}`}
-                            </span>
+                            <div className="selected-option__value">
+                              <span className="form__radio-label">
+                                {`${address.address} ${address.secondAddress} ${address.postalCode} ${address.city} ${address.province}`}
+                              </span>
+                              <span className="selected-option__info">
+                                {`${address.size} m`}
+                                <sup className="top-index top-index_little">2</sup>
+                                {` - ${t(
+                                  livingRooms.find((elem) => Number(elem.split(' ')[0]) === address.livingRooms),
+                                )} - ${t(
+                                  kitchens.find((elem) => Number(elem.split(' ')[0]) === address.kitchens),
+                                )} - ${t(
+                                  bedrooms.find((elem) => Number(elem.split(' ')[0]) === address.bedrooms),
+                                )} - ${t(bathrooms.find((elem) => Number(elem.split(' ')[0]) === address.bathrooms))}`}
+                              </span>
+                            </div>
                           </div>
                           <div className="form__action-btn" onClick={(e) => handleEditAddress(e, address._id)}>
                             <svg

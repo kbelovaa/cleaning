@@ -93,7 +93,7 @@ const Receipt = () => {
                     order.specialInstructions ? '' : 'total-summary__last-line'
                   }`}
                 >
-                  {`${order.address.address}${order.address.secondAddress ? `, ${order.address.address2}` : ''}, ${
+                  {`${order.address.address}${order.address.secondAddress ? `, ${order.address.secondAddress}` : ''}, ${
                     order.address.city
                   }, ${order.address.province}, ${order.address.postalCode}`}
                 </p>
